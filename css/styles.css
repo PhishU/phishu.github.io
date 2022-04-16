@@ -3624,8 +3624,8 @@ textarea.form-control-lg {
 
 .btn-teal {
   color: #fff;
-  background-color: #00ba94;
-  border-color: #00ba94;
+  background-color: #00E1A7;
+  border-color: #00E1A7;
 }
 .btn-teal:hover {
   color: #fff;
@@ -11021,7 +11021,7 @@ textarea.form-control-lg {
 
 .bg-teal {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-teal-rgb), var(--bs-bg-opacity)) !important;
+  background-color: #00E1A7 !important;
 }
 
 .bg-cyan {
