@@ -26,21 +26,150 @@
 		<meta property="og:image" content="https://phishu.net/images/unfurl2.png"/>
 			
 		<meta name="twitter:card" content="summary_large_image">
-		<meta name="twitter:domain" value="PhishU.net" />
-		<meta name="twitter:title" value="PhishU" />
-		<meta name="twitter:description" value="Targeted Spear-Phishing and Security Awareness Training Tools and Services" />
-		<meta name="twitter:image" content="https://misformalware.com/img/unfurl.png" />
-		<meta name="twitter:url" value="PhishU.net" />
-		<meta name="twitter:label1" value="Get Caught Then Join the School" />
+<meta name="twitter:domain" content="phishu.net" />
+<meta name="twitter:title" content="PhishU" />
+<meta name="twitter:description" content="Targeted Spear-Phishing and Security Awareness Training Tools and Services" />
+<meta name="twitter:url" content="https://phishu.net" />
+<meta name="twitter:label1" content="Get Caught Then Join the School" />
+
+		<meta name="twitter:image" content="https://phishu.net/images/unfurl2.png" />
 
 <script type="application/ld+json">
-    {  "@context" : "http://schema.org",
-       "@type" : "WebSite",
-       "name" : "PhishU",
-       "alternateName" : "Get Caught Then Join the School",
-       "url" : "phishu.net"
-    }
-    </script>
+{  "@context": "http://schema.org",
+   "@type": "WebSite",
+   "name": "PhishU",
+   "alternateName": "Get Caught Then Join the School",
+   "url": "https://phishu.net"
+}
+</script>
+	<!-- ApexCharts -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts@4/dist/apexcharts.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+/>
+	<style>
+@media (min-width: 992px) {
+  /* desktop 50% larger */
+  .feature-alert-desktop {
+    width: 170%;   /* 115% × 1.5 ≈ 170% */
+    max-width: none;
+  }
+  /* mobile 50% larger */
+  .feature-alert-mobile {
+    width: 75%;    /* 40% × 1.5 = 60% */
+    max-width: none;
+	transform: translateX(20%);
+  }
+}
+@media (min-width: 992px) {
+  .scale-125 {
+    width: 125%;
+    max-width: none;
+    position: relative;
+    left: -15%;
+  }
+}
+#chart3-wrapper {
+  margin: 0 auto;
+}
+#campaign-management {
+  overflow: visible;
+}
+
+/* make the image 180% as wide as its column, and pull it left by half of that extra 80% */
+.campaign-preview {
+  width: 180%;
+  max-width: none;
+  margin-left: -40%;
+}
+.campaign-swiper {
+  width: 100%;
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+}
+.campaign-swiper .swiper-slide {
+  width: 60%;       /* controls how “fat” each card is */
+  margin-right: -20%; /* overlap amount */
+}
+
+</style>
+<style>
+  /* wrap around your existing swiper/css */
+  .campaign-swiper {
+    width: 100%;
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+    position: relative;
+  }
+  .campaign-swiper .swiper-slide {
+    /* make each “card” fatter */
+    width: 70% !important;
+    /* overlap a little less so you see more of the next card */
+    margin-right: -20% !important;
+  }
+  .campaign-swiper .swiper-button-prev,
+  .campaign-swiper .swiper-button-next {
+    /* theme-green arrows */
+    color: #20c997;
+    /* larger hit area */
+    width: 3rem;
+    height: 3rem;
+  }
+  .campaign-swiper .swiper-button-prev {
+    /* push the left arrow further left */
+    left: -1.5rem;
+  }
+  .campaign-swiper .swiper-button-next {
+    /* push the right arrow further right */
+    right: -1.5rem;
+  }
+  /* Allow slides & nav buttons to overflow the default Swiper “viewport” */
+.swiper.campaign-swiper {
+  overflow: visible !important;
+}
+
+/* Also make sure the wrapper doesn’t hide anything */
+.campaign-swiper .swiper-wrapper {
+  overflow: visible !important;
+}
+
+/* Enlarge and lift the arrows above the slides */
+.campaign-swiper .swiper-button-prev,
+.campaign-swiper .swiper-button-next {
+  width: 4rem;
+  height: 4rem;
+  z-index: 20;
+  color: #20c997;
+}
+
+/* Push them fully outside the card stack */
+.campaign-swiper .swiper-button-prev {
+  left: -2rem !important;
+}
+.campaign-swiper .swiper-button-next {
+  right: -2rem !important;
+}
+/* make that one slide a little wider than the rest */
+.campaign-swiper .email-preview-slide {
+  width: 85% !important;      /* instead of 70% */
+}
+
+/* optional: a tiny scale to really make it pop */
+.campaign-swiper .email-preview-slide img {
+  transform: scale(1.5);
+  transition: transform .3s;
+}
+/* only for the “Tailored Training Experience” section */
+.training-section .scale-125 {
+  /* cancel the 125% / left:-15% hack */
+  width: 100% !important;
+  max-width: 100% !important;
+  left: 0 !important;
+  transform: none !important;
+}
+
+</style>
     </head>
     <body>
         <div id="layoutDefault">
@@ -61,8 +190,8 @@
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-end animated--fade-in-up me-lg-n25 me-xl-n15" aria-labelledby="navbarDropdownDemos">
                                             <div class="row g-0">
-                                                <div class="col-lg-3 p-lg-3 bg-img-cover bg-gradient-primary-only d-none d-lg-block" style="background-image: url('assets/img/backgrounds/menubg.png')">
-						    <!--<div class="page-header-ui page-header-ui-dark bg-gradient-primary-only">-->
+                                                <!--<div class="col-lg-3 p-lg-3 bg-img-cover bg-gradient-primary-only d-none d-lg-block" style="background-image: url('assets/img/backgrounds/menubg.png')">-->
+						    <div class="p-lg-3">
                                                     <div class="d-flex h-100 w-100 align-items-center justify-content-center">
                                                         <div class="text-white text-center z-1">
                                                             <!--<div class="mb-3">Multipurpose landing pages for a variety of projects.</div>
@@ -123,9 +252,9 @@
                                         <div class="dropdown-menu dropdown-menu-end me-lg-n20 me-xl-n15 animated--fade-in-up" aria-labelledby="navbarDropdownPages">
                                             <div class="row g-0">
                                                 <div class="col-lg-4 p-lg-5">
-                                                    <h6 class="dropdown-header text-primary">Coming Soon!</h6>
-                                                    <!--<a class="dropdown-item" href="page-basic.html">Basic Page</a>
-                                                    <a class="dropdown-item" href="page-company-about.html">About</a>
+                                                    <h6 class="dropdown-header text-primary">Spear-Phishing and Awareness Training</h6>
+                                                    <a class="dropdown-item" href="https://framework.phishu.net">PhishU Framework - Login Portal</a>
+                                                    <!--<a class="dropdown-item" href="page-company-about.html">About</a>
                                                     <a class="dropdown-item" href="page-company-pricing.html">Pricing</a>
                                                     <a class="dropdown-item" href="page-company-contact.html">Contact</a>
                                                     <a class="dropdown-item" href="page-company-team.html">Team</a>
@@ -218,7 +347,7 @@
 									<div class="col-lg-7" data-aos="fade-up" data-aos-delay="100"><img class="img-fluid" src="images/logo-transparent-white-grey-small.png" /><br></div>
 									<div class="col-lg-5" data-aos="fade-up">
                                         <br><h6 class="page-header-ui-title">Targeted, Adversary-Level Spear-Phishing</h6>
-                                        <p class="page-header-ui-text mb-7">We do tactical spear-phishing really, <i>really</i> well. At PhishU, we <i>only</i> offer phishing and cybersecurity awareness training so we can focus solely on advanced, bleeding-edge techniques like the attackers. More than 90% of breaches still occur from a convincing email. How does your employee training and defensive solutions stack up when you're targeted? This is as real-world as it gets!</p>
+                                        <p class="page-header-ui-text mb-7">At PhishU, we specialize exclusively in advanced, real-world spear-phishing campaigns and highly customized cybersecurity awareness training. With over 90% of data breaches still initiated via email, our approach mirrors real adversaries, testing your organization's defenses and training your employees effectively. How well does your current security posture hold up under targeted attacks?</p>
                                         <!--<a class="btn btn-teal fw-500 me-2" href="#!">
                                             Get Started
                                             <i class="ms-2" data-feather="arrow-right"></i>
@@ -240,17 +369,17 @@
                                 <div class="col-lg-4 mb-5 mb-lg-0">
                                     <div class="icon-stack icon-stack-xl bg-teal text-white mb-4"><i class="fa fa-fish"></i></div>
                                     <h3>Social Engineering Services</h3>
-                                    <p class="mb-0">We perform highly customized, targeted spear-phishing with analytics to test your defenses and track employee awareness progress. We also help identify weaknesses in Multi-Factor Authentication and anti-spam implementations.</p>
+                                    <p class="mb-0">We execute meticulously customized spear-phishing campaigns tailored precisely to your environment and personnel. Our analytics track every interaction, enabling you to pinpoint vulnerabilities, measure the effectiveness of Multi-Factor Authentication (MFA), and optimize anti-spam defenses.</p>
                                 </div>
                                 <div class="col-lg-4 mb-5 mb-lg-0">
                                     <div class="icon-stack icon-stack-xl bg-teal text-white mb-4"><i class="fa fa-graduation-cap"></i></div>
                                     <h3>Security Awareness Training</h3>
-                                    <p class="mb-0">After getting caught (or before!), take our awareness training to know what to look for next time and improve the security posture of the organization.</p>
+                                    <p class="mb-0">Our focused, scenario-driven training addresses vulnerabilities identified in real spear-phishing campaigns. Delivered interactively through videos, instructor-led sessions, and tailored modules, our training is confidential, supportive, and strategically designed to elevate employee awareness without shame.</p>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="icon-stack icon-stack-xl bg-teal text-white mb-4"><i class="fa fa-wrench"></i></div>
                                     <h3>Cybersecurity Tools</h3>
-                                    <p class="mb-0">Have your own internal security team? Purchase our tool to assist with internal phishing campains and awareness training.</p>
+                                    <p class="mb-0">Empower your internal security teams with our PhishU Framework, a robust platform enabling you to independently conduct sophisticated phishing campaigns, training, and real-time monitoring of security awareness within your organization.</p>
                                 </div>
                             </div>
                         </div>
@@ -267,21 +396,21 @@
                                 </div>
                                 <div class="col-lg-6 order-0 order-lg-1 mb-5 mb-lg-0" data-aos="fade-left">
                                     <div class="mb-5">
-                                        <h2>What sets us apart</h2>
-                                        <p class="lead">We offer highly customized campaigns catered to your environment and personnel. Some campaigns we've performed include spoofed Zoom desktop applications, SSO portals (Okta, Microsoft Online, Google, etc), remote administrative portals (Citrix, VDIs, VPNs), and many others! Head over to our <a href="/blog">Blog</a> for more information on unique techniques and other campaigns we've delivered recently.</p>
+                                        <h2>What Sets PhishU Apart</h2>
+                                        <p class="lead">PhishU distinguishes itself through an exclusive focus on advanced, customized spear-phishing campaigns and targeted training solutions without allow-listing. Everything is entirely external, including acquiring doppelganger domains and sending emails, just as the attackers do. Our innovative technologies, ease of use, and personalized approach ensure unmatched realism and effectiveness in enhancing your cybersecurity posture.</p>
                                     </div>
                                     <div class="row gx-5">
                                         <div class="col-md-6 mb-4">
-                                            <h6>Email Campaigns</h6>
-                                            <p class="mb-2 small">Target privileged users and craft campaigns with unique emails to every employee! We created dynamic templates and imported spreadsheets to be able to make each email unique and appear to be from that person's supervisor, if desired. No blanket company-wide emails!</p>
+                                            <h6>Landing Pages</h6>
+                                            <p class="mb-2 small">PhishU's tailored approach includes highly-customized campaigns using templates and proprietary AI-cloning technologies, which can then be fine-tuned with a drag-and-drop HTML editor for Landing Pages. These sites can be spun up in seconds using domains acquired from within the app. Advanced techniques such as Browser-in-Browser, Human Checks, and redirect behavior are all very user-friendly.</p>
                                             <!--<a class="small text-arrow-icon" href="#!">
                                                 Learn More
                                                 <i data-feather="arrow-right"></i>
                                             </a>-->
                                         </div>
                                         <div class="col-md-6 mb-4">
-                                            <h6>Receive Catered Training!</h6>
-                                            <p class="mb-2 small mb-0">We believe in continuous improvement and security awareness! Take our catered "University" training after a campaign to identify common "gotchas" based on real results! The training can optionally be required and confidential because we don't believe in shaming users but want to improve awareness for all!</p>
+                                            <h6>Email Templates and Content</h6>
+                                            <p class="mb-2 small mb-0">PhishU Framework's dynamic templating and AI system generates highly personalized emails for each employee, often simulating messages from direct supervisors or trusted colleagues, ensuring a genuine adversary-level experience. QRs, tracking pixels, and "malicious" attachments can all be generated and customized in seconds. Placeholders are used for highly-catered campaigns and are unique to each recipient. Emails can be sent directly from the framework and tracked in real-time!</p>
                                             <!--<a class="small text-arrow-icon" href="#!">
                                                 Learn More
                                                 <i data-feather="arrow-right"></i>-->
@@ -290,16 +419,16 @@
                                     </div>
                                     <div class="row gx-5">
                                         <div class="col-md-6 mb-4">
-                                            <h6>Tools</h6>
-                                            <p class="mb-2 small mb-0">Already have internal security resources? That's great! Work with one of our experts to perform a white-box campaign or, do it completely by yourself by using our phishing tool and training resources!</p>
+                                            <h6>PhishU Framework or Cyber Security Services</h6>
+                                            <p class="mb-2 small mb-0">Already have internal security resources? That's great! Work with one of our experts to perform a white-box campaign, or independently conduct one using the PhishU Framework and our training resources.</p>
                                             <!--<a class="small text-arrow-icon" href="#!">
                                                 Learn More
                                                 <i data-feather="arrow-right"></i>
                                             </a>-->
                                         </div>
                                         <div class="col-md-6 mb-4">
-                                            <h6>Analytics</h6>
-                                            <p class="small mb-0">We track detailed analytics for all components of our campaigns so you have real-time visibility into results of the engagements while they happen! We can also integrate into existing enterprise chat applications to monitor results as they come in using tools such as Slack, Discord, and Teams!</p>
+                                            <h6>Real-Time Analytics and Visibility</h6>
+                                            <p class="small mb-0">Gain unparalleled insights with our real-time analytics dashboard, tracking email interactions, credential submissions, and user engagement. Reporting capabilities also exist for MSSPs and consultants.</p>
                                             <!--<a class="small text-arrow-icon" href="#!">
                                                 Learn More
                                                 <i data-feather="arrow-right"></i>
@@ -310,6 +439,219 @@
                             </div>
                         </div>
                     </section>
+					<!-- -- Conditional Click-through Trends Over Time -- -->
+<section class="bg-light pt-6 pb-10">
+  <div class="container px-5">
+    <h2 class="text-center mb-5">Conditional Click-through Trends Over Time</h2>
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-10 col-lg-9">
+        <div id="chart3"></div>
+      </div>
+    </div>
+  </div><!-- close .container here -->
+<div id="chart3-wrapper" style="position:relative">
+  <div id="chart3"></div>
+  <div id="chart3-blocker"
+       style="
+         position:absolute;
+         top:0; left:0;
+         width:100%; height:100%;
+         background:transparent;
+         cursor:pointer;
+       "
+       title="Click to activate chart">
+  </div>
+</div>
+  <!-- wave border sits outside the container now -->
+  <div class="svg-border-rounded text-light">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor">
+      <path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path>
+    </svg>
+  </div>
+</section>
+
+
+
+<section
+  id="campaign-management"
+  class="bg-dark pt-10"
+  style="overflow: visible; padding-bottom: 6rem;"
+>
+  <div class="container px-5">
+    <!-- Section Title -->
+    <h2
+      class="text-white text-center mb-6"
+      data-aos="fade-down"
+      data-aos-delay="100"
+    >
+      Real-Time Alerting &amp; Evasion Techniques
+    </h2><br>
+
+    <!-- Images Row -->
+    <div
+      class="row gx-5 justify-content-center mb-6"
+      data-aos="fade-right"
+      data-aos-delay="200"
+    >
+      <div class="col-10 col-md-6 col-lg-5">
+        <img
+          src="images/BrowserNotifications.png"
+          alt="Browser notification example"
+          class="img-fluid rounded feature-alert-desktop"
+        />
+      </div>
+      <div
+        class="col-6 col-md-4 col-lg-3"
+        data-aos="fade-left"
+        data-aos-delay="300"
+      >
+        <img
+          src="images/MobileNotifications.png"
+          alt="Mobile notification example"
+          class="img-fluid rounded feature-alert-mobile"
+        />
+      </div>
+    </div>
+
+    <!-- Section Text -->
+    <div
+      class="text-center mb-6"
+      data-aos="fade-up"
+      data-aos-delay="400"
+    >
+      <br><p class="lead text-white-50 mb-0">
+        Proprietary anti-evasion techniques acquired over decades of social engineering assessments are baked into the back-end logic of the framework to keep domains and landing pages "alive" long enough to carry out campaigns. Domains are also automatically provisioned and ripened to more easily pass through anti-spam filters. Receive notifications or monitor traffic interactions in real-time using a chat-style interface, enabling swift actions to block unwanted visitors.
+      </p>
+    </div>
+
+    <!-- Campaign Management -->
+    <br><br><h3
+      class="text-white text-center mt-6 mb-4"
+      data-aos="fade-up"
+      data-aos-delay="500"
+    >
+      Real-Time Campaign Previews
+    </h3>
+    <div
+      class="row gx-5 justify-content-center mb-6"
+      data-aos="fade-up"
+      data-aos-delay="600"
+    >
+      <div class="col-10 col-md-8 col-lg-6 text-center">
+        <div class="swiper campaign-swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+        <h4 class="text-white mb-3"><font color="#00E1A7">What the Target Sees</font></h4>
+	  <img src="images/targetbrowser.png" class="img-fluid rounded" alt="Slide 1">
+    </div>
+    <div class="swiper-slide">
+        <h4 class="text-white mb-3"><font color="#00E1A7">What the Blocked Visitors See</font></h4>
+	  <img src="images/blockedconstruction.png" class="img-fluid rounded" alt="Slide 2">
+    </div>
+    <div class="swiper-slide">
+        <h4 class="text-white mb-3"><font color="#00E1A7">Real-Time Google Safe Site Monitoring</font></h4>
+	  <img src="images/dangeroussite.png" class="img-fluid rounded" alt="Slide 3">
+    </div>
+    <div class="swiper-slide">
+        <h4 class="text-white mb-3"><font color="#00E1A7">Enforce Human Checks for Training and to Prevent Bots</font></h4>
+	  <img src="images/blockedhumancheck.png" class="img-fluid rounded" alt="Slide 4">
+    </div>
+    <div class="swiper-slide">
+        <h4 class="text-white mb-3"><font color="#00E1A7">Ensure HTTPS is Operational Before Launch</font></h4>
+	  <img src="images/sslwarning.png" class="img-fluid rounded" alt="Slide 5">
+    </div>
+    <div class="swiper-slide email-preview-slide d-flex flex-column align-items-center">
+        <h4 class="text-white mb-3"><font color="#00E1A7">Rendered Email Preview</font></h4>
+	  <img src="images/emailpreview.png" class="img-fluid rounded" alt="Slide 6">
+    </div>
+  </div>
+  <!-- navigation -->
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+</div>
+
+      </div>
+    </div>
+
+    <!-- Campaign Management Points -->
+    <br><div
+      class="row gx-5 justify-content-center mb-10"
+      data-aos="fade-up"
+      data-aos-delay="700"
+    >
+      <div class="col-10 col-md-8 col-lg-6">
+        <ul class="list-unstyled text-white-50 text-center">
+          <li class="mb-3"><i class="fa fa-check text-teal me-2"></i>Complete Control Over What Targets and Blocked Visitors See</li>
+          <li class="mb-3"><i class="fa fa-check text-teal me-2"></i>See Real-Time Previews of Email and Landing Pages Before and During Campaign</li>
+          <li class="mb-3"><i class="fa fa-check text-teal me-2"></i>Prevent Common Campaign Mistakes</li>
+          <li><i class="fa fa-check text-teal me-2"></i>Multiple Evasion Techniques Built-in!</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Wave border into the next section -->
+  <div class="svg-border-rounded text-white">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor">
+      <path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path>
+    </svg>
+  </div>
+</section>
+
+
+
+
+
+
+<section class="bg-white py-10 training-section">
+  <div class="container px-5">
+    <div class="row gx-5 align-items-center">
+      <!-- TEXT ON LEFT -->
+      <div class="col-lg-6" data-aos="fade-right">
+        <h2>Tailored Training Experience</h2>
+        <p class="lead mb-5">
+          Our focused, scenario-driven training addresses vulnerabilities identified in real spear-phishing campaigns. Delivered interactively through videos, instructor-led sessions, and tailored modules, our training is confidential, supportive, and strategically designed to elevate employee awareness without shame.<br><br>PhishU’s post-campaign training modules adapt specifically to each user's interactions during the campaign. This personalized approach ensures relevant, actionable, and impactful learning, fostering continuous improvement in security awareness. Only relevant attributes to the campaign are included by default and are conditional to each user, so recipients only take the training they need and avoid information overload.
+        </p>
+        <ul class="list-unstyled">
+          <li class="mb-3"><i class="fa fa-check text-teal me-2"></i>Only receive relevant training the recipient experienced at that point-in-time</li>
+		  <li class="mb-3"><i class="fa fa-check text-teal me-2"></i>Interactive and educational, explaining the "gotchas" to look out for next time</li>
+          <li class="mb-3"><i class="fa fa-check text-teal me-2"></i>Highly customized slide content using placeholders and an editor</li>
+          <li class="mb-3"><i class="fa fa-check text-teal me-2"></i>Only include the training you want</li>
+		  <li class="mb-3"><i class="fa fa-check text-teal me-2"></i>Assign training to any target in a campaign without requring an account</li>
+        </ul>
+      </div>
+      <!-- TWO IMAGES ON RIGHT -->
+<div class="col-lg-6">
+  <!-- First image fades in from the left -->
+  <img
+    src="images/TrainingConfigure.png"
+    class="img-fluid rounded scale-125"
+    alt="Illustration of feature"
+    data-aos="fade-left"
+    data-aos-delay="100"
+  />
+  <!-- Second image fades up with a bit more delay -->
+  <img
+    src="images/TrainingEmail.png"
+    class="img-fluid rounded mt-4 scale-125"
+    alt="Dashboard screenshot"
+    data-aos="fade-up"
+    data-aos-delay="300"
+  />
+</div>
+
+    </div>
+  </div>
+  <!-- matching border to transition to next section -->
+  <div class="svg-border-rounded text-light">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor">
+      <path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path>
+    </svg>
+  </div>
+</section>
+
+
                     <hr class="m-0" />
                     <!--<section class="bg-light pt-10">
                         <div class="container px-5">
@@ -430,8 +772,8 @@
                                     <div class="d-flex h-100">
                                         <div class="icon-stack flex-shrink-0 bg-teal text-white"><i class="fas fa-question"></i></div>
                                         <div class="ms-4">
-                                            <h5 class="text-white">What if we already use Phishing and Training resources?</h5>
-                                            <p class="text-white-50">It's no problem! We complement these other products and services by testing the effectiveness of existing training and security solutions. Those products are often allowlisted and not reflective of real life attacks. Our training is conditional for each user and only shows the relevant modules and point-in-time view each user saw during the campaign.</p>
+                                            <h5 class="text-white">Already have phishing resources?</h5>
+                                            <p class="text-white-50">No problem! PhishU enhances existing security products and services by realistically evaluating their effectiveness without the bias of allowlisting. Our adaptive training provides relevant, user-specific content, ensuring meaningful improvement.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -439,8 +781,8 @@
                                     <div class="d-flex h-100">
                                         <div class="icon-stack flex-shrink-0 bg-teal text-white"><i class="fas fa-question"></i></div>
                                         <div class="ms-4">
-                                            <h5 class="text-white">Is this necessary if we use Multi-Factor Authentication?</h5>
-                                            <p class="text-white-50">Absolutely! One of the big things we do for our customers is identify common MFA implementation vulnerabilities and offer guidance on how to harden authentication.</p>
+                                            <h5 class="text-white">Do we need this with MFA and Passkeys?</h5>
+                                            <p class="text-white-50">Absolutely. PhishU identifies common MFA vulnerabilities, providing critical insights and guidance to strengthen your authentication processes. Passkeys can be bypassed with MiTM proxies and insecure fallbacks, and the framework allows operators to easily inject Passkey fallback prompts into Landing Pages, if desired. It's about more than just capturing credentials!</p>
                                         </div>
                                     </div>
                                 </div>
@@ -448,8 +790,8 @@
                                     <div class="d-flex h-100">
                                         <div class="icon-stack flex-shrink-0 bg-teal text-white"><i class="fas fa-question"></i></div>
                                         <div class="ms-4">
-                                            <h5 class="text-white">How is PhishU different than other Cybersecurity consulting firms?</h5>
-                                            <p class="text-white-50">Most security firms offering services either don't offer phishing, don't do it well due to roadblocks with spam prevention and cloud technologies today, or resell generic phishing tools which aren't as effective. This is our specialty and we purposely don't offer those other services so we can stay focused on what we do best!</p>
+                                            <h5 class="text-white">How does PhishU differ from other cybersecurity providers?</h5>
+                                            <p class="text-white-50">Unlike generic solutions, PhishU focuses exclusively on realistic, targeted phishing and training. Our specialization ensures unmatched expertise, attention to detail, and continuous innovation in adversary emulation. This is not allow-listed, generic phishing for only internal users.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -457,8 +799,8 @@
                                     <div class="d-flex h-100">
                                         <div class="icon-stack flex-shrink-0 bg-teal text-white"><i class="fas fa-question"></i></div>
                                         <div class="ms-4">
-                                            <h5 class="text-white">Do you offer reporting or adversary simulation?</h5>
-                                            <p class="text-white-50">We bake analytics in for email opens, link clicks, visited landing pages, captured credentials, and every other statistic you can think of to help bring awareness to specific techniques and targeted training efforts. This is provided in a real-time dashboard so our customers can view results as they come in! We can also absolutely (and optionally!) use captured credentials to demonstrate the impact an attacker can have with remote administrative access and lateral internal phishing</p>
+                                            <h5 class="text-white">Do you offer comprehensive reporting?</h5>
+                                            <p class="text-white-50">Yes! Our real-time analytics offer detailed visibility into email interactions, credential captures, and user behavior. Only relevant metrics for that campaign are reported. Optionally, captured credentials can demonstrate the tangible impact of successful phishing attacks, enhancing your organization's understanding of real-world risks.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -466,8 +808,13 @@
                             <div class="row gx-5 justify-content-center text-center">
                                 <div class="col-lg-8">
                                     <!--<div class="badge bg-transparent-light rounded-pill badge-marketing mb-4">Get Started</div>-->
-                                    <h2 class="text-white">Who's this for?</h2>
-                                    <p class="lead text-white-50 mb-5">We help customers from all security maturity models! Bring us in early or, like a red team, after your security maturity is established to test your defenses! Ideally we could be used continuously to help provide ongoing security awarness in your organization, or train your internal resources to perform these services themselves when ready.</p>
+                                    <h2 class="text-white">Who Benefits from PhishU?</h2>
+                                    <p class="lead text-white-50 mb-5">PhishU is designed for organizations across all security maturity levels, from startups establishing foundational security to advanced enterprises seeking rigorous red-team assessments. Whether you're a corporate security team, a consulting firm, or an MSSP, our solutions scale flexibly with your needs.<br><br>Our straightforward, transparent pricing structure offers exceptional value, empowering your team or your consulting practice without hidden costs or complexities.</p>
+									<h2 class="text-white">Besides, we did "write the book" on Spear Phishing 😉</h2>
+									<p><a href="https://cybersecurityabcs.com"><img src="images/spearphishingbook.png" target="_BLANK" width="50%"></a></p>
+									<h2 class="text-white">Ready to Strengthen Your Defenses?</h2>
+<p class="lead text-white-50 mb-5">Enhance your organization's resilience against spear-phishing attacks. Request a straightforward, competitive quote today and discover the PhishU difference.
+</p>
                                     <a class="btn btn-teal fw-500" href="contact-us.html">Request a Quote!</a>
                                 </div>
                             </div>
@@ -648,5 +995,110 @@
                 once: true,
             });
         </script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+const options = {
+  chart: { type: 'line', height: 300, background: 'transparent',   width:  '100%', toolbar: { show: false } },
+  series: [
+    { name: 'Emails Sent',           data: [800, 802, 835, 823, 829, 820, 810, 800, 790, 780, 770, 760] },
+    { name: 'Emails Opened',         data: [723, 680, 674, 654, 643, 630, 620, 610, 600, 590, 580, 570] },
+    { name: 'Attachments Opened',    data: [192, 180, 163, 130,  99,  90,  80,  70,  60,  50,  40,  30] },
+    { name: 'QR Codes Scanned',      data: [ 50,  43,  37,  28,   6,   5,   4,   3,   2,   1,   1,   0] },
+    { name: 'Pages Visited',         data: [701, 637, 628, 612, 599, 580, 560, 540, 520, 500, 480, 460] },
+    { name: 'Credentials Entered',   data: [123, 103,  80,  64,  37,  30,  25,  20,  15,  10,   5,   3] },
+    { name: 'Weak Passwords',        data: [ 20,  21,   8,   3,   0,   0,   0,   0,   0,   0,   0,   0] },
+    { name: 'Compromised Passwords', data: [  3,   1,   0,   1,   0,   0,   0,   0,   0,   0,   0,   0] },
+    { name: 'Emails Reported',       data: [300, 465, 489, 503, 601, 590, 580, 570, 630, 653, 692, 701] }
+  ],
+  xaxis: {
+    categories: [
+      'January','February','March','April','May',
+      'June','July','August','September','October','November','December'
+    ]
+  },
+  stroke:  { curve: 'straight' },
+  markers: { size: 5 },
+  grid:    { borderColor: '#ddd' },
+  legend:  { position: 'top', horizontalAlign: 'center' },
+  colors:  ['#00E396','#008FFB','#FEB019','#775DD0','#FF4560','#546E7A','#E91E63','#00897B','#00D9E9']
+};
+
+new ApexCharts(document.querySelector('#chart3'), options).render();
+
+const blocker = document.getElementById("chart3-blocker"),
+      chartEl = document.getElementById("chart3");
+
+blocker.addEventListener("click", e => {
+  blocker.style.display = "none";
+});
+
+// if you click anywhere _outside_ the chart, put it back
+document.addEventListener("click", e => {
+  if (!chartEl.contains(e.target) && blocker.style.display === "none") {
+    blocker.style.display = "block";
+  }
+});
+
+});
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<style>
+  /* wrap around your existing swiper/css */
+  .campaign-swiper {
+    width: 100%;
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+    position: relative;
+  }
+  .campaign-swiper .swiper-slide {
+    /* make each “card” fatter */
+    width: 70% !important;
+    /* overlap a little less so you see more of the next card */
+    margin-right: -20% !important;
+  }
+  .campaign-swiper .swiper-button-prev,
+  .campaign-swiper .swiper-button-next {
+    /* theme-green arrows */
+    color: #20c997;
+    /* larger hit area */
+    width: 3rem;
+    height: 3rem;
+  }
+  .campaign-swiper .swiper-button-prev {
+    /* push the left arrow further left */
+    left: -1.5rem;
+  }
+  .campaign-swiper .swiper-button-next {
+    /* push the right arrow further right */
+    right: -1.5rem;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    new Swiper('.campaign-swiper', {
+      effect: 'coverflow',
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: 'auto',
+      /* space between cards */
+      spaceBetween: 40,
+      coverflowEffect: {
+        rotate: 0,
+        stretch: -80,
+        depth: 200,
+        modifier: 1.5,
+        slideShadows: false,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  });
+</script>
+
+
     </body>
 </html>
