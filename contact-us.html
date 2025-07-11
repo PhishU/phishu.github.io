@@ -41,11 +41,7 @@
        "url" : "phishu.net"
     }
     </script>
-	<script src="https://cdn.emailjs.com/sdk/3.2/email.min.js"></script>
-<script>
-  // Use your public key directly—no "user_" prefix
-  emailjs.init('JDdMkRZP6gEcdCI0H');
-</script>
+
 
     </head>
     <body>
@@ -374,6 +370,29 @@
     <p id="form-status" style="display:none; margin-top:1rem;"></p>
   </div>
 </form>
+
+<div class="modal fade" id="thankYouModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center p-4">
+      <div class="modal-body">
+        <h5 class="mb-3">Thank you!</h5>
+        <p>Someone will be in touch shortly.</p>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+	<script src="https://cdn.emailjs.com/sdk/3.2/email.min.js"></script>
+<script>
+  // Use your public key directly—no "user_" prefix
+  emailjs.init('JDdMkRZP6gEcdCI0H');
+</script>
+
+
 
 <!-- 3) The EmailJS submit handler -->
 <script>
