@@ -384,47 +384,7 @@
     </div>
   </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
-	<script src="https://cdn.emailjs.com/sdk/3.2/email.min.js"></script>
-<script>
-  // Use your public key directly—no "user_" prefix
-  emailjs.init('JDdMkRZP6gEcdCI0H');
-</script>
-
-
-
-<!-- 3) The EmailJS submit handler -->
-<script>
-document
-  .getElementById('contact-form')
-  .addEventListener('submit', function (e) {
-    e.preventDefault();
-    const statusEl = document.getElementById('form-status');
-
-    emailjs
-      .sendForm(
-        'service_6wh1qm3',   // ← your Service ID
-        'template_jt9di8q',  // ← your Template ID
-        this
-      )
-      .then(
-        () => {
-          this.reset();
-          statusEl.style.display = 'block';
-          statusEl.style.color = 'green';
-          statusEl.textContent = '✅ Message sent! Thank you.';
-        },
-        (err) => {
-          console.error('EmailJS error:', err);
-          statusEl.style.display = 'block';
-          statusEl.style.color = 'red';
-          statusEl.textContent =
-            '❌ Oops—could not send. Please try again later.';
-        }
-      );
-  });
-</script>
                         </div>
                         <div class="svg-border-rounded text-dark">
                             
@@ -515,5 +475,42 @@ document
                 once: true,
             });
         </script>
+		  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- 1) Load EmailJS SDK -->
+  <script src="https://cdn.emailjs.com/sdk/latest/email.min.js"></script>
+  
+  <!-- 2) Initialize & wire up your form in one go -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // init with YOUR public key
+    emailjs.init('JDdMkRZP6gEcdCI0H');
+
+    // form handler
+    const form = document.getElementById('contact-form');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      emailjs
+        .sendForm('service_6wh1qm3', 'template_jt9di8q', this)
+        .then(() => {
+          this.reset();
+          const modalEl = document.getElementById('thankYouModal');
+          const modal = new bootstrap.Modal(modalEl);
+          modal.show();
+          modalEl.addEventListener('hidden.bs.modal', () => {
+            window.location.href = 'index.html';
+          }, { once: true });
+        })
+        .catch(err => {
+          console.error('EmailJS error:', err);
+          const status = document.getElementById('form-status');
+          status.style.display = 'block';
+          status.style.color = 'red';
+          status.textContent = '❌ Couldn’t send—please try again later.';
+        });
+    });
+  });
+  </script>
+</body>
     </body>
 </html>
