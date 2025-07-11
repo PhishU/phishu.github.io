@@ -41,6 +41,12 @@
        "url" : "phishu.net"
     }
     </script>
+	<script src="https://cdn.emailjs.com/sdk/3.2/email.min.js"></script>
+<script>
+  // Use your public key directly—no "user_" prefix
+  emailjs.init('JDdMkRZP6gEcdCI0H');
+</script>
+
     </head>
     <body>
         <div id="layoutDefault">
@@ -312,23 +318,94 @@
                                     <a href="#!">support@startbootstrap.com</a>
                                 </div>
                             </div>-->
-                            <form action="https://formspree.io/f/mayvplpj" method="POST">
-                                <div class="row gx-5 mb-4">
-                                    <div class="col-md-6">
-                                        <label class="text-dark mb-2" for="inputName">Full name</label>
-                                        <input class="form-control py-4" id="inputName" name="Full Name"type="text" placeholder="Full name" required />
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="text-dark mb-2" for="inputEmail">Email</label>
-                                        <input class="form-control py-4" id="inputEmail" name="Email" type="email" placeholder="name@example.com" required />
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <label class="text-dark mb-2" for="inputMessage">Message</label>
-                                    <textarea class="form-control py-3" id="inputMessage" name="Message" type="text" placeholder="Enter your message..." rows="4"></textarea>
-                                </div>
-                                <div class="text-center"><button class="btn btn-primary mt-4" type="submit">Submit Request</button></div>
-                            </form>
+                            <!-- 2) Your updated form -->
+<form id="contact-form" class="row gx-5 mb-4">
+  <div class="col-md-6">
+    <label class="text-dark mb-2" for="inputName">Full Name</label>
+    <input
+      class="form-control py-4"
+      id="inputName"
+      name="name"
+      type="text"
+      placeholder="Full name"
+      required
+    />
+  </div>
+
+  <div class="col-md-6">
+    <label class="text-dark mb-2" for="inputEmail">Email</label>
+    <input
+      class="form-control py-4"
+      id="inputEmail"
+      name="email"
+      type="email"
+      placeholder="name@example.com"
+      required
+    />
+  </div>
+
+  <div class="col-md-6 mt-3">
+    <label class="text-dark mb-2" for="inputOrg">Organization</label>
+    <input
+      class="form-control py-4"
+      id="inputOrg"
+      name="org"
+      type="text"
+      placeholder="Your organization"
+      required
+    />
+  </div>
+
+  <div class="col-12 mt-3">
+    <label class="text-dark mb-2" for="inputMessage">Message</label>
+    <textarea
+      class="form-control py-3"
+      id="inputMessage"
+      name="message"
+      placeholder="Enter your message..."
+      rows="4"
+      required
+    ></textarea>
+  </div>
+
+  <div class="col-12 text-center mt-4">
+    <button class="btn btn-primary" type="submit">Submit Request</button>
+    <!-- status message -->
+    <p id="form-status" style="display:none; margin-top:1rem;"></p>
+  </div>
+</form>
+
+<!-- 3) The EmailJS submit handler -->
+<script>
+document
+  .getElementById('contact-form')
+  .addEventListener('submit', function (e) {
+    e.preventDefault();
+    const statusEl = document.getElementById('form-status');
+
+    emailjs
+      .sendForm(
+        'service_6wh1qm3',   // ← your Service ID
+        'template_jt9di8q',  // ← your Template ID
+        this
+      )
+      .then(
+        () => {
+          this.reset();
+          statusEl.style.display = 'block';
+          statusEl.style.color = 'green';
+          statusEl.textContent = '✅ Message sent! Thank you.';
+        },
+        (err) => {
+          console.error('EmailJS error:', err);
+          statusEl.style.display = 'block';
+          statusEl.style.color = 'red';
+          statusEl.textContent =
+            '❌ Oops—could not send. Please try again later.';
+        }
+      );
+  });
+</script>
                         </div>
                         <div class="svg-border-rounded text-dark">
                             
