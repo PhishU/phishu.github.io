@@ -475,41 +475,39 @@
                 once: true,
             });
         </script>
-		  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Bootstrap Bundle (so bootstrap.Modal exists) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- 1) Load EmailJS SDK -->
-  <script src="https://cdn.emailjs.com/sdk/latest/email.min.js"></script>
-  
-  <!-- 2) Initialize & wire up your form in one go -->
+  <!-- 1) Load the EmailJS SDK -->
+  <script type="text/javascript"
+          src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <!-- 2) Initialize & wire up your form -->
   <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // init with YOUR public key
-    emailjs.init('JDdMkRZP6gEcdCI0H');
+    document.addEventListener('DOMContentLoaded', function() {
+      // initialize with your public key
+      emailjs.init('JDdMkRZP6gEcdCI0H');
 
-    // form handler
-    const form = document.getElementById('contact-form');
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      emailjs
-        .sendForm('service_6wh1qm3', 'template_jt9di8q', this)
-        .then(() => {
-          this.reset();
-          const modalEl = document.getElementById('thankYouModal');
-          const modal = new bootstrap.Modal(modalEl);
-          modal.show();
-          modalEl.addEventListener('hidden.bs.modal', () => {
-            window.location.href = 'index.html';
-          }, { once: true });
-        })
-        .catch(err => {
-          console.error('EmailJS error:', err);
-          const status = document.getElementById('form-status');
-          status.style.display = 'block';
-          status.style.color = 'red';
-          status.textContent = '❌ Couldn’t send—please try again later.';
-        });
+      // attach your form handler
+      document.getElementById('contact-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        emailjs.sendForm('service_6wh1qm3','template_jt9di8q', this)
+          .then(() => {
+            this.reset();
+            const modal = new bootstrap.Modal(document.getElementById('thankYouModal'));
+            modal.show();
+            document
+              .getElementById('thankYouModal')
+              .addEventListener('hidden.bs.modal', () => location.href='index.html', { once: true });
+          })
+          .catch(err => {
+            console.error(err);
+            const s = document.getElementById('form-status');
+            s.style.display='block'; s.style.color='red';
+            s.textContent='❌ Couldn’t send—please try again later.';
+          });
+      });
     });
-  });
   </script>
 </body>
     </body>
