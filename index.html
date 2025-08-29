@@ -228,7 +228,7 @@
   .phishapi-xl{
     width: 123%;
     max-width: none;
-    margin-left: -29%;
+    margin-left: -33%;
     /* make it a bit taller without touching existing transforms */
     scale: 1 1.08;              /* ↑ 8% vertical */
     transform-origin: left center;
@@ -239,7 +239,7 @@
 @media (max-width: 1000.98px){
   .phishapi-xl{
     width: 115%;
-    margin-left: -3.0%;
+    margin-left: -4.5%;
     scale: 1 1.13;
   }
 }
@@ -250,6 +250,28 @@
     transform-origin: left center; /* keep the left edge anchored */
   }
 }
+
+	.full-bleed {
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  width: 100vw;
+  padding-left: 2rem;   /* optional */
+  padding-right: 2rem;  /* optional */
+}
+
+/* make the chart 85% of the viewport wrapper and center it */
+#chart3 { width: 85%; margin: 0 auto; }
+
+/* make the click blocker match the chart width & centered */
+#chart3-blocker {
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 85%; height: 100%;
+  background: transparent;
+  cursor: pointer;
+}
+
 </style>
     </head>
     <body>
