@@ -243,7 +243,13 @@
     scale: 1 1.13;
   }
 }
-
+/* +10% overall size (keeps your 8% vertical stretch) */
+@media (min-width: 992px){
+  .phishapi-xl{
+    scale: 1.10 1.188;   /* 10% wider, 10% taller on top of 1.08 vertical */
+    transform-origin: left center; /* keep the left edge anchored */
+  }
+}
 </style>
     </head>
     <body>
