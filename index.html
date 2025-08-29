@@ -206,9 +206,9 @@
 /* Desktop: a little bigger and biased further left */
 @media (min-width: 992px){
   .phishapi-xl{
-    width: 120%;      /* bigger than current */
+    width: 123%;      /* bigger than current */
     max-width: none;
-    margin-left: -28%;/* more left than the centered -17.5% */
+    margin-left: -29%;/* more left than the centered -17.5% */
   }
 }
 
@@ -219,6 +219,31 @@
     margin-left: -2.5%;
   }
 }
+
+	/* keep overflow so we can oversize */
+.content-skewed-right { overflow: visible; }
+
+/* Desktop: push left + make slightly taller */
+@media (min-width: 992px){
+  .phishapi-xl{
+    width: 123%;
+    max-width: none;
+    margin-left: -29%;
+    /* make it a bit taller without touching existing transforms */
+    scale: 1 1.08;              /* ↑ 8% vertical */
+    transform-origin: left center;
+  }
+}
+
+/* Mobile/tablet */
+@media (max-width: 991.98px){
+  .phishapi-xl{
+    width: 105%;
+    margin-left: -2.5%;
+    scale: 1 1.03;
+  }
+}
+
 </style>
     </head>
     <body>
