@@ -168,6 +168,21 @@
   left: 0 !important;
   transform: none !important;
 }
+/* Let the skew container show overflow, then oversize the image a bit */
+.content-skewed-right { overflow: visible; }
+
+.phishapi-xl {
+  width: 150%;        /* make it bigger than its column */
+  max-width: none;    /* ignore Bootstrap's max-width:100% */
+  margin-left: -25%;  /* pull it left so it stays centered-ish */
+}
+
+@media (max-width: 991.98px) {
+  .phishapi-xl {
+    width: 120%;
+    margin-left: -10%;
+  }
+}
 
 </style>
     </head>
@@ -392,7 +407,11 @@
                         <div class="container px-5">
                             <div class="row gx-5 align-items-center justify-content-center">
                                 <div class="col-md-9 col-lg-6 order-1 order-lg-0" data-aos="fade-right">
-                                    <div class="content-skewed content-skewed-right"><img class="content-skewed-item img-fluid shadow-lg rounded-3" src="images/phishapi.png" alt="..." /></div>
+                                    <div class="content-skewed content-skewed-right"><img
+  class="content-skewed-item img-fluid shadow-lg rounded-3 phishapi-xl"
+  src="images/phishapi.png"
+  alt="..."
+/></div>
                                 </div>
                                 <div class="col-lg-6 order-0 order-lg-1 mb-5 mb-lg-0" data-aos="fade-left">
                                     <div class="mb-5">
