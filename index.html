@@ -183,6 +183,23 @@
     margin-left: -10%;
   }
 }
+/* keep overflow so the image can hang out of its column a bit */
+.content-skewed-right { overflow: visible; }
+
+/* 25% smaller than before (150% → 112.5%) and re-centered */
+.phishapi-xl{
+  width: 112.5%;
+  max-width: none;
+  margin-left: -6.25%; /* half of the extra (12.5%) */
+}
+
+/* tighten it a bit more on smaller screens */
+@media (max-width: 991.98px){
+  .phishapi-xl{
+    width: 105%;
+    margin-left: -2.5%;
+  }
+}
 
 </style>
     </head>
