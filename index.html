@@ -244,9 +244,9 @@
   }
 }
 /* +10% overall size (keeps your 8% vertical stretch) */
-@media (min-width: 992px){
+@media (min-width: 1010px){
   .phishapi-xl{
-    scale: 1.10 1.188;   /* 10% wider, 10% taller on top of 1.08 vertical */
+    scale: 1.20 1.28;   /* 10% wider, 10% taller on top of 1.08 vertical */
     transform-origin: left center; /* keep the left edge anchored */
   }
 }
@@ -556,9 +556,18 @@
       </div>
     </div>
   </div><!-- close .container here -->
-<div id="chart3-wrapper" class="full-bleed" style="position:relative">
+<div id="chart3-wrapper" style="position:relative">
   <div id="chart3"></div>
-  <div id="chart3-blocker" title="Click to activate chart"></div>
+  <div id="chart3-blocker"
+       style="
+         position:absolute;
+         top:0; left:0;
+         width:100%; height:100%;
+         background:transparent;
+         cursor:pointer;
+       "
+       title="Click to activate chart">
+  </div>
 </div>
   <!-- wave border sits outside the container now -->
   <div class="svg-border-rounded text-light">
