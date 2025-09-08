@@ -271,37 +271,6 @@
   background: transparent;
   cursor: pointer;
 }
-/* 1) Guardrail: never allow horizontal scroll */
-html, body { overflow-x: hidden; }
-@supports (overflow: clip) {
-  html, body { overflow-x: clip; } /* nicer than hidden, when supported */
-}
-
-/* 2) Mobile-only clamp for the carousel */
-@media (max-width: 991.98px) {
-  /* stop viewport bleed */
-  .swiper.campaign-swiper,
-  .campaign-swiper .swiper-wrapper {
-    overflow: hidden !important;
-  }
-
-  /* keep each card inside the viewport */
-  .campaign-swiper .swiper-slide {
-    width: 88vw !important;      /* fit within the viewport */
-    margin-right: 2vw !important; /* tiny gap between slides */
-  }
-
-  /* keep arrows fully inside the viewport */
-  .campaign-swiper .swiper-button-prev { left: 0 !important; }
-  .campaign-swiper .swiper-button-next { right: 0 !important; }
-
-  /* prevent the email preview slide from overflowing via scaling */
-  .campaign-swiper .email-preview-slide { width: 88vw !important; }
-  .campaign-swiper .email-preview-slide img { transform: none !important; }
-
-  /* defensive: images never exceed their slide */
-  .campaign-swiper img { max-width: 100%; height: auto; }
-}
 
 </style>
     </head>
@@ -1135,29 +1104,49 @@ html, body { overflow-x: hidden; }
         </script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  new Swiper('.campaign-swiper', {
-    effect: 'coverflow',
-    grabCursor: true,
-    centeredSlides: true,
-    slidesPerView: 'auto',
-    spaceBetween: 40,
-    coverflowEffect: { rotate: 0, stretch: -80, depth: 200, modifier: 1.5, slideShadows: false },
-    navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+const options = {
+  chart: { type: 'line', height: 300, background: 'transparent',   width:  '100%', toolbar: { show: false } },
+  series: [
+    { name: 'Emails Sent',           data: [800, 802, 835, 823, 829, 820, 810, 800, 790, 780, 770, 760] },
+    { name: 'Emails Opened',         data: [723, 652, 534, 454, 393, 330, 220, 110, 60, 51, 32, 12] },
+    { name: 'Attachments Opened',    data: [392, 380, 263, 230,  199,  98,  59,  76,  31,  50,  41,  8] },
+    { name: 'QR Codes Scanned',      data: [ 96,  43,  37,  28,   6,   5,   4,   3,   2,   1,   1,   0] },
+    { name: 'Pages Visited',         data: [701, 637, 528, 412, 369, 307, 212, 103, 57, 49, 31, 10] },
+    { name: 'Credentials Entered',   data: [401, 378,  352,  331,  289,  277,  202,  87,  46,  27,   8,   5] },
+    { name: 'Weak Passwords',        data: [ 20,  21,   8,   3,   0,   0,   0,   0,   0,   0,   0,   0] },
+    { name: 'Compromised Passwords', data: [  3,   1,   0,   1,   0,   0,   0,   0,   0,   0,   0,   0] },
+    { name: 'Emails Reported',       data: [107, 177, 208, 337, 528, 590, 580, 570, 630, 653, 692, 701] }
+  ],
+  xaxis: {
+    categories: [
+      'January','February','March','April','May',
+      'June','July','August','September','October','November','December'
+    ]
+  },
+  stroke:  { curve: 'straight' },
+  markers: { size: 5 },
+  grid:    { borderColor: '#ddd' },
+  legend:  { position: 'top', horizontalAlign: 'center' },
+  colors:  ['#00E396','#008FFB','#FEB019','#775DD0','#FF4560','#546E7A','#E91E63','#00897B','#00D9E9']
+};
 
-    /* mobile clamp */
-    breakpoints: {
-      0: {
-        spaceBetween: 16,
-        coverflowEffect: { rotate: 0, stretch: -20, depth: 120, modifier: 1.2, slideShadows: false }
-      },
-      992: {
-        spaceBetween: 40,
-        coverflowEffect: { rotate: 0, stretch: -80, depth: 200, modifier: 1.5, slideShadows: false }
-      }
-    }
-  });
+new ApexCharts(document.querySelector('#chart3'), options).render();
+
+const blocker = document.getElementById("chart3-blocker"),
+      chartEl = document.getElementById("chart3");
+
+blocker.addEventListener("click", e => {
+  blocker.style.display = "none";
 });
 
+// if you click anywhere _outside_ the chart, put it back
+document.addEventListener("click", e => {
+  if (!chartEl.contains(e.target) && blocker.style.display === "none") {
+    blocker.style.display = "block";
+  }
+});
+
+});
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
