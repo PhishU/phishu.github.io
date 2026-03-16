@@ -168,6 +168,39 @@
   left: 0 !important;
   transform: none !important;
 }
+/* ── Lightbox modal ── */
+.phishu-lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(0,0,0,.88);
+  cursor: zoom-out;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+.phishu-lightbox.active { display: flex; }
+.phishu-lightbox img {
+  max-width: 92vw;
+  max-height: 92vh;
+  object-fit: contain;
+  border-radius: 6px;
+  box-shadow: 0 0 40px rgba(0,0,0,.6);
+  cursor: default;
+}
+.phishu-lightbox-close {
+  position: absolute;
+  top: 1rem; right: 1.5rem;
+  font-size: 2.5rem;
+  color: #fff;
+  cursor: pointer;
+  line-height: 1;
+  z-index: 100000;
+  font-family: sans-serif;
+}
+img.phishu-zoomable { cursor: zoom-in; }
+
 /* Dashboard image sizing (consolidated) */
 .content-skewed-right { overflow: visible; }
 
@@ -219,6 +252,11 @@
 </style>
     </head>
     <body>
+<!-- Lightbox overlay -->
+<div class="phishu-lightbox" id="phishuLightbox">
+  <span class="phishu-lightbox-close" id="phishuLightboxClose">&times;</span>
+  <img src="" alt="Enlarged screenshot" id="phishuLightboxImg" />
+</div>
         <div id="layoutDefault">
             <div id="layoutDefault_content">
                 <main>
@@ -1261,6 +1299,59 @@ chartWrapper.addEventListener("mouseleave", () => {
   });
 </script>
 
+
+<!-- Lightbox script -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const lb      = document.getElementById('phishuLightbox');
+  const lbImg   = document.getElementById('phishuLightboxImg');
+  const lbClose = document.getElementById('phishuLightboxClose');
+
+  // Images to EXCLUDE from lightbox (logo, book cover already linked externally)
+  const excludeSrc = [
+    'logo-transparent-white-grey-small.png',
+    'spearphishingbook.png',
+    'unfurl2.png'
+  ];
+
+  function isExcluded(img) {
+    const src = img.getAttribute('src') || '';
+    return excludeSrc.some(ex => src.includes(ex));
+  }
+
+  // Find all screenshot images in the page content (inside main)
+  const images = document.querySelectorAll('main img');
+  images.forEach(img => {
+    if (isExcluded(img)) return;
+    img.classList.add('phishu-zoomable');
+    img.addEventListener('click', e => {
+      e.preventDefault();
+      e.stopPropagation();
+      lbImg.src = img.src;
+      lbImg.alt = img.alt || 'Enlarged screenshot';
+      lb.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  // Close on X button
+  lbClose.addEventListener('click', closeLightbox);
+  // Close on backdrop click (but not on image click)
+  lb.addEventListener('click', e => {
+    if (e.target === lb) closeLightbox();
+  });
+  // Close on Escape key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && lb.classList.contains('active')) closeLightbox();
+  });
+
+  function closeLightbox() {
+    lb.classList.remove('active');
+    document.body.style.overflow = '';
+    lbImg.src = '';
+  }
+});
+</script>
 
     </body>
 </html>
