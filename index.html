@@ -1282,7 +1282,7 @@ chartWrapper.addEventListener("mouseleave", () => {
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    new Swiper('.campaign-swiper', {
+    const campaignSwiper = new Swiper('.campaign-swiper', {
       effect: 'coverflow',
       grabCursor: true,
       centeredSlides: true,
@@ -1300,6 +1300,19 @@ chartWrapper.addEventListener("mouseleave", () => {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       },
+    });
+    // Open lightbox when tapping the active slide's image
+    campaignSwiper.on('click', function () {
+      const activeSlide = this.slides[this.activeIndex];
+      if (!activeSlide) return;
+      const img = activeSlide.querySelector('img');
+      if (!img) return;
+      const lb    = document.getElementById('phishuLightbox');
+      const lbImg = document.getElementById('phishuLightboxImg');
+      lbImg.src = img.src;
+      lbImg.alt = img.alt || 'Enlarged screenshot';
+      lb.classList.add('active');
+      document.body.style.overflow = 'hidden';
     });
   });
 </script>
