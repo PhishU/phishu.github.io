@@ -168,86 +168,30 @@
   left: 0 !important;
   transform: none !important;
 }
-/* Let the skew container show overflow, then oversize the image a bit */
+/* Dashboard image sizing (consolidated) */
 .content-skewed-right { overflow: visible; }
 
 .phishapi-xl {
-  width: 150%;        /* make it bigger than its column */
-  max-width: none;    /* ignore Bootstrap's max-width:100% */
-  margin-left: -25%;  /* pull it left so it stays centered-ish */
-}
-
-@media (max-width: 991.98px) {
-  .phishapi-xl {
-    width: 120%;
-    margin-left: -10%;
-  }
-}
-/* keep overflow so the image can hang out of its column a bit */
-.content-skewed-right { overflow: visible; }
-
-/* 25% smaller than before (150% → 112.5%) and re-centered */
-.phishapi-xl{
-  width: 112.5%;
+  width: 100%;
   max-width: none;
-  margin-left: -6.25%; /* half of the extra (12.5%) */
+  margin-left: 0;
 }
 
-/* tighten it a bit more on smaller screens */
-@media (max-width: 991.98px){
+/* Desktop */
+@media (min-width: 992px){
   .phishapi-xl{
     width: 105%;
-    margin-left: -2.5%;
-  }
-}
-/* Let the skewed container show overflow */
-.content-skewed-right { overflow: visible; }
-
-/* Desktop: a little bigger and biased further left */
-@media (min-width: 992px){
-  .phishapi-xl{
-    width: 123%;      /* bigger than current */
     max-width: none;
-    margin-left: -29%;/* more left than the centered -17.5% */
-  }
-}
-
-/* Mobile/tablet: keep it tidy */
-@media (max-width: 991.98px){
-  .phishapi-xl{
-    width: 100%;
-    margin-left: -2.5%;
-  }
-}
-
-	/* keep overflow so we can oversize */
-.content-skewed-right { overflow: visible; }
-
-/* Desktop: push left + make slightly taller */
-@media (min-width: 992px){
-  .phishapi-xl{
-    width: 123%;
-    max-width: none;
-    margin-left: -37%;
-    /* make it a bit taller without touching existing transforms */
-    scale: 1 1.08;              /* ↑ 8% vertical */
+    margin-left: -10%;
     transform-origin: left center;
   }
 }
 
 /* Mobile/tablet */
-@media (max-width: 1000.98px){
+@media (max-width: 991.98px){
   .phishapi-xl{
-    width: 115%;
-    margin-left: -4.5%;
-    scale: 1 1.13;
-  }
-}
-/* +10% overall size (keeps your 8% vertical stretch) */
-@media (min-width: 1010px){
-  .phishapi-xl{
-    scale: 1.20 1.28;   /* 10% wider, 10% taller on top of 1.08 vertical */
-    transform-origin: left center; /* keep the left edge anchored */
+    width: 100%;
+    margin-left: 0;
   }
 }
 
@@ -450,7 +394,7 @@
 									<div class="col-lg-7" data-aos="fade-up" data-aos-delay="100"><img class="img-fluid" src="images/logo-transparent-white-grey-small.png" /><br></div>
 									<div class="col-lg-5" data-aos="fade-up">
                                         <br><h6 class="page-header-ui-title">Targeted, Adversary-Level Spear-Phishing</h6>
-                                        <p class="page-header-ui-text mb-7">At PhishU, we specialize exclusively in advanced, real-world spear-phishing campaigns and highly customized cybersecurity awareness training. With over 90% of data breaches still initiated via email, our approach mirrors real adversaries, testing your organization's defenses and training your employees effectively. How well does your current security posture hold up under targeted attacks?</p>
+                                        <p class="page-header-ui-text mb-7">Advanced, real-world spear-phishing campaigns and targeted security awareness training. We test through your real defenses by default, use the same techniques as actual attackers, and train the people who fall for it. Over 90% of breaches still start with email. How well do your defenses hold up under a real, targeted attack?</p>
                                         <!--<a class="btn btn-teal fw-500 me-2" href="#!">
                                             Get Started
                                             <i class="ms-2" data-feather="arrow-right"></i>
@@ -477,12 +421,12 @@
                                 <div class="col-lg-4 mb-5 mb-lg-0">
                                     <div class="icon-stack icon-stack-xl bg-teal text-white mb-4"><i class="fa fa-graduation-cap"></i></div>
                                     <h3>Security Awareness Training</h3>
-                                    <p class="mb-0">Our focused, scenario-driven training addresses vulnerabilities identified in real spear-phishing campaigns. Delivered interactively through videos, instructor-led sessions, and tailored modules, our training is confidential, supportive, and strategically designed to elevate employee awareness without shame.</p>
+                                    <p class="mb-0">Training is always free and always optional. When used, it addresses vulnerabilities identified during real spear-phishing campaigns. Delivered interactively through tailored modules, our training shows each recipient what they actually encountered and what to watch for next time.</p>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="icon-stack icon-stack-xl bg-teal text-white mb-4"><i class="fa fa-wrench"></i></div>
                                     <h3>Cybersecurity Tools</h3>
-                                    <p class="mb-0">Empower your internal security teams with our PhishU Framework, a robust platform enabling you to independently conduct sophisticated phishing campaigns, training, and real-time monitoring of security awareness within your organization.</p>
+                                    <p class="mb-0">Use the PhishU Framework to independently run realistic phishing campaigns, deliver targeted training, and monitor security awareness in real time. Built for internal security teams, pentest firms, MSSPs, and red teams running client engagements.</p>
                                 </div>
                             </div>
                         </div>
@@ -504,7 +448,7 @@
                                 <div class="col-lg-6 order-0 order-lg-1 mb-5 mb-lg-0" data-aos="fade-left">
                                     <div class="mb-5">
                                         <h2>What Sets PhishU Apart</h2>
-                                        <p class="lead">PhishU distinguishes itself through an exclusive focus on advanced, customized spear-phishing campaigns and targeted training solutions without allow-listing. Everything is entirely external, including acquiring doppelganger domains and sending emails, just as the attackers do. Our innovative technologies, ease of use, and personalized approach ensure unmatched realism and effectiveness in enhancing your cybersecurity posture.</p>
+                                        <p class="lead">PhishU focuses on advanced, customized spear-phishing campaigns and targeted training. By default, everything is external with no allow-listing, just like real attackers. Doppelganger domains are acquired and emails are sent through your existing defenses. If allow-listing is desired for long-term internal programs, you can set that up too. Built-in AI helps design campaigns in minutes, and safeguards protect your domains from burning out prematurely.</p>
                                     </div>
                                     <div class="row gx-5">
                                         <div class="col-md-6 mb-4">
@@ -535,7 +479,7 @@
                                         </div>
                                         <div class="col-md-6 mb-4">
                                             <h6>Real-Time Analytics and Visibility</h6>
-                                            <p class="small mb-0">Gain unparalleled insights with our real-time analytics dashboard, tracking email interactions, credential submissions, and user engagement. Reporting capabilities also exist for MSSPs and consultants.</p>
+                                            <p class="small mb-0">Real-time analytics dashboard tracks email interactions, credential submissions, and user engagement. AI-driven report generator creates branded, actionable red team reports in minutes. Built for MSSPs and consultants.</p>
                                             <!--<a class="small text-arrow-icon" href="#!">
                                                 Learn More
                                                 <i data-feather="arrow-right"></i>
@@ -546,10 +490,89 @@
                             </div>
                         </div>
                     </section>
+
+<!-- Session Hijacking / AiTM Section -->
+<section class="bg-dark py-10">
+  <div class="container px-5">
+    <div class="row gx-5 align-items-center">
+      <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
+        <h2 class="text-white">Point-and-Click Session Hijacking</h2>
+        <p class="lead text-white-50 mb-4">
+          PhishU's Adversary-in-the-Middle (AiTM) proxy sits between the target and their identity provider, capturing credentials, MFA tokens, and session cookies in real time. After a target authenticates, you click one button and you're browsing their actual inbox.
+        </p>
+        <p class="text-white-50 mb-4">
+          No other commercial phishing simulation platform does this. This is the same technique real attackers use, packaged for authorized testing. No phishlets, no YAML files, no infrastructure to manage.
+        </p>
+        <ul class="list-unstyled text-white-50">
+          <li class="mb-3"><i class="fa fa-check text-teal me-2"></i>Bypass MFA and passkeys to demonstrate actual account takeover</li>
+          <li class="mb-3"><i class="fa fa-check text-teal me-2"></i>One-click session jump into the target's real account</li>
+          <li class="mb-3"><i class="fa fa-check text-teal me-2"></i>Captures 20+ session cookies, HTTP headers, and IdP profile data</li>
+          <li class="mb-3"><i class="fa fa-check text-teal me-2"></i>Engineered to evade Chrome browser heuristics</li>
+          <li><i class="fa fa-check text-teal me-2"></i>Works with Google, Microsoft, Okta, and more</li>
+        </ul>
+      </div>
+      <div class="col-lg-6 text-center" data-aos="fade-left">
+        <div class="badge bg-teal-soft text-teal rounded-pill badge-marketing mb-3">Exclusive Capability</div>
+        <div class="card bg-gray-800 border-0 shadow">
+          <div class="card-body p-5 text-center">
+            <div class="icon-stack icon-stack-xl bg-teal text-white mb-4"><i class="fas fa-user-secret"></i></div>
+            <h4 class="text-white">Why This Matters</h4>
+            <p class="text-white-50 mb-0">"We captured your CFO's session and browsed their inbox" is a different conversation than "your employee clicked a link." PhishU proves what a real attacker could do, not just that someone clicked.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="svg-border-rounded text-light">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor">
+      <path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path>
+    </svg>
+  </div>
+</section>
+
+<!-- AI-Assisted Campaign Building -->
+<section class="bg-light py-10">
+  <div class="container px-5">
+    <div class="row gx-5 mb-5 align-items-center">
+      <div class="col-lg-5 mb-5 mb-lg-0" data-aos="fade-right">
+        <h2>AI-Assisted Campaign Building</h2>
+        <p class="lead mb-4">
+          PhishU's AI does the reconnaissance for you. Point it at a target domain and it performs passive OSINT to identify the organization's technology stack, email platforms, and workforce structure, then generates ready-to-use campaign ideas tailored to that specific target.
+        </p>
+        <p class="mb-4">
+          Need a custom email? Describe what you want in plain language. The AI uses your campaign context, company research, and sender info to write a complete, branded email body. No templates to customize. No copy-pasting. Just describe the scenario and click Generate.
+        </p>
+        <ul class="list-unstyled">
+          <li class="mb-3"><i class="fa fa-check text-teal me-2"></i>Passive recon identifies technology stack, email platforms, and realistic pretexts</li>
+          <li class="mb-3"><i class="fa fa-check text-teal me-2"></i>AI suggests campaigns with target audience and impersonation sender already selected</li>
+          <li class="mb-3"><i class="fa fa-check text-teal me-2"></i>Prompt-based email generation creates branded, context-aware email content</li>
+          <li><i class="fa fa-check text-teal me-2"></i>Takes campaign setup from hours to minutes</li>
+        </ul>
+      </div>
+      <div class="col-lg-7 text-center" data-aos="fade-left">
+        <div class="mb-4">
+          <img class="img-fluid shadow-lg rounded-3 mx-auto d-block" src="images/airecon.png" alt="AI Campaign Suggestions - passive reconnaissance identifies target-specific campaign ideas" style="max-width: 80%;" />
+          <p class="small text-muted mt-2">AI performs passive recon and suggests targeted campaigns</p>
+        </div>
+        <div>
+          <img class="img-fluid shadow-lg rounded-3 mx-auto d-block" src="images/aiemails.png" alt="AI Email Generation - describe what you want and AI writes the phishing email" style="max-width: 80%;" />
+          <p class="small text-muted mt-2">Describe what you want and AI writes the email</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="svg-border-rounded text-light">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor">
+      <path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path>
+    </svg>
+  </div>
+</section>
+
 					<!-- -- Conditional Click-through Trends Over Time -- -->
 <section class="bg-light pt-6 pb-10">
   <div class="container px-5">
-    <h2 class="text-center mb-5">Conditional Click-through Trends Over Time</h2>
+    <h2 class="text-center mt-5 mb-3">Click-Through Trends</h2>
+    <p class="lead text-center text-muted mb-5">Repeat customers show measurable, sustained improvement in phishing resilience. Real-world testing with campaign-specific training produces genuine behavioral change. As attacks get more sophisticated, click rates continue to decline and reporting rates climb.</p>
     <div class="row justify-content-center">
       <div class="col-12 col-md-10 col-lg-9">
         <div id="chart3"></div>
@@ -716,9 +739,9 @@
     <div class="row gx-5 align-items-center">
       <!-- TEXT ON LEFT -->
       <div class="col-lg-6" data-aos="fade-right">
-        <h2>Tailored Training Experience</h2>
+        <h2>Tailored Training Experience (Always Free, Always Optional)</h2>
         <p class="lead mb-5">
-          Our focused, scenario-driven training addresses vulnerabilities identified in real spear-phishing campaigns. Delivered interactively through videos, instructor-led sessions, and tailored modules, our training is confidential, supportive, and strategically designed to elevate employee awareness without shame.<br><br>PhishU’s post-campaign training modules adapt specifically to each user's interactions during the campaign. This personalized approach ensures relevant, actionable, and impactful learning, fostering continuous improvement in security awareness. Only relevant attributes to the campaign are included by default and are conditional to each user, so recipients only take the training they need and avoid information overload.
+          Training is always included at no additional cost and is always optional. When used, it addresses the specific vulnerabilities each person encountered during their campaign. No generic videos. No 30-minute modules about password hygiene.<br><br>PhishU's post-campaign training adapts to each recipient's actual experience. If they fell for a QR code phish, they see training about QR phishing. If it was a Browser-in-Browser attack, they see that. Recipients only take the training they need and avoid information overload. This approach produces measurable improvement over time because the training is personal, not generic.
         </p>
         <ul class="list-unstyled">
           <li class="mb-3"><i class="fa fa-check text-teal me-2"></i>Only receive relevant training the recipient experienced at that point-in-time</li>
@@ -758,8 +781,39 @@
   </div>
 </section>
 
+<!-- AI-Powered Report Generator Section -->
+<section class="bg-light py-10">
+  <div class="container px-5">
+    <div class="row gx-5 align-items-center">
+      <div class="col-lg-6 order-1 order-lg-0" data-aos="fade-right">
+        <div class="content-skewed content-skewed-right">
+          <img class="img-fluid shadow-lg rounded-3" src="images/reportgenerator.png" alt="PhishU Report Generator" />
+        </div>
+      </div>
+      <div class="col-lg-6 order-0 order-lg-1 mb-5 mb-lg-0" data-aos="fade-left">
+        <h2>AI-Powered Report Generator</h2>
+        <p class="lead mb-4">
+          Generate branded, professional red team reports in minutes, not hours. PhishU's report generator uses AI to write the Executive Summary, pull in campaign metrics, and format everything into a polished PDF ready to hand to a client or executive.
+        </p>
+        <ul class="list-unstyled mb-4">
+          <li class="mb-3"><i class="fa fa-check text-teal me-2"></i>AI-written Executive Summary with campaign-specific findings and recommendations</li>
+          <li class="mb-3"><i class="fa fa-check text-teal me-2"></i>Campaign metrics, credential statistics, password analysis, and domain health, all populated automatically</li>
+          <li class="mb-3"><i class="fa fa-check text-teal me-2"></i>Upload your organization's logo for white-labeled reports</li>
+          <li class="mb-3"><i class="fa fa-check text-teal me-2"></i>Version control with saved drafts for iterating on report content</li>
+          <li class="mb-3"><i class="fa fa-check text-teal me-2"></i>Edit the AI-generated text, then export a print-ready PDF</li>
+          <li><i class="fa fa-check text-teal me-2"></i>Regenerate the summary any time with one click if campaign data changes</li>
+        </ul>
+        <p class="text-muted">For pentest firms and MSSPs, this eliminates hours of manual report writing per engagement. The report is the deliverable. PhishU builds it for you.</p>
+      </div>
+    </div>
+  </div>
+  <div class="svg-border-rounded text-dark">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor">
+      <path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path>
+    </svg>
+  </div>
+</section>
 
-                    <hr class="m-0" />
                     <!--<section class="bg-light pt-10">
                         <div class="container px-5">
                             <div class="text-center mb-5">
@@ -889,7 +943,7 @@
                                         <div class="icon-stack flex-shrink-0 bg-teal text-white"><i class="fas fa-question"></i></div>
                                         <div class="ms-4">
                                             <h5 class="text-white">Do we need this with MFA and Passkeys?</h5>
-                                            <p class="text-white-50">Absolutely. PhishU identifies common MFA vulnerabilities, providing critical insights and guidance to strengthen your authentication processes. Passkeys can be bypassed with MiTM proxies and insecure fallbacks, and the framework allows operators to easily inject Passkey fallback prompts into Landing Pages, if desired. It's about more than just capturing credentials!</p>
+                                            <p class="text-white-50">Absolutely. PhishU identifies common MFA vulnerabilities, providing critical insights and guidance to strengthen your authentication processes. Passkeys can be bypassed with Adversary-in-the-Middle (AiTM) proxies and insecure fallbacks, and the framework allows operators to easily inject Passkey fallback prompts into Landing Pages, if desired. It's about more than just capturing credentials!</p>
                                         </div>
                                     </div>
                                 </div>
@@ -898,7 +952,7 @@
                                         <div class="icon-stack flex-shrink-0 bg-teal text-white"><i class="fas fa-question"></i></div>
                                         <div class="ms-4">
                                             <h5 class="text-white">How does PhishU differ from other cybersecurity providers?</h5>
-                                            <p class="text-white-50">Unlike generic solutions, PhishU focuses exclusively on realistic, targeted phishing and training. Our specialization ensures unmatched expertise, attention to detail, and continuous innovation in adversary emulation. This is not allow-listed, generic phishing for only internal users.</p>
+                                            <p class="text-white-50">PhishU focuses exclusively on realistic, targeted phishing and training. We test through real defenses by default, use the same techniques as real attackers (AiTM session hijacking, ClickFix, Browser-in-Browser, and more), and include campaign-specific training that actually changes behavior. This is not allow-listed, generic phishing for only internal users. It's built for red teams, pentest firms, MSSPs, and internal security teams alike.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -907,7 +961,7 @@
                                         <div class="icon-stack flex-shrink-0 bg-teal text-white"><i class="fas fa-question"></i></div>
                                         <div class="ms-4">
                                             <h5 class="text-white">Do you offer comprehensive reporting?</h5>
-                                            <p class="text-white-50">Yes! Our real-time analytics offer detailed visibility into email interactions, credential captures, and user behavior. Only relevant metrics for that campaign are reported. Optionally, captured credentials can demonstrate the tangible impact of successful phishing attacks, enhancing your organization's understanding of real-world risks.</p>
+                                            <p class="text-white-50">Yes. Built-in dashboards with analytics and an AI-driven report generator create comprehensive, branded, actionable red team reports in minutes. Real-time analytics track email interactions, credential captures, and user behavior. Only relevant metrics for that campaign are reported. For pentest firms and MSSPs, this eliminates hours of manual report writing per engagement.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -916,7 +970,7 @@
                                 <div class="col-lg-8">
                                     <!--<div class="badge bg-transparent-light rounded-pill badge-marketing mb-4">Get Started</div>-->
                                     <h2 class="text-white">Who Benefits from PhishU?</h2>
-                                    <p class="lead text-white-50 mb-5">PhishU is designed for organizations across all security maturity levels, from startups establishing foundational security to advanced enterprises seeking rigorous red-team assessments. Whether you're a corporate security team, a consulting firm, or an MSSP, our solutions scale flexibly with your needs.<br><br>Our straightforward, transparent pricing structure offers exceptional value, empowering your team or your consulting practice without hidden costs or complexities.</p>
+                                    <p class="lead text-white-50 mb-5">PhishU works for organizations across all security maturity levels. Whether you're a corporate security team, a pentest firm, an MSSP, or a red team running authorized adversary emulation, PhishU scales with your needs.<br><br>Our pricing is straightforward and transparent. $12,000/year for the full platform, first Org included. Additional Orgs are $1,000 each. Training is always included. No per-seat fees. No per-user training charges. No hidden tiers.</p>
 									<h2 class="text-white">Besides, we did "write the book" on Spear Phishing 😉</h2>
 									<p><a href="https://cybersecurityabcs.com"><img src="images/spearphishingbook.png" target="_BLANK" width="50%"></a></p>
 									<h2 class="text-white">Ready to Strengthen Your Defenses?</h2>
@@ -1029,7 +1083,7 @@
                                 <div class="mb-3">Get Caught Then Join the School</div>
                                 <div class="icon-list-social mb-5">
                                     <!--<a class="icon-list-social-link" href="#!"><i class="fab fa-instagram"></i></a>-->
-                                    <a class="icon-list-social-link" href="#!"><i class="fab fa-facebook"></i></a>
+                                    <a class="icon-list-social-link" href="https://www.linkedin.com/company/phishu"><i class="fab fa-linkedin"></i></a>
                                     <a class="icon-list-social-link" href="#!"><i class="fab fa-github"></i></a>
                                     <a class="icon-list-social-link" href="#!"><i class="fab fa-twitter"></i></a>
                                 </div>
@@ -1081,11 +1135,11 @@
                         </div>
                         <hr class="my-5" />
                         <div class="row gx-5 align-items-center">
-                            <div class="col-md-6 small">Copyright &copy; PhishU 2022</div>
+                            <div class="col-md-6 small">Copyright &copy; PhishU 2026</div>
                             <div class="col-md-6 text-md-end small">
-                                <a href="#!">Privacy Policy</a>
+                                <a href="https://framework.phishu.net/privacypolicy/">Privacy Policy</a>
                                 &middot;
-                                <a href="#!">Terms &amp; Conditions</a>
+                                <a href="https://framework.phishu.net/privacypolicy/">Terms &amp; Conditions</a>
                             </div>
                         </div>
                     </div>
