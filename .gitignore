@@ -1,0 +1,5 @@
+# Synology NAS metadata
+@eaDir/
+
+# Source working directory (lives in PhishUFramework, not in this repo)
+Marketing/
