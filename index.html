@@ -1324,7 +1324,14 @@ document.addEventListener('DOMContentLoaded', () => {
   images.forEach(img => {
     if (isExcluded(img)) return;
     img.classList.add('phishu-zoomable');
-    img.addEventListener('click', e => {
+
+    // Track pointer to distinguish clicks from drags (Swiper uses drag)
+    let startX = 0, startY = 0;
+    img.addEventListener('pointerdown', e => { startX = e.clientX; startY = e.clientY; });
+    img.addEventListener('pointerup', e => {
+      const dx = Math.abs(e.clientX - startX);
+      const dy = Math.abs(e.clientY - startY);
+      if (dx > 6 || dy > 6) return;           // was a drag/swipe, not a tap
       e.preventDefault();
       e.stopPropagation();
       lbImg.src = img.src;
