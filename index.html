@@ -568,30 +568,30 @@
   </div>
 </section>
 
-					<!-- -- Conditional Click-through Trends Over Time -- -->
-<section class="bg-light pt-6 pb-10">
+					<!-- -- Click-Through Trends -- -->
+<section class="bg-light pb-10">
   <div class="container px-5">
-    <h2 class="text-center mt-5 mb-3">Click-Through Trends</h2>
+    <h2 class="text-center mb-3">Click-Through Trends</h2>
     <p class="lead text-center text-muted mb-5">Repeat customers show measurable, sustained improvement in phishing resilience. Real-world testing with campaign-specific training produces genuine behavioral change. As attacks get more sophisticated, click rates continue to decline and reporting rates climb.</p>
     <div class="row justify-content-center">
       <div class="col-12 col-md-10 col-lg-9">
-        <div id="chart3"></div>
+        <div id="chart3-wrapper" style="position:relative">
+          <div id="chart3"></div>
+          <div id="chart3-blocker"
+               style="
+                 position:absolute;
+                 top:0; left:0;
+                 width:100%; height:100%;
+                 background:transparent;
+                 cursor:pointer;
+                 z-index:10;
+               "
+               title="Click to interact with chart">
+          </div>
+        </div>
       </div>
     </div>
-  </div><!-- close .container here -->
-<div id="chart3-wrapper" style="position:relative">
-  <div id="chart3"></div>
-  <div id="chart3-blocker"
-       style="
-         position:absolute;
-         top:0; left:0;
-         width:100%; height:100%;
-         background:transparent;
-         cursor:pointer;
-       "
-       title="Click to activate chart">
   </div>
-</div>
   <!-- wave border sits outside the container now -->
   <div class="svg-border-rounded text-light">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor">
@@ -1187,17 +1187,23 @@ const options = {
 new ApexCharts(document.querySelector('#chart3'), options).render();
 
 const blocker = document.getElementById("chart3-blocker"),
-      chartEl = document.getElementById("chart3");
+      chartWrapper = document.getElementById("chart3-wrapper");
 
+// Click blocker to interact with chart
 blocker.addEventListener("click", e => {
   blocker.style.display = "none";
 });
 
-// if you click anywhere _outside_ the chart, put it back
+// Click anywhere outside the chart wrapper to re-enable the blocker
 document.addEventListener("click", e => {
-  if (!chartEl.contains(e.target) && blocker.style.display === "none") {
+  if (!chartWrapper.contains(e.target) && blocker.style.display === "none") {
     blocker.style.display = "block";
   }
+});
+
+// Re-enable blocker when mouse leaves the chart area (prevents scroll hijack on leave)
+chartWrapper.addEventListener("mouseleave", () => {
+  blocker.style.display = "block";
 });
 
 });
