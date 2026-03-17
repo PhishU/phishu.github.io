@@ -640,7 +640,7 @@ img.phishu-zoomable { cursor: zoom-in; }
 </section>
 
 					<!-- -- Click-Through Trends -- -->
-<section class="bg-light pb-10">
+<section class="bg-light pt-4 pb-10">
   <div class="container px-5">
     <h2 class="text-center mb-3">Click-Through Trends</h2>
     <p class="lead text-center text-muted mb-5">Repeat customers show measurable, sustained improvement in phishing resilience. Real-world testing with campaign-specific training produces genuine behavioral change. As attacks get more sophisticated, click rates continue to decline and reporting rates climb.</p>
@@ -654,10 +654,9 @@ img.phishu-zoomable { cursor: zoom-in; }
                  top:0; left:0;
                  width:100%; height:100%;
                  background:transparent;
-                 cursor:pointer;
+                 cursor:default;
                  z-index:10;
-               "
-               title="Click to interact with chart">
+               ">
           </div>
         </div>
       </div>
@@ -1229,7 +1228,9 @@ img.phishu-zoomable { cursor: zoom-in; }
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 const options = {
-  chart: { type: 'line', height: 300, background: 'transparent',   width:  '100%', toolbar: { show: false } },
+  chart: { type: 'line', height: 300, background: 'transparent', width: '100%', toolbar: { show: false }, zoom: { enabled: false }, selection: { enabled: false }, events: {} },
+  tooltip: { enabled: false },
+  states: { hover: { filter: { type: 'none' } }, active: { filter: { type: 'none' } } },
   series: [
     { name: 'Emails Sent',           data: [800, 802, 835, 823, 829, 820, 810, 800, 790, 780, 770, 760] },
     { name: 'Emails Opened',         data: [723, 652, 534, 454, 393, 330, 220, 110, 60, 51, 32, 12] },
@@ -1256,25 +1257,7 @@ const options = {
 
 new ApexCharts(document.querySelector('#chart3'), options).render();
 
-const blocker = document.getElementById("chart3-blocker"),
-      chartWrapper = document.getElementById("chart3-wrapper");
-
-// Click blocker to interact with chart
-blocker.addEventListener("click", e => {
-  blocker.style.display = "none";
-});
-
-// Click anywhere outside the chart wrapper to re-enable the blocker
-document.addEventListener("click", e => {
-  if (!chartWrapper.contains(e.target) && blocker.style.display === "none") {
-    blocker.style.display = "block";
-  }
-});
-
-// Re-enable blocker when mouse leaves the chart area (prevents scroll hijack on leave)
-chartWrapper.addEventListener("mouseleave", () => {
-  blocker.style.display = "block";
-});
+// Chart is display-only — blocker div permanently covers it to prevent scroll hijack.
 
 });
 
