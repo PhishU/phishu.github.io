@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="PhishU explains how one-click transparent AiTM proxying works in the PhishU Framework, how it supports major identity providers including Google, and how it is engineered to evade Chrome phishing heuristics for authorized testing." />
+        <meta name="author" content="PhishU, LLC" />
+        <title>Transparent AiTM Proxying in the PhishU Framework | PhishU Blog</title>
+        <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+        <link rel="canonical" href="https://phishu.net/blogs/blog-transparent-aitm-proxy-framework.html" />
+        <link href="../css/styles.css" rel="stylesheet" />
+        <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" crossorigin="anonymous"></script>
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://phishu.net/blogs/blog-transparent-aitm-proxy-framework.html" />
+        <meta property="og:title" content="Transparent AiTM Proxying in the PhishU Framework" />
+        <meta property="og:description" content="One-click transparent AiTM proxying, major IdP support including Google, and Chrome heuristic evasion engineered for authorized phishing assessments." />
+        <meta property="og:site_name" content="PhishU" />
+        <meta property="og:image" content="https://phishu.net/images/unfurl2.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Transparent AiTM Proxying in the PhishU Framework" />
+        <meta name="twitter:description" content="A high-level look at one-click transparent AiTM proxying, Google support, and Chrome heuristic evasion in the PhishU Framework." />
+        <meta name="twitter:image" content="https://phishu.net/images/unfurl2.png" />
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "headline": "Transparent AiTM Proxying in the PhishU Framework",
+          "description": "PhishU explains how one-click transparent AiTM proxying works in the PhishU Framework, how it supports major identity providers including Google, and how it is engineered to evade Chrome phishing heuristics for authorized testing.",
+          "datePublished": "2026-03-16",
+          "dateModified": "2026-03-16",
+          "author": {
+            "@type": "Organization",
+            "name": "PhishU"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "PhishU",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://phishu.net/images/logo-transparent-white-grey-small.png"
+            }
+          },
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+              "@id": "https://phishu.net/blogs/blog-transparent-aitm-proxy-framework.html"
+          }
+        }
+        </script>
+        <style>
+            .article-shell {
+                max-width: 860px;
+                margin: 0 auto;
+            }
+            .article-meta {
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                font-size: 0.8rem;
+                color: #6c757d;
+            }
+            .placeholder-box {
+                border: 2px dashed #9fb3c8;
+                border-radius: 0.75rem;
+                background: #f8fafc;
+                padding: 1.25rem;
+                color: #4a5568;
+            }
+            .article-shell h2 {
+                margin-top: 2.75rem;
+            }
+            .article-shell p,
+            .article-shell li {
+                font-size: 1.05rem;
+                line-height: 1.8;
+            }
+            .article-image {
+                width: 100%;
+                border-radius: 0.75rem;
+                box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.16);
+            }
+            .article-caption {
+                margin-top: 0.75rem;
+                font-size: 0.95rem;
+                color: #6c757d;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="layoutDefault">
+            <div id="layoutDefault_content">
+                <main>
+                    <nav class="navbar navbar-marketing navbar-expand-lg bg-dark navbar-dark">
+                        <div class="container px-5">
+                            <a class="navbar-brand text-white" href="/">PhishU</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i data-feather="menu"></i></button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ms-auto me-lg-4">
+                                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../blog.html">Blog</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../contact-us.html">Contact</a></li>
+                                </ul>
+                                <a class="btn fw-500 ms-lg-4 btn-teal" href="../contact-us.html">Request a Quote</a>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <header class="page-header-ui page-header-ui-dark bg-gradient-primary-only">
+                        <div class="page-header-ui-content pt-10 pb-5">
+                            <div class="container px-5 article-shell">
+                                <div class="article-meta mb-3">March 16, 2026 • PhishU Blog</div>
+                                <h1 class="page-header-ui-title mb-4">Transparent AiTM Proxying in the PhishU Framework</h1>
+                                <p class="page-header-ui-text mb-0">One click, real account-takeover demonstration, major identity provider support, and browser-warning evasion that is actively maintained as Chrome changes.</p>
+                            </div>
+                        </div>
+                        <div class="svg-border-rounded text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
+                        </div>
+                    </header>
+
+                    <section class="bg-white py-10">
+                        <div class="container px-5">
+                            <article class="article-shell">
+                                <p>Most phishing simulation platforms stop at the click. A user opens an email, taps a link, and the report says they failed. That may be enough for a compliance dashboard, but it is not enough to show what a real attacker could do next.</p>
+
+                                <p>The PhishU Framework now puts transparent Adversary-in-the-Middle, or AiTM, proxying behind a click of a button. Instead of stitching together separate tools, writing phishlets, and keeping up with browser changes by hand, operators can launch an authorized AiTM assessment from the same platform they already use for domains, landing pages, email delivery, analytics, training, and reporting.</p>
+
+                                <p>That matters because AiTM is where phishing turns from a user-awareness problem into a business-risk problem. If a target signs in through the proxy, the operator can capture the login flow, collect the resulting session material, and demonstrate what actual account takeover risk looks like in practice.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/AiTMConfiguration.png" alt="PhishU Framework AiTM configuration screen showing transparent proxy setup inside the platform" />
+                                    <figcaption class="article-caption">Transparent AiTM proxying is configured directly inside the PhishU Framework, not through external phishlets or separate infrastructure.</figcaption>
+                                </figure>
+
+                                <h2>What Transparent AiTM Proxying Means</h2>
+                                <p>At a high level, transparent proxying places the phishing infrastructure in the middle of the login conversation. The target believes they are interacting with a familiar sign-in experience. The real identity provider still receives the authentication traffic. The difference is that the proxy is in the path, observing the exchange and capturing the pieces that matter for a defender-led assessment.</p>
+
+                                <p>In the PhishU Framework, that capability is built into the product. There is no need to stand up separate infrastructure, babysit configuration files, or bolt on external reporting after the fact. The operator works inside the same interface used for the rest of the phishing workflow.</p>
+
+                                <p>That single workflow is a big part of the value. The hard part has never been understanding what an AiTM proxy is. The hard part has been getting one working reliably, keeping it alive, and integrating it into an engagement that still needs domains, email, tracking, evidence, and training. PhishU handles that end to end.</p>
+
+                                <h2>From Click to Session Hijack, in One Workflow</h2>
+                                <p>When defenders talk about phishing risk, stakeholders often hear one thing: someone clicked. That is not the same as showing that a real account could be taken over. AiTM changes that. If the target successfully authenticates through the proxy, the framework can capture the resulting session data and let the operator demonstrate downstream access risk with a point-and-click session jump.</p>
+
+                                <p>That is a very different conversation with a client, executive team, or internal security stakeholder. A report that says, "an employee entered credentials" gets attention. A report that shows, "this is the inbox, tenant access, or cloud session an attacker could have used next" gets action.</p>
+
+                                <p>Inside the PhishU Framework, that workflow is deliberately simple. The operator sees the captured session appear in the interface, gets a real-time notification that the authentication succeeded, and can use the built-in Session Hijacking option to jump directly into the authenticated session from within the Framework workflow. That one-click handoff is a big part of what makes the capability practical. It turns a technically complex attack path into evidence a client can understand immediately.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/AiTMCapturedSessionNotification.png" alt="PhishU notification showing a captured AiTM session available for action inside the Framework" />
+                                    <figcaption class="article-caption">The Framework alerts the operator as soon as a live session is captured, making it easy to move from delivery to evidence collection in real time.</figcaption>
+                                </figure>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/AiTMSessionHijack.png" alt="PhishU one-click Session Hijacking option inside the Framework after a captured AiTM session" />
+                                    <figcaption class="article-caption">Session Hijacking is exposed as a direct in-product action, so operators can demonstrate real downstream access risk without leaving the Framework.</figcaption>
+                                </figure>
+
+                                <p>That is also why this capability belongs in a phishing platform built for red teams, pentest firms, MSSPs, and internal security teams. It closes the gap between generic awareness testing and realistic adversary emulation.</p>
+
+                                <h2>Support for Major Identity Providers, Including Google</h2>
+                                <p>The Framework's transparent proxy capability is designed for the identity platforms organizations actually use. That includes major IdPs and cloud login experiences such as Google. For defenders, that matters because the value of a phishing assessment rises sharply when it tests real authentication surfaces instead of toy examples.</p>
+
+                                <p>Google is a good example. Security teams already know Google sign-in flows are not simple static login pages. They involve modern browser behavior, evolving authentication steps, and active anti-phishing controls. Supporting that environment is not a checkbox feature. It is a sign that the platform is being maintained against real-world sign-in surfaces, not abandoned after a demo.</p>
+
+                                <p>PhishU's approach is not to expose all of that complexity to the operator. The point is the opposite. The platform absorbs the complexity so the operator can run an authorized assessment without becoming a full-time Evilginx maintainer.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/AiTMGoogle.png" alt="Google sign-in flow proxied through PhishU Framework transparent AiTM support" />
+                                    <figcaption class="article-caption">Google is one of the major identity-provider environments the Framework is built to support for authorized phishing assessments.</figcaption>
+                                </figure>
+
+                                <h2>How It Deals with Chrome's Built-In Phishing Heuristics</h2>
+                                <p>One of the biggest problems in modern phishing infrastructure is not just the mail gateway. It is the browser. Chrome applies local and real-time phishing heuristics that can generate warnings when a non-Google domain serves content that looks too much like a Google sign-in experience. Any platform that claims to support realistic AiTM testing against major IdPs has to deal with that reality.</p>
+
+                                <p>PhishU does. The Framework is engineered to evade Chrome's built-in phishing heuristics, and those protections are actively maintained as browser detection changes over time. That is a major advantage of using a hosted platform instead of rolling your own toolkit. When the browser environment shifts, the customer does not need to reverse-engineer the change and rebuild their own infrastructure. The platform adapts centrally.</p>
+
+                                <p>It is important to be precise here. No honest vendor should promise permanent or universal browser evasion. Detection logic changes. Browsers evolve. The right claim is that PhishU treats browser-level detection as an engineering problem that is continuously maintained, and that the current approach has been consistently effective in testing. That is the standard defenders should expect.</p>
+
+                                <h2>Why This Matters More Than a Generic Phishing Click Report</h2>
+                                <p>Most phishing programs are built to count clicks and assign training. That has value, but it does not answer the question security leaders actually care about: what happens if a real phish gets through?</p>
+
+                                <p>Transparent AiTM proxying helps answer that question in a way a generic simulation cannot. It shows whether modern authentication flows can be abused, whether MFA meaningfully changes the outcome, and whether session theft remains a real exposure path in the target environment. It turns phishing from a lightweight awareness exercise into a deeper control-validation exercise.</p>
+
+                                <p>For service providers, it also changes the economics of phishing work. Instead of juggling separate tools for delivery, proxying, reporting, and training, the operator can work from one hosted platform. That reduces setup time, reduces operational drag, and makes higher-value social engineering work easier to deliver repeatedly.</p>
+
+                                <h2>No Phishlets, No YAML, No Duct Tape</h2>
+                                <p>A lot of practitioners know the pain of maintaining phishing infrastructure by hand. One tool handles email. Another handles proxying. Another handles reporting. Then Chrome changes behavior, Google changes a login flow, or a landing page gets burned, and the whole stack needs attention again.</p>
+
+                                <p>The PhishU Framework is built to remove that glue work. Operators do not need to manage phishlets, YAML files, or custom infrastructure just to run a realistic AiTM assessment. The result is a cleaner path from idea to campaign, and a much better path from campaign to usable evidence.</p>
+
+                                <p>That is one reason this capability matters beyond internal awareness teams. Pentest firms, red teams, and MSSPs need workflows they can operate at client scale. A point-and-click transparent proxy inside a broader phishing platform is a much more practical answer than another standalone research tool.</p>
+
+                                <h2>Where This Fits in the Bigger PhishU Story</h2>
+                                <p>AiTM proxying is not a party trick, and it should not be treated like one. It is one part of a realistic phishing workflow that also includes domain setup, deliverability engineering, landing page control, browser-warning evasion, analytics, targeted training, and reporting that decision-makers can actually use.</p>
+
+                                <p>That combination is what makes the Framework different. The goal is not to give defenders a pile of offensive techniques. The goal is to give them a controlled, authorized, usable way to test phishing resilience under real conditions and then do something useful with the results.</p>
+
+                                <p>If a platform can show that an email landed, a user authenticated, and a session could be reused, that is not fear-based marketing. That is the exact kind of evidence security programs need to prioritize the next fix.</p>
+
+                                <div class="card bg-light border-0 mt-5">
+                                    <div class="card-body p-4 p-lg-5">
+                                        <h2 class="h4">Want to see it in action?</h2>
+                                        <p class="mb-3">PhishU supports realistic phishing assessments, targeted training, and point-and-click AiTM session hijacking for authorized engagements. If you want to test what a real phishing attack could do in your environment, start there.</p>
+                                        <a class="btn btn-teal fw-500" href="../contact-us.html">Request a Quote</a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                </main>
+            </div>
+            <div id="layoutDefault_footer">
+                <footer class="footer pt-5 pb-5 mt-auto bg-dark footer-dark">
+                    <div class="container px-5">
+                        <div class="row gx-5 align-items-center">
+                            <div class="col-md-6 small">Copyright &copy; PhishU 2026</div>
+                            <div class="col-md-6 text-md-end small">
+                                <a href="https://www.linkedin.com/company/phishu">LinkedIn</a>
+                                &middot;
+                                <a href="../contact-us.html">Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="../js/scripts.js"></script>
+    </body>
+</html>
