@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Keep template/demo files out of indexing.
+Disallow: /indexORIG.html
+Disallow: /header-*.html
+Disallow: /landing-*.html
+Disallow: /page-*.html
+
+Sitemap: https://phishu.net/sitemap.xml
