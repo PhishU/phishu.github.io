@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="PhishU explains how the ClickFix template in the PhishU Framework simulates a real social-engineering technique, records harmless callback analytics as a verification signal, and ties the result directly into reporting and campaign-specific training." />
+        <meta name="author" content="PhishU, LLC" />
+        <title>ClickFix in the PhishU Framework | PhishU Blog</title>
+        <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+        <link rel="canonical" href="https://phishu.net/blogs/blog-clickfix-in-the-phishu-framework.html" />
+        <link href="../css/styles.css" rel="stylesheet" />
+        <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" crossorigin="anonymous"></script>
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://phishu.net/blogs/blog-clickfix-in-the-phishu-framework.html" />
+        <meta property="og:title" content="ClickFix in the PhishU Framework" />
+        <meta property="og:description" content="A high-level look at how the PhishU Framework turns ClickFix into a point-and-click template with callback analytics, console visibility, and campaign-linked training." />
+        <meta property="og:site_name" content="PhishU" />
+        <meta property="og:image" content="https://phishu.net/images/ClickFixVisit.png" />
+        <meta property="og:image:alt" content="ClickFix landing page in the PhishU Framework showing the fake verification flow and PowerShell copy prompt" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="ClickFix in the PhishU Framework" />
+        <meta name="twitter:description" content="How the PhishU Framework simulates ClickFix with callback analytics, reporting, and campaign-specific training." />
+        <meta name="twitter:image" content="https://phishu.net/images/ClickFixVisit.png" />
+        <meta name="twitter:image:alt" content="ClickFix landing page in the PhishU Framework showing the fake verification flow and PowerShell copy prompt" />
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "headline": "ClickFix in the PhishU Framework",
+          "description": "PhishU explains how the ClickFix template in the PhishU Framework simulates a real social-engineering technique, records harmless callback analytics as a verification signal, and ties the result directly into reporting and campaign-specific training.",
+          "datePublished": "2026-03-23",
+          "dateModified": "2026-03-23",
+          "author": {
+            "@type": "Organization",
+            "name": "PhishU"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "PhishU",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://phishu.net/images/logo-transparent-white-grey-small.png"
+            }
+          },
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://phishu.net/blogs/blog-clickfix-in-the-phishu-framework.html"
+          }
+        }
+        </script>
+        <style>
+            .article-shell {
+                max-width: 860px;
+                margin: 0 auto;
+            }
+            .article-meta {
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                font-size: 0.8rem;
+                color: #6c757d;
+            }
+            .placeholder-box {
+                border: 2px dashed #9fb3c8;
+                border-radius: 0.75rem;
+                background: #f8fafc;
+                padding: 1.25rem;
+                color: #4a5568;
+            }
+            .article-shell h2 {
+                margin-top: 2.75rem;
+            }
+            .article-shell p,
+            .article-shell li {
+                font-size: 1.05rem;
+                line-height: 1.8;
+            }
+            .article-image {
+                display: block;
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+                border-radius: 0.75rem;
+                box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.16);
+            }
+            .article-caption {
+                margin-top: 0.75rem;
+                font-size: 0.95rem;
+                color: #6c757d;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="layoutDefault">
+            <div id="layoutDefault_content">
+                <main>
+                    <nav class="navbar navbar-marketing navbar-expand-lg bg-dark navbar-dark">
+                        <div class="container px-5">
+                            <a class="navbar-brand text-white" href="/">PhishU</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i data-feather="menu"></i></button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ms-auto me-lg-4">
+                                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../blog.html">Blog</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../contact-us.html">Contact</a></li>
+                                </ul>
+                                <a class="btn fw-500 ms-lg-4 btn-teal" href="../contact-us.html">Request a Quote</a>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <header class="page-header-ui page-header-ui-dark bg-gradient-primary-only">
+                        <div class="page-header-ui-content pt-10 pb-5">
+                            <div class="container px-5 article-shell">
+                                <div class="article-meta mb-3">March 23, 2026 • PhishU Blog</div>
+                                <h1 class="page-header-ui-title mb-4">ClickFix in the PhishU Framework</h1>
+                                <p class="page-header-ui-text mb-0">A realistic social-engineering technique, a point-and-click landing page template, harmless callback analytics, and campaign-specific training tied to what the target actually did.</p>
+                            </div>
+                        </div>
+                        <div class="svg-border-rounded text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
+                        </div>
+                    </header>
+
+                    <section class="bg-white py-10">
+                        <div class="container px-5">
+                            <article class="article-shell">
+                                <p>Security teams keep hearing about ClickFix because it works on the same thing a lot of social engineering relies on: urgency, routine, and the target's willingness to follow what looks like a normal verification step. Instead of asking someone to click a suspicious login form, the page pushes them toward a fake fix workflow that feels procedural.</p>
+
+                                <p>The PhishU Framework now brings that technique into the platform as a point-and-click landing page template. Operators can use it as part of an authorized phishing assessment, collect a harmless verification signal when the target follows the prompt, and then tie that result directly into reporting and campaign-linked training.</p>
+
+                                <p>That matters because ClickFix is not just another landing page theme. It is a different kind of behavior test. It measures whether a target will follow an unusual instruction path under pressure, and it gives defenders a concrete way to explain why that behavior is risky before a real attacker gets the chance.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/ClickFixVisit.png" alt="ClickFix landing page in the PhishU Framework showing the fake verification flow and PowerShell copy prompt" />
+                                    <figcaption class="article-caption">The ClickFix landing page presents a fake verification workflow and pushes the target toward a PowerShell copy action instead of a normal login step.</figcaption>
+                                </figure>
+
+                                <h2>What the ClickFix Template Does</h2>
+                                <p>At a high level, the ClickFix template presents a fake human-verification or anti-bot step and instructs the target to copy a PowerShell command. In the PhishU Framework, that command does not deliver a payload. It calls back to the landing page so the framework can record a verification event. That callback becomes the engagement signal.</p>
+
+                                <p>That distinction matters. The value here is not endpoint compromise. The value is measurement. The template records a callback event when the target runs the command, then drives conditional training and reporting based on that engagement signal. It gives defenders a way to test whether users will follow a modern social-engineering prompt that falls outside the usual email-link-and-login pattern.</p>
+
+                                <p>Because it is built into the platform, the operator does not have to hand-build the page, wire up analytics manually, or bolt on separate evidence collection afterward. The ClickFix template lives alongside the rest of the landing page workflow in the PhishU Framework.</p>
+
+                                <h2>Why ClickFix Matters</h2>
+                                <p>A lot of awareness programs still focus on the same narrow user action: do not click the link, do not type the password, do not open the attachment. Those are still important, but current social engineering keeps shifting. Attackers increasingly look for ways to turn the user into the one performing the next step for them.</p>
+
+                                <p>That is why ClickFix deserves attention. It tests whether a target will trust a page enough to run a local command because the page sounds technical, procedural, or routine. It is less about brand imitation and more about instruction compliance. For defenders, that is a different training opportunity than a standard credential-harvest page.</p>
+
+                                <p>It also fits naturally into red-team and pentest workflows. If the goal is to measure realistic user behavior, the platform should support the kinds of social-engineering paths that are showing up in the real world now, not just the ones defenders were training against three years ago.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/ClickFixPowerShellSubmission.png" alt="ClickFix verification state after the PowerShell request is made in the PhishU Framework" />
+                                    <figcaption class="article-caption">After the request is made, the Framework records the callback as a verification signal that can feed analytics, reporting, and training.</figcaption>
+                                </figure>
+
+                                <h2>Built for Measurement, Not Theater</h2>
+                                <p>There is a big difference between simulating a current technique and trying to be flashy for its own sake. The PhishU approach is to make the outcome measurable. When the target follows the ClickFix prompt, the framework records that callback as a harmless analytics event. That gives the operator a clear signal: the target did more than visit the page. They followed through on the instruction.</p>
+
+                                <p>That signal can then be surfaced where it matters. It appears in dashboard metrics, in live console visibility, and in campaign-linked training when applicable. In other words, the behavior does not vanish into a one-off landing page log. It becomes part of the campaign evidence story.</p>
+
+                                <p>That is one of the advantages of a full platform over standalone phishing infrastructure. A technique is more useful when it is not isolated. It should connect to the operator's live visibility, the final report, and the remediation path afterward. PhishU is built around that full loop.</p>
+
+                                <h2>Real-Time Visibility When It Happens</h2>
+                                <p>ClickFix is especially useful when operators can see the behavior as it happens. The Framework's console gives that immediate visibility. When the callback is received, the platform can surface the event in the same workflow used for the rest of a campaign's live activity.</p>
+
+                                <p>That matters for two reasons. First, it gives the operator real evidence that the target followed the instruction flow. Second, it makes the result easier to explain later. A screenshot of the landing page is one thing. A timestamped event in the console is much stronger when the assessment is being reviewed with a client, security team, or executive audience.</p>
+
+                                <h2>Why the Training Tie-In Matters</h2>
+                                <p>One reason the technique fits the PhishU model so well is that it naturally maps into training. If a target falls for a ClickFix-style prompt, the training should explain exactly what happened, why the page was suspicious, and what the correct response should have been next time.</p>
+
+                                <p>That is more effective than generic awareness content. The training can be tied to the exact campaign, the exact landing page style, and the exact kind of behavior the target demonstrated. Instead of a broad warning about phishing, the recipient sees the specific social-engineering move they responded to and the specific red flags they missed.</p>
+
+                                <p>That is a big part of the PhishU philosophy. The goal is not just to catch someone. It is to catch them, show what happened, and make the next attempt less likely to work.</p>
+
+                                <h2>Another Example of Why a Hosted Platform Matters</h2>
+                                <p>ClickFix is also a good example of the broader PhishU advantage. As new social-engineering techniques show up in the wild, they can be added to the platform as point-and-click templates instead of becoming another research project the customer has to operationalize on their own.</p>
+
+                                <p>That is the hosted-platform benefit in plain terms. The customer does not have to reverse-engineer every new trick, wire it into a landing page, decide how to measure it, and then figure out how to explain it in training. The platform handles that centrally and makes the result usable immediately.</p>
+
+                                <p>For pentest firms, MSSPs, red teams, and internal security teams, that means less glue work and more time spent on the part that matters: running realistic phishing assessments and turning the outcome into evidence and remediation.</p>
+
+                                <div class="card bg-light border-0 mt-5">
+                                    <div class="card-body p-4 p-lg-5">
+                                        <h2 class="h4">Want to test ClickFix-style behavior in your environment?</h2>
+                                        <p class="mb-3">The PhishU Framework gives operators point-and-click access to realistic phishing techniques, live visibility, targeted training, and reporting that ties the whole engagement together.</p>
+                                        <a class="btn btn-teal fw-500" href="../contact-us.html">Request a Quote</a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                </main>
+            </div>
+            <div id="layoutDefault_footer">
+                <footer class="footer pt-5 pb-5 mt-auto bg-dark footer-dark">
+                    <div class="container px-5">
+                        <div class="row gx-5 align-items-center">
+                            <div class="col-md-6 small">Copyright &copy; PhishU 2026</div>
+                            <div class="col-md-6 text-md-end small">
+                                <a href="https://www.linkedin.com/company/phishu">LinkedIn</a>
+                                &middot;
+                                <a href="../contact-us.html">Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="../js/scripts.js"></script>
+    </body>
+</html>
