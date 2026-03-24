@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="Compare PhishU Framework vs GoPhish. See how hosted phishing workflows, realistic techniques, training, reporting, and multi-org management differ from a self-hosted open-source stack." />
+        <meta name="author" content="PhishU, LLC" />
+        <title>PhishU Framework vs GoPhish</title>
+        <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+        <link rel="canonical" href="https://phishu.net/phishu-framework-vs-gophish.html" />
+        <link href="css/styles.css" rel="stylesheet" />
+        <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" crossorigin="anonymous"></script>
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://phishu.net/phishu-framework-vs-gophish.html" />
+        <meta property="og:title" content="PhishU Framework vs GoPhish" />
+        <meta property="og:description" content="A practical comparison between a hosted phishing platform and an open-source self-hosted toolkit." />
+        <meta property="og:image" content="https://phishu.net/images/phishapi.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="PhishU Framework vs GoPhish" />
+        <meta name="twitter:description" content="Compare PhishU Framework and GoPhish for realistic phishing operations, reporting, training, and multi-org use." />
+        <meta name="twitter:image" content="https://phishu.net/images/phishapi.png" />
+        <style>
+            .hero-shell, .page-shell { max-width: 1150px; margin: 0 auto; }
+            .eyebrow { letter-spacing: .08em; text-transform: uppercase; font-size: .8rem; color: rgba(255,255,255,.75); }
+            .table-wrap { overflow-x: auto; }
+            .compare-table { width: 100%; border-collapse: separate; border-spacing: 0; background: #fff; border-radius: 1rem; overflow: hidden; box-shadow: 0 1rem 3rem rgba(15,23,42,.08); }
+            .compare-table th, .compare-table td { padding: 1rem; border-bottom: 1px solid #e9ecef; vertical-align: top; }
+            .compare-table th { background: #f8fafc; }
+            .note-card { border: 0; border-radius: 1rem; box-shadow: 0 1rem 3rem rgba(15,23,42,.08); }
+        </style>
+    </head>
+    <body>
+        <div id="layoutDefault">
+            <div id="layoutDefault_content">
+                <main>
+                    <nav class="navbar navbar-marketing navbar-expand-lg bg-dark navbar-dark">
+                        <div class="container px-5">
+                            <a class="navbar-brand text-white" href="/">PhishU</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i data-feather="menu"></i></button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ms-auto me-lg-4">
+                                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="phishu-framework-pricing.html">Pricing</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact</a></li>
+                                </ul>
+                                <a class="btn fw-500 ms-lg-4 btn-teal" href="contact-us.html">Request a Quote</a>
+                            </div>
+                        </div>
+                    </nav>
+                    <header class="page-header-ui page-header-ui-dark bg-gradient-primary-only">
+                        <div class="page-header-ui-content pt-10 pb-5">
+                            <div class="container px-5 hero-shell">
+                                <div class="eyebrow mb-3">Comparison</div>
+                                <h1 class="page-header-ui-title mb-4">PhishU Framework vs GoPhish</h1>
+                                <p class="page-header-ui-text mb-0">GoPhish is a respected open-source phishing toolkit. PhishU Framework is a hosted platform built to remove the operational glue around realistic phishing engagements. The practical question is simple: do you want a toolkit you assemble around, or a broader workflow that is already there?</p>
+                            </div>
+                        </div>
+                        <div class="svg-border-rounded text-white"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg></div>
+                    </header>
+                    <section class="bg-white py-10">
+                        <div class="container px-5 page-shell">
+                            <div class="table-wrap mb-5">
+                                <table class="compare-table">
+                                    <thead>
+                                        <tr><th>Category</th><th>PhishU Framework</th><th>GoPhish</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>Deployment model</td><td>Hosted platform with one login</td><td>Self-hosted open-source toolkit</td></tr>
+                                        <tr><td>Primary fit</td><td>Internal teams, pentest firms, MSSPs, red teams</td><td>Teams comfortable operating and extending their own infrastructure</td></tr>
+                                        <tr><td>External client engagements</td><td>Designed to support them with org separation</td><td>Possible, but typically assembled manually around the core toolkit</td></tr>
+                                        <tr><td>No allow-listing by default</td><td>Yes, built for real-world style testing</td><td>Possible, but deliverability posture is self-managed</td></tr>
+                                        <tr><td>AiTM proxy / session hijack</td><td>Built into the broader platform workflow</td><td>Not built into GoPhish itself</td></tr>
+                                        <tr><td>Browser-in-Browser / ClickFix / current templates</td><td>Supported as platform techniques and templates</td><td>Not built into GoPhish itself</td></tr>
+                                        <tr><td>Landing-page hosting and maintenance</td><td>Hosted and maintained</td><td>Operator-managed</td></tr>
+                                        <tr><td>Domain acquisition and DNS workflow</td><td>Built into the product workflow</td><td>Handled outside the tool</td></tr>
+                                        <tr><td>Training tied to campaign behavior</td><td>Included and campaign-specific</td><td>Requires separate content and workflow</td></tr>
+                                        <tr><td>Reporting</td><td>Built-in analytics and AI-assisted report generation</td><td>Basic campaign data; broader reporting usually handled separately</td></tr>
+                                        <tr><td>AI campaign assistance</td><td>Built in, with data-governance guardrails</td><td>Not built into GoPhish itself</td></tr>
+                                        <tr><td>Pricing model</td><td>$12,000/year first org, $1,000/additional org</td><td>Software is open source; infrastructure and operating time are separate costs</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row gx-5 gy-4">
+                                <div class="col-lg-6">
+                                    <div class="card note-card bg-light h-100">
+                                        <div class="card-body p-4">
+                                            <h2 class="h5">Choose GoPhish if...</h2>
+                                            <p class="mb-0">You want an open-source toolkit, you are comfortable self-hosting, and you do not mind assembling adjacent capabilities like advanced landing pages, reporting, training, and infrastructure management yourself.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="card note-card bg-light h-100">
+                                        <div class="card-body p-4">
+                                            <h2 class="h5">Choose PhishU Framework if...</h2>
+                                            <p class="mb-0">You want one platform that already includes realistic phishing workflows, newer techniques, training, reporting, hosted maintenance, and multi-org operations for client or internal use.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card note-card mt-5">
+                                <div class="card-body p-4 p-lg-5">
+                                    <p class="mb-2"><strong>Comparison note:</strong> GoPhish is a trademark of its respective owner. This comparison is based on public documentation and normal operator workflows as of March 2026. Product capabilities may change over time.</p>
+                                    <p class="mb-3">The biggest difference is not just feature count. It is operational burden. GoPhish gives operators a good starting toolkit. PhishU Framework aims to replace the stitched-together toolchain around realistic phishing engagements with one maintained product.</p>
+                                    <a class="btn btn-teal fw-500" href="contact-us.html">Talk to PhishU</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+            </div>
+            <div id="layoutDefault_footer"><footer class="footer pt-5 pb-5 mt-auto bg-dark footer-dark"><div class="container px-5"><div class="row gx-5 align-items-center"><div class="col-md-6 small">Copyright &copy; PhishU 2026</div><div class="col-md-6 text-md-end small"><a href="https://framework.phishu.net">Framework</a> &middot; <a href="blog.html">Blog</a> &middot; <a href="phishu-framework-pricing.html">Pricing</a> &middot; <a href="contact-us.html">Contact</a></div></div></div></footer></div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
