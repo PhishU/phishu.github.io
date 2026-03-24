@@ -4,6 +4,11 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <script>
+            if (window.location.pathname === '/index.html') {
+                window.location.replace(window.location.origin + '/' + window.location.search + window.location.hash);
+            }
+        </script>
         <meta name="description" content="Advanced spear-phishing assessments, targeted security awareness training, and the PhishU Framework for internal teams, MSSPs, pentest firms, and red teams." />
         <meta name="author" content="PhishU, LLC" />
         <title>PhishU | Spear-Phishing Assessments, Training, and PhishU Framework</title>

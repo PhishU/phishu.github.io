@@ -15,7 +15,7 @@
         window.gtag('event', name, params || {});
     };
 
-    const pagePath = window.location.pathname;
+    const pagePath = window.location.pathname === '/index.html' ? '/' : window.location.pathname;
     const pageTitle = document.title;
 
     const classifyPageView = function() {
