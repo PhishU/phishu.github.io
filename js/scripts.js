@@ -3,6 +3,30 @@
     * Copyright 2013-2021 Start Bootstrap
     * Licensed under SEE_LICENSE (https://github.com/BlackrockDigital/sb-ui-kit-pro/blob/master/LICENSE)
     */
+    (function initializeAnalytics() {
+        const measurementId = window.PHISHU_SITE_CONFIG && window.PHISHU_SITE_CONFIG.ga4MeasurementId;
+        if (!measurementId) {
+            return;
+        }
+
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function() {
+            dataLayer.push(arguments);
+        };
+
+        const gaScript = document.createElement('script');
+        gaScript.async = true;
+        gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(measurementId);
+        document.head.appendChild(gaScript);
+
+        window.gtag('js', new Date());
+        window.gtag('config', measurementId, {
+            page_title: document.title,
+            page_location: window.location.href,
+            page_path: window.location.pathname
+        });
+    })();
+
     window.addEventListener('DOMContentLoaded', event => {
     // Activate feather
     feather.replace();

@@ -27,22 +27,43 @@
 		<meta property="og:description" content="Get Caught Then Join the School"/>
 		<meta property="og:site_name" content="PhishU"/>
 		<meta property="og:image" content="https://phishu.net/images/unfurl2.png"/>
+		<meta property="og:image:alt" content="PhishU marketing site preview for phishing assessments, training, and the PhishU Framework"/>
 			
 		<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:domain" content="phishu.net" />
 <meta name="twitter:title" content="PhishU" />
 <meta name="twitter:description" content="Targeted Spear-Phishing and Security Awareness Training Tools and Services" />
 <meta name="twitter:url" content="https://phishu.net/" />
-<meta name="twitter:label1" content="Get Caught Then Join the School" />
+		<meta name="twitter:label1" content="Get Caught Then Join the School" />
 
 		<meta name="twitter:image" content="https://phishu.net/images/unfurl2.png" />
+		<meta name="twitter:image:alt" content="PhishU marketing site preview for phishing assessments, training, and the PhishU Framework" />
 
 <script type="application/ld+json">
-{  "@context": "https://schema.org",
-   "@type": "WebSite",
-   "name": "PhishU",
-   "alternateName": "Get Caught Then Join the School",
-   "url": "https://phishu.net"
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://phishu.net/#organization",
+      "name": "PhishU",
+      "url": "https://phishu.net/",
+      "logo": "https://phishu.net/images/logo-transparent-white-grey-small.png",
+      "sameAs": [
+        "https://www.linkedin.com/company/phishu"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://phishu.net/#website",
+      "url": "https://phishu.net/",
+      "name": "PhishU",
+      "alternateName": "Get Caught Then Join the School",
+      "publisher": {
+        "@id": "https://phishu.net/#organization"
+      }
+    }
+  ]
 }
 </script>
 	<!-- ApexCharts -->
@@ -1482,7 +1503,8 @@ img.phishu-zoomable { cursor: zoom-in; }
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
+    <script src="js/site-config.js"></script>
+    <script src="js/scripts.js"></script>
         <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
         <script>
             AOS.init({
