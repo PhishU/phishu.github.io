@@ -518,6 +518,7 @@
     emailjs
       .sendForm('service_6wh1qm3', 'template_jt9di8q', form)
       .then(() => {
+        document.dispatchEvent(new CustomEvent('phishu:lead_generated'));
         form.reset();
         // show your modal…
         const modal = new bootstrap.Modal(document.getElementById('thankYouModal'));

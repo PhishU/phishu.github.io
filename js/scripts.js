@@ -3,33 +3,125 @@
     * Copyright 2013-2021 Start Bootstrap
     * Licensed under SEE_LICENSE (https://github.com/BlackrockDigital/sb-ui-kit-pro/blob/master/LICENSE)
     */
-    (function initializeAnalytics() {
-        const measurementId = window.PHISHU_SITE_CONFIG && window.PHISHU_SITE_CONFIG.ga4MeasurementId;
-        if (!measurementId) {
-            return;
-        }
-
-        window.dataLayer = window.dataLayer || [];
-        window.gtag = function() {
-            dataLayer.push(arguments);
-        };
-
-        const gaScript = document.createElement('script');
-        gaScript.async = true;
-        gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(measurementId);
-        document.head.appendChild(gaScript);
-
-        window.gtag('js', new Date());
-        window.gtag('config', measurementId, {
-            page_title: document.title,
-            page_location: window.location.href,
-            page_path: window.location.pathname
-        });
-    })();
-
     window.addEventListener('DOMContentLoaded', event => {
     // Activate feather
     feather.replace();
+
+    const hasGtag = typeof window.gtag === 'function';
+    const trackEvent = function(name, params) {
+        if (!hasGtag) {
+            return;
+        }
+        window.gtag('event', name, params || {});
+    };
+
+    const pagePath = window.location.pathname;
+    const pageTitle = document.title;
+
+    const classifyPageView = function() {
+        if (pagePath.endsWith('/phishu-framework-pricing.html')) {
+            trackEvent('view_pricing', {
+                page_title: pageTitle,
+                page_path: pagePath
+            });
+        }
+
+        if (/\/phishu-framework-vs-[^/]+\.html$/.test(pagePath)) {
+            trackEvent('view_comparison_page', {
+                page_title: pageTitle,
+                page_path: pagePath
+            });
+        }
+
+        if (/(clickfix|aitm|browser-in-browser|qr-phishing|no-allow-listing|passkey-bypass|session-hijacking)/.test(pagePath)) {
+            trackEvent('view_technique_page', {
+                page_title: pageTitle,
+                page_path: pagePath
+            });
+        }
+
+        if (/(mssps|enterprises|red-teams|pentest)/.test(pagePath)) {
+            trackEvent('view_use_case_page', {
+                page_title: pageTitle,
+                page_path: pagePath
+            });
+        }
+    };
+
+    classifyPageView();
+
+    document.addEventListener('click', function(e) {
+        const link = e.target.closest('a');
+        if (!link || !link.href) {
+            return;
+        }
+
+        const href = link.getAttribute('href') || '';
+        const linkText = (link.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 120);
+        const url = new URL(link.href, window.location.origin);
+
+        if (url.hostname === 'framework.phishu.net') {
+            trackEvent('click_framework', {
+                page_title: pageTitle,
+                page_path: pagePath,
+                destination_url: url.href,
+                link_text: linkText
+            });
+            return;
+        }
+
+        if (href.startsWith('mailto:')) {
+            trackEvent('click_email', {
+                page_title: pageTitle,
+                page_path: pagePath,
+                destination_url: href,
+                link_text: linkText
+            });
+            return;
+        }
+
+        if (url.pathname.endsWith('/phishu-framework-pricing.html')) {
+            trackEvent('click_pricing', {
+                page_title: pageTitle,
+                page_path: pagePath,
+                destination_url: url.href,
+                link_text: linkText
+            });
+            return;
+        }
+
+        if (url.pathname.endsWith('/contact-us.html')) {
+            const ctaText = linkText.toLowerCase();
+            const eventName = /(request a quote|get started|talk to phishu|contact sales|submit request)/.test(ctaText)
+                ? 'click_quote'
+                : 'click_contact_page';
+            trackEvent(eventName, {
+                page_title: pageTitle,
+                page_path: pagePath,
+                destination_url: url.href,
+                link_text: linkText
+            });
+        }
+    }, true);
+
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function() {
+            trackEvent('submit_contact_form', {
+                page_title: pageTitle,
+                page_path: pagePath,
+                form_id: 'contact-form'
+            });
+        });
+    }
+
+    document.addEventListener('phishu:lead_generated', function() {
+        trackEvent('generate_lead', {
+            page_title: pageTitle,
+            page_path: pagePath,
+            method: 'contact_form'
+        });
+    });
 
     // Enable tooltips globally
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
