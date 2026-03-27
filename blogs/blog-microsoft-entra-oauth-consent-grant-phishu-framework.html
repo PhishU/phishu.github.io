@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="PhishU explains how the PhishU Framework turns Microsoft Entra OAuth Consent Grant phishing into a point-and-click workflow with app configuration, persistent token capture, live notifications and an interactive Token Explorer." />
+        <meta name="author" content="PhishU, LLC" />
+        <title>Microsoft Entra OAuth Consent Grant Attack Simulation in the PhishU Framework | PhishU Blog</title>
+        <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+        <link rel="canonical" href="https://phishu.net/blogs/blog-microsoft-entra-oauth-consent-grant-phishu-framework.html" />
+        <link href="../css/styles.css" rel="stylesheet" />
+        <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" crossorigin="anonymous"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y2W7ZWEC7"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag("js", new Date());
+            gtag("config", "G-0Y2W7ZWEC7");
+        </script>
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://phishu.net/blogs/blog-microsoft-entra-oauth-consent-grant-phishu-framework.html" />
+        <meta property="og:title" content="Microsoft Entra OAuth Consent Grant Attack Simulation in the PhishU Framework" />
+        <meta property="og:description" content="A high-level look at how the PhishU Framework turns Microsoft Entra OAuth Consent Grant phishing into a point-and-click workflow with persistent token capture and an interactive Token Explorer." />
+        <meta property="og:site_name" content="PhishU" />
+        <meta property="og:image" content="https://phishu.net/images/MSOauthTemplateSelection.png" />
+        <meta property="og:image:alt" content="PhishU Framework template selection showing the Microsoft Entra OAuth Consent Grant landing page template" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Microsoft Entra OAuth Consent Grant Attack Simulation in the PhishU Framework" />
+        <meta name="twitter:description" content="How the PhishU Framework simulates Microsoft Entra OAuth Consent Grant phishing with persistent token capture, live notifications and an interactive Token Explorer." />
+        <meta name="twitter:image" content="https://phishu.net/images/MSOauthTemplateSelection.png" />
+        <meta name="twitter:image:alt" content="PhishU Framework template selection showing the Microsoft Entra OAuth Consent Grant landing page template" />
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "headline": "Microsoft Entra OAuth Consent Grant Attack Simulation in the PhishU Framework",
+          "description": "PhishU explains how the PhishU Framework turns Microsoft Entra OAuth Consent Grant phishing into a point-and-click workflow with app configuration, persistent token capture, live notifications and an interactive Token Explorer.",
+          "datePublished": "2026-03-27",
+          "dateModified": "2026-03-27",
+          "author": {
+            "@type": "Organization",
+            "name": "PhishU"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "PhishU",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://phishu.net/images/logo-transparent-white-grey-small.png"
+            }
+          },
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://phishu.net/blogs/blog-microsoft-entra-oauth-consent-grant-phishu-framework.html"
+          }
+        }
+        </script>
+        <style>
+            .article-shell {
+                max-width: 860px;
+                margin: 0 auto;
+            }
+            .article-meta {
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                font-size: 0.8rem;
+                color: #6c757d;
+            }
+            .article-shell h2 {
+                margin-top: 2.75rem;
+            }
+            .article-shell p,
+            .article-shell li {
+                font-size: 1.05rem;
+                line-height: 1.8;
+            }
+            .article-image {
+                display: block;
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+                border-radius: 0.75rem;
+                box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.16);
+            }
+            .article-caption {
+                margin-top: 0.75rem;
+                font-size: 0.95rem;
+                color: #6c757d;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="layoutDefault">
+            <div id="layoutDefault_content">
+                <main>
+                    <nav class="navbar navbar-marketing navbar-expand-lg bg-dark navbar-dark">
+                        <div class="container px-5">
+                            <a class="navbar-brand text-white" href="/">PhishU</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i data-feather="menu"></i></button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ms-auto me-lg-4">
+                                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../blog.html">Blog</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../contact-us.html">Contact</a></li>
+                                </ul>
+                                <a class="btn fw-500 ms-lg-4 btn-teal" href="../contact-us.html">Request a Quote</a>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <header class="page-header-ui page-header-ui-dark bg-gradient-primary-only">
+                        <div class="page-header-ui-content pt-10 pb-5">
+                            <div class="container px-5 article-shell">
+                                <div class="article-meta mb-3">March 27, 2026 - PhishU Blog</div>
+                                <h1 class="page-header-ui-title mb-4">Microsoft Entra OAuth Consent Grant Attack Simulation in the PhishU Framework</h1>
+                                <p class="page-header-ui-text mb-0">A real Microsoft consent phishing technique, persistent delegated access that survives password resets and a built-in Token Explorer that turns the result into immediate assessment evidence. Google support is coming soon.</p>
+                            </div>
+                        </div>
+                        <div class="svg-border-rounded text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
+                        </div>
+                    </header>
+
+                    <section class="bg-white py-10">
+                        <div class="container px-5">
+                            <article class="article-shell">
+                                <p>Most phishing simulations still revolve around one familiar outcome: the target typed a password. That matters, but it is no longer the only account-access path defenders should care about.</p>
+
+                                <p>OAuth consent phishing is different. Instead of stealing credentials directly, the target is pushed into a legitimate Microsoft Entra consent screen and asked to approve an attacker-controlled application. If they click <strong>Accept</strong>, the application receives delegated API access under the requested scopes. That can mean reading mail, browsing files, sending messages as the victim, viewing calendars and more.</p>
+
+                                <p>What makes it especially dangerous is persistence. A stolen password dies on reset. A delegated OAuth grant can continue working after password changes, MFA changes and routine credential rotation until the grant is explicitly revoked. That is why the PhishU Framework now treats Microsoft Entra OAuth Consent Grant simulation as one of the most important techniques in the platform.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/MSOauthTemplateSelection.png" alt="PhishU Framework template gallery showing the Microsoft Entra OAuth Consent Grant landing page template" />
+                                    <figcaption class="article-caption">The Microsoft Entra OAuth Consent Grant template lives directly in the PhishU Framework landing page gallery, alongside the rest of the phishing workflow.</figcaption>
+                                </figure>
+
+                                <h2>A Real Technique, Simplified</h2>
+                                <p>In the real world, running a believable OAuth consent phishing assessment is usually difficult and time consuming. App registrations need to be configured. Redirect URIs need to be handled correctly. Authorization codes have to be exchanged for tokens. Tokens need to be stored safely. Then the operator still needs a way to prove impact afterward.</p>
+
+                                <p>The PhishU Framework compresses that into a workflow that feels simple. Select the Microsoft Entra OAuth Consent Grant template. Name the app. Pick the permissions. Enable the landing page. Send the campaign. When the target grants consent, the framework captures the delegated access and exposes it through the built-in Token Explorer.</p>
+
+                                <p>That is the real story here. This is not just support for a new lure page. It is a point-and-click workflow for a real-world Microsoft technique that is normally harder to operationalize than it should be.</p>
+
+                                <p>That also works cleanly for mobile-first delivery. If the operator uses a QR code in the email template and the campaign's landing page is the Microsoft Entra OAuth Consent Grant template, scanning the QR code takes the mobile user into that same OAuth consent flow as an alternative to clicking a hyperlink. That gives operators another realistic delivery path for environments where quishing-style lures make more sense than a standard email link.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/MSOauthTemplateConfiguration.png" alt="PhishU Framework configuration screen for the Microsoft Entra OAuth Consent Grant template" />
+                                    <figcaption class="article-caption">Operators control the app display name and the permission request directly inside the template configuration workflow.</figcaption>
+                                </figure>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/MSOauthConsentPromptandNotification.png" alt="Microsoft consent prompt and PhishU Framework notification for an OAuth consent grant event" />
+                                    <figcaption class="article-caption">The target sees a real Microsoft consent flow, and the framework turns the resulting action into immediate operator visibility.</figcaption>
+                                </figure>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/MSOauthConsentConsoleNotification.png" alt="PhishU Framework console notification showing that a Microsoft OAuth consent grant was captured" />
+                                    <figcaption class="article-caption">Once the target approves the grant, the framework surfaces the Microsoft consent event immediately so the operator can move from delivery to validation in real time.</figcaption>
+                                </figure>
+
+                                <h2>Why OAuth Consent Grants Matter More Than Password Capture</h2>
+                                <p>Credential capture is easy to explain. The user typed a password. The password was stolen. Reset it and the immediate risk is reduced.</p>
+
+                                <p>OAuth consent abuse is more serious because the user is authorizing an application, not just exposing a secret. Once the grant is approved, the application can keep interacting with Microsoft Graph under the approved scopes. If offline access is granted, tokens can be refreshed and reused over time. The result is persistent delegated access to business data through a legitimate identity flow.</p>
+
+                                <p>That changes the conversation in an assessment. Instead of saying, "a user clicked a link," the operator can show that the user approved durable access to their mailbox, OneDrive, calendar and other cloud data.</p>
+
+                                <h2>The Token Explorer Is the Proof</h2>
+                                <p>The biggest differentiator is what happens after consent is granted. Most tooling stops at token capture and leaves the operator to do the rest by hand.</p>
+
+                                <p>The PhishU Framework does not. The captured grant shows up in the results workflow with an interactive Token Explorer. Scope-dependent actions let the operator work directly from inside the platform. That can include reading inbox contents, rendering full emails, browsing files, creating calendar events, sending email as the victim, viewing Teams chats and refreshing access tokens when offline access was granted.</p>
+
+                                <p>That is the demo closer. Read their inbox. Browse their files. Send email as them. All from the Framework.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/OAuthConsentGrantOptionswithFileBrowsing.png" alt="PhishU Framework Token Explorer options showing file browsing and other post-consent actions" />
+                                    <figcaption class="article-caption">After the notification, the operator can open the captured grant in the results workflow and use the Token Explorer to access scope-driven actions such as profile review, inbox access and file browsing.</figcaption>
+                                </figure>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/OAuthConsentEmailRendering.png" alt="PhishU Framework rendering an email through the OAuth Token Explorer after a consent grant is captured" />
+                                    <figcaption class="article-caption">From there, mailbox content can be rendered directly inside the Framework, turning consent abuse from an abstract concept into concrete evidence.</figcaption>
+                                </figure>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/OAuthConsentCreateCalendarEvent.png" alt="PhishU Framework creating a calendar event through a captured OAuth consent grant" />
+                                    <figcaption class="article-caption">Calendar access and write actions can also be demonstrated when the requested Microsoft scopes allow it.</figcaption>
+                                </figure>
+
+                                <h2>Live Visibility Matters</h2>
+                                <p>One reason this feature fits the PhishU model so well is that it is not isolated from the rest of the platform. OAuth consent events are visible where operators already work. They show up in results, in campaign metrics and in console notifications.</p>
+
+                                <p>That makes the outcome easier to understand and easier to explain. A token in a database is not compelling. A live notification tied to a campaign, followed by immediate Token Explorer access, is much more powerful when the assessment is being reviewed with a client, security team or executive audience.</p>
+
+                                <h2>Built for the Full Assessment Loop</h2>
+                                <p>The feature does not stop at post-exploitation evidence. Microsoft Entra OAuth consent events feed into campaign dashboards, AI-generated report narratives and campaign-linked training content. Recipients who grant consent can be shown what happened, why it mattered and what signs should have stood out before approving the application.</p>
+
+                                <p>That is part of what makes the hosted-platform model so valuable. A new technique is more useful when it is integrated into reporting, analytics and remediation instead of living as a disconnected proof of concept.</p>
+
+                                <h2>Microsoft Today, Google Soon</h2>
+                                <p>This release is specifically about <strong>Microsoft Entra</strong>. The real Microsoft consent flow, Microsoft Graph access and Microsoft-focused Token Explorer actions are the story today.</p>
+
+                                <p>Google support is coming soon. That matters because OAuth consent abuse is not a Microsoft-only problem. The broader product direction is clear: turn modern consent phishing paths into point-and-click assessment workflows instead of leaving operators to piece them together manually.</p>
+
+                                <h2>One, Two, Three</h2>
+                                <p>If the short version is needed, it is this:</p>
+
+                                <p><strong>1.</strong> Select the Microsoft Entra OAuth Consent Grant template and choose the requested permissions.<br>
+                                <strong>2.</strong> Launch the landing page and send the campaign.<br>
+                                <strong>3.</strong> When the target grants consent, open the Token Explorer and demonstrate the resulting access.</p>
+
+                                <p>That takes a very real phishing technique that is normally harder to pull off and turns it into a workflow that feels as easy as one-two-three.</p>
+
+                                <div class="card bg-light border-0 mt-5">
+                                    <div class="card-body p-4 p-lg-5">
+                                        <h2 class="h4">Want to see Microsoft Entra OAuth Consent Grant simulation in action?</h2>
+                                        <p class="mb-3">The PhishU Framework now brings persistent token capture, live notifications, interactive Token Explorer actions and targeted training into one Microsoft-focused phishing assessment workflow.</p>
+                                        <a class="btn btn-teal fw-500" href="../contact-us.html">Request a Quote</a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                </main>
+            </div>
+            <div id="layoutDefault_footer">
+                <footer class="footer pt-5 pb-5 mt-auto bg-dark footer-dark">
+                    <div class="container px-5">
+                        <div class="row gx-5 align-items-center">
+                            <div class="col-md-6 small">Copyright &copy; PhishU 2026</div>
+                            <div class="col-md-6 text-md-end small">
+                                <a href="https://www.linkedin.com/company/phishu">LinkedIn</a>
+                                &middot;
+                                <a href="../contact-us.html">Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="../js/site-config.js"></script>
+        <script src="../js/scripts.js"></script>
+    </body>
+</html>
