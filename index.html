@@ -284,6 +284,109 @@ img.phishu-zoomable { cursor: zoom-in; }
   margin-top: 1.5rem;
 }
 
+.blog-strip-header {
+  max-width: 680px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.blog-strip-section {
+  margin-top: 2.5rem;
+}
+
+.blog-swiper {
+  overflow: visible;
+  padding: 0.5rem 0 0.5rem;
+}
+
+.blog-swiper .swiper-slide {
+  height: auto;
+}
+
+.blog-mini-card {
+  display: block;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 1rem;
+  box-shadow: 0 0.75rem 1.75rem rgba(15, 23, 42, 0.06);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.blog-mini-card:hover,
+.blog-mini-card:focus,
+.blog-mini-card:active {
+  color: inherit;
+  text-decoration: none;
+}
+
+.blog-mini-card:hover,
+.blog-mini-card:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 1rem 2rem rgba(15, 23, 42, 0.08);
+}
+
+.blog-mini-card-body {
+  padding: 1rem 1rem 0.95rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.blog-mini-date {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6c757d;
+  margin-bottom: 0.85rem;
+}
+
+.blog-mini-title {
+  font-size: 0.92rem;
+  line-height: 1.4;
+  margin-bottom: 0.55rem;
+}
+
+.blog-mini-desc {
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: #5b6470;
+  margin-bottom: 0.7rem;
+}
+
+.blog-mini-link {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #20c997;
+  margin-top: auto;
+}
+
+.blog-swiper-nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.65rem;
+}
+
+.blog-swiper-button {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  background: rgba(255,255,255,0.92);
+  color: #1f2d3d;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0.5rem 1.25rem rgba(15, 23, 42, 0.08);
+}
+
+.blog-swiper-button::after {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
 /* Dashboard image sizing (consolidated) */
 .content-skewed-right { overflow: visible; }
 
@@ -1222,6 +1325,23 @@ img.phishu-zoomable { cursor: zoom-in; }
                             </div>
                         </div>
                     </section>
+                    <section class="bg-light pt-8 pb-6 blog-strip-section">
+                        <div class="container px-5">
+                            <div class="d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-end mb-4 gap-3">
+                                <div class="blog-strip-header">
+                                    <h3 class="mb-3">Latest Blog Posts</h3>
+                                    <p class="text-muted mb-0">Technical writeups, product updates, and practical security insights from the PhishU blog.</p>
+                                </div>
+                                <div class="blog-swiper-nav">
+                                    <div class="swiper-button-prev blog-swiper-button"></div>
+                                    <div class="swiper-button-next blog-swiper-button"></div>
+                                </div>
+                            </div>
+                            <div class="swiper blog-swiper" data-aos="fade-up">
+                                <div class="swiper-wrapper" id="blogCarouselSlides"></div>
+                            </div>
+                        </div>
+                    </section>
                     <!--<section class="bg-white pt-10">
                         <div class="container px-5">
                             <div class="row gx-5 mb-10">
@@ -1465,6 +1585,60 @@ new ApexCharts(document.querySelector('#chart3'), options).render();
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    const blogPosts = [
+      {
+        date: 'March 27, 2026',
+        title: 'Microsoft Entra OAuth Consent Grant Attack Simulation in the PhishU Framework',
+        description: 'How the Framework turns Microsoft Entra OAuth consent phishing into a point-and-click workflow with token capture and built-in impact demonstration.',
+        href: 'blogs/blog-microsoft-entra-oauth-consent-grant-phishu-framework.html'
+      },
+      {
+        date: 'March 25, 2026',
+        title: 'ClickFix in the PhishU Framework',
+        description: 'A look at how ClickFix lures, callback tracking, reporting, and training fit into one workflow instead of a pile of one-off tooling.',
+        href: 'blogs/blog-clickfix-in-the-phishu-framework.html'
+      },
+      {
+        date: 'March 24, 2026',
+        title: 'Transparent AiTM Proxy in the PhishU Framework',
+        description: 'Session hijacking, transparent proxying, and realistic post-auth risk demonstration wrapped in a hosted operator workflow.',
+        href: 'blogs/blog-transparent-aitm-proxy-framework.html'
+      }
+    ];
+
+    const blogSlides = document.getElementById('blogCarouselSlides');
+    if (blogSlides) {
+      blogSlides.innerHTML = blogPosts.map(post => `
+        <div class="swiper-slide">
+          <a class="blog-mini-card" href="${post.href}" target="_blank" rel="noopener noreferrer">
+            <div class="blog-mini-card-body">
+              <div class="blog-mini-date">${post.date}</div>
+              <h3 class="blog-mini-title">${post.title}</h3>
+              <p class="blog-mini-desc">${post.description}</p>
+              <div class="blog-mini-link">Read article <i class="fas fa-arrow-right text-xs ms-1"></i></div>
+            </div>
+          </a>
+        </div>
+      `).join('');
+    }
+
+    const blogSwiper = document.querySelector('.blog-swiper');
+    if (blogSwiper) {
+      new Swiper('.blog-swiper', {
+        slidesPerView: 1.35,
+        spaceBetween: 16,
+        navigation: {
+          nextEl: '.blog-swiper .swiper-button-next, .blog-swiper-nav .swiper-button-next',
+          prevEl: '.blog-swiper .swiper-button-prev, .blog-swiper-nav .swiper-button-prev',
+        },
+        breakpoints: {
+          576: { slidesPerView: 1.9, spaceBetween: 16 },
+          768: { slidesPerView: 2.6, spaceBetween: 18 },
+          1200: { slidesPerView: 3.4, spaceBetween: 18 }
+        }
+      });
+    }
+
     const campaignSwiper = new Swiper('.campaign-swiper', {
       effect: 'coverflow',
       grabCursor: true,
