@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="PhishU explains how the PhishU Framework turns Microsoft Entra device code phishing into a point-and-click workflow with per-target code generation, silent token capture, live notifications, and Token Explorer follow-on actions." />
+        <meta name="author" content="PhishU, LLC" />
+        <title>Microsoft Entra Device Code Phishing Simulation in the PhishU Framework | PhishU Blog</title>
+        <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+        <link rel="canonical" href="https://phishu.net/blogs/blog-microsoft-entra-device-code-phishing-phishu-framework.html" />
+        <link href="../css/styles.css" rel="stylesheet" />
+        <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" crossorigin="anonymous"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y2W7ZWEC7"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag("js", new Date());
+            gtag("config", "G-0Y2W7ZWEC7");
+        </script>
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://phishu.net/blogs/blog-microsoft-entra-device-code-phishing-phishu-framework.html" />
+        <meta property="og:title" content="Microsoft Entra Device Code Phishing Simulation in the PhishU Framework" />
+        <meta property="og:description" content="A high-level look at how the PhishU Framework turns Microsoft Entra device code phishing into a point-and-click workflow with silent token capture and Token Explorer follow-on access." />
+        <meta property="og:site_name" content="PhishU" />
+        <meta property="og:image" content="https://phishu.net/images/PhishUFramework.png" />
+        <meta property="og:image:alt" content="PhishU Framework blog hero image" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Microsoft Entra Device Code Phishing Simulation in the PhishU Framework" />
+        <meta name="twitter:description" content="How the PhishU Framework simulates Microsoft Entra device code phishing with silent token capture, live notifications, and Token Explorer follow-on actions." />
+        <meta name="twitter:image" content="https://phishu.net/images/PhishUFramework.png" />
+        <meta name="twitter:image:alt" content="PhishU Framework blog hero image" />
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "headline": "Microsoft Entra Device Code Phishing Simulation in the PhishU Framework",
+          "description": "PhishU explains how the PhishU Framework turns Microsoft Entra device code phishing into a point-and-click workflow with per-target code generation, silent token capture, live notifications, and Token Explorer follow-on actions.",
+          "datePublished": "2026-03-30",
+          "dateModified": "2026-03-30",
+          "author": {
+            "@type": "Organization",
+            "name": "PhishU"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "PhishU",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://phishu.net/images/logo-transparent-white-grey-small.png"
+            }
+          },
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://phishu.net/blogs/blog-microsoft-entra-device-code-phishing-phishu-framework.html"
+          }
+        }
+        </script>
+        <style>
+            .article-shell {
+                max-width: 860px;
+                margin: 0 auto;
+            }
+            .article-meta {
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                font-size: 0.8rem;
+                color: #6c757d;
+            }
+            .article-shell h2 {
+                margin-top: 2.75rem;
+            }
+            .article-shell p,
+            .article-shell li {
+                font-size: 1.05rem;
+                line-height: 1.8;
+            }
+            .article-image {
+                display: block;
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+                border-radius: 0.75rem;
+                box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.16);
+            }
+            .article-caption {
+                margin-top: 0.75rem;
+                font-size: 0.95rem;
+                color: #6c757d;
+            }
+            .article-hero-image {
+                display: block;
+                width: 100%;
+                max-width: 315px;
+                margin: 0 auto 1rem;
+            }
+            .svg-border-rounded {
+                display: block;
+                line-height: 0;
+                margin-bottom: -1px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="layoutDefault">
+            <div id="layoutDefault_content">
+                <main>
+                    <nav class="navbar navbar-marketing navbar-expand-lg bg-dark navbar-dark">
+                        <div class="container px-5">
+                            <a class="navbar-brand text-white" href="/">PhishU</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="#navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i data-feather="menu"></i></button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ms-auto me-lg-4">
+                                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../blog.html">Blog</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../contact-us.html">Contact</a></li>
+                                </ul>
+                                <a class="btn fw-500 ms-lg-4 btn-teal" href="../contact-us.html">Request a Quote</a>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <header class="page-header-ui page-header-ui-dark bg-gradient-primary-only">
+                        <div class="page-header-ui-content pt-8 pb-5">
+                            <div class="container px-5 article-shell">
+                                <img class="article-hero-image" src="../images/PhishUFramework.png" alt="PhishU Framework" />
+                                <div class="article-meta mb-3">March 30, 2026 - PhishU Blog</div>
+                                <h1 class="page-header-ui-title mb-4">Microsoft Entra Device Code Phishing Simulation in the PhishU Framework</h1>
+                                <p class="page-header-ui-text mb-0">A real Microsoft sign-in flow, no consent prompt, no fake credential form, and silent token capture when the target authenticates an attacker-controlled device code.</p>
+                            </div>
+                        </div>
+                        <div class="svg-border-rounded text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
+                        </div>
+                    </header>
+
+                    <section class="bg-white py-10">
+                        <div class="container px-5">
+                            <article class="article-shell">
+                                <p>Most phishing simulations still focus on two familiar outcomes: the target clicked the link, or the target typed a password. Device code phishing is a different attack path entirely. The target does not approve scary permissions and does not type credentials into a fake login page. Instead, they complete a normal Microsoft sign-in flow for a device code that belongs to the attacker.</p>
+
+                                <p>That distinction matters because it makes the technique both stealthier and harder to explain away. The target is sent to a legitimate Microsoft page at <strong>microsoft.com/devicelogin</strong>, signs in normally, completes MFA normally, and hands over tokens to an attacker-controlled device flow. The PhishU Framework now turns that technique into a point-and-click landing page template built into the same hosted workflow used for campaigns, reporting, analytics, and training.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/DeviceCodeVisitNotification.png" alt="PhishU Framework notification showing that a target completed a device code authentication flow" />
+                                    <figcaption class="article-caption">When the target completes device code authentication, the Framework records the event and surfaces it immediately so the operator can validate impact in real time.</figcaption>
+                                </figure>
+
+                                <h2>A Very Different Kind of OAuth Abuse</h2>
+                                <p>At a high level, the PhishU Framework provisions a public client app, generates a fresh device code when the target lands on the page, displays that code with a copy button and instructions, and then polls Microsoft until the authentication completes. When the target signs in, the Framework captures the resulting access and refresh tokens.</p>
+
+                                <p>That makes device code phishing part of the same broader identity-and-token abuse family as <a href="blog-microsoft-entra-oauth-consent-grant-phishu-framework.html">Microsoft Entra OAuth Consent Grant simulation</a>, but the path is different. OAuth Consent Grant asks the target to approve an app and its permissions. Device Code asks the target to log a device in for the attacker. No permissions screen. No Accept button. Just a normal Microsoft sign-in flow.</p>
+
+                                <p>That is also why the success profile is different. Device code phishing intentionally sticks to auto-approved scopes such as <code>openid</code>, <code>profile</code>, <code>email</code>, <code>offline_access</code>, and <code>User.Read</code>. The tradeoff is narrower initial access, but the target never sees a consent prompt. That makes the attack path quieter and often more believable.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/DeviceCodeTemplateConfig.png" alt="PhishU Framework device code phishing configuration screen showing app naming and auto-approved scope selection" />
+                                    <figcaption class="article-caption">Operators configure the Microsoft Entra Device Code template directly inside the Framework, including the application display name the target will see during sign-in. The available scopes are limited to auto-approved scopes so the target sees no consent prompt.</figcaption>
+                                </figure>
+
+                                <h2>Why Attackers Like Device Code Phishing</h2>
+                                <p>From an attacker perspective, the appeal is obvious. The target authenticates on the real Microsoft domain. The login page is legitimate. MFA is legitimate. The browser experience is legitimate. The only malicious part is who requested the device code in the first place.</p>
+
+                                <p>That makes device code phishing one of the cleaner ways to move beyond old credential-harvest thinking. It is not about stealing a password and hoping the target misses the fake page. It is about abusing a real Microsoft flow to get durable tokens without ever showing the victim a scary permissions screen.</p>
+
+                                <p>The real-world relevance is not theoretical either. Device code phishing has already been observed at scale against hundreds of Microsoft 365 organizations, which is exactly why this belongs in an authorized assessment platform built for realistic phishing work.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/DeviceCodePromptName.png" alt="Microsoft-themed device code landing page in the PhishU Framework showing a generated sign-in code" />
+                                    <figcaption class="article-caption">The device code template presents a Microsoft-style sign-in page, generates a fresh code per visitor, and sends the target to the real Microsoft device login flow.</figcaption>
+                                </figure>
+
+                                <h2>Why This Matters for Defenders</h2>
+                                <p>Most organizations are still much more prepared to think about fake login pages than token abuse. Device code phishing is a good example of why that gap matters. The target can do everything on a legitimate Microsoft page and still give an attacker durable access to their account.</p>
+
+                                <p>That changes what a phishing program should test. It is no longer enough to ask whether users can spot a fake login form. Defenders also need to know whether users will authenticate an attacker-controlled device code when the flow looks routine, polished, and familiar.</p>
+
+                                <p>That is exactly where the PhishU Framework fits. The technique is not treated like a disconnected proof of concept. It connects to campaign delivery, real-time visibility, captured-results workflows, reporting, and training.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/DeviceCodeSuccess.png" alt="PhishU Framework showing a successful device code authentication capture" />
+                                    <figcaption class="article-caption">The device code flow ends with token capture and a clean handoff into the same post-capture workflow used for other token-based techniques in the platform.</figcaption>
+                                </figure>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/DeviceCodeConsoleNotification.png" alt="PhishU Framework console notification showing that a device code authentication was captured" />
+                                    <figcaption class="article-caption">The console also surfaces device code captures as a live event, which makes it easy to tie the target action to the resulting token-based workflow before opening the captured-grants view.</figcaption>
+                                </figure>
+
+                                <h2>Same Token Explorer, Different Entry Point</h2>
+                                <p>One of the strongest parts of the implementation is that device code captures feed straight into the same Token Explorer used for OAuth Consent Grant. The attack path is different, but the post-capture workflow is unified. Operators can inspect the grant, refresh tokens, view the victim profile, and let the Framework auto-discover what other Graph endpoints are accessible in that tenant.</p>
+
+                                <p>That means device code phishing is not just a landing page demo. It becomes a practical assessment workflow. In many environments, even the limited auto-approved scopes are enough to enumerate the org directory, inspect group membership, discover reporting chains, and surface other tenant context that helps explain the downstream impact of the capture.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/DeviceCodeOAuthConsentGrants.png" alt="Captured device code grants shown alongside other OAuth grants in the PhishU Framework" />
+                                    <figcaption class="article-caption">Captured device code grants appear in the same token-centric results workflow, which keeps device code and OAuth consent phishing in one consistent operator experience.</figcaption>
+                                </figure>
+
+                                <h2>Device Code or OAuth Consent Grant?</h2>
+                                <p>The right answer is usually both, because they test different things.</p>
+
+                                <p>Use <a href="blog-microsoft-entra-oauth-consent-grant-phishu-framework.html">OAuth Consent Grant</a> when the goal is maximum post-exploitation depth and broad delegated access such as mail, files, calendars, and Teams. Use Device Code when the goal is maximum stealth and a higher success rate, because the target just signs in normally and never sees a consent screen.</p>
+
+                                <p>Together, those two techniques cover two major Microsoft token-abuse paths that most awareness platforms still do not simulate. Add transparent AiTM session hijacking on top, and the broader product story becomes much clearer: PhishU is not stuck measuring only clicks and passwords.</p>
+
+                                <h2>One, Two, Three</h2>
+                                <p>If the short version is needed, it is this:</p>
+
+                                <p><strong>1.</strong> Select the Microsoft Entra Device Code template and configure the app display name.<br>
+                                <strong>2.</strong> Launch the landing page and send the campaign.<br>
+                                <strong>3.</strong> When the target signs in at microsoft.com/devicelogin, capture the tokens and move straight into the Token Explorer.</p>
+
+                                <p>That turns a modern identity-abuse technique into a workflow that feels simple enough to run routinely, while still demonstrating the kind of real-world Microsoft tradecraft that most organizations are not testing today.</p>
+
+                                <div class="card bg-light border-0 mt-5">
+                                    <div class="card-body p-4 p-lg-5">
+                                        <h2 class="h4">Want to test Microsoft Entra device code phishing in your environment?</h2>
+                                        <p class="mb-3">The PhishU Framework now gives operators a point-and-click way to simulate device code phishing, capture persistent tokens, and connect the result directly into reporting and recipient-specific training.</p>
+                                        <a class="btn btn-teal fw-500" href="../contact-us.html">Request a Quote</a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                </main>
+            </div>
+            <div id="layoutDefault_footer">
+                <footer class="footer pt-5 pb-5 mt-auto bg-dark footer-dark">
+                    <div class="container px-5">
+                        <div class="row gx-5 align-items-center">
+                            <div class="col-md-6 small">Copyright &copy; PhishU 2026</div>
+                            <div class="col-md-6 text-md-end small">
+                                <a href="https://www.linkedin.com/company/phishu">LinkedIn</a>
+                                &middot;
+                                <a href="../contact-us.html">Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="../js/site-config.js"></script>
+        <script src="../js/scripts.js"></script>
+    </body>
+</html>

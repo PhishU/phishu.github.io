@@ -24,13 +24,13 @@
         <meta property="og:title" content="Microsoft Entra OAuth Consent Grant Attack Simulation in the PhishU Framework" />
         <meta property="og:description" content="A high-level look at how the PhishU Framework turns Microsoft Entra OAuth Consent Grant phishing into a point-and-click workflow with persistent token capture and an interactive Token Explorer." />
         <meta property="og:site_name" content="PhishU" />
-        <meta property="og:image" content="https://phishu.net/images/MSOauthTemplateSelection.png" />
-        <meta property="og:image:alt" content="PhishU Framework template selection showing the Microsoft Entra OAuth Consent Grant landing page template" />
+        <meta property="og:image" content="https://phishu.net/images/PhishUFramework.png" />
+        <meta property="og:image:alt" content="PhishU Framework blog hero image" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Microsoft Entra OAuth Consent Grant Attack Simulation in the PhishU Framework" />
         <meta name="twitter:description" content="How the PhishU Framework simulates Microsoft Entra OAuth Consent Grant phishing with persistent token capture, live notifications and an interactive Token Explorer." />
-        <meta name="twitter:image" content="https://phishu.net/images/MSOauthTemplateSelection.png" />
-        <meta name="twitter:image:alt" content="PhishU Framework template selection showing the Microsoft Entra OAuth Consent Grant landing page template" />
+        <meta name="twitter:image" content="https://phishu.net/images/PhishUFramework.png" />
+        <meta name="twitter:image:alt" content="PhishU Framework blog hero image" />
         <script type="application/ld+json">
         {
           "@context": "https://schema.org",
@@ -89,6 +89,12 @@
                 font-size: 0.95rem;
                 color: #6c757d;
             }
+            .article-hero-image {
+                display: block;
+                width: 100%;
+                max-width: 315px;
+                margin: 0 auto 1rem;
+            }
         </style>
     </head>
     <body>
@@ -111,8 +117,9 @@
                     </nav>
 
                     <header class="page-header-ui page-header-ui-dark bg-gradient-primary-only">
-                        <div class="page-header-ui-content pt-10 pb-5">
+                        <div class="page-header-ui-content pt-8 pb-5">
                             <div class="container px-5 article-shell">
+                                <img class="article-hero-image" src="../images/PhishUFramework.png" alt="PhishU Framework" />
                                 <div class="article-meta mb-3">March 27, 2026 - PhishU Blog</div>
                                 <h1 class="page-header-ui-title mb-4">Microsoft Entra OAuth Consent Grant Attack Simulation in the PhishU Framework</h1>
                                 <p class="page-header-ui-text mb-0">A real Microsoft consent phishing technique, persistent delegated access that survives password resets and a built-in Token Explorer that turns the result into immediate assessment evidence. Google support is coming soon.</p>
@@ -204,6 +211,9 @@
                                 <p>This release is specifically about <strong>Microsoft Entra</strong>. The real Microsoft consent flow, Microsoft Graph access and Microsoft-focused Token Explorer actions are the story today.</p>
 
                                 <p>Google support is coming soon. That matters because OAuth consent abuse is not a Microsoft-only problem. The broader product direction is clear: turn modern consent phishing paths into point-and-click assessment workflows instead of leaving operators to piece them together manually.</p>
+
+                                <h2>Related Reading</h2>
+                                <p>If you want to compare the quieter sibling technique, PhishU also supports <a href="blog-microsoft-entra-device-code-phishing-phishu-framework.html">Microsoft Entra Device Code Phishing simulation</a>. OAuth Consent Grant is the better fit when the goal is broader delegated access and deeper post-exploitation. Device Code is the better fit when the goal is stealth and a higher success rate because the target sees no consent prompt at all.</p>
 
                                 <h2>One, Two, Three</h2>
                                 <p>If the short version is needed, it is this:</p>
