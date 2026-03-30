@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="PhishU explains why passkeys are phishing-resistant by design, where fallback flows still create risk, and how the PhishU Framework simulates passkey bypass scenarios with a point-and-click overlay." />
+        <meta name="author" content="PhishU, LLC" />
+        <title>Understanding What Makes Passkeys Great and How to Bypass in the PhishU Framework | PhishU Blog</title>
+        <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+        <link rel="canonical" href="https://phishu.net/blogs/blog-understanding-what-makes-passkeys-great-and-how-to-bypass-in-the-phishu-framework.html" />
+        <link href="../css/styles.css" rel="stylesheet" />
+        <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" crossorigin="anonymous"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y2W7ZWEC7"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag("js", new Date());
+            gtag("config", "G-0Y2W7ZWEC7");
+        </script>
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://phishu.net/blogs/blog-understanding-what-makes-passkeys-great-and-how-to-bypass-in-the-phishu-framework.html" />
+        <meta property="og:title" content="Understanding What Makes Passkeys Great and How to Bypass in the PhishU Framework" />
+        <meta property="og:description" content="Why passkeys are phishing-resistant by design, where downgrade and fallback risk still lives, and how the PhishU Framework simulates those realities." />
+        <meta property="og:site_name" content="PhishU" />
+        <meta property="og:image" content="https://phishu.net/images/PhishUFramework.png" />
+        <meta property="og:image:alt" content="PhishU Framework" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Understanding What Makes Passkeys Great and How to Bypass in the PhishU Framework" />
+        <meta name="twitter:description" content="A high-level look at why passkeys stop classic phishing paths, where fallback abuse still matters, and how the PhishU Framework lets defenders test it." />
+        <meta name="twitter:image" content="https://phishu.net/images/PhishUFramework.png" />
+        <meta name="twitter:image:alt" content="PhishU Framework" />
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "headline": "Understanding What Makes Passkeys Great and How to Bypass in the PhishU Framework",
+          "description": "PhishU explains why passkeys are phishing-resistant by design, where fallback flows still create risk, and how the PhishU Framework simulates passkey bypass scenarios with a point-and-click overlay.",
+          "datePublished": "2026-03-30",
+          "dateModified": "2026-03-30",
+          "author": {
+            "@type": "Organization",
+            "name": "PhishU"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "PhishU",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://phishu.net/images/logo-transparent-white-grey-small.png"
+            }
+          },
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://phishu.net/blogs/blog-understanding-what-makes-passkeys-great-and-how-to-bypass-in-the-phishu-framework.html"
+          }
+        }
+        </script>
+        <style>
+            .article-shell {
+                max-width: 860px;
+                margin: 0 auto;
+            }
+            .article-meta {
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                font-size: 0.8rem;
+                color: #6c757d;
+            }
+            .article-shell h2 {
+                margin-top: 2.75rem;
+            }
+            .article-shell p,
+            .article-shell li {
+                font-size: 1.05rem;
+                line-height: 1.8;
+            }
+            .article-image {
+                display: block;
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+                border-radius: 0.75rem;
+                box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.16);
+            }
+            .article-media {
+                display: block;
+                width: 100%;
+                max-width: 640px;
+                height: auto;
+                margin: 0 auto;
+                border-radius: 0.75rem;
+                box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.16);
+                background: #000;
+            }
+            .article-caption {
+                margin-top: 0.75rem;
+                font-size: 0.95rem;
+                color: #6c757d;
+            }
+            .article-hero-image {
+                display: block;
+                width: 100%;
+                max-width: 315px;
+                margin: 0 auto 1rem;
+            }
+            .svg-border-rounded {
+                display: block;
+                line-height: 0;
+                margin-bottom: -1px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="layoutDefault">
+            <div id="layoutDefault_content">
+                <main>
+                    <nav class="navbar navbar-marketing navbar-expand-lg bg-dark navbar-dark">
+                        <div class="container px-5">
+                            <a class="navbar-brand text-white" href="/">PhishU</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="#navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i data-feather="menu"></i></button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ms-auto me-lg-4">
+                                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../blog.html">Blog</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../contact-us.html">Contact</a></li>
+                                </ul>
+                                <a class="btn fw-500 ms-lg-4 btn-teal" href="../contact-us.html">Request a Quote</a>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <header class="page-header-ui page-header-ui-dark bg-gradient-primary-only">
+                        <div class="page-header-ui-content pt-8 pb-5">
+                            <div class="container px-5 article-shell">
+                                <img class="article-hero-image" src="../images/PhishUFramework.png" alt="PhishU Framework" />
+                                <div class="article-meta mb-3">March 30, 2026 - PhishU Blog</div>
+                                <h1 class="page-header-ui-title mb-4">Understanding What Makes Passkeys Great and How to Bypass in the PhishU Framework</h1>
+                                <p class="page-header-ui-text mb-0">Passkeys are phishing-resistant by design. They do not just add another authentication step. They change the rules of the login ceremony in a way that breaks classic phishing and session-hijacking paths.</p>
+                            </div>
+                        </div>
+                        <div class="svg-border-rounded text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
+                        </div>
+                    </header>
+
+                    <section class="bg-white py-10">
+                        <div class="container px-5">
+                            <article class="article-shell">
+                                <p>Passkeys are not just another, more secure form of MFA. They are phishing-resistant by design, which means they do not lead to session hijacking the way passwords plus MFA still can. In a classic Adversary-in-the-Middle flow, the victim signs in, completes MFA, and the attacker steals the authenticated session that comes out the other side. Passkeys change that because the authentication response is cryptographically tied to the legitimate site origin. If the phishing page is on the wrong domain, the ceremony does not complete as if it were the real site. That is the whole point.</p>
+
+                                <p>That is why passkeys matter so much. They do not just make phishing harder. They shut down an entire class of phishing paths that still work perfectly well against passwords, TOTP apps, SMS codes, and push approvals. If an organization has truly moved to passkey-first or passkey-only authentication with no weak fallback route, a transparent MiTM proxy should not be able to turn that login into a stolen reusable session in the same way.</p>
+
+                                <p>That is also why the remaining risk moves elsewhere. The real question becomes whether the target can be nudged away from the phishing-resistant path and into a weaker fallback flow. The PhishU Framework now supports that reality directly. Operators can add a Passkey Bypass overlay to a landing page from inside the editor, turning what used to be a one-off custom trick into a controlled workflow that fits alongside the rest of campaign delivery, reporting, and training.</p>
+
+                                <p>When that overlay renders and shows the fallback login form, it also pre-populates the target's email address or username. That small detail matters. It makes the experience feel less like a generic interruption and more like a real continuation of the sign-in flow the target expected, which increases the believability of the downgrade path being tested.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/PasskeyEditor.png" alt="PhishU Framework landing page editor showing the Passkey Bypass overlay placement" />
+                                    <figcaption class="article-caption">The Passkey Bypass overlay is added directly inside the landing page editor, which keeps the technique in the same point-and-click workflow as the rest of the campaign build.</figcaption>
+                                </figure>
+
+                                <h2>Why Passkeys Are Different</h2>
+                                <p>A lot of security conversations still flatten every authentication improvement into the same mental bucket. Passwords plus MFA. Stronger MFA. Better MFA. Passkeys do not fit neatly into that model because they are not just a second factor layered on top of a password prompt. They are a different model for proving identity to a legitimate site.</p>
+
+                                <p>That distinction matters because it changes what an authorized phishing assessment should test. If the environment really is passkey-first, the strongest possible result is that the classic phish fails. That is not a disappointing assessment outcome. That is evidence that the defense is doing what it is supposed to do.</p>
+
+                                <p>It also changes how defenders should explain passkeys internally. The sales pitch should not be that passkeys are a more convenient MFA prompt. The better pitch is that passkeys directly resist origin-swapped phishing. They take away the attacker advantage that comes from replaying credentials or stealing the resulting session after the user finishes a legitimate-looking login flow.</p>
+
+                                <h2>Why the Risk Does Not Fully Disappear</h2>
+                                <p>Passkeys are excellent. They are not magic. The real weakness usually appears when an environment still offers a weaker recovery or fallback path. If the sign-in experience lets the user abandon the passkey flow and drop back to a password, or if the application presents a confusing alternate login route, the assessment target is no longer the passkey itself. The assessment target becomes the decision architecture around it.</p>
+
+                                <p>That is where realistic testing still matters. Many organizations are mid-transition. They support passkeys while also leaving password fallback, recovery options, or weaker legacy flows available. In those environments, the question is not whether WebAuthn can be cryptographically broken by the phish. The question is whether the user can be socially engineered into choosing a weaker path that puts the old risk back on the table.</p>
+
+                                <p>That is also where the educational opportunity gets much better. A phishing program should not accidentally teach people that passkeys are "just another MFA prompt." It should teach the opposite: passkeys are worth adopting precisely because they stop whole classes of phishing that older MFA methods still lose to.</p>
+
+                                <h2>What the Passkey Bypass Overlay Is Actually Testing</h2>
+                                <p>Inside the Framework, the Passkey Bypass overlay is not claiming to defeat passkeys cryptographically. The point is to simulate the human and workflow conditions that lead a target away from the stronger path and into a weaker one. In other words, the test is not "can we break passkeys?" The test is "can we socially engineer the user into abandoning the phishing-resistant path?" Pre-populating the target's identifier in the rendered fallback form is part of that realism. It mirrors what users are accustomed to seeing in legitimate sign-in flows and helps measure whether familiarity lowers skepticism in the moment.</p>
+
+                                <p>That is a more honest and more useful assessment story. If the organization really is passkey-only with no practical fallback, the result should be reassuring. If the user can be steered into a weaker flow, that is still a real risk worth showing, documenting, and training on.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-media" src="../images/PasskeyRender.webp" alt="Rendered Passkey Bypass overlay showing a fallback login form with the target email pre-populated" />
+                                    <figcaption class="article-caption">When the overlay renders, the fallback login form can already show the target identifier, which makes the downgrade path feel like a continuation of the expected sign-in flow instead of a generic interruption.</figcaption>
+                                </figure>
+
+                                <h2>Why This Is Good News for Defenders</h2>
+                                <p>There is a tempting marketing instinct to treat every new authentication defense as "good, but attackers can still get around it." That is not the right message here. The right message is that passkeys are a real step forward. They meaningfully reduce phishing risk. They deserve to be adopted aggressively.</p>
+
+                                <p>What defenders need is not fear-based messaging. They need clarity about where the residual risk moved. With passkeys, the residual risk is much more about weak fallback choices, inconsistent implementation, and user confusion during the transition from older authentication patterns. That is a much narrower and much healthier problem than every login still being vulnerable to the same proxy-and-replay story.</p>
+
+                                <p>That also makes passkeys a strong training topic. Users should understand that a passkey is not just a cleaner push approval. It is tied to the legitimate site. If they are being prompted in a strange context, redirected into an alternate path, or told the passkey flow is unavailable, that is exactly the kind of moment they should pause and question.</p>
+
+                                <h2>Where This Fits Beside AiTM and Session Hijacking</h2>
+                                <p>This is one of the clearest examples of why modern phishing assessment cannot be reduced to a single technique. Transparent AiTM with session hijacking still matters enormously in password-and-MFA environments. <a href="blog-transparent-aitm-proxy-framework.html">AiTM proxying in the PhishU Framework</a> shows exactly how dangerous session theft remains when the authentication flow can be relayed successfully.</p>
+
+                                <p>Passkeys are different. If the environment is truly passkey-first with no practical downgrade path, that classic session-hijacking story gets much weaker or disappears entirely. That is not a limitation of the Framework. It is evidence that the defense is working. The Framework's job then becomes showing whether the deployment is actually that strong, or whether the user can still be pushed sideways into a weaker route.</p>
+
+                                <p>That is also why this capability belongs in the same product as landing pages, proxying, token-abuse workflows, campaign delivery, reporting, and training. Different organizations are at different stages of the authentication transition. Some need AiTM testing today. Some need OAuth and device code abuse testing. Some need passkey downgrade testing. Many need all three.</p>
+
+                                <h2>The Better Security Story</h2>
+                                <p>The bigger point is not just that PhishU can simulate a passkey bypass scenario. The bigger point is that passkeys deserve to be explained correctly. They are not another checkbox MFA option. They are one of the most important phishing-resistant authentication improvements organizations can adopt.</p>
+
+                                <p>That makes the assessment story better, not worse. If your environment resists the classic phish, that is worth proving. If your environment still leaves a weaker fallback path open, that is worth proving too. Either way, the result is more useful than another generic click-rate dashboard.</p>
+
+                                <p>If the short version is needed, it is this: passkeys are great, they really do stop major phishing and session-hijacking paths, and defenders still need to test whether the surrounding login experience quietly reintroduces the old risk through fallback abuse.</p>
+
+                                <div class="card bg-light border-0 mt-5">
+                                    <div class="card-body p-4 p-lg-5">
+                                        <h2 class="h4">Want to test passkey downgrade and fallback risk in your environment?</h2>
+                                        <p class="mb-3">The PhishU Framework lets operators simulate passkey bypass scenarios, show where phishing-resistant authentication really holds, and connect the result directly into reporting and campaign-linked training.</p>
+                                        <a class="btn btn-teal fw-500" href="../contact-us.html">Request a Quote</a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                </main>
+            </div>
+            <div id="layoutDefault_footer">
+                <footer class="footer pt-5 pb-5 mt-auto bg-dark footer-dark">
+                    <div class="container px-5">
+                        <div class="row gx-5 align-items-center">
+                            <div class="col-md-6 small">Copyright &copy; PhishU 2026</div>
+                            <div class="col-md-6 text-md-end small">
+                                <a href="https://www.linkedin.com/company/phishu">LinkedIn</a>
+                                &middot;
+                                <a href="../contact-us.html">Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="../js/site-config.js"></script>
+        <script src="../js/scripts.js"></script>
+    </body>
+</html>
