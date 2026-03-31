@@ -364,7 +364,7 @@
         const recommendations = posts.filter(post => {
             const postTitle = (post.title || '').replace(/\s+/g, ' ').trim().toLowerCase();
             return currentAbsolutePath !== post.absoluteHref && currentTitle !== postTitle;
-        }).slice(0, 3);
+        }).slice(0, 6);
         if (!recommendations.length) {
             return;
         }
