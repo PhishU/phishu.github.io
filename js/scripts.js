@@ -360,7 +360,7 @@
             return;
         }
         const currentAbsolutePath = normalizedPath;
-        const recommendations = posts.filter(post => !currentAbsolutePath.endsWith(post.absoluteHref)).slice(0, 3);
+        const recommendations = posts.filter(post => currentAbsolutePath !== post.absoluteHref).slice(0, 3);
         if (!recommendations.length) {
             return;
         }
@@ -375,11 +375,14 @@
         section.className = 'bg-light pt-8 pb-6 blog-strip-section';
         section.innerHTML = `
             <div class="container px-5">
-                <div class="d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-end mb-4 gap-3">
-                    <div class="blog-strip-header">
+                <div class="text-center mb-4">
+                    <div class="blog-strip-header mx-auto text-center">
                         <h3 class="mb-3">More from the Blog</h3>
                         <p class="text-muted mb-0">Recent PhishU articles worth reading next.</p>
                     </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+                    <div></div>
                     <div class="d-flex align-items-center gap-3">
                         <a class="btn btn-outline-primary btn-sm fw-500" href="${localHref('blog.html')}">View All Articles</a>
                         <div class="blog-swiper-nav">
@@ -425,7 +428,9 @@
             }
         }
         injectBlogArticleRecommendations(posts);
-        initHomepageBlogCarousel(posts);
+        if (!isBlogArticle) {
+            initHomepageBlogCarousel(posts);
+        }
     });
 
     document.addEventListener('click', function(e) {
