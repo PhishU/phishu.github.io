@@ -308,12 +308,11 @@
         });
     };
 
-    const initHomepageBlogCarousel = function(posts) {
-        const blogSlides = document.getElementById('blogCarouselSlides');
-        if (!blogSlides || !posts.length) {
+    const renderBlogSlides = function(slideHost, posts) {
+        if (!slideHost || !posts.length) {
             return;
         }
-        const slideHost = blogSlides.classList.contains('swiper-wrapper') ? blogSlides : (blogSlides.querySelector('.swiper-wrapper') || blogSlides);
+
         slideHost.innerHTML = posts.slice(0, 6).map(post => `
             <div class="swiper-slide">
               <a class="blog-mini-card" href="${post.href}" target="_blank" rel="noopener noreferrer">
@@ -325,7 +324,16 @@
                 </div>
               </a>
             </div>
-            `).join('');
+          `).join('');
+    };
+
+    const initHomepageBlogCarousel = function(posts) {
+        const blogSlides = document.getElementById('blogCarouselSlides');
+        if (!blogSlides || !posts.length) {
+            return;
+        }
+        const slideHost = blogSlides.classList.contains('swiper-wrapper') ? blogSlides : (blogSlides.querySelector('.swiper-wrapper') || blogSlides);
+        renderBlogSlides(slideHost, posts);
 
         const blogSwiper = document.querySelector('.blog-swiper');
         if (blogSwiper && !blogSwiper.dataset.initialized) {
@@ -364,12 +372,12 @@
 
         const section = document.createElement('section');
         section.id = 'blogArticleMorePosts';
-        section.className = 'bg-light py-10';
+        section.className = 'bg-light pt-8 pb-6 blog-strip-section';
         section.innerHTML = `
             <div class="container px-5">
-                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
-                    <div>
-                        <h2 class="h3 mb-1">More from the Blog</h2>
+                <div class="d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-end mb-4 gap-3">
+                    <div class="blog-strip-header">
+                        <h3 class="mb-3">More from the Blog</h3>
                         <p class="text-muted mb-0">Recent PhishU articles worth reading next.</p>
                     </div>
                     <div class="d-flex align-items-center gap-3">
@@ -380,14 +388,32 @@
                         </div>
                     </div>
                 </div>
-                <div class="blog-related-wrap pb-5">
-                    <div class="swiper blog-swiper">
-                        <div class="swiper-wrapper" id="blogCarouselSlides">
-                        </div>
-                    </div>
+                <div class="swiper blog-swiper" data-aos="fade-up">
+                    <div class="swiper-wrapper" id="blogCarouselSlides"></div>
                 </div>
             </div>`;
         footerHost.parentNode.insertBefore(section, footerHost);
+
+        const articleSlides = section.querySelector('#blogCarouselSlides');
+        renderBlogSlides(articleSlides, recommendations);
+
+        const articleSwiper = section.querySelector('.blog-swiper');
+        if (articleSwiper && !articleSwiper.dataset.initialized) {
+            articleSwiper.dataset.initialized = 'true';
+            new Swiper(articleSwiper, {
+                slidesPerView: 1.35,
+                spaceBetween: 16,
+                navigation: {
+                    nextEl: section.querySelector('.swiper-button-next'),
+                    prevEl: section.querySelector('.swiper-button-prev')
+                },
+                breakpoints: {
+                    576: { slidesPerView: 1.9, spaceBetween: 16 },
+                    768: { slidesPerView: 2.6, spaceBetween: 18 },
+                    1200: { slidesPerView: 3.4, spaceBetween: 18 }
+                }
+            });
+        }
     };
 
     fetchBlogPosts().then(async function(posts) {
@@ -398,8 +424,8 @@
                 // If Swiper fails to load, the homepage/article content still renders as links.
             }
         }
-        initHomepageBlogCarousel(posts);
         injectBlogArticleRecommendations(posts);
+        initHomepageBlogCarousel(posts);
     });
 
     document.addEventListener('click', function(e) {
