@@ -313,7 +313,8 @@
         if (!blogSlides || !posts.length) {
             return;
         }
-        blogSlides.innerHTML = posts.slice(0, 6).map(post => `
+        const slideHost = blogSlides.classList.contains('swiper-wrapper') ? blogSlides : (blogSlides.querySelector('.swiper-wrapper') || blogSlides);
+        slideHost.innerHTML = posts.slice(0, 6).map(post => `
             <div class="swiper-slide">
               <a class="blog-mini-card" href="${post.href}" target="_blank" rel="noopener noreferrer">
                 <div class="blog-mini-card-body">
@@ -324,7 +325,7 @@
                 </div>
               </a>
             </div>
-          `).join('');
+            `).join('');
 
         const blogSwiper = document.querySelector('.blog-swiper');
         if (blogSwiper && !blogSwiper.dataset.initialized) {
@@ -380,20 +381,8 @@
                     </div>
                 </div>
                 <div class="blog-related-wrap pb-5">
-                    <div class="swiper blog-swiper" id="blogCarouselSlides">
-                        <div class="swiper-wrapper">
-                            ${recommendations.map(post => `
-                                <div class="swiper-slide">
-                                    <a class="blog-mini-card" href="${post.href}">
-                                        <div class="blog-mini-card-body">
-                                            <div class="blog-mini-date">${post.date}</div>
-                                            <h3 class="blog-mini-title">${post.title}</h3>
-                                            <p class="blog-mini-desc">${post.description}</p>
-                                            <div class="blog-mini-link">Read article <i class="fas fa-arrow-right text-xs ms-1"></i></div>
-                                        </div>
-                                    </a>
-                                </div>
-                            `).join('')}
+                    <div class="swiper blog-swiper">
+                        <div class="swiper-wrapper" id="blogCarouselSlides">
                         </div>
                     </div>
                 </div>
