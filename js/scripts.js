@@ -44,36 +44,31 @@
                                             <h6 class="dropdown-header text-primary mb-0">PhishU Framework SaaS</h6>
                                             <a class="btn btn-outline-primary btn-sm fw-500" href="${localHref('phishu-framework-pricing.html')}">Pricing</a>
                                         </div>
-                                        <div class="row gx-5">
-                                            <div class="col-lg-6">
-                                                <h6 class="dropdown-header text-primary">Features</h6>
-                                                <a class="dropdown-item" href="${localHref('ai-assisted-phishing-campaign-builder.html')}">AI Targeted Recon and Content Generation</a>
-                                                <a class="dropdown-item" href="${localHref('phishing-deliverability-and-evasion.html')}">Real-World Filter Evasion</a>
-                                                <a class="dropdown-item" href="${localHref('doppelganger-domain-acquisition.html')}">Doppelganger Domain Acquisition</a>
-                                                <a class="dropdown-item" href="${localHref('auto-cert-dkim-dmarc-spf-provisioning.html')}">Auto Cert / DKIM / DMARC / SPF Provisioning</a>
-                                                <a class="dropdown-item" href="${localHref('create-custom-phishing-campaigns.html')}">Create Custom Campaigns</a>
-                                                <a class="dropdown-item" href="${localHref('create-custom-landing-pages.html')}">Create Custom Landing Pages</a>
-                                                <a class="dropdown-item" href="${localHref('email-and-landing-page-templates.html')}">Email and Landing Page Templates</a>
-                                                <a class="dropdown-item" href="${localHref('ai-phishing-report-generator.html')}">AI-Generated Reporting</a>
-                                                <a class="dropdown-item" href="${localHref('ai-generated-conditional-training.html')}">AI-Generated Conditional Training</a>
-                                                <a class="dropdown-item" href="${localHref('phishing-tracking-and-analytics.html')}">Tracking and Analytics</a>
-                                                <a class="dropdown-item" href="${localHref('cloud-directory-sync-for-phishing-campaigns.html')}">Cloud Directory Sync</a>
-                                                <a class="dropdown-item" href="${localHref('real-time-phishing-notifications.html')}">Real-Time Visit and Credential Capture Notifications</a>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <h6 class="dropdown-header text-primary">Techniques</h6>
-                                                <a class="dropdown-item" href="${localHref('aitm-phishing-assessment.html')}">AiTM/MiTM Proxy and Session Hijacking</a>
-                                                <a class="dropdown-item" href="${localHref('clickfix-phishing-simulation.html')}">ClickFix</a>
-                                                <a class="dropdown-item" href="${localHref('oauth-consent-grant-phishing-simulation.html')}">OAuth Consent Grants</a>
-                                                <a class="dropdown-item" href="${localHref('device-code-phishing-simulation.html')}">Device Code Phishing</a>
-                                                <a class="dropdown-item" href="${localHref('calendar-event-phishing-simulation.html')}">Calendar Event Phishing</a>
-                                                <a class="dropdown-item" href="${localHref('qr-phishing-simulation.html')}">QR Codes</a>
-                                                <a class="dropdown-item" href="${localHref('malicious-attachment-phishing-simulation.html')}">Malicious Attachments</a>
-                                                <a class="dropdown-item" href="${localHref('browser-in-browser-phishing-simulation.html')}">Browser-in-Browser</a>
-                                                <a class="dropdown-item" href="${localHref('passkey-bypass-phishing-simulation.html')}">Passkey Bypass</a>
-                                                <a class="dropdown-item" href="${localHref('cloudflare-turnstile-phishing-simulation.html')}">Cloudflare Turnstile</a>
-                                            </div>
-                                        </div>
+                                        <h6 class="dropdown-header text-primary ps-3">Features</h6>
+                                        <a class="dropdown-item ps-4" href="${localHref('ai-assisted-phishing-campaign-builder.html')}">AI Targeted Recon and Content Generation</a>
+                                        <a class="dropdown-item ps-4" href="${localHref('phishing-deliverability-and-evasion.html')}">Real-World Filter Evasion</a>
+                                        <a class="dropdown-item ps-4" href="${localHref('doppelganger-domain-acquisition.html')}">Doppelganger Domain Acquisition</a>
+                                        <a class="dropdown-item ps-4" href="${localHref('auto-cert-dkim-dmarc-spf-provisioning.html')}">Auto Cert / DKIM / DMARC / SPF Provisioning</a>
+                                        <a class="dropdown-item ps-4" href="${localHref('create-custom-phishing-campaigns.html')}">Create Custom Campaigns</a>
+                                        <a class="dropdown-item ps-4" href="${localHref('create-custom-landing-pages.html')}">Create Custom Landing Pages</a>
+                                        <a class="dropdown-item ps-4" href="${localHref('email-and-landing-page-templates.html')}">Email and Landing Page Templates</a>
+                                        <a class="dropdown-item ps-4" href="${localHref('ai-phishing-report-generator.html')}">AI-Generated Reporting</a>
+                                        <a class="dropdown-item ps-4" href="${localHref('ai-generated-conditional-training.html')}">AI-Generated Conditional Training</a>
+                                        <a class="dropdown-item ps-4" href="${localHref('phishing-tracking-and-analytics.html')}">Tracking and Analytics</a>
+                                        <a class="dropdown-item ps-4" href="${localHref('cloud-directory-sync-for-phishing-campaigns.html')}">Cloud Directory Sync</a>
+                                        <a class="dropdown-item ps-4" href="${localHref('real-time-phishing-notifications.html')}">Real-Time Visit and Credential Capture Notifications</a>
+                                        <div class="dropdown-divider border-0"></div>
+                                        <h6 class="dropdown-header text-primary ps-3">Techniques</h6>
+                                        <a class="dropdown-item ps-4" href="${localHref('aitm-phishing-assessment.html')}">AiTM/MiTM Proxy and Session Hijacking</a>
+                                        <a class="dropdown-item ps-4" href="${localHref('clickfix-phishing-simulation.html')}">ClickFix</a>
+                                        <a class="dropdown-item ps-4" href="${localHref('oauth-consent-grant-phishing-simulation.html')}">OAuth Consent Grants</a>
+                                        <a class="dropdown-item ps-4" href="${localHref('device-code-phishing-simulation.html')}">Device Code Phishing</a>
+                                        <a class="dropdown-item ps-4" href="${localHref('calendar-event-phishing-simulation.html')}">Calendar Event Phishing</a>
+                                        <a class="dropdown-item ps-4" href="${localHref('qr-phishing-simulation.html')}">QR Codes</a>
+                                        <a class="dropdown-item ps-4" href="${localHref('malicious-attachment-phishing-simulation.html')}">Malicious Attachments</a>
+                                        <a class="dropdown-item ps-4" href="${localHref('browser-in-browser-phishing-simulation.html')}">Browser-in-Browser</a>
+                                        <a class="dropdown-item ps-4" href="${localHref('passkey-bypass-phishing-simulation.html')}">Passkey Bypass</a>
+                                        <a class="dropdown-item ps-4" href="${localHref('cloudflare-turnstile-phishing-simulation.html')}">Cloudflare Turnstile</a>
                                     </div>
                                     <div class="col-lg-4 p-lg-5">
                                         <div class="d-flex align-items-center justify-content-between gap-3 mb-2">
