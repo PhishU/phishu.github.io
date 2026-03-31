@@ -76,6 +76,56 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://phishu.net/doppelganger-domain-acquisition.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://phishu.net/auto-cert-dkim-dmarc-spf-provisioning.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://phishu.net/create-custom-phishing-campaigns.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://phishu.net/create-custom-landing-pages.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://phishu.net/email-and-landing-page-templates.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://phishu.net/ai-generated-conditional-training.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://phishu.net/phishing-tracking-and-analytics.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://phishu.net/cloud-directory-sync-for-phishing-campaigns.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://phishu.net/real-time-phishing-notifications.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://phishu.net/cloudflare-turnstile-phishing-simulation.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://phishu.net/oauth-consent-grant-phishing-simulation.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
