@@ -148,10 +148,11 @@
             const doc = parser.parseFromString(html, 'text/html');
             return Array.from(doc.querySelectorAll('a.card.card-link')).map(card => {
                 const href = card.getAttribute('href') || '';
-                const absoluteHref = new URL(href, response.url).pathname;
+                const absoluteHref = new URL(href, response.url).pathname.replace(/\/+$/, '');
                 return {
                     href: absoluteHref,
                     absoluteHref,
+                    slug: absoluteHref.split('/').pop() || absoluteHref,
                     date: (card.querySelector('.text-uppercase-expanded')?.textContent || '').trim(),
                     title: (card.querySelector('h2')?.textContent || '').trim(),
                     description: (card.querySelector('p')?.textContent || '').trim()
@@ -359,11 +360,11 @@
         if (!isBlogArticle || !posts.length || document.getElementById('blogArticleMorePosts')) {
             return;
         }
-        const currentAbsolutePath = normalizedPath;
-        const currentTitle = (document.querySelector('h1.page-header-ui-title')?.textContent || document.title || '').replace(/\s+/g, ' ').trim().toLowerCase();
+        const canonicalPath = (document.querySelector('link[rel="canonical"]')?.href || window.location.href);
+        const currentAbsolutePath = new URL(canonicalPath, window.location.origin).pathname.replace(/\/+$/, '');
         const recommendations = posts.filter(post => {
-            const postTitle = (post.title || '').replace(/\s+/g, ' ').trim().toLowerCase();
-            return currentAbsolutePath !== post.absoluteHref && currentTitle !== postTitle;
+            const postPath = (post.absoluteHref || post.href || '').replace(/\/+$/, '');
+            return postPath !== currentAbsolutePath;
         }).slice(0, 6);
         if (!recommendations.length) {
             return;
