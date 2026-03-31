@@ -76,6 +76,36 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://phishu.net/oauth-consent-grant-phishing-simulation.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://phishu.net/device-code-phishing-simulation.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://phishu.net/calendar-event-phishing-simulation.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://phishu.net/malicious-attachment-phishing-simulation.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://phishu.net/one-time-phishing-campaigns.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://phishu.net/read-only-phishing-framework-access.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://phishu.net/phishing-awareness-training-that-works.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
