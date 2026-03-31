@@ -27,11 +27,10 @@
 
         marketingNav.innerHTML = `
             <div class="container px-5">
-                <a class="navbar-brand text-white" href="${localHref('index.html')}">PhishU</a>
+                <a class="navbar-brand text-white" href="${localHref('index.html')}">Home</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i data-feather="menu"></i></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto me-lg-5">
-                        <li class="nav-item"><a class="nav-link${homeClass}" href="${localHref('index.html')}">Home</a></li>
                         <li class="nav-item dropdown dropdown-xl no-caret">
                             <a class="nav-link dropdown-toggle" id="navbarDropdownServices" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Services
