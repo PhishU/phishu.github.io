@@ -39,7 +39,7 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-end animated--fade-in-up me-lg-n25 me-xl-n15" aria-labelledby="navbarDropdownServices">
                                 <div class="row g-0">
-                                    <div class="col-lg-7 p-lg-5">
+                                    <div class="col-lg-12 p-lg-5">
                                         <div class="d-flex align-items-center justify-content-between gap-3 mb-3">
                                             <h6 class="dropdown-header text-primary mb-0">PhishU Framework SaaS</h6>
                                             <a class="btn btn-outline-primary btn-sm fw-500" href="${localHref('phishu-framework-pricing.html')}">Pricing</a>
@@ -69,13 +69,12 @@
                                         <a class="dropdown-item ps-4" style="white-space: normal;" href="${localHref('browser-in-browser-phishing-simulation.html')}">Browser-in-Browser</a>
                                         <a class="dropdown-item ps-4" style="white-space: normal;" href="${localHref('passkey-bypass-phishing-simulation.html')}">Passkey Bypass</a>
                                         <a class="dropdown-item ps-4" style="white-space: normal;" href="${localHref('cloudflare-turnstile-phishing-simulation.html')}">Cloudflare Turnstile</a>
-                                    </div>
-                                    <div class="col-lg-5 p-lg-5">
+                                        <div class="dropdown-divider my-3"></div>
                                         <h6 class="dropdown-header text-primary mb-2">Consulting</h6>
-                                        <a class="dropdown-item" style="white-space: normal;" href="${localHref('one-time-phishing-campaigns.html')}">One-Time Phishing Campaigns</a>
-                                        <a class="dropdown-item" style="white-space: normal;" href="${localHref('ai-phishing-report-generator.html')}">Reporting</a>
-                                        <a class="dropdown-item" style="white-space: normal;" href="${localHref('phishing-awareness-training-that-works.html')}">Training</a>
-                                        <a class="dropdown-item" style="white-space: normal;" href="${localHref('read-only-phishing-framework-access.html')}">Read-Only Framework Access</a>
+                                        <a class="dropdown-item ps-4" style="white-space: normal;" href="${localHref('one-time-phishing-campaigns.html')}">One-Time Phishing Campaigns</a>
+                                        <a class="dropdown-item ps-4" style="white-space: normal;" href="${localHref('ai-phishing-report-generator.html')}">Reporting</a>
+                                        <a class="dropdown-item ps-4" style="white-space: normal;" href="${localHref('phishing-awareness-training-that-works.html')}">Training</a>
+                                        <a class="dropdown-item ps-4" style="white-space: normal;" href="${localHref('read-only-phishing-framework-access.html')}">Read-Only Framework Access</a>
                                         <div class="mt-3 ps-3">
                                             <a class="btn btn-teal btn-sm fw-500" href="${localHref('contact-us.html')}">Request a Quote</a>
                                         </div>
@@ -138,6 +137,120 @@
     };
 
     classifyPageView();
+
+    const fetchBlogPosts = async function() {
+        try {
+            const response = await fetch(localHref('blog.html'), { credentials: 'same-origin' });
+            if (!response.ok) {
+                return [];
+            }
+            const html = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            return Array.from(doc.querySelectorAll('a.card.card-link')).map(card => {
+                const href = card.getAttribute('href') || '';
+                return {
+                    href,
+                    absoluteHref: new URL(href, response.url).pathname,
+                    date: (card.querySelector('.text-uppercase-expanded')?.textContent || '').trim(),
+                    title: (card.querySelector('h2')?.textContent || '').trim(),
+                    description: (card.querySelector('p')?.textContent || '').trim()
+                };
+            }).filter(post => post.href && post.title);
+        } catch (err) {
+            return [];
+        }
+    };
+
+    const initHomepageBlogCarousel = function(posts) {
+        const blogSlides = document.getElementById('blogCarouselSlides');
+        if (!blogSlides || !posts.length) {
+            return;
+        }
+        blogSlides.innerHTML = posts.slice(0, 6).map(post => `
+            <div class="swiper-slide">
+              <a class="blog-mini-card" href="${post.href}" target="_blank" rel="noopener noreferrer">
+                <div class="blog-mini-card-body">
+                  <div class="blog-mini-date">${post.date}</div>
+                  <h3 class="blog-mini-title">${post.title}</h3>
+                  <p class="blog-mini-desc">${post.description}</p>
+                  <div class="blog-mini-link">Read article <i class="fas fa-arrow-right text-xs ms-1"></i></div>
+                </div>
+              </a>
+            </div>
+          `).join('');
+
+        const blogSwiper = document.querySelector('.blog-swiper');
+        if (blogSwiper && !blogSwiper.dataset.initialized) {
+            blogSwiper.dataset.initialized = 'true';
+            new Swiper('.blog-swiper', {
+                slidesPerView: 1.35,
+                spaceBetween: 16,
+                navigation: {
+                    nextEl: '.blog-swiper .swiper-button-next, .blog-swiper-nav .swiper-button-next',
+                    prevEl: '.blog-swiper .swiper-button-prev, .blog-swiper-nav .swiper-button-prev',
+                },
+                breakpoints: {
+                    576: { slidesPerView: 1.9, spaceBetween: 16 },
+                    768: { slidesPerView: 2.6, spaceBetween: 18 },
+                    1200: { slidesPerView: 3.4, spaceBetween: 18 }
+                }
+            });
+        }
+    };
+
+    const injectBlogArticleRecommendations = function(posts) {
+        if (!isBlogArticle || !posts.length || document.getElementById('blogArticleMorePosts')) {
+            return;
+        }
+        const currentAbsolutePath = normalizedPath;
+        const recommendations = posts.filter(post => !currentAbsolutePath.endsWith(post.absoluteHref)).slice(0, 3);
+        if (!recommendations.length) {
+            return;
+        }
+
+        const footerHost = document.getElementById('layoutDefault_footer');
+        if (!footerHost) {
+            return;
+        }
+
+        const section = document.createElement('section');
+        section.id = 'blogArticleMorePosts';
+        section.className = 'bg-light py-10';
+        section.innerHTML = `
+            <div class="container px-5">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
+                    <div>
+                        <h2 class="h3 mb-1">More from the Blog</h2>
+                        <p class="text-muted mb-0">Recent PhishU articles worth reading next.</p>
+                    </div>
+                    <a class="btn btn-outline-primary btn-sm fw-500" href="${localHref('blog.html')}">View All Articles</a>
+                </div>
+                <div class="row gx-5 gy-4">
+                    ${recommendations.map(post => `
+                        <div class="col-lg-4">
+                            <a class="card card-link lift border-0 shadow-sm h-100" href="${post.href}">
+                                <div class="card-body p-4">
+                                    <div class="text-uppercase-expanded text-xs mb-2">${post.date}</div>
+                                    <h3 class="h5 mb-3">${post.title}</h3>
+                                    <p class="mb-3 text-muted">${post.description}</p>
+                                    <div class="text-primary fw-bold d-inline-flex align-items-center">
+                                        Read the article
+                                        <i class="fas fa-arrow-right text-xs ms-1"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>`;
+        footerHost.parentNode.insertBefore(section, footerHost);
+    };
+
+    fetchBlogPosts().then(function(posts) {
+        initHomepageBlogCarousel(posts);
+        injectBlogArticleRecommendations(posts);
+    });
 
     document.addEventListener('click', function(e) {
         const link = e.target.closest('a');
