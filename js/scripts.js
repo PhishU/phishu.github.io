@@ -183,7 +183,10 @@
         const blogSwiper = document.querySelector('.blog-swiper');
         if (blogSwiper && !blogSwiper.dataset.initialized) {
             blogSwiper.dataset.initialized = 'true';
+            const visiblePosts = posts.slice(0, 6);
             new Swiper('.blog-swiper', {
+                centeredSlides: true,
+                initialSlide: visiblePosts.length > 3 ? 1 : 0,
                 slidesPerView: 1.35,
                 spaceBetween: 16,
                 navigation: {
@@ -226,25 +229,47 @@
                     </div>
                     <a class="btn btn-outline-primary btn-sm fw-500" href="${localHref('blog.html')}">View All Articles</a>
                 </div>
-                <div class="row gx-5 gy-4">
-                    ${recommendations.map(post => `
-                        <div class="col-lg-4">
-                            <a class="card card-link lift border-0 shadow-sm h-100" href="${post.href}">
-                                <div class="card-body p-4">
-                                    <div class="text-uppercase-expanded text-xs mb-2">${post.date}</div>
-                                    <h3 class="h5 mb-3">${post.title}</h3>
-                                    <p class="mb-3 text-muted">${post.description}</p>
-                                    <div class="text-primary fw-bold d-inline-flex align-items-center">
-                                        Read the article
-                                        <i class="fas fa-arrow-right text-xs ms-1"></i>
-                                    </div>
+                <div class="position-relative pb-5">
+                    <div class="swiper blog-related-swiper">
+                        <div class="swiper-wrapper">
+                            ${recommendations.map(post => `
+                                <div class="swiper-slide">
+                                    <a class="blog-mini-card" href="${post.href}">
+                                        <div class="blog-mini-card-body">
+                                            <div class="blog-mini-date">${post.date}</div>
+                                            <h3 class="blog-mini-title">${post.title}</h3>
+                                            <p class="blog-mini-desc">${post.description}</p>
+                                            <div class="blog-mini-link">Read article <i class="fas fa-arrow-right text-xs ms-1"></i></div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
+                            `).join('')}
                         </div>
-                    `).join('')}
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
                 </div>
             </div>`;
         footerHost.parentNode.insertBefore(section, footerHost);
+
+        const relatedSwiper = section.querySelector('.blog-related-swiper');
+        if (relatedSwiper) {
+            new Swiper(relatedSwiper, {
+                centeredSlides: true,
+                initialSlide: recommendations.length > 2 ? 1 : 0,
+                slidesPerView: 1.15,
+                spaceBetween: 16,
+                navigation: {
+                    nextEl: section.querySelector('.swiper-button-next'),
+                    prevEl: section.querySelector('.swiper-button-prev')
+                },
+                breakpoints: {
+                    576: { slidesPerView: 1.4, spaceBetween: 16 },
+                    768: { slidesPerView: 2.1, spaceBetween: 18 },
+                    1200: { slidesPerView: 2.4, spaceBetween: 18 }
+                }
+            });
+        }
     };
 
     fetchBlogPosts().then(function(posts) {
