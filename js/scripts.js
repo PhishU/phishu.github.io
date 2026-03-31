@@ -148,9 +148,10 @@
             const doc = parser.parseFromString(html, 'text/html');
             return Array.from(doc.querySelectorAll('a.card.card-link')).map(card => {
                 const href = card.getAttribute('href') || '';
+                const absoluteHref = new URL(href, response.url).pathname;
                 return {
-                    href,
-                    absoluteHref: new URL(href, response.url).pathname,
+                    href: absoluteHref,
+                    absoluteHref,
                     date: (card.querySelector('.text-uppercase-expanded')?.textContent || '').trim(),
                     title: (card.querySelector('h2')?.textContent || '').trim(),
                     description: (card.querySelector('p')?.textContent || '').trim()
