@@ -370,51 +370,24 @@
                         <h2 class="h3 mb-1">More from the Blog</h2>
                         <p class="text-muted mb-0">Recent PhishU articles worth reading next.</p>
                     </div>
-                    <div class="d-flex align-items-center gap-3">
-                        <a class="btn btn-outline-primary btn-sm fw-500" href="${localHref('blog.html')}">View All Articles</a>
-                        <div class="blog-swiper-nav">
-                            <div class="swiper-button-prev blog-swiper-button"></div>
-                            <div class="swiper-button-next blog-swiper-button"></div>
-                        </div>
-                    </div>
+                    <a class="btn btn-outline-primary btn-sm fw-500" href="${localHref('blog.html')}">View All Articles</a>
                 </div>
-                <div class="blog-related-wrap pb-5">
-                    <div class="swiper blog-related-swiper">
-                        <div class="swiper-wrapper">
-                            ${recommendations.map(post => `
-                                <div class="swiper-slide">
-                                    <a class="blog-mini-card" href="${post.href}">
-                                        <div class="blog-mini-card-body">
-                                            <div class="blog-mini-date">${post.date}</div>
-                                            <h3 class="blog-mini-title">${post.title}</h3>
-                                            <p class="blog-mini-desc">${post.description}</p>
-                                            <div class="blog-mini-link">Read article <i class="fas fa-arrow-right text-xs ms-1"></i></div>
-                                        </div>
-                                    </a>
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    ${recommendations.map(post => `
+                        <div class="col">
+                            <a class="blog-mini-card h-100" href="${post.href}">
+                                <div class="blog-mini-card-body">
+                                    <div class="blog-mini-date">${post.date}</div>
+                                    <h3 class="blog-mini-title">${post.title}</h3>
+                                    <p class="blog-mini-desc">${post.description}</p>
+                                    <div class="blog-mini-link">Read article <i class="fas fa-arrow-right text-xs ms-1"></i></div>
                                 </div>
-                            `).join('')}
+                            </a>
                         </div>
-                    </div>
+                    `).join('')}
                 </div>
             </div>`;
         footerHost.parentNode.insertBefore(section, footerHost);
-
-        const relatedSwiper = section.querySelector('.blog-related-swiper');
-        if (relatedSwiper) {
-            new Swiper(relatedSwiper, {
-                slidesPerView: 1.1,
-                spaceBetween: 16,
-                navigation: {
-                    nextEl: section.querySelector('.swiper-button-next'),
-                    prevEl: section.querySelector('.swiper-button-prev')
-                },
-                breakpoints: {
-                    576: { slidesPerView: 1.25, spaceBetween: 16 },
-                    768: { slidesPerView: 1.6, spaceBetween: 18 },
-                    1200: { slidesPerView: 2.1, spaceBetween: 18 }
-                }
-            });
-        }
     };
 
     fetchBlogPosts().then(async function(posts) {
