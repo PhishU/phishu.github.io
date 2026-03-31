@@ -166,7 +166,8 @@
             const style = document.createElement('style');
             style.id = 'phishu-blog-carousel-styles';
             style.textContent = `
-                .blog-swiper {
+                .blog-swiper,
+                .blog-related-swiper {
                   overflow: visible;
                   padding: 0.5rem 0 0.5rem;
                 }
@@ -231,6 +232,14 @@
                   justify-content: flex-end;
                   gap: 0.65rem;
                 }
+                .blog-related-wrap {
+                  position: relative;
+                  overflow: visible;
+                  padding: 0 3.25rem 0.75rem;
+                }
+                .blog-related-swiper {
+                  overflow: hidden;
+                }
                 .blog-swiper-button,
                 .blog-related-swiper .swiper-button-prev,
                 .blog-related-swiper .swiper-button-next {
@@ -253,8 +262,17 @@
                 }
                 .blog-related-swiper .swiper-button-prev,
                 .blog-related-swiper .swiper-button-next {
-                  position: static;
+                  position: absolute;
+                  top: 50%;
+                  transform: translateY(-50%);
                   margin-top: 0;
+                  z-index: 3;
+                }
+                .blog-related-swiper .swiper-button-prev {
+                  left: -3.25rem;
+                }
+                .blog-related-swiper .swiper-button-next {
+                  right: -3.25rem;
                 }
             `;
             document.head.appendChild(style);
@@ -360,7 +378,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="position-relative pb-5">
+                <div class="blog-related-wrap pb-5">
                     <div class="swiper blog-related-swiper">
                         <div class="swiper-wrapper">
                             ${recommendations.map(post => `
@@ -384,16 +402,16 @@
         const relatedSwiper = section.querySelector('.blog-related-swiper');
         if (relatedSwiper) {
             new Swiper(relatedSwiper, {
-                slidesPerView: 1.15,
+                slidesPerView: 1.1,
                 spaceBetween: 16,
                 navigation: {
                     nextEl: section.querySelector('.swiper-button-next'),
                     prevEl: section.querySelector('.swiper-button-prev')
                 },
                 breakpoints: {
-                    576: { slidesPerView: 1.4, spaceBetween: 16 },
-                    768: { slidesPerView: 2.1, spaceBetween: 18 },
-                    1200: { slidesPerView: 2.4, spaceBetween: 18 }
+                    576: { slidesPerView: 1.25, spaceBetween: 16 },
+                    768: { slidesPerView: 1.6, spaceBetween: 18 },
+                    1200: { slidesPerView: 2.1, spaceBetween: 18 }
                 }
             });
         }
