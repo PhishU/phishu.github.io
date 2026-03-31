@@ -161,6 +161,134 @@
         }
     };
 
+    const ensureBlogCarouselAssets = async function() {
+        if (!document.getElementById('phishu-blog-carousel-styles')) {
+            const style = document.createElement('style');
+            style.id = 'phishu-blog-carousel-styles';
+            style.textContent = `
+                .blog-swiper {
+                  overflow: visible;
+                  padding: 0.5rem 0 0.5rem;
+                }
+                .blog-swiper .swiper-slide,
+                .blog-related-swiper .swiper-slide {
+                  height: auto;
+                }
+                .blog-mini-card {
+                  display: block;
+                  height: 100%;
+                  text-decoration: none;
+                  color: inherit;
+                  background: rgba(255,255,255,0.92);
+                  border: 1px solid rgba(15, 23, 42, 0.06);
+                  border-radius: 1rem;
+                  box-shadow: 0 0.75rem 1.75rem rgba(15, 23, 42, 0.06);
+                  transition: transform 0.18s ease, box-shadow 0.18s ease;
+                }
+                .blog-mini-card:hover,
+                .blog-mini-card:focus,
+                .blog-mini-card:active {
+                  color: inherit;
+                  text-decoration: none;
+                }
+                .blog-mini-card:hover,
+                .blog-mini-card:focus-visible {
+                  transform: translateY(-2px);
+                  box-shadow: 0 1rem 2rem rgba(15, 23, 42, 0.08);
+                }
+                .blog-mini-card-body {
+                  padding: 1rem 1rem 0.95rem;
+                  display: flex;
+                  flex-direction: column;
+                  height: 100%;
+                }
+                .blog-mini-date {
+                  font-size: 0.72rem;
+                  letter-spacing: 0.08em;
+                  text-transform: uppercase;
+                  color: #6c757d;
+                  margin-bottom: 0.85rem;
+                }
+                .blog-mini-title {
+                  font-size: 0.92rem;
+                  line-height: 1.4;
+                  margin-bottom: 0.55rem;
+                }
+                .blog-mini-desc {
+                  font-size: 0.82rem;
+                  line-height: 1.55;
+                  color: #5b6470;
+                  margin-bottom: 0.7rem;
+                }
+                .blog-mini-link {
+                  font-size: 0.8rem;
+                  font-weight: 700;
+                  color: #20c997;
+                  margin-top: auto;
+                }
+                .blog-swiper-nav {
+                  display: flex;
+                  justify-content: flex-end;
+                  gap: 0.65rem;
+                }
+                .blog-swiper-button,
+                .blog-related-swiper .swiper-button-prev,
+                .blog-related-swiper .swiper-button-next {
+                  width: 2.75rem;
+                  height: 2.75rem;
+                  border-radius: 999px;
+                  border: 1px solid rgba(15, 23, 42, 0.1);
+                  background: rgba(255,255,255,0.92);
+                  color: #1f2d3d;
+                  display: inline-flex;
+                  align-items: center;
+                  justify-content: center;
+                  box-shadow: 0 0.5rem 1.25rem rgba(15, 23, 42, 0.08);
+                }
+                .blog-swiper-button::after,
+                .blog-related-swiper .swiper-button-prev::after,
+                .blog-related-swiper .swiper-button-next::after {
+                  font-size: 0.95rem;
+                  font-weight: 700;
+                }
+                .blog-related-swiper .swiper-button-prev,
+                .blog-related-swiper .swiper-button-next {
+                  position: static;
+                  margin-top: 0;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        if (!document.querySelector('link[data-phishu-swiper-css]') && !document.querySelector('link[href*="swiper-bundle.min.css"]')) {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css';
+            link.setAttribute('data-phishu-swiper-css', 'true');
+            document.head.appendChild(link);
+        }
+
+        if (window.Swiper) {
+            return;
+        }
+
+        await new Promise((resolve, reject) => {
+            const existing = document.querySelector('script[data-phishu-swiper-js]');
+            if (existing) {
+                existing.addEventListener('load', resolve, { once: true });
+                existing.addEventListener('error', reject, { once: true });
+                return;
+            }
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js';
+            script.async = true;
+            script.setAttribute('data-phishu-swiper-js', 'true');
+            script.onload = resolve;
+            script.onerror = reject;
+            document.body.appendChild(script);
+        });
+    };
+
     const initHomepageBlogCarousel = function(posts) {
         const blogSlides = document.getElementById('blogCarouselSlides');
         if (!blogSlides || !posts.length) {
@@ -224,7 +352,13 @@
                         <h2 class="h3 mb-1">More from the Blog</h2>
                         <p class="text-muted mb-0">Recent PhishU articles worth reading next.</p>
                     </div>
-                    <a class="btn btn-outline-primary btn-sm fw-500" href="${localHref('blog.html')}">View All Articles</a>
+                    <div class="d-flex align-items-center gap-3">
+                        <a class="btn btn-outline-primary btn-sm fw-500" href="${localHref('blog.html')}">View All Articles</a>
+                        <div class="blog-swiper-nav">
+                            <div class="swiper-button-prev blog-swiper-button"></div>
+                            <div class="swiper-button-next blog-swiper-button"></div>
+                        </div>
+                    </div>
                 </div>
                 <div class="position-relative pb-5">
                     <div class="swiper blog-related-swiper">
@@ -242,8 +376,6 @@
                                 </div>
                             `).join('')}
                         </div>
-                        <div class="swiper-button-prev"></div>
-                        <div class="swiper-button-next"></div>
                     </div>
                 </div>
             </div>`;
@@ -267,7 +399,14 @@
         }
     };
 
-    fetchBlogPosts().then(function(posts) {
+    fetchBlogPosts().then(async function(posts) {
+        if ((document.getElementById('blogCarouselSlides') || isBlogArticle) && posts.length) {
+            try {
+                await ensureBlogCarouselAssets();
+            } catch (err) {
+                // If Swiper fails to load, the homepage/article content still renders as links.
+            }
+        }
         initHomepageBlogCarousel(posts);
         injectBlogArticleRecommendations(posts);
     });
