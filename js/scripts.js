@@ -360,7 +360,11 @@
             return;
         }
         const currentAbsolutePath = normalizedPath;
-        const recommendations = posts.filter(post => currentAbsolutePath !== post.absoluteHref).slice(0, 3);
+        const currentTitle = (document.querySelector('h1.page-header-ui-title')?.textContent || document.title || '').replace(/\s+/g, ' ').trim().toLowerCase();
+        const recommendations = posts.filter(post => {
+            const postTitle = (post.title || '').replace(/\s+/g, ' ').trim().toLowerCase();
+            return currentAbsolutePath !== post.absoluteHref && currentTitle !== postTitle;
+        }).slice(0, 3);
         if (!recommendations.length) {
             return;
         }
