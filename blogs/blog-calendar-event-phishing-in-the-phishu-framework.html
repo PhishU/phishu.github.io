@@ -145,9 +145,9 @@
                     <section class="bg-white py-10">
                         <div class="container px-5">
                             <article class="article-shell">
-                                <p>Most phishing programs still revolve around one assumption: the attack arrives as an email, the user sees it in the inbox, and the next step is a click. That is still common, but it is not the only trust surface people respond to all day. Calendars have their own privileged position in business workflows. Invites feel routine. They show accept and decline buttons. They trigger reminders. They land somewhere users are conditioned to treat as operational, not suspicious.</p>
+                                <p>Most phishing programs still assume the attack arrives as an email in the inbox. Real users make trust decisions in more places than that. Calendar invites feel routine, operational, and easier to trust than a normal message.</p>
 
-                                <p>That is exactly why calendar event phishing matters. A calendar invite can bypass a lot of the mental skepticism users have learned to apply to ordinary email. Instead of a standard message asking for attention, the lure arrives as a meeting request that appears native to Outlook or Gmail. The target sees a title, a date, a location, a reminder, and event details that can contain the tracked link. It feels like work, not marketing.</p>
+                                <p>Calendar event phishing matters because it sidesteps some of the skepticism users have learned to apply to ordinary email. Instead of another message asking for attention, the lure arrives as a meeting request that looks native to Outlook or Gmail. The target sees a title, a date, a location, a reminder, and event details that can contain the tracked link. It feels like work, not marketing.</p>
 
                                 <p>The PhishU Framework now supports that technique directly with a first-class Calendar Event Invite template. Operators select it on the Email Templates page just like any other template, move into a dedicated calendar editor, configure the event details, write the description in a WYSIWYG editor, and let the Framework deliver the result as a real ICS invitation using <code>text/calendar; method=REQUEST</code>.</p>
 
@@ -159,16 +159,16 @@
                                 </figure>
 
                                 <h2>Why Calendar Invites Work So Well</h2>
-                                <p>Calendar invites get a better starting position than most phishing emails. They are not just another message sitting in a crowded inbox. They often create a visible event card, show up in the calendar view itself, and follow the target with reminders later. That changes the psychology. A normal phish asks the user to trust a message. A calendar invite asks the user to trust their routine.</p>
+                                <p>Calendar invites have a better starting position than most phishing emails. They do not just sit in a crowded inbox. They can appear as a real event card, show up in the calendar view, and return later as reminders. A normal phish asks the user to trust a message. A calendar invite asks the user to trust their routine.</p>
 
-                                <p>That makes the technique especially useful for realistic social-engineering assessment. Defenders need to know whether employees will click a suspicious link in a message that feels operational, not promotional. They also need to know whether their awareness program is overfitted to obvious email tells while ignoring other business-native delivery paths.</p>
+                                <p>This makes the technique useful in realistic social-engineering assessments. Defenders need to know whether employees will click a suspicious link in something that feels operational, not promotional, and whether their awareness program is overfitted to obvious email tells while ignoring business-native delivery paths.</p>
 
-                                <p>It also helps explain why email-only testing is too narrow. If the organization measures only inbox phishing, it can miss whether users will blindly trust an event that appears to come with built-in legitimacy. That is a meaningful gap because many people treat meeting requests as lower-friction decisions than ordinary messages.</p>
+                                <p>Email-only testing is too narrow. If an organization measures only inbox phishing, it can miss whether users will trust an event that appears to come with built-in legitimacy. Many people treat meeting requests as lower-friction decisions than ordinary messages.</p>
 
                                 <h2>How the Calendar Event Invite Workflow Works</h2>
                                 <p>Inside the Framework, the workflow is deliberately simple. The operator chooses the Calendar Event Invite template, sets the event title, defines the start and end time, picks the location, chooses the reminder timing, and writes the event description. The description supports the same variable-driven authoring model as other templates, including recipient personalization and tracked-link insertion.</p>
 
-                                <p>Under the hood, the template stores calendar metadata in the template's attachment JSON as <code>calendar_meta</code>. That includes the event timing, location, and reminder settings. The AI path can also populate those fields directly, which makes the calendar workflow more than just a different delivery format. It is a faster way to build a plausible meeting request that matches the surrounding campaign context.</p>
+                                <p>Under the hood, the template stores calendar metadata in the template's attachment JSON as <code>calendar_meta</code>. That includes the event timing, location, and reminder settings. The AI path can populate those fields directly, which makes it faster to build a plausible meeting request that matches the surrounding campaign context.</p>
 
                                 <figure class="my-5">
                                     <img class="article-image" src="../images/CalendarEventCampaignPreview.png" alt="PhishU Framework campaign preview showing the authored calendar event content and tracked link placement" />
@@ -178,7 +178,7 @@
                                 <h2>What the Target Actually Sees</h2>
                                 <p>On the receiving end, the goal is not to send a message that vaguely resembles a calendar invite. The goal is to send a calendar event that appears natively inside the client's mail and calendar workflow. The Framework does that with an ICS request that surfaces as an actual event invitation. The target sees the meeting title, organizer, date and time, location, and the accept and decline actions they already use every week.</p>
 
-                                <p>That is the key differentiator. The technique does not rely on pretending to be a calendar invite inside a normal HTML email. It uses the calendar system itself as the delivery vehicle. That gives the lure a different kind of credibility and a different kind of persistence, because reminders and calendar visibility can keep pulling the target back to the event after the original delivery moment has passed.</p>
+                                <p>The technique does not rely on pretending to be a calendar invite inside a normal HTML email. It uses the calendar system itself as the delivery vehicle. That gives the lure more credibility and more persistence, since reminders and calendar visibility can keep pulling the target back to the event after the original delivery moment has passed.</p>
 
                                 <figure class="my-5">
                                     <img class="article-image" src="../images/CalendarEventReceivedWithoutAccepting.png" alt="Received calendar event phishing invitation rendered in the client without accepting the event" />
@@ -186,23 +186,23 @@
                                 </figure>
 
                                 <h2>Why the Training Tie-In Matters</h2>
-                                <p>A lot of tools can simulate a phishing moment. Far fewer can teach from it properly afterward. This is one place where the PhishU Framework has a much stronger story than a one-off template demo. Calendar event campaigns automatically feed a dedicated training slide that shows the exact invite the recipient received, including the organizer details, the event body, and the suspicious domains that mattered.</p>
+                                <p>A lot of tools can simulate a phishing moment. Far fewer can teach from it properly afterward. Calendar event campaigns in the PhishU Framework automatically feed a dedicated training slide that shows the exact invite the recipient received, including the organizer details, the event body, and the suspicious domains that mattered.</p>
 
-                                <p>That matters because calendar trust is a different lesson than inbox trust. If someone accepts a questionable calendar invite or follows the tracked link in the event body, the remediation should explain how the calendar workflow itself was used against them. Generic phishing training does not do that well. Campaign-linked training does.</p>
+                                <p>Calendar trust is a different lesson than inbox trust. If someone accepts a questionable calendar invite or follows the tracked link in the event body, the remediation should explain how the calendar workflow itself was used against them. Generic phishing training rarely does that well. Campaign-linked training does.</p>
 
-                                <p>The training renderer is also designed to look like a real calendar client instead of a plain text dump. It shows the event details, organizer line, and accept, maybe, and decline actions in a familiar invite layout. That makes the training more concrete and much easier for the recipient to map back to the exact thing they saw in the campaign.</p>
+                                <p>The training renderer is also designed to look like a real calendar client instead of a plain text dump. It shows the event details, organizer line, and accept, maybe, and decline actions in a familiar invite layout, which makes the training easier for the recipient to map back to the exact thing they saw in the campaign.</p>
 
                                 <h2>Why This Matters for Red Teams, Pentest Firms, and MSSPs</h2>
                                 <p>Most phishing toolchains still force operators to think in email-only terms. That is a problem for service providers because real social engineering keeps moving into workflow-native channels. A modern platform should support the delivery paths attackers are already using, not just the ones awareness programs are most comfortable measuring.</p>
 
                                 <p>Calendar Event Invite phishing is a good example of why the hosted-platform model matters. The operator does not need to hand-build ICS files, invent the event narrative from scratch, or create separate training content after the fact. The Framework compresses the workflow into a template, AI-assisted editor, delivery path, and training story that all fit together.</p>
 
-                                <p>That is especially useful when the goal is not just to count clicks, but to demonstrate a blind spot in how the client thinks about phishing risk. If they have trained heavily on suspicious emails but have never tested whether employees trust calendar requests too easily, this technique exposes that gap fast.</p>
+                                <p>This is especially useful when the goal is not just to count clicks, but to demonstrate a blind spot in how the client thinks about phishing risk. If they have trained heavily on suspicious emails but have never tested whether employees trust calendar requests too easily, this technique exposes that gap fast.</p>
 
                                 <h2>The Better Awareness Story</h2>
                                 <p>The point of adding Calendar Event Invite phishing is not novelty. The point is realism. People do not make security decisions only in their inbox. They make them in calendars, chat clients, document-sharing tools, login prompts, and every other place work happens. A phishing assessment platform should reflect that reality.</p>
 
-                                <p>That is what makes this a useful technique for the PhishU Framework. It broadens the delivery surface, keeps the operator workflow simple, and turns the result into something defensible in both reporting and training. Most awareness platforms still test email. Real attackers use calendar invites too.</p>
+                                <p>This is what makes it a useful technique for the PhishU Framework. It broadens the delivery surface, keeps the operator workflow simple, and turns the result into something defensible in both reporting and training. Most awareness platforms still test email. Real attackers use calendar invites too.</p>
 
                                 <div class="card bg-light border-0 mt-5">
                                     <div class="card-body p-4 p-lg-5">
