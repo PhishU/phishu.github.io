@@ -41,7 +41,7 @@
                                 <div class="row g-0">
                                     <div class="col-lg-12 p-lg-5">
                                         <div class="d-flex align-items-center justify-content-between gap-3 mb-3">
-                                            <div class="dropdown-header text-primary mb-0" style="font-size: 1.02rem; letter-spacing: 0.11em;">PhishU Framework SaaS</div>
+                                            <div class="dropdown-header text-primary mb-0" style="font-size: 1.12rem; letter-spacing: 0.11em;">PhishU Framework SaaS</div>
                                             <a class="btn btn-outline-primary btn-sm fw-500" href="${localHref('phishu-framework-pricing.html')}">Pricing</a>
                                         </div>
                                         <h6 class="dropdown-header text-primary ps-3" style="font-size: 0.82rem; letter-spacing: 0.14em;">Features</h6>
