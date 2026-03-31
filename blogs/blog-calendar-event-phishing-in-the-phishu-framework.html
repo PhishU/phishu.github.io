@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="PhishU explains how Calendar Event Invite phishing works, why calendar trust is such a useful social-engineering path, and how the PhishU Framework turns it into a point-and-click template with integrated training." />
+        <meta name="description" content="PhishU explains how calendar event phishing works, why calendar trust is such a useful social-engineering path, and how the PhishU Framework turns it into a point-and-click template with AI suggestions and integrated training." />
         <meta name="author" content="PhishU, LLC" />
         <title>Calendar Event Phishing in the PhishU Framework | PhishU Blog</title>
         <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
@@ -22,21 +22,21 @@
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://phishu.net/blogs/blog-calendar-event-phishing-in-the-phishu-framework.html" />
         <meta property="og:title" content="Calendar Event Phishing in the PhishU Framework" />
-        <meta property="og:description" content="A high-level look at how the PhishU Framework turns calendar event invite phishing into a point-and-click workflow with native invite rendering, tracked links, and campaign-linked training." />
+        <meta property="og:description" content="A high-level look at how the PhishU Framework turns calendar event phishing into a point-and-click workflow with native invite rendering, AI suggestions, tracked links, and campaign-linked training." />
         <meta property="og:site_name" content="PhishU" />
         <meta property="og:image" content="https://phishu.net/images/CalendarEventEditor.png" />
-        <meta property="og:image:alt" content="PhishU Framework calendar event editor showing event details and ICS preview" />
+        <meta property="og:image:alt" content="PhishU Framework calendar event editor showing event details and AI-assisted authoring controls" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Calendar Event Phishing in the PhishU Framework" />
-        <meta name="twitter:description" content="How the PhishU Framework simulates calendar invite phishing with native event rendering, tracked links, and integrated training." />
+        <meta name="twitter:description" content="How the PhishU Framework simulates calendar event phishing with native event rendering, AI suggestions, tracked links, and integrated training." />
         <meta name="twitter:image" content="https://phishu.net/images/CalendarEventEditor.png" />
-        <meta name="twitter:image:alt" content="PhishU Framework calendar event editor showing event details and ICS preview" />
+        <meta name="twitter:image:alt" content="PhishU Framework calendar event editor showing event details and AI-assisted authoring controls" />
         <script type="application/ld+json">
         {
           "@context": "https://schema.org",
           "@type": "BlogPosting",
           "headline": "Calendar Event Phishing in the PhishU Framework",
-          "description": "PhishU explains how Calendar Event Invite phishing works, why calendar trust is such a useful social-engineering path, and how the PhishU Framework turns it into a point-and-click template with integrated training.",
+          "description": "PhishU explains how calendar event phishing works, why calendar trust is such a useful social-engineering path, and how the PhishU Framework turns it into a point-and-click template with AI suggestions and integrated training.",
           "datePublished": "2026-04-01",
           "dateModified": "2026-04-01",
           "author": {
@@ -134,7 +134,7 @@
                                 <img class="article-hero-image" src="../images/PhishUFramework.png" alt="PhishU Framework" />
                                 <div class="article-meta mb-3">April 1, 2026 - PhishU Blog</div>
                                 <h1 class="page-header-ui-title mb-4">Calendar Event Phishing in the PhishU Framework</h1>
-                                <p class="page-header-ui-text mb-0">Calendar event phishing is not new, but most testing tools still do not cover it well. The PhishU Framework turns it into a point-and-click campaign workflow with native invite rendering, tracked links, and campaign-linked training.</p>
+                                <p class="page-header-ui-text mb-0">Calendar event phishing is not new, but most testing tools still do not cover it well. The PhishU Framework turns it into a point-and-click campaign workflow with AI-assisted authoring, native invite rendering, tracked links, and campaign-linked training.</p>
                             </div>
                         </div>
                         <div class="svg-border-rounded text-white">
@@ -151,12 +151,11 @@
 
                                 <p>The PhishU Framework now supports that technique directly with a first-class Calendar Event Invite template. Operators select it on the Email Templates page just like any other template, move into a dedicated calendar editor, configure the event details, write the description in a TinyMCE-based editor, and let the Framework deliver the result as a real ICS invitation using <code>text/calendar; method=REQUEST</code>.</p>
 
+                                <p>The workflow also supports the same kind of AI acceleration PhishU already brought to email content. The operator can give AI an idea, and the Framework will generate a full event title, event body, and suggested calendar metadata such as timing, location, and reminder settings using campaign context, sender details, company research, and supported placeholders.</p>
+
                                 <figure class="my-5">
-                                    <div class="placeholder-box">
-                                        <strong>Image placeholder:</strong> add a screenshot of the Calendar Event Editor showing the event title field, event details panel, and ICS preview.<br>
-                                        Recommended path: <code>../images/CalendarEventEditor.png</code>
-                                    </div>
-                                    <figcaption class="article-caption">Calendar Event Invite is a first-class template type in the PhishU Framework, with a dedicated editor for event title, start and end time, location, reminder timing, and the generated ICS preview.</figcaption>
+                                    <img class="article-image" src="../images/CalendarEventEditor.png" alt="PhishU Framework Calendar Event Editor showing event details and AI-assisted authoring controls" />
+                                    <figcaption class="article-caption">Calendar Event Invite is a first-class template type in the PhishU Framework, with a dedicated editor for event title, start and end time, location, reminder timing, and AI-assisted authoring.</figcaption>
                                 </figure>
 
                                 <h2>Why Calendar Invites Work So Well</h2>
@@ -169,14 +168,11 @@
                                 <h2>How the Calendar Event Invite Workflow Works</h2>
                                 <p>Inside the Framework, the workflow is deliberately simple. The operator chooses the Calendar Event Invite template, sets the event title, defines the start and end time, picks the location, chooses the reminder timing, and writes the event description. The description supports the same variable-driven authoring model as other templates, including recipient personalization and tracked-link insertion.</p>
 
-                                <p>Under the hood, the template stores calendar metadata in the template's attachment JSON as <code>calendar_meta</code>. That includes the event timing, location, and reminder settings. The editor also shows an inline ICS preview so the operator can see the structure that will be delivered before the campaign goes out. That is an important usability detail because calendar invites are easy to conceptually understand but easy to misconfigure if the operator cannot see the event payload taking shape.</p>
+                                <p>Under the hood, the template stores calendar metadata in the template's attachment JSON as <code>calendar_meta</code>. That includes the event timing, location, and reminder settings. The AI path can also populate those fields directly, which makes the calendar workflow more than just a different delivery format. It is a faster way to build a plausible meeting request that matches the surrounding campaign context.</p>
 
                                 <figure class="my-5">
-                                    <div class="placeholder-box">
-                                        <strong>Image placeholder:</strong> add a screenshot showing the event description content with the tracked link in the body and any personalization variables you want to demonstrate.<br>
-                                        Recommended path: <code>../images/CalendarEventContent.png</code>
-                                    </div>
-                                    <figcaption class="article-caption">The event description is authored in the same rich editor style as other templates, so operators can build a realistic meeting narrative and embed the tracked link directly in the event body.</figcaption>
+                                    <img class="article-image" src="../images/CalendarEventCampaignPreview.png" alt="PhishU Framework campaign preview showing the authored calendar event content and tracked link placement" />
+                                    <figcaption class="article-caption">The event description is authored in the same rich editor style as other templates, so operators can build a realistic meeting narrative, use supported placeholders, and embed the tracked link directly in the event body.</figcaption>
                                 </figure>
 
                                 <h2>What the Target Actually Sees</h2>
@@ -185,11 +181,8 @@
                                 <p>That is the key differentiator. The technique does not rely on pretending to be a calendar invite inside a normal HTML email. It uses the calendar system itself as the delivery vehicle. That gives the lure a different kind of credibility and a different kind of persistence, because reminders and calendar visibility can keep pulling the target back to the event after the original delivery moment has passed.</p>
 
                                 <figure class="my-5">
-                                    <div class="placeholder-box">
-                                        <strong>Image placeholder:</strong> add a screenshot of the rendered calendar invite in Outlook or Gmail showing the event card and the accept, maybe, and decline actions.<br>
-                                        Recommended path: <code>../images/CalendarEventRendered.png</code>
-                                    </div>
-                                    <figcaption class="article-caption">The target sees a native-looking event invite with the same trust signals people are used to handling quickly: an organizer, a meeting time, a location, and response buttons.</figcaption>
+                                    <img class="article-image" src="../images/CalendarEventReceivedWithoutAccepting.png" alt="Received calendar event phishing invitation rendered in the client without accepting the event" />
+                                    <figcaption class="article-caption">The target sees a native-looking event invite with the same trust signals people are used to handling quickly: an organizer, a meeting time, a location, and response controls inside the calendar workflow.</figcaption>
                                 </figure>
 
                                 <h2>Why the Training Tie-In Matters</h2>
@@ -199,18 +192,10 @@
 
                                 <p>The training renderer is also designed to look like a real calendar client instead of a plain text dump. It shows the event details, organizer line, and accept, maybe, and decline actions in a familiar invite layout. That makes the training more concrete and much easier for the recipient to map back to the exact thing they saw in the campaign.</p>
 
-                                <figure class="my-5">
-                                    <div class="placeholder-box">
-                                        <strong>Image placeholder:</strong> add either a screenshot of the recipient-side training slide or a live notification / results view tied to a calendar event campaign.<br>
-                                        Recommended path: <code>../images/CalendarEventTrainingOrNotification.png</code>
-                                    </div>
-                                    <figcaption class="article-caption">Calendar event phishing is not just a delivery trick in the Framework. It ties directly into reporting and the dedicated training slide that explains how calendar trust was exploited.</figcaption>
-                                </figure>
-
                                 <h2>Why This Matters for Red Teams, Pentest Firms, and MSSPs</h2>
                                 <p>Most phishing toolchains still force operators to think in email-only terms. That is a problem for service providers because real social engineering keeps moving into workflow-native channels. A modern platform should support the delivery paths attackers are already using, not just the ones awareness programs are most comfortable measuring.</p>
 
-                                <p>Calendar Event Invite phishing is a good example of why the hosted-platform model matters. The operator does not need to hand-build ICS files, manually reason about invite formatting, or create separate training content after the fact. The Framework compresses the workflow into a template, editor, delivery path, and training story that all fit together.</p>
+                                <p>Calendar Event Invite phishing is a good example of why the hosted-platform model matters. The operator does not need to hand-build ICS files, invent the event narrative from scratch, or create separate training content after the fact. The Framework compresses the workflow into a template, AI-assisted editor, delivery path, and training story that all fit together.</p>
 
                                 <p>That is especially useful when the goal is not just to count clicks, but to demonstrate a blind spot in how the client thinks about phishing risk. If they have trained heavily on suspicious emails but have never tested whether employees trust calendar requests too easily, this technique exposes that gap fast.</p>
 
@@ -222,7 +207,7 @@
                                 <div class="card bg-light border-0 mt-5">
                                     <div class="card-body p-4 p-lg-5">
                                         <h2 class="h4">Want to test calendar-based phishing in your environment?</h2>
-                                        <p class="mb-3">The PhishU Framework now supports Calendar Event Invite phishing with a dedicated editor, native invite rendering, tracked links, and campaign-linked training that shows exactly how calendar trust was exploited.</p>
+                                        <p class="mb-3">The PhishU Framework now supports Calendar Event Invite phishing with AI-assisted authoring, native invite rendering, tracked links, and campaign-linked training that shows exactly how calendar trust was exploited.</p>
                                         <a class="btn btn-teal fw-500" href="../contact-us.html">Request a Quote</a>
                                     </div>
                                 </div>
