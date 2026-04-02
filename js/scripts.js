@@ -23,7 +23,6 @@
         const homeClass = isCurrentPage('index.html') ? ' active' : '';
         const blogClass = isCurrentPage('blog.html') ? ' active' : '';
         const pricingClass = isCurrentPage('phishu-framework-pricing.html') ? ' active' : '';
-        const contactClass = isCurrentPage('contact-us.html') ? ' active' : '';
 
         marketingNav.innerHTML = `
             <div class="container px-5">
@@ -84,7 +83,6 @@
                         <li class="nav-item"><a class="nav-link" href="https://framework.phishu.net">PhishU Framework</a></li>
                         <li class="nav-item"><a class="nav-link${blogClass}" href="${localHref('blog.html')}">Blog</a></li>
                         <li class="nav-item"><a class="nav-link${pricingClass}" href="${localHref('phishu-framework-pricing.html')}">Pricing</a></li>
-                        <li class="nav-item"><a class="nav-link${contactClass}" href="${localHref('contact-us.html')}">Contact</a></li>
                     </ul>
                     <a class="btn fw-500 ms-lg-4 btn-teal" href="${localHref('contact-us.html')}">Contact Us<i class="ms-2" data-feather="arrow-right"></i></a>
                 </div>
