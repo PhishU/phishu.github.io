@@ -75,7 +75,7 @@
                                         <a class="dropdown-item ps-4" style="white-space: normal; font-size: 0.88rem; line-height: 1.3; padding-top: 0.42rem; padding-bottom: 0.42rem;" href="${localHref('phishing-awareness-training-that-works.html')}">Training</a>
                                         <a class="dropdown-item ps-4" style="white-space: normal; font-size: 0.88rem; line-height: 1.3; padding-top: 0.42rem; padding-bottom: 0.42rem;" href="${localHref('read-only-phishing-framework-access.html')}">Read-Only Framework Access</a>
                                         <div class="mt-3 ps-3">
-                                            <a class="btn btn-teal btn-sm fw-500" href="${localHref('contact-us.html')}">Request a Quote</a>
+                                            <a class="btn btn-teal btn-sm fw-500" href="${localHref('contact-us.html')}">Contact Us</a>
                                         </div>
                                     </div>
                                 </div>
@@ -86,7 +86,7 @@
                         <li class="nav-item"><a class="nav-link${pricingClass}" href="${localHref('phishu-framework-pricing.html')}">Pricing</a></li>
                         <li class="nav-item"><a class="nav-link${contactClass}" href="${localHref('contact-us.html')}">Contact</a></li>
                     </ul>
-                    <a class="btn fw-500 ms-lg-4 btn-teal" href="${localHref('contact-us.html')}">Get Started!<i class="ms-2" data-feather="arrow-right"></i></a>
+                    <a class="btn fw-500 ms-lg-4 btn-teal" href="${localHref('contact-us.html')}">Contact Us<i class="ms-2" data-feather="arrow-right"></i></a>
                 </div>
             </div>`;
     }
