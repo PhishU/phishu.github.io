@@ -148,11 +148,9 @@
             const doc = parser.parseFromString(html, 'text/html');
             return Array.from(doc.querySelectorAll('a.card.card-link')).map(card => {
                 const href = card.getAttribute('href') || '';
-                const absoluteHref = new URL(href, response.url).pathname.replace(/\/+$/, '');
                 return {
-                    href: absoluteHref,
-                    absoluteHref,
-                    slug: absoluteHref.split('/').pop() || absoluteHref,
+                    href,
+                    absoluteHref: new URL(href, response.url).pathname,
                     date: (card.querySelector('.text-uppercase-expanded')?.textContent || '').trim(),
                     title: (card.querySelector('h2')?.textContent || '').trim(),
                     description: (card.querySelector('p')?.textContent || '').trim()
@@ -309,12 +307,12 @@
         });
     };
 
-    const renderBlogSlides = function(slideHost, posts) {
-        if (!slideHost || !posts.length) {
+    const initHomepageBlogCarousel = function(posts) {
+        const blogSlides = document.getElementById('blogCarouselSlides');
+        if (!blogSlides || !posts.length) {
             return;
         }
-
-        slideHost.innerHTML = posts.slice(0, 6).map(post => `
+        blogSlides.innerHTML = posts.slice(0, 6).map(post => `
             <div class="swiper-slide">
               <a class="blog-mini-card" href="${post.href}" target="_blank" rel="noopener noreferrer">
                 <div class="blog-mini-card-body">
@@ -326,15 +324,6 @@
               </a>
             </div>
           `).join('');
-    };
-
-    const initHomepageBlogCarousel = function(posts) {
-        const blogSlides = document.getElementById('blogCarouselSlides');
-        if (!blogSlides || !posts.length) {
-            return;
-        }
-        const slideHost = blogSlides.classList.contains('swiper-wrapper') ? blogSlides : (blogSlides.querySelector('.swiper-wrapper') || blogSlides);
-        renderBlogSlides(slideHost, posts);
 
         const blogSwiper = document.querySelector('.blog-swiper');
         if (blogSwiper && !blogSwiper.dataset.initialized) {
@@ -360,12 +349,8 @@
         if (!isBlogArticle || !posts.length || document.getElementById('blogArticleMorePosts')) {
             return;
         }
-        const canonicalPath = (document.querySelector('link[rel="canonical"]')?.href || window.location.href);
-        const currentAbsolutePath = new URL(canonicalPath, window.location.origin).pathname.replace(/\/+$/, '');
-        const recommendations = posts.filter(post => {
-            const postPath = (post.absoluteHref || post.href || '').replace(/\/+$/, '');
-            return postPath !== currentAbsolutePath;
-        }).slice(0, 6);
+        const currentAbsolutePath = normalizedPath;
+        const recommendations = posts.filter(post => !currentAbsolutePath.endsWith(post.absoluteHref)).slice(0, 3);
         if (!recommendations.length) {
             return;
         }
@@ -377,51 +362,32 @@
 
         const section = document.createElement('section');
         section.id = 'blogArticleMorePosts';
-        section.className = 'bg-light pt-8 pb-6 blog-strip-section';
+        section.className = 'bg-light py-10';
         section.innerHTML = `
             <div class="container px-5">
-                <div class="text-center mb-4">
-                    <div class="blog-strip-header mx-auto text-center">
-                        <h3 class="mb-3">More from the Blog</h3>
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
+                    <div>
+                        <h2 class="h3 mb-1">More from the Blog</h2>
                         <p class="text-muted mb-0">Recent PhishU articles worth reading next.</p>
                     </div>
+                    <a class="btn btn-outline-primary btn-sm fw-500" href="${localHref('blog.html')}">View All Articles</a>
                 </div>
-                <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
-                    <div></div>
-                    <div class="d-flex align-items-center gap-3">
-                        <a class="btn btn-outline-primary btn-sm fw-500" href="${localHref('blog.html')}">View All Articles</a>
-                        <div class="blog-swiper-nav">
-                            <div class="swiper-button-prev blog-swiper-button"></div>
-                            <div class="swiper-button-next blog-swiper-button"></div>
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    ${recommendations.map(post => `
+                        <div class="col">
+                            <a class="blog-mini-card h-100" href="${post.href}">
+                                <div class="blog-mini-card-body">
+                                    <div class="blog-mini-date">${post.date}</div>
+                                    <h3 class="blog-mini-title">${post.title}</h3>
+                                    <p class="blog-mini-desc">${post.description}</p>
+                                    <div class="blog-mini-link">Read article <i class="fas fa-arrow-right text-xs ms-1"></i></div>
+                                </div>
+                            </a>
                         </div>
-                    </div>
-                </div>
-                <div class="swiper blog-swiper" data-aos="fade-up">
-                    <div class="swiper-wrapper" id="blogCarouselSlides"></div>
+                    `).join('')}
                 </div>
             </div>`;
         footerHost.parentNode.insertBefore(section, footerHost);
-
-        const articleSlides = section.querySelector('#blogCarouselSlides');
-        renderBlogSlides(articleSlides, recommendations);
-
-        const articleSwiper = section.querySelector('.blog-swiper');
-        if (articleSwiper && !articleSwiper.dataset.initialized) {
-            articleSwiper.dataset.initialized = 'true';
-            new Swiper(articleSwiper, {
-                slidesPerView: 1.35,
-                spaceBetween: 16,
-                navigation: {
-                    nextEl: section.querySelector('.swiper-button-next'),
-                    prevEl: section.querySelector('.swiper-button-prev')
-                },
-                breakpoints: {
-                    576: { slidesPerView: 1.9, spaceBetween: 16 },
-                    768: { slidesPerView: 2.6, spaceBetween: 18 },
-                    1200: { slidesPerView: 3.4, spaceBetween: 18 }
-                }
-            });
-        }
     };
 
     fetchBlogPosts().then(async function(posts) {
@@ -432,10 +398,8 @@
                 // If Swiper fails to load, the homepage/article content still renders as links.
             }
         }
+        initHomepageBlogCarousel(posts);
         injectBlogArticleRecommendations(posts);
-        if (!isBlogArticle) {
-            initHomepageBlogCarousel(posts);
-        }
     });
 
     document.addEventListener('click', function(e) {
