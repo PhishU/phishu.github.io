@@ -365,6 +365,27 @@
     />
   </div>
 
+  <div class="col-md-6 mt-3">
+    <label class="text-dark mb-2" for="inputInterest">Interested In</label>
+    <select
+      class="form-control py-4"
+      id="inputInterest"
+      name="service_interest"
+      required
+    >
+      <option value="" selected disabled>Select an option</option>
+      <optgroup label="PhishU Framework">
+        <option value="PhishU Framework Platform SaaS">PhishU Framework Platform SaaS</option>
+      </optgroup>
+      <optgroup label="One-Time Consulting Assessments">
+        <option value="One-Time Assessment - $7,000">One-Time Assessment - $7,000</option>
+        <option value="Expanded Assessment - $10,000">Expanded Assessment - $10,000</option>
+        <option value="Comprehensive Assessment - $13,000">Comprehensive Assessment - $13,000</option>
+        <option value="Personalized Scope / Custom Quote">Personalized Scope / Custom Quote</option>
+      </optgroup>
+    </select>
+  </div>
+
   <div class="col-12 mt-3">
     <label class="text-dark mb-2" for="inputMessage">Message</label>
     <textarea
@@ -516,6 +537,11 @@
   // this is called **after** reCAPTCHA passes and injects g-recaptcha-response
   function onSubmitRecaptcha(token) {
     const form = document.getElementById('contact-form');
+    const interest = document.getElementById('inputInterest');
+    const message = document.getElementById('inputMessage');
+    const originalMessage = message.value;
+    const selectedInterest = interest && interest.value ? interest.value : 'Not specified';
+    message.value = `Interested in: ${selectedInterest}\nOrganization: ${document.getElementById('inputOrg').value}\n\n${originalMessage}`;
     emailjs
       .sendForm('service_6wh1qm3', 'template_jt9di8q', form)
       .then(() => {
@@ -529,6 +555,7 @@
         }, { once: true });
       })
       .catch(err => {
+        message.value = originalMessage;
         console.error('EmailJS error:', err);
         const s = document.getElementById('form-status');
         s.style.display = 'block';
