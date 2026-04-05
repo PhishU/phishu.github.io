@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="PhishU explains how Microsoft Entra B2B guest invitation phishing works in the PhishU Framework, why it is the attack with no attacker domain, and how a few clicks handle persona selection, redirects, and downstream grant capture." />
+        <meta name="author" content="PhishU, LLC" />
+        <title>The Attack With No Attacker Domain: Microsoft Entra B2B Guest Invitation Phishing in the PhishU Framework | PhishU Blog</title>
+        <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+        <link rel="canonical" href="https://phishu.net/blogs/blog-microsoft-entra-b2b-guest-invitation-phishing-phishu-framework.html" />
+        <link href="../css/styles.css" rel="stylesheet" />
+        <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" crossorigin="anonymous"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y2W7ZWEC7"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag("js", new Date());
+            gtag("config", "G-0Y2W7ZWEC7");
+        </script>
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://phishu.net/blogs/blog-microsoft-entra-b2b-guest-invitation-phishing-phishu-framework.html" />
+        <meta property="og:title" content="The Attack With No Attacker Domain: Microsoft Entra B2B Guest Invitation Phishing in the PhishU Framework" />
+        <meta property="og:description" content="How the PhishU Framework turns Microsoft Entra B2B guest invitations into a phishing delivery method with no attacker domain, no email-template glue work, and only a few clicks of setup." />
+        <meta property="og:site_name" content="PhishU" />
+        <meta property="og:image" content="https://phishu.net/images/B2BReceivedEmail.png" />
+        <meta property="og:image:alt" content="Microsoft B2B guest invitation email received by the target from invites@microsoft.com" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="The Attack With No Attacker Domain: Microsoft Entra B2B Guest Invitation Phishing in the PhishU Framework" />
+        <meta name="twitter:description" content="Microsoft sends the email. The target clicks through Microsoft-owned URLs. The Framework handles the redirect and downstream technique setup in a few clicks." />
+        <meta name="twitter:image" content="https://phishu.net/images/B2BReceivedEmail.png" />
+        <meta name="twitter:image:alt" content="Microsoft B2B guest invitation email received by the target from invites@microsoft.com" />
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "headline": "The Attack With No Attacker Domain: Microsoft Entra B2B Guest Invitation Phishing in the PhishU Framework",
+          "description": "PhishU explains how Microsoft Entra B2B guest invitation phishing works in the PhishU Framework, why it is the attack with no attacker domain, and how a few clicks handle persona selection, redirects, and downstream grant capture.",
+          "datePublished": "2026-04-05",
+          "dateModified": "2026-04-05",
+          "author": {
+            "@type": "Organization",
+            "name": "PhishU"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "PhishU",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://phishu.net/images/logo-transparent-white-grey-small.png"
+            }
+          },
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://phishu.net/blogs/blog-microsoft-entra-b2b-guest-invitation-phishing-phishu-framework.html"
+          }
+        }
+        </script>
+        <style>
+            .article-shell {
+                max-width: 860px;
+                margin: 0 auto;
+            }
+            .article-meta {
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                font-size: 0.8rem;
+                color: #6c757d;
+            }
+            .article-shell h2 {
+                margin-top: 2.75rem;
+            }
+            .article-shell p,
+            .article-shell li {
+                font-size: 1.05rem;
+                line-height: 1.8;
+            }
+            .article-image {
+                display: block;
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+                border-radius: 0.75rem;
+                box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.16);
+            }
+            .article-caption {
+                margin-top: 0.75rem;
+                font-size: 0.95rem;
+                color: #6c757d;
+            }
+            .article-hero-image {
+                display: block;
+                width: 100%;
+                max-width: 315px;
+                margin: 0 auto 1rem;
+            }
+            .svg-border-rounded {
+                display: block;
+                line-height: 0;
+                margin-bottom: -1px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="layoutDefault">
+            <div id="layoutDefault_content">
+                <main>
+                    <nav class="navbar navbar-marketing navbar-expand-lg bg-dark navbar-dark">
+                        <div class="container px-5">
+                            <a class="navbar-brand text-white" href="/">PhishU</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i data-feather="menu"></i></button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ms-auto me-lg-4">
+                                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../blog.html">Blog</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../contact-us.html">Contact</a></li>
+                                </ul>
+                                <a class="btn fw-500 ms-lg-4 btn-teal" href="../contact-us.html">Contact Us</a>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <header class="page-header-ui page-header-ui-dark bg-gradient-primary-only">
+                        <div class="page-header-ui-content pt-8 pb-5">
+                            <div class="container px-5 article-shell">
+                                <img class="article-hero-image" src="../images/PhishUFramework.png" alt="PhishU Framework" />
+                                <div class="article-meta mb-3">April 5, 2026 - PhishU Blog</div>
+                                <h1 class="page-header-ui-title mb-4">The Attack With No Attacker Domain: Microsoft Entra B2B Guest Invitation Phishing in the PhishU Framework</h1>
+                                <p class="page-header-ui-text mb-0">Microsoft sends the email. The target clicks through Microsoft-owned URLs. The hard part becomes the redirect and the post-accept action, and the PhishU Framework turns that setup into a few clicks instead of another pile of campaign glue work.</p>
+                            </div>
+                        </div>
+                        <div class="svg-border-rounded text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
+                        </div>
+                    </header>
+
+                    <section class="bg-white py-10">
+                        <div class="container px-5">
+                            <article class="article-shell">
+                                <p>Most phishing delivery methods still force the operator to solve the same set of problems first. Pick or clone a landing page. Build or tune an email template. Stand up a sender. Worry about SPF, DKIM, and DMARC. Think about warm-up, reputation, and evasion. Then hope the target actually sees the message.</p>
+
+                                <p>Microsoft Entra B2B guest invitation phishing changes that shape completely. The sender is Microsoft. The email comes from <code>invites@microsoft.com</code>. The accept link is a real <code>login.microsoftonline.com</code> URL. There is no operator-controlled sending domain to check, no sender reputation to build, and no email template to nurse through the gateway. That is why this is the attack with no attacker domain.</p>
+
+                                <p>In the PhishU Framework, that delivery path is no longer a concept piece or a one-off script. It is a shipped technique that an operator can configure in a few clicks. Pick the delivery persona, write the invitation message, choose where the target lands after Microsoft redemption, and pair it with the downstream technique you actually want to test. The hard part is the redirect and what happens after the accept flow. PhishU handles the rest.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/B2BSettings.png" alt="PhishU Framework settings for Microsoft Entra B2B guest invitation delivery persona and invitation message" />
+                                    <figcaption class="article-caption">The B2B configuration is intentionally short. Pick the delivery persona, set the inviter display name, write the invitation message, and let the Framework handle the Microsoft Graph invitation flow.</figcaption>
+                                </figure>
+
+                                <h2>No Landing Page to Clone. No Email Template to Build.</h2>
+                                <p>That is the first practical difference operators notice. B2B guest invitation delivery is not another SMTP campaign with a Microsoft theme wrapped around it. The delivery email itself is a genuine Microsoft B2B invitation. That removes a surprising amount of operator work.</p>
+
+                                <p>There is no need to build a lure email from scratch. There is no separate sender mailbox to configure. There is no discussion about whether the right domain has been warmed, whether the mail path is aligned, or whether a target gateway will trust the sender. Microsoft is the sender. The target sees a message that already carries the trust posture users are trained to rely on.</p>
+
+                                <p>The Framework reflects that reality in the UX. The normal sender-template steps collapse away because they do not apply. Instead of pushing the operator through one more email setup workflow, the platform pivots to what actually matters for this technique: the persona tenant, the invitation text, the post-accept landing page, and the downstream action.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/B2BPEmailPreview.png" alt="PhishU Framework preview of the Microsoft Entra B2B guest invitation email" />
+                                    <figcaption class="article-caption">The preview reflects a Microsoft-branded invitation email, not an operator-built SMTP lure. That is the point of the technique.</figcaption>
+                                </figure>
+
+                                <h2>The Real Trick Is the Redirect</h2>
+                                <p>The most important engineering detail in this technique is not the email. Microsoft already solved the email. The critical piece is where the target goes after they click Accept and complete Microsoft's redemption flow.</p>
+
+                                <p>That is where the Framework's redirect handling matters. The invitation flow preserves the campaign tracking identifier across Microsoft's redemption path and sends the target to the configured post-accept landing page. That landing page is where the operator decides what the assessment actually becomes next.</p>
+
+                                <p>That is also what makes this technique more powerful than a novelty delivery trick. On its own, a Microsoft-sent invitation already tests a serious user-trust and email-security gap. Paired with the right post-accept page, it becomes a realistic social engineering workflow that can continue into OAuth Consent Grant, Device Code, or another downstream path while the target is still moving through a trust context they just accepted from Microsoft.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/B2BReceivedEmail.png" alt="Target inbox showing a Microsoft Entra B2B guest invitation email from invites@microsoft.com" />
+                                    <figcaption class="article-caption">The target receives a genuine Microsoft B2B invitation email from <code>invites@microsoft.com</code>. There is no attacker-owned sender domain for the target or the gateway to challenge.</figcaption>
+                                </figure>
+
+                                <h2>Why This Feels More Trusted Than Typical Phishing</h2>
+                                <p>Traditional user advice usually focuses on sender reputation and domain scrutiny. Check the sender. Hover the link. Be suspicious of a domain that does not match the brand. That advice can still help in a lot of ordinary phishing cases, but it does not help much here.</p>
+
+                                <p>In this flow, the sender is Microsoft. The accept URL is Microsoft. The sign-in experience is Microsoft. The user moves through a chain that looks legitimate because it is legitimate Microsoft infrastructure until the post-accept transition happens. That is exactly why the technique is valuable for assessment and training. It measures whether users and defenders can spot the real risk when the old simple heuristics do not apply.</p>
+
+                                <p>For defenders, the lesson is not just that the user clicked. The lesson is that an organization can have mature email filtering and still leave a guest-invitation path effectively ungoverned. This is less about bypassing controls with a clever domain and more about exploiting a trust channel many teams do not meaningfully monitor.</p>
+
+                                <h2>A Few Clicks to Pair Delivery With the Grant Path You Want</h2>
+                                <p>One reason this technique matters inside the PhishU Framework instead of as a loose integration is that the operator can move directly from delivery setup to downstream action selection. The B2B path is usually paired with a second technique because the invitation itself is the opener, not the whole play.</p>
+
+                                <p>If the assessment calls for OAuth Consent Grant, the operator can configure the exact grants they want to request. If the assessment calls for Device Code, the post-accept page can move into that flow instead. If the target scenario calls for a simpler post-accept landing page, the operator can steer there too. The key point is not just that the Framework supports the pieces. It is that the operator can configure them without dropping into separate tools or stitching together redirect logic by hand.</p>
+
+                                <p>That means the workflow stays short: choose the B2B invitation template, pick the delivery persona, customize the invitation note, set the redirect destination, choose the downstream grant or technique path, and send. No cloned Microsoft landing page. No handmade lure email. No ad hoc evasion strategy just to get the message delivered in the first place.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/B2BGrantPrompt.png" alt="Post-accept grant prompt shown after the Microsoft Entra B2B guest invitation redemption flow" />
+                                    <figcaption class="article-caption">Once the target finishes the Microsoft redemption flow, the Framework can carry them into the configured post-accept action, including a grant prompt with the exact permissions the operator chose for the assessment.</figcaption>
+                                </figure>
+
+                                <h2>Why This Is Easier to Run Than It Should Be</h2>
+                                <p>From the outside, B2B guest invitation phishing sounds like something that should require a pile of moving parts. In practice, most of those moving parts are either handled by Microsoft or absorbed by the Framework. That is what makes the technique operationally interesting.</p>
+
+                                <p>The hard operational problems in phishing are often not the ones people talk about on slides. The hard parts are the glue: reliable delivery, believable previews, redirect handling, analytics continuity, and packaging the result into something useful after the target acts. PhishU compresses that glue work into the product workflow. That is why this is more than a screenshot-worthy technique. It is a practical one.</p>
+
+                                <p>For pentest firms and MSSPs, that matters because time spent building and nursing campaign infrastructure is margin leakage. For internal teams, it matters because every extra moving part makes realistic testing less likely to happen consistently. A few clicks is not just a convenience angle. It is the difference between a technique that gets talked about and a technique that actually gets used in authorized assessments.</p>
+
+                                <h2>The Better Defensive Story</h2>
+                                <p>The value of this technique is not that it gives defenders a clever Microsoft-branded lure. The value is that it exposes a delivery channel and trust path many programs still ignore. A target receives a Microsoft-authenticated guest invitation, clicks a Microsoft-owned accept link, signs in through Microsoft's flow, and then reaches the assessment's controlled post-accept step. That is a much more realistic test of trust handling than another fake login page sent from a warmed sender domain.</p>
+
+                                <p>That is also why the training angle matters. The target does not just need to learn that phishing exists. They need to learn that guest invitations, cross-tenant collaboration prompts, and delegated-access flows can be the real entry point. Most awareness programs do not teach that well because most awareness platforms cannot simulate it cleanly.</p>
+
+                                <div class="card bg-light border-0 mt-5">
+                                    <div class="card-body p-4 p-lg-5">
+                                        <h2 class="h4">Want to test the attack with no attacker domain?</h2>
+                                        <p class="mb-3">The PhishU Framework supports Microsoft Entra B2B guest invitation delivery, configurable post-accept technique paths, reporting, and training in one workflow. If you want to see how easily this can be run in an authorized assessment, start there.</p>
+                                        <a class="btn btn-teal fw-500" href="../contact-us.html">Contact Us</a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                </main>
+            </div>
+            <div id="layoutDefault_footer">
+                <footer class="footer pt-5 pb-5 mt-auto bg-dark footer-dark">
+                    <div class="container px-5">
+                        <div class="row gx-5 align-items-center">
+                            <div class="col-md-6 small">Copyright &copy; PhishU 2026</div>
+                            <div class="col-md-6 text-md-end small">
+                                <a href="https://www.linkedin.com/company/phishu">LinkedIn</a>
+                                &middot;
+                                <a href="../contact-us.html">Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="../js/site-config.js"></script>
+        <script src="../js/scripts.js?v=20260405a"></script>
+    </body>
+</html>
