@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="PhishU explains how the Framework uses AI plus deterministic infrastructure signals to suggest better phishing campaigns, including Microsoft 365 recon-first campaigns when Org Users coverage is still sparse." />
+        <meta name="author" content="PhishU, LLC" />
+        <title>How the PhishU Framework Uses AI and Target Infrastructure to Suggest Better Campaigns | PhishU Blog</title>
+        <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+        <link rel="canonical" href="https://phishu.net/blogs/blog-how-ai-suggests-phishing-campaigns-based-on-target-infrastructure-in-the-phishu-framework.html" />
+        <link href="../css/styles.css" rel="stylesheet" />
+        <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" crossorigin="anonymous"></script>
+        <style>
+            .article-shell {
+                max-width: 860px;
+                margin: 0 auto;
+            }
+            .article-meta {
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                font-size: 0.8rem;
+                color: #6c757d;
+            }
+            .article-image {
+                display: block;
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+                border-radius: 0.75rem;
+                box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.16);
+            }
+            .article-shell h2 {
+                margin-top: 2.75rem;
+            }
+            .article-shell p,
+            .article-shell li {
+                font-size: 1.05rem;
+                line-height: 1.8;
+            }
+            .article-caption {
+                margin-top: 0.75rem;
+                font-size: 0.95rem;
+                color: #6c757d;
+            }
+            .article-hero-image {
+                display: block;
+                width: 100%;
+                max-width: 315px;
+                margin: 0 auto 1rem;
+            }
+            .svg-border-rounded {
+                display: block;
+                line-height: 0;
+                margin-bottom: -1px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="layoutDefault">
+            <div id="layoutDefault_content">
+                <main>
+                    <nav class="navbar navbar-marketing navbar-expand-lg bg-dark navbar-dark">
+                        <div class="container px-5">
+                            <a class="navbar-brand text-white" href="/">PhishU</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i data-feather="menu"></i></button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ms-auto me-lg-4">
+                                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../blog.html">Blog</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../contact-us.html">Contact</a></li>
+                                </ul>
+                                <a class="btn fw-500 ms-lg-4 btn-teal" href="../contact-us.html">Contact Us</a>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <header class="page-header-ui page-header-ui-dark bg-gradient-primary-only">
+                        <div class="page-header-ui-content pt-8 pb-5">
+                            <div class="container px-5 article-shell">
+                                <img class="article-hero-image" src="../images/PhishUFramework.png" alt="PhishU Framework" />
+                                <div class="article-meta mb-3">April 5, 2026 - PhishU Blog</div>
+                                <h1 class="page-header-ui-title mb-4">How the PhishU Framework Uses AI and Target Infrastructure to Suggest Better Campaigns</h1>
+                                <p class="page-header-ui-text mb-0">The best phishing campaign is not always the most obvious one. The PhishU Framework uses AI plus deterministic infrastructure signals to suggest campaigns that fit the target organization, the current state of the engagement, and the amount of directory coverage already available to the operator.</p>
+                            </div>
+                        </div>
+                        <div class="svg-border-rounded text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
+                        </div>
+                    </header>
+
+                    <section class="bg-white py-10">
+                        <div class="container px-5">
+                            <article class="article-shell">
+                                <p>AI campaign suggestion in the PhishU Framework is not meant to be a slot machine that spits out ten generic phishing ideas. It is supposed to help the operator make a better first move in a black-box assessment. That means the suggestion engine has to care about what the target organization is likely using, what the Framework already knows about that organization, and whether the right next step is a recon-first Microsoft technique instead of a generic lure.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/airecon.png" alt="PhishU Framework AI campaign suggestion view" />
+                                    <figcaption class="article-caption">The Framework uses AI-assisted research plus deterministic infrastructure signals to suggest campaign ideas that better fit the target organization's actual environment.</figcaption>
+                                </figure>
+
+                                <h2>AI Suggestions Should Not Be Infrastructure-Blind</h2>
+                                <p>A company that appears to run Microsoft 365, Entra ID, and Exchange Online should not get the same first campaign suggestions as a company that looks like a Google Workspace shop or a company that shows no clear cloud signal at all. The PhishU Framework now leans into that idea by combining AI with a practical whitelist and blacklist style decision layer.</p>
+
+                                <p>In plain terms, the Framework looks for evidence that should increase or decrease confidence in certain campaign types. DNS and MX records matter. Local M365 verification data matters. Entra management settings matter. The research pass matters. If those signals all start pointing in the same direction, the Framework can treat Microsoft-focused phishing techniques as more relevant than generic lures.</p>
+
+                                <h2>Why the Whitelist and Blacklist Approach Matters</h2>
+                                <p>The point is not to pretend the system has perfect certainty about every target environment. The point is to stop making recommendations as if every organization is identical. A practical campaign suggestion engine should have a mental model that sounds more like this:</p>
+
+                                <ul>
+                                    <li>If the target strongly appears to use Microsoft 365 and Entra, move Microsoft-native techniques up the list.</li>
+                                    <li>If the target does not show strong Microsoft evidence, do not force those techniques to the top.</li>
+                                    <li>If the operator has very little user coverage yet, favor campaign ideas that can help build that coverage first.</li>
+                                    <li>If the organization already has enough users and context in the Framework, favor more targeted role-specific scenarios instead of recon-first collection.</li>
+                                </ul>
+
+                                <p>That is the whitelist and blacklist idea here. Some signals make a technique more appropriate. Other conditions should suppress or demote it. The result is a suggestion list that feels more like planning and less like random brainstorming. The important distinction is that the output is not just "what email might people click." It is "what first campaign is most likely to reveal useful structure about this organization."</p>
+
+                                <h2>First Campaign Changes the Recommendation</h2>
+                                <p>The first enabled campaign for an organization is not the same decision as the fifth. On a brand new org, the Framework may know the target domain and some infrastructure signals, but still know very little about the employee population. That is exactly where a recon-first campaign can make more sense than immediately launching a broad social-engineering lure.</p>
+
+                                <p>If the target appears to be a Microsoft-heavy environment and there is not already another active campaign for the org, the AI suggestion engine can now bias toward an initial Microsoft-focused recon campaign. That could mean Device Code phishing, a Microsoft OAuth consent flow with limited scopes, or an admin-approval-oriented Microsoft access scenario depending on the context. The point is not just to get a click. The point is to establish whether Microsoft token-based techniques fit the tenant and what kind of directory access that tenant is likely to expose.</p>
+
+                                <h2>Low Org Users Coverage Should Change the Plan Too</h2>
+                                <p>The same logic applies when the Org Users table is still sparse. If there are not many users available yet, the value of a highly targeted payroll or executive lure is limited. The operator does not have enough visibility into departments, reporting chains, or the structure of the organization to make the most of those targeted scenarios. In a black-box engagement, that lack of coverage is a signal by itself.</p>
+
+                                <p>In that situation, the Framework can favor Microsoft recon-first campaign suggestions because the better next move may be to learn more about the organization before trying to phish it in a more tailored way. That is especially true when the infrastructure signals strongly suggest Microsoft 365 and Entra, because those techniques can be used to test delegated access, enumerate directory data, and validate whether broader org discovery is available.</p>
+
+                                <h2>Examples of Recon-First Suggestions</h2>
+                                <p>When the AI suggestion engine sees that combination of conditions, it can move ideas like these closer to the top:</p>
+
+                                <ul>
+                                    <li><strong>Device Code Phishing</strong> when the goal is a low-friction Microsoft sign-in flow with a higher chance of success and a strong fit for Microsoft-native environments.</li>
+                                    <li><strong>Limited OAuth Consent Grant</strong> when the operator wants to test what delegated directory access the tenant will expose without starting with the loudest possible scope set.</li>
+                                    <li><strong>Admin Consent or Approval-Oriented Flows</strong> when the environment looks like Microsoft 365 but the likely value is in testing how the tenant handles higher-friction consent paths rather than a normal user grant.</li>
+                                </ul>
+
+                                <p>The important part is the rationale. The Framework should not just say "try Device Code phishing." It should explain why: this looks like a Microsoft environment, there is limited user coverage in the Framework, and a recon-first technique may be the smartest starting point before more targeted follow-on campaigns.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/orgchart-blackbox-recon-demo.svg" alt="Illustrated PhishU-style org chart showing a fake organization with multiple reporting levels" />
+                                    <figcaption class="article-caption">A themed local draft image showing the kind of hierarchy the Framework can help build after a Microsoft delegated grant exposes reporting relationships and additional directory users.</figcaption>
+                                </figure>
+
+                                <h2>What Happens After a Microsoft Grant Is Captured</h2>
+                                <p>This is where the Org Chart feature becomes strategically important. Once a Microsoft OAuth or Device Code capture succeeds, the Framework user is not limited to a token row in a table. The captured-grant workflow now includes an Org Chart view that can explore the best-effort directory and reporting-chain data exposed by that grant.</p>
+
+                                <p>If the granted scopes and tenant policy allow it, the Framework can pull from the victim profile, manager relationship, direct reports, org directory, and best-effort manager lookups. That information is turned into an interactive Org Chart directly inside the captured OAuth workflow. Operators can inspect the structure visually instead of trying to reason through raw API responses or disconnected user records.</p>
+
+                                <h2>Why Org Chart Matters in a Black-Box Assessment</h2>
+                                <p>In a black-box assessment, getting a useful user list is often half the battle. The Org Chart feature is not just there to look interesting. It is there to help operators turn a recon-first campaign into a stronger second campaign. If the captured grant exposes additional users who are not already in the Framework, those discovered users can be added into the Org Users table for that organization.</p>
+
+                                <p>That changes everything about the next campaign. Instead of operating with a thin or incomplete user list, the operator can now build more tailored follow-on campaigns against identified departments, reporting chains, individual business units, or users sitting around a known manager or executive. In other words, the first campaign helps teach the Framework who the organization really is, and the second campaign can be far more specific because of it.</p>
+
+                                <h2>Adding Discovered Users Back into Org Users</h2>
+                                <p>The practical value is not only in the visualization. From the captured-grant Org Chart flow, newly discovered users can be added directly into the Framework's Org Users table. That means the operator can move from black-box uncertainty into a more structured recon posture without leaving the platform or manually retyping directory results.</p>
+
+                                <p>Once those users are in Org Users, the rest of the Framework becomes more valuable. AI target suggestion gets better because there is now more real workforce structure to work with. Campaign targeting becomes more specific because departments, titles, and manager relationships are clearer. Follow-on phishing can be built around actual teams instead of assumptions.</p>
+
+                                <h2>The Better AI Story</h2>
+                                <p>The better AI story in phishing is not "the model wrote an email." It is that the platform can combine AI with deterministic product logic and real organization context to suggest a smarter assessment path. That means taking infrastructure clues seriously, recognizing when a recon-first campaign is more valuable than a broad lure, and then using the results of that recon to build the next campaign with much better context.</p>
+
+                                <p>That is the direction the PhishU Framework is moving toward. AI helps identify the right first move. Microsoft-specific recon campaigns can help validate tenant fit and expand user coverage. The Org Chart turns captured Microsoft access into something operators can actually use. And the users learned through that process can be brought back into the Framework for the more targeted campaigns that come next.</p>
+
+                                <div class="card bg-light border-0 mt-5">
+                                    <div class="card-body p-4 p-lg-5">
+                                        <h2 class="h4">Want to see how the Framework can turn a black-box Microsoft assessment into a structured user map?</h2>
+                                        <p class="mb-3">The PhishU Framework combines AI with target-infrastructure signals, Microsoft 365 detection, recon-first campaign suggestion, and post-capture Org Chart exploration so operators can move from limited context to real users, real hierarchy, and much more targeted follow-on campaigns.</p>
+                                        <a class="btn btn-teal fw-500" href="../contact-us.html">Contact Us</a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                </main>
+            </div>
+            <div id="layoutDefault_footer">
+                <footer class="footer pt-5 pb-5 mt-auto bg-dark footer-dark">
+                    <div class="container px-5">
+                        <div class="row gx-5 align-items-center">
+                            <div class="col-md-6 small">Copyright &copy; PhishU 2026</div>
+                            <div class="col-md-6 text-md-end small">
+                                <a href="https://www.linkedin.com/company/phishu">LinkedIn</a>
+                                &middot;
+                                <a href="../contact-us.html">Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="../js/scripts.js"></script>
+        <script>feather.replace();</script>
+    </body>
+</html>

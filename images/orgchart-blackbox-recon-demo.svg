@@ -1,0 +1,100 @@
+<svg width="1600" height="980" viewBox="0 0 1600 980" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="980" rx="24" fill="#1F2126"/>
+  <rect x="24" y="24" width="1552" height="88" rx="18" fill="#26282B" stroke="#363A3F"/>
+  <text x="52" y="78" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="34" font-weight="700">Org Chart</text>
+  <text x="1132" y="78" fill="#9AA4B2" font-family="Arial, sans-serif" font-size="26">42 users · 17 inferred manager links · 9 cloud-synced</text>
+
+  <rect x="24" y="134" width="1176" height="822" rx="18" fill="#16181C"/>
+  <rect x="1218" y="134" width="358" height="822" rx="18" fill="#20242B"/>
+
+  <text x="1250" y="186" fill="#00E1A7" font-family="Arial, sans-serif" font-size="22" font-weight="700">SELECTION</text>
+  <text x="1250" y="238" fill="#7F8A98" font-family="Arial, sans-serif" font-size="18">Name</text>
+  <text x="1368" y="238" fill="#E6EDF3" font-family="Arial, sans-serif" font-size="18">Alyssa Reed</text>
+  <text x="1250" y="282" fill="#7F8A98" font-family="Arial, sans-serif" font-size="18">Email</text>
+  <text x="1368" y="282" fill="#E6EDF3" font-family="Arial, sans-serif" font-size="18">alyssa.reed@northstar.example</text>
+  <text x="1250" y="326" fill="#7F8A98" font-family="Arial, sans-serif" font-size="18">Title</text>
+  <text x="1368" y="326" fill="#E6EDF3" font-family="Arial, sans-serif" font-size="18">VP of Finance</text>
+  <text x="1250" y="370" fill="#7F8A98" font-family="Arial, sans-serif" font-size="18">Dept</text>
+  <text x="1368" y="370" fill="#E6EDF3" font-family="Arial, sans-serif" font-size="18">Finance</text>
+  <text x="1250" y="414" fill="#7F8A98" font-family="Arial, sans-serif" font-size="18">Manager</text>
+  <text x="1368" y="414" fill="#E6EDF3" font-family="Arial, sans-serif" font-size="18">Melissa Hart</text>
+  <text x="1250" y="458" fill="#7F8A98" font-family="Arial, sans-serif" font-size="18">Source</text>
+  <text x="1368" y="458" fill="#E6EDF3" font-family="Arial, sans-serif" font-size="18">Captured OAuth grant</text>
+
+  <line x1="1218" y1="514" x2="1576" y2="514" stroke="#2D3138"/>
+  <text x="1250" y="564" fill="#00E1A7" font-family="Arial, sans-serif" font-size="22" font-weight="700">COVERAGE</text>
+  <text x="1250" y="614" fill="#9AA4B2" font-family="Arial, sans-serif" font-size="18">Interactive org chart built from a</text>
+  <text x="1250" y="642" fill="#9AA4B2" font-family="Arial, sans-serif" font-size="18">Microsoft delegated grant. Newly</text>
+  <text x="1250" y="670" fill="#9AA4B2" font-family="Arial, sans-serif" font-size="18">discovered users can be added to</text>
+  <text x="1250" y="698" fill="#9AA4B2" font-family="Arial, sans-serif" font-size="18">Org Users for follow-on campaigns.</text>
+
+  <line x1="612" y1="236" x2="612" y2="286" stroke="#8A8F98" stroke-width="3"/>
+  <line x1="612" y1="286" x2="612" y2="316" stroke="#8A8F98" stroke-width="3"/>
+  <line x1="300" y1="430" x2="924" y2="430" stroke="#8A8F98" stroke-width="3"/>
+  <line x1="612" y1="316" x2="612" y2="430" stroke="#8A8F98" stroke-width="3"/>
+  <line x1="300" y1="430" x2="300" y2="458" stroke="#8A8F98" stroke-width="3"/>
+  <line x1="612" y1="430" x2="612" y2="458" stroke="#8A8F98" stroke-width="3"/>
+  <line x1="924" y1="430" x2="924" y2="458" stroke="#8A8F98" stroke-width="3"/>
+  <line x1="300" y1="574" x2="300" y2="606" stroke="#8A8F98" stroke-width="3"/>
+  <line x1="924" y1="574" x2="924" y2="606" stroke="#8A8F98" stroke-width="3"/>
+  <line x1="180" y1="606" x2="420" y2="606" stroke="#8A8F98" stroke-width="3"/>
+  <line x1="804" y1="606" x2="1044" y2="606" stroke="#8A8F98" stroke-width="3"/>
+  <line x1="180" y1="606" x2="180" y2="632" stroke="#8A8F98" stroke-width="3"/>
+  <line x1="420" y1="606" x2="420" y2="632" stroke="#8A8F98" stroke-width="3"/>
+  <line x1="804" y1="606" x2="804" y2="632" stroke="#8A8F98" stroke-width="3"/>
+  <line x1="1044" y1="606" x2="1044" y2="632" stroke="#8A8F98" stroke-width="3"/>
+
+  <g>
+    <rect x="470" y="168" width="284" height="68" rx="16" fill="#3C2A4D" stroke="#A855F7" stroke-width="2"/>
+    <text x="612" y="210" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="24" font-weight="700" text-anchor="middle">Northstar Health</text>
+  </g>
+
+  <g>
+    <rect x="164" y="458" width="272" height="116" rx="16" fill="#1F2937" stroke="#60A5FA" stroke-width="2"/>
+    <text x="188" y="498" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="24" font-weight="700">Melissa Hart</text>
+    <text x="188" y="532" fill="#CBD5E1" font-family="Arial, sans-serif" font-size="18">CFO</text>
+    <text x="188" y="562" fill="#94A3B8" font-family="Arial, sans-serif" font-size="16">melissa.hart@northstar.example</text>
+  </g>
+
+  <g>
+    <rect x="476" y="458" width="272" height="116" rx="16" fill="#17314A" stroke="#00E1A7" stroke-width="2.5"/>
+    <text x="500" y="498" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="24" font-weight="700">Alyssa Reed</text>
+    <text x="500" y="532" fill="#CBD5E1" font-family="Arial, sans-serif" font-size="18">VP of Finance</text>
+    <text x="500" y="562" fill="#94A3B8" font-family="Arial, sans-serif" font-size="16">alyssa.reed@northstar.example</text>
+  </g>
+
+  <g>
+    <rect x="788" y="458" width="272" height="116" rx="16" fill="#1F2937" stroke="#F59E0B" stroke-width="2"/>
+    <text x="812" y="498" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="24" font-weight="700">Jon Mercer</text>
+    <text x="812" y="532" fill="#CBD5E1" font-family="Arial, sans-serif" font-size="18">Director of IT</text>
+    <text x="812" y="562" fill="#94A3B8" font-family="Arial, sans-serif" font-size="16">jon.mercer@northstar.example</text>
+  </g>
+
+  <g>
+    <rect x="44" y="632" width="272" height="116" rx="16" fill="#1F2937" stroke="#4B5563" stroke-width="2"/>
+    <text x="68" y="672" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="22" font-weight="700">Kelly Lawson</text>
+    <text x="68" y="704" fill="#CBD5E1" font-family="Arial, sans-serif" font-size="18">Senior Accountant</text>
+    <text x="68" y="734" fill="#94A3B8" font-family="Arial, sans-serif" font-size="16">kelly.lawson@northstar.example</text>
+  </g>
+
+  <g>
+    <rect x="300" y="632" width="272" height="116" rx="16" fill="#1F2937" stroke="#4B5563" stroke-width="2"/>
+    <text x="324" y="672" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="22" font-weight="700">Victor Shaw</text>
+    <text x="324" y="704" fill="#CBD5E1" font-family="Arial, sans-serif" font-size="18">Accounts Payable Lead</text>
+    <text x="324" y="734" fill="#94A3B8" font-family="Arial, sans-serif" font-size="16">victor.shaw@northstar.example</text>
+  </g>
+
+  <g>
+    <rect x="668" y="632" width="272" height="116" rx="16" fill="#1F2937" stroke="#4B5563" stroke-width="2"/>
+    <text x="692" y="672" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="22" font-weight="700">Priya Nair</text>
+    <text x="692" y="704" fill="#CBD5E1" font-family="Arial, sans-serif" font-size="18">Security Engineer</text>
+    <text x="692" y="734" fill="#94A3B8" font-family="Arial, sans-serif" font-size="16">priya.nair@northstar.example</text>
+  </g>
+
+  <g>
+    <rect x="924" y="632" width="272" height="116" rx="16" fill="#1F2937" stroke="#4B5563" stroke-width="2"/>
+    <text x="948" y="672" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="22" font-weight="700">Marcus Bell</text>
+    <text x="948" y="704" fill="#CBD5E1" font-family="Arial, sans-serif" font-size="18">Cloud Administrator</text>
+    <text x="948" y="734" fill="#94A3B8" font-family="Arial, sans-serif" font-size="16">marcus.bell@northstar.example</text>
+  </g>
+</svg>

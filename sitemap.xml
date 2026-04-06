@@ -21,6 +21,11 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://phishu.net/blogs/blog-how-ai-suggests-phishing-campaigns-based-on-target-infrastructure-in-the-phishu-framework.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://phishu.net/blogs/blog-microsoft-entra-b2b-guest-invitation-phishing-phishu-framework.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
