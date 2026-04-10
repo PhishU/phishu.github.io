@@ -266,6 +266,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://phishu.net/phishing-testing-for-msps.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://phishu.net/phishing-simulation-for-enterprises.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
