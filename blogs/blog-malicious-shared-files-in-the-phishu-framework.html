@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="PhishU explains how Malicious Shared Files delivery works in the PhishU Framework, why native Microsoft file-share invitations matter, and how the platform automates SharePoint-hosted collaboration lures with training built in." />
+        <meta name="author" content="PhishU, LLC" />
+        <title>The Microsoft Collaboration Lure: Malicious Shared Files in the PhishU Framework | PhishU Blog</title>
+        <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+        <link rel="canonical" href="https://phishu.net/blogs/blog-malicious-shared-files-in-the-phishu-framework.html" />
+        <link href="../css/styles.css" rel="stylesheet" />
+        <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" crossorigin="anonymous"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y2W7ZWEC7"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag("js", new Date());
+            gtag("config", "G-0Y2W7ZWEC7");
+        </script>
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://phishu.net/blogs/blog-malicious-shared-files-in-the-phishu-framework.html" />
+        <meta property="og:title" content="The Microsoft Collaboration Lure: Malicious Shared Files in the PhishU Framework" />
+        <meta property="og:description" content="How the PhishU Framework automates Microsoft-hosted shared-file delivery, why the native Microsoft invitation matters, and how the technique ties into training and downstream auth workflows." />
+        <meta property="og:site_name" content="PhishU" />
+        <meta property="og:image" content="https://phishu.net/images/SharedMalDocsEditor.png" />
+        <meta property="og:image:alt" content="Shared File WYSIWYG editor in the PhishU Framework" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="The Microsoft Collaboration Lure: Malicious Shared Files in the PhishU Framework" />
+        <meta name="twitter:description" content="How the PhishU Framework automates native Microsoft shared-file delivery with unique per-recipient documents, Microsoft-originated invitations, and training built in." />
+        <meta name="twitter:image" content="https://phishu.net/images/SharedMalDocsEditor.png" />
+        <meta name="twitter:image:alt" content="Shared File WYSIWYG editor in the PhishU Framework" />
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "headline": "The Microsoft Collaboration Lure: Malicious Shared Files in the PhishU Framework",
+          "description": "PhishU explains how Malicious Shared Files delivery works in the PhishU Framework, why native Microsoft file-share invitations matter, and how the platform automates SharePoint-hosted collaboration lures with training built in.",
+          "datePublished": "2026-04-11",
+          "dateModified": "2026-04-11",
+          "author": {
+            "@type": "Organization",
+            "name": "PhishU"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "PhishU",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://phishu.net/images/logo-transparent-white-grey-small.png"
+            }
+          },
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://phishu.net/blogs/blog-malicious-shared-files-in-the-phishu-framework.html"
+          }
+        }
+        </script>
+        <style>
+            .article-shell {
+                max-width: 860px;
+                margin: 0 auto;
+            }
+            .article-meta {
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                font-size: 0.8rem;
+                color: #6c757d;
+            }
+            .article-shell h2 {
+                margin-top: 2.75rem;
+            }
+            .article-shell p,
+            .article-shell li {
+                font-size: 1.05rem;
+                line-height: 1.8;
+            }
+            .article-image {
+                display: block;
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+                border-radius: 0.75rem;
+                box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.16);
+            }
+            .article-caption {
+                margin-top: 0.75rem;
+                font-size: 0.95rem;
+                color: #6c757d;
+            }
+            .article-hero-image {
+                display: block;
+                width: 100%;
+                max-width: 315px;
+                margin: 0 auto 1rem;
+            }
+            .svg-border-rounded {
+                display: block;
+                line-height: 0;
+                margin-bottom: -1px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="layoutDefault">
+            <div id="layoutDefault_content">
+                <main>
+                    <nav class="navbar navbar-marketing navbar-expand-lg bg-dark navbar-dark">
+                        <div class="container px-5">
+                            <a class="navbar-brand text-white" href="/">PhishU</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="#navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i data-feather="menu"></i></button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ms-auto me-lg-4">
+                                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../blog.html">Blog</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../contact-us.html">Contact</a></li>
+                                </ul>
+                                <a class="btn fw-500 ms-lg-4 btn-teal" href="../contact-us.html">Contact Us</a>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <header class="page-header-ui page-header-ui-dark bg-gradient-primary-only">
+                        <div class="page-header-ui-content pt-8 pb-5">
+                            <div class="container px-5 article-shell">
+                                <img class="article-hero-image" src="../images/PhishUFramework.png" alt="PhishU Framework" />
+                                <div class="article-meta mb-3">April 11, 2026 - PhishU Blog</div>
+                                <h1 class="page-header-ui-title mb-4">The Microsoft Collaboration Lure: Malicious Shared Files in the PhishU Framework</h1>
+                                <p class="page-header-ui-text mb-0">The PhishU Framework ships more real-world phishing techniques in one platform than any commercial alternative. Malicious Shared Files is the latest example: a Microsoft-hosted collaboration lure that turns SharePoint sharing into a native delivery path, with unique per-recipient content, downstream auth chaining, and training built in.</p>
+                            </div>
+                        </div>
+                        <div class="svg-border-rounded text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
+                        </div>
+                    </header>
+
+                    <section class="bg-white py-10">
+                        <div class="container px-5">
+                            <article class="article-shell">
+                                <p>Attackers have used shared files as a lure for a long time because collaboration feels routine. A user who hesitates at a normal phishing email may still click an invoice, review document, or project file when it arrives through a familiar Microsoft workflow. That is exactly why shared-file delivery belongs in a realistic phishing platform instead of being treated like a side note.</p>
+
+                                <p>Malicious Shared Files gives the PhishU Framework a Microsoft-hosted collaboration lure that lives outside the normal sender-reputation game. The complicated Microsoft-side infrastructure work is handled automatically on the back end by the Framework, and Microsoft sends the native shared-file invitation to the target. There is no operator-built sender profile to warm up, no hand-tuned phishing email to nurse through the gateway, and no separate evasion work just to get the lure in front of the target.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/SharedMalDocsEditor.png" alt="Shared File WYSIWYG editor in the PhishU Framework" />
+                                    <figcaption class="article-caption">Operators design the shared file in the Framework's WYSIWYG editor, then let the platform render a unique file for each recipient at send time.</figcaption>
+                                </figure>
+
+                                <h2>Why Shared Files Matter</h2>
+                                <p>Email is still the dominant phishing channel, but a lot of modern lures no longer stop at “click this link in a message.” Collaboration workflows now carry their own trust. Shared files, meeting invites, guest invitations, and Microsoft-hosted documents all create a context where the target is already primed to believe the interaction is legitimate.</p>
+
+                                <p>That is what makes this technique valuable. The file is the lure container. The target receives a real Microsoft file-share invitation for a Microsoft-hosted document. When they open it, they are already inside a trust context that most awareness programs still do not cover well enough.</p>
+
+                                <h2>Why This Was Harder Than It Looks</h2>
+                                <p>From the outside, it is easy to assume this should be straightforward: upload a file, share it to an outside email address, and let Microsoft handle the rest. In practice, the fully programmatic path is where things get difficult. Some of the obvious automation routes do not behave the way a clean unattended workflow needs them to.</p>
+
+                                <p>That forced the Framework down a more creative path. Some of the obvious fully programmatic approaches do not behave the way a clean unattended workflow needs them to, so the finished technique required original research and careful workarounds. The important buyer-facing point is simple: all of that complicated infrastructure handling is automated on the back end by the PhishU Framework rather than left as manual operator glue work.</p>
+
+                                <p>As far as public tooling appears to go, fully automating this path still looks rare. Awareness platforms do not do it. Public offensive workflows tend to stop at the concept or require a lot of hand-built glue. The PhishU Framework turns it into an operator workflow that can actually be used repeatedly, which is why it is reasonable to say this may be one of the only tools, white-hat or black-hat, currently automating the full path end to end.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/SharedMalDocsEmailReceived.png" alt="Native Microsoft shared-file invitation email received by the target" />
+                                    <figcaption class="article-caption">The target receives a native Microsoft shared-file invitation for a Microsoft-hosted document instead of a hand-built lure from an operator-owned sender.</figcaption>
+                                </figure>
+
+                                <h2>Designed in the Framework, Unique for Every Recipient</h2>
+                                <p>Another important difference is that the shared document is not a fixed blob that gets reused for every target. Operators design the document in the Shared File editor using the same WYSIWYG workflow used elsewhere in the product. The Framework stores the reusable document HTML and the related metadata, then renders a unique file for each recipient at send time.</p>
+
+                                <p>That means the file contents can incorporate normal placeholders, tracked links, and target-specific details without forcing the operator into manual document generation. The lure feels like a real collaboration artifact, not just a generic attachment dropped into Microsoft. That is a much better fit for realistic testing and for training afterward.</p>
+
+                                <p>The shared-file workflow also carries metadata that helps the campaign stay cohesive when the document chains into a downstream Microsoft OAuth Consent Grant or Device Code Phishing path. The current AI campaign-creation flow can pre-populate shared-file metadata for this technique, including the custom invite-body text, which makes the workflow even faster when the suggested campaign path resolves to Malicious Shared Files.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/SharedMalDocsDocument.png" alt="Opened Microsoft-hosted shared document used as the lure container" />
+                                    <figcaption class="article-caption">The opened shared document becomes the lure container itself, keeping the target inside a believable collaboration workflow before the downstream auth or landing-page action.</figcaption>
+                                </figure>
+
+                                <h2>Microsoft Sends the Invitation</h2>
+                                <p>This is the practical delivery advantage buyers will care about immediately. The shared-file invitation is not a hand-built lure from an operator-owned sender mailbox. Microsoft sends the native file-share email for the Microsoft-hosted file. That means the operator does not need to build a sender profile, warm up a sending domain, or spend time tuning a separate email body just to get the lure delivered.</p>
+
+                                <p>That does not make it identical to the trust posture of a B2B guest invitation, and it should not be described that way. But it does create a native Microsoft collaboration delivery path and a Microsoft-hosted shared-file trust context that feels much more natural than a normal sender-crafted phishing email. The target is dealing with a real Microsoft file-share workflow, not with a fake brand wrapper trying to imitate one.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/SharedMalDocsClicked.png" alt="Shared-file workflow after the target clicks through the Microsoft invitation" />
+                                    <figcaption class="article-caption">Once the target clicks through, the workflow stays inside a Microsoft-hosted collaboration context rather than dropping straight into a normal sender-crafted phishing page.</figcaption>
+                                </figure>
+
+                                <h2>Why This Matters for Defenders</h2>
+                                <p>Shared files are a social-engineering surface. That sounds obvious when stated directly, but a lot of awareness content still treats phishing as if it begins and ends with a suspicious sender and a suspicious link in a conventional email. Attackers do not think that narrowly. They use collaboration lures because users trust collaboration tools.</p>
+
+                                <p>That is why Malicious Shared Files fits the PhishU model so well. The delivery method is realistic. The downstream technique can chain into OAuth Consent Grant or Device Code Phishing when the scenario calls for it. The result can be explained in training. The report can show how a trusted file-share workflow becomes the entry point. This is exactly the kind of gap realistic phishing tests should expose.</p>
+
+                                <p>For pentest firms and MSSPs, it is also a major workflow gain. A technique that would otherwise require custom Graph logic, file hosting decisions, guest-object handling, Microsoft invitation behavior, and one-off troubleshooting becomes a repeatable part of the product. Less glue work. More time spent on the assessment itself.</p>
+
+                                <div class="card bg-light border-0 mt-5">
+                                    <div class="card-body p-4 p-lg-5">
+                                        <h2 class="h4">Want to test Microsoft-hosted shared-file lures in your environment?</h2>
+                                        <p class="mb-3">The PhishU Framework supports Malicious Shared Files delivery with SharePoint-hosted documents, Microsoft-originated invitations, unique per-recipient rendering, downstream auth chaining, reporting, and training in one workflow.</p>
+                                        <p class="mb-3">Every technique attackers use. One platform. Training built in.</p>
+                                        <a class="btn btn-teal fw-500" href="../contact-us.html">Contact Us</a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                </main>
+            </div>
+            <div id="layoutDefault_footer">
+                <footer class="footer pt-5 pb-5 mt-auto bg-dark footer-dark">
+                    <div class="container px-5">
+                        <div class="row gx-5 align-items-center">
+                            <div class="col-md-6 small">Copyright &copy; PhishU 2026</div>
+                            <div class="col-md-6 text-md-end small">
+                                <a href="https://www.linkedin.com/company/phishu">LinkedIn</a>
+                                &middot;
+                                <a href="../contact-us.html">Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="../js/site-config.js"></script>
+        <script src="../js/scripts.js?v=20260411a"></script>
+    </body>
+</html>
