@@ -26,6 +26,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://phishu.net/blogs/blog-chaining-phishing-techniques-in-the-phishu-framework.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://phishu.net/blogs/blog-how-ai-suggests-phishing-campaigns-based-on-target-infrastructure-in-the-phishu-framework.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -142,6 +147,11 @@
   </url>
   <url>
     <loc>https://phishu.net/microsoft-shared-files-delivery.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://phishu.net/multi-stage-phishing-simulation.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -267,6 +277,11 @@
   </url>
   <url>
     <loc>https://phishu.net/passkey-bypass-phishing-simulation.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://phishu.net/phishing-technique-chaining.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
