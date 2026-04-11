@@ -157,7 +157,12 @@
 
                                 <p>That distinction matters. The value here is not endpoint compromise. The value is measurement. The template records a callback event when the target runs the command, then drives conditional training and reporting based on that engagement signal. It gives defenders a way to test whether users will follow a modern social-engineering prompt that falls outside the usual email-link-and-login pattern.</p>
 
-                                <p>Because it is built into the platform, the operator does not have to hand-build the page, wire up analytics manually, or bolt on separate evidence collection afterward. The ClickFix template lives alongside the rest of the landing page workflow in the PhishU Framework.</p>
+                                 <p>Because it is built into the platform, the operator does not have to hand-build the page, wire up analytics manually, or bolt on separate evidence collection afterward. The ClickFix template lives alongside the rest of the landing page workflow in the PhishU Framework.</p>
+
+                                <h2>It Is Not Windows-Only</h2>
+                                <p>Another practical detail matters here: the ClickFix template in the PhishU Framework is not limited to a Windows-only prompt. The template detects desktop macOS user agents and swaps the interaction to a Terminal-based flow, with different on-screen instructions and a macOS-friendly command path. That means the same landing page can stay aligned with the target's platform instead of forcing obviously wrong Windows instructions onto a Mac user.</p>
+
+                                <p>That kind of adaptation is part of what makes the technique more believable. Realistic phishing tests do not just copy a single set of instructions and hope for the best. They match the environment the user is actually in. For defenders, that also matters for training: if teams want to know whether their current phishing tests and awareness material cover modern techniques, the answer should account for platform-aware variations too.</p>
 
                                 <h2>Why ClickFix Matters</h2>
                                 <p>A lot of awareness programs still focus on the same narrow user action: do not click the link, do not type the password, do not open the attachment. Those are still important, but current social engineering keeps shifting. Attackers increasingly look for ways to turn the user into the one performing the next step for them.</p>
