@@ -141,6 +141,16 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://phishu.net/microsoft-shared-files-delivery.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://phishu.net/shared-file-phishing-simulation.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://phishu.net/one-time-phishing-campaigns.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
