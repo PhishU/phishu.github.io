@@ -312,7 +312,7 @@
         }
         blogSlides.innerHTML = posts.slice(0, 6).map(post => `
             <div class="swiper-slide">
-              <a class="blog-mini-card" href="${post.href}" target="_blank" rel="noopener noreferrer">
+              <a class="blog-mini-card" href="${post.absoluteHref || post.href}" target="_blank" rel="noopener noreferrer">
                 <div class="blog-mini-card-body">
                   <div class="blog-mini-date">${post.date}</div>
                   <h3 class="blog-mini-title">${post.title}</h3>
@@ -373,7 +373,7 @@
                 <div class="row row-cols-1 row-cols-md-3 g-4">
                     ${recommendations.map(post => `
                         <div class="col">
-                            <a class="blog-mini-card h-100" href="${post.href}">
+                            <a class="blog-mini-card h-100" href="${post.absoluteHref || post.href}">
                                 <div class="blog-mini-card-body">
                                     <div class="blog-mini-date">${post.date}</div>
                                     <h3 class="blog-mini-title">${post.title}</h3>
