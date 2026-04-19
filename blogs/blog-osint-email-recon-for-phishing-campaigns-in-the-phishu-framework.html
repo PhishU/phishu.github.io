@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="PhishU explains how the Framework uses public-source discovery, paid enrichment, and direct Org Users import to turn black-box phishing engagements into usable target lists." />
+        <meta name="author" content="PhishU, LLC" />
+        <title>OSINT Email Recon for Phishing Campaigns in the PhishU Framework | PhishU Blog</title>
+        <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+        <link rel="canonical" href="https://phishu.net/blogs/blog-osint-email-recon-for-phishing-campaigns-in-the-phishu-framework.html" />
+        <link href="../css/styles.css" rel="stylesheet" />
+        <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" crossorigin="anonymous"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y2W7ZWEC7"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag("js", new Date());
+            gtag("config", "G-0Y2W7ZWEC7");
+        </script>
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://phishu.net/blogs/blog-osint-email-recon-for-phishing-campaigns-in-the-phishu-framework.html" />
+        <meta property="og:title" content="OSINT Email Recon for Phishing Campaigns in the PhishU Framework" />
+        <meta property="og:description" content="How the PhishU Framework turns public-source email discovery and paid enrichment into a directly usable target list for red teams, pentest firms, and MSSPs." />
+        <meta property="og:site_name" content="PhishU" />
+        <meta property="og:image" content="https://phishu.net/images/OSINTDomainRecon.png" />
+        <meta property="og:image:alt" content="PhishU OSINT domain discovery showing associated domain recon results" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="OSINT Email Recon for Phishing Campaigns in the PhishU Framework" />
+        <meta name="twitter:description" content="How the PhishU Framework turns OSINT email recon into a directly usable target list without a separate recon tool chain." />
+        <meta name="twitter:image" content="https://phishu.net/images/OSINTDomainRecon.png" />
+        <meta name="twitter:image:alt" content="PhishU OSINT domain discovery showing associated domain recon results" />
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "headline": "OSINT Email Recon for Phishing Campaigns in the PhishU Framework",
+          "description": "PhishU explains how the Framework uses public-source discovery, paid enrichment, and direct Org Users import to turn black-box phishing engagements into usable target lists.",
+          "image": "https://phishu.net/images/OSINTDomainRecon.png",
+          "datePublished": "2026-04-19",
+          "dateModified": "2026-04-19",
+          "author": {
+            "@type": "Organization",
+            "name": "PhishU"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "PhishU",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://phishu.net/images/logo-transparent-white-grey-small.png"
+            }
+          },
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://phishu.net/blogs/blog-osint-email-recon-for-phishing-campaigns-in-the-phishu-framework.html"
+          }
+        }
+        </script>
+        <style>
+            .article-shell {
+                max-width: 860px;
+                margin: 0 auto;
+            }
+            .article-meta {
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                font-size: 0.8rem;
+                color: #6c757d;
+            }
+            .article-image {
+                display: block;
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+                border-radius: 0.75rem;
+                box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.16);
+            }
+            .article-shell h2 {
+                margin-top: 2.75rem;
+            }
+            .article-shell p,
+            .article-shell li {
+                font-size: 1.05rem;
+                line-height: 1.8;
+            }
+            .article-caption {
+                margin-top: 0.75rem;
+                font-size: 0.95rem;
+                color: #6c757d;
+            }
+            .article-hero-image {
+                display: block;
+                width: 100%;
+                max-width: 315px;
+                margin: 0 auto 1rem;
+            }
+            .svg-border-rounded {
+                display: block;
+                line-height: 0;
+                margin-bottom: -1px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="layoutDefault">
+            <div id="layoutDefault_content">
+                <main>
+                    <nav class="navbar navbar-marketing navbar-expand-lg bg-dark navbar-dark">
+                        <div class="container px-5">
+                            <a class="navbar-brand text-white" href="/">PhishU</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i data-feather="menu"></i></button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ms-auto me-lg-4">
+                                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../blog.html">Blog</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../contact-us.html">Contact</a></li>
+                                </ul>
+                                <a class="btn fw-500 ms-lg-4 btn-teal" href="../contact-us.html">Contact Us</a>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <header class="page-header-ui page-header-ui-dark bg-gradient-primary-only">
+                        <div class="page-header-ui-content pt-8 pb-5">
+                            <div class="container px-5 article-shell">
+                                <img class="article-hero-image" src="../images/PhishUFramework.png" alt="PhishU Framework" />
+                                <div class="article-meta mb-3">April 19, 2026 - PhishU Blog</div>
+                                <h1 class="page-header-ui-title mb-4">OSINT Email Recon for Phishing Campaigns in the PhishU Framework</h1>
+                                <p class="page-header-ui-text mb-0">A realistic phishing assessment is much easier to run when the platform can help build the target list too. The PhishU Framework now includes an OSINT discovery workflow that finds associated domains, enumerates public employee addresses, and imports selected users directly into the same directory used for campaigns.</p>
+                            </div>
+                        </div>
+                        <div class="svg-border-rounded text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
+                        </div>
+                    </header>
+
+                    <section class="bg-white py-10">
+                        <div class="container px-5">
+                            <article class="article-shell">
+                                <p>Many authorized phishing engagements start with the same problem: there is no usable target list yet. The landing page can be ready. The email can be ready. The reporting and training workflow can be ready. But the operator still has to figure out who actually works at the target organization before the first campaign can go out.</p>
+
+                                <p>That gap is especially painful in red team and pentest work. A client may want a realistic black-box assessment, but may not want to hand over a full directory on day one. Open-source tooling usually leaves this part outside the platform. The operator ends up juggling spreadsheets, one-off recon scripts, separate enrichment tools, and manual imports before the phishing work even really starts.</p>
+
+                                <p>The PhishU Framework now closes that gap with built-in OSINT email reconnaissance. Under the Users section, the operator can discover associated domains, enumerate public employee addresses from multiple sources, and import selected users directly into Org Users without leaving the platform.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/OSINTDomainRecon.png" alt="PhishU OSINT domain discovery showing associated domain recon results" />
+                                    <figcaption class="article-caption">The domain-discovery step turns a company name or seed domain into a shortlist of domains likely tied to the target organization.</figcaption>
+                                </figure>
+
+                                <h2>The Workflow Starts With Associated Domains</h2>
+                                <p>The first step is not guessing email addresses. It is figuring out which domains belong to the organization in the first place. The current workflow uses a company name and/or seed domain, then checks certificate transparency data, CertSpotter, and Wikidata to surface likely associated apex domains. That gives the operator a much better starting point than assuming the target only uses one obvious domain.</p>
+
+                                <p>That detail matters in real assessments. A client might use one public corporate domain, a different mail domain, a regional domain, a holding-company domain, or several domains that never show up in a simple homepage glance. If the platform can surface those early, the rest of the discovery pass gets more useful fast.</p>
+
+                                <h2>Then the Framework Enumerates Public Employee Addresses</h2>
+                                <p>Once the operator confirms which domains belong to the organization, the Framework moves into user enumeration. The current flow uses public sources like GitHub commit metadata and certificate transparency email artifacts, then layers in paid enrichment where it improves coverage. Hunter.io is a major part of that path because it returns not just addresses, but often names, titles, and naming-pattern hints that help the operator understand how the directory is structured.</p>
+
+                                <p>The important part is that this is not just a loose recon dump. The Framework deduplicates results against users already in the org, scores confidence, shows the source of each hit, and lets the operator choose which records should move forward.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/OSINTUserRecon.png" alt="PhishU OSINT user recon showing discovered email addresses and confidence scoring" />
+                                    <figcaption class="article-caption">The user-enumeration step surfaces a usable, reviewable target list with source visibility and confidence scoring.</figcaption>
+                                </figure>
+
+                                <h2>Why the Multi-Tenant Platform Model Changes the Economics</h2>
+                                <p>This is where the hosted, centralized, multi-tenant model matters. Paid enrichment has real cost. The API integration work has real cost too. For one-off consulting engagements or open-source stacks, that cost usually gets pushed back onto the operator. They either skip the enrichment, pay for separate subscriptions, or burn time gluing tools together around the phishing platform.</p>
+
+                                <p>The PhishU Framework is in a different position. Because the platform is centrally maintained and used across multiple orgs and customers, PhishU can justify wiring paid third-party enrichment directly into the workflow instead of treating recon as a separate product category. The operator does not have to build pagination, deduplication, domain discovery, and import logic on top of a basic phishing tool. It is already there.</p>
+
+                                <p>That is a real advantage for pentest firms, MSSPs, and red teams. Margin gets better when billable time is not spent exporting CSV files from one tool just to re-import them into another. The value is not only that the data exists. The value is that the data lands directly in the place where the campaign work already happens.</p>
+
+                                <h2>Direct Import Matters More Than It Sounds</h2>
+                                <p>Recon is only useful if it becomes operational. In the PhishU Framework, the OSINT workflow does not end with a list on screen. The operator can select the discovered users and import them directly into Org Users, which is the same directory used by targeting, campaigns, follow-on workflow, and reporting.</p>
+
+                                <p>That means the handoff is immediate. There is no separate cleanup cycle. No extra spreadsheet normalization. No sidecar database. No custom import script just to make the phishing platform aware of the people that were just discovered.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/OSINTUserImport.png" alt="PhishU OSINT import showing discovered users being added into Org Users" />
+                                    <figcaption class="article-caption">The import step turns recon into something the rest of the Framework can immediately use.</figcaption>
+                                </figure>
+
+                                <h2>OSINT Complements the Existing White-Box Options</h2>
+                                <p>This does not replace the other ways the Framework builds a target directory. For white-box or customer-assisted work, PhishU still supports <a href="../cloud-directory-sync-for-phishing-campaigns.html">cloud directory sync</a> from Microsoft Entra and Google Workspace, plus straightforward CSV import when the client already has a clean user list.</p>
+
+                                <p>The difference is that the platform now covers both sides of the engagement model. If the client is comfortable sharing a directory, sync it. If they want to stay black-box longer, use OSINT discovery. If they just want to upload a list, use CSV. The important part is that all three paths feed the same downstream campaign workflow instead of forcing the operator to switch tools or rebuild the directory each time.</p>
+
+                                <h2>One Platform, Not a Recon Sidecar</h2>
+                                <p>This is the broader story. The PhishU Framework is not just trying to be the place where the email gets sent. It is the place where the assessment gets built. The target list can start there. The landing page can start there. The email can start there. The monitoring, training, and report can finish there. That is what makes the platform useful to practitioners running real phishing engagements instead of just demoing isolated features.</p>
+
+                                <p>For red teams and pentest firms, OSINT email recon makes the platform more self-contained. For MSSPs, it makes managed phishing work easier to repeat across customers. For internal security teams, it provides another option when the official directory is incomplete, stale, or not yet connected. In every case, the outcome is the same: less glue work, faster time to a realistic campaign, and fewer reasons to leave the Framework for outside tools.</p>
+
+                                <div class="card bg-light border-0 mt-5">
+                                    <div class="card-body p-4 p-lg-5">
+                                        <h2 class="h4">Want to see OSINT email recon used in an authorized phishing assessment?</h2>
+                                        <p class="mb-3">The PhishU Framework can now discover associated domains, enumerate public employee addresses, import selected users directly into Org Users, and carry that directory straight into the rest of the phishing workflow. No separate recon tool chain required.</p>
+                                        <a class="btn btn-teal fw-500" href="../contact-us.html">Contact Us</a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                </main>
+            </div>
+            <div id="layoutDefault_footer">
+                <footer class="footer pt-5 pb-5 mt-auto bg-dark footer-dark">
+                    <div class="container px-5">
+                        <div class="row gx-5 align-items-center">
+                            <div class="col-md-6 small">Copyright &copy; PhishU 2026</div>
+                            <div class="col-md-6 text-md-end small">
+                                <a href="https://www.linkedin.com/company/phishu">LinkedIn</a>
+                                &middot;
+                                <a href="../contact-us.html">Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="../js/site-config.js"></script>
+        <script src="../js/scripts.js?v=20260413a"></script>
+    </body>
+</html>
