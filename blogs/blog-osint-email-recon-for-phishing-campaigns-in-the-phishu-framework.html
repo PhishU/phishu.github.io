@@ -69,6 +69,13 @@
                 font-size: 0.8rem;
                 color: #6c757d;
             }
+            .placeholder-box {
+                border: 2px dashed #9fb3c8;
+                border-radius: 0.75rem;
+                background: #f8fafc;
+                padding: 1.25rem;
+                color: #4a5568;
+            }
             .article-image {
                 display: block;
                 width: 100%;
@@ -186,6 +193,21 @@
                                 <p>This does not replace the other ways the Framework builds a target directory. For white-box or customer-assisted work, PhishU still supports <a href="../cloud-directory-sync-for-phishing-campaigns.html">cloud directory sync</a> from Microsoft Entra and Google Workspace, plus straightforward CSV import when the client already has a clean user list.</p>
 
                                 <p>The difference is that the platform now covers both sides of the engagement model. If the client is comfortable sharing a directory, sync it. If they want to stay black-box longer, use OSINT discovery. If they just want to upload a list, use CSV. The important part is that all three paths feed the same downstream campaign workflow instead of forcing the operator to switch tools or rebuild the directory each time.</p>
+
+                                <h2>A Small Starter List Can Still Expand Fast</h2>
+                                <p>OSINT is not the only way the Framework can solve limited user coverage. Operators can also start with a small known user list and run a targeted <a href="../device-code-phishing-simulation.html">Microsoft Entra Device Code phishing</a> campaign against that initial set. When a target completes the flow, the Framework captures the delegated OAuth tokens and opens the same Token Explorer used for broader Microsoft grant workflows.</p>
+
+                                <p>If the granted access and tenant policy expose enough directory context, the Token Explorer can render a best-effort Org Chart and let the operator import newly discovered users directly back into Org Users. That gives the assessment another path from partial visibility to a much larger, more usable target list without leaving the platform.</p>
+
+                                <p>That matters because not every engagement starts fully black-box and not every client wants to hand over a full directory immediately. Sometimes the realistic starting point is just a handful of users. The Framework can still help turn that small initial foothold into a stronger follow-on campaign plan.</p>
+
+                                <figure class="my-5">
+                                    <div class="placeholder-box">
+                                        <strong>Image Placeholder 4</strong><br>
+                                        Device Code capture flowing into Token Explorer with Org Chart visible, plus the action to import newly discovered users back into Org Users.
+                                    </div>
+                                    <figcaption class="article-caption">Placeholder for the small-list expansion path: start with a few known users, capture a Device Code grant, view the Org Chart in Token Explorer, and import more users for follow-on campaigns.</figcaption>
+                                </figure>
 
                                 <h2>One Platform, Not a Recon Sidecar</h2>
                                 <p>This is the broader story. The PhishU Framework is not just trying to be the place where the email gets sent. It is the place where the assessment gets built. The target list can start there. The landing page can start there. The email can start there. The monitoring, training, and report can finish there. That is what makes the platform useful to practitioners running real phishing engagements instead of just demoing isolated features.</p>
