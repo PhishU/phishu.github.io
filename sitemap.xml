@@ -26,6 +26,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://phishu.net/blogs/blog-calendar-event-invite-phishing-in-the-phishu-framework.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://phishu.net/blogs/blog-malicious-shared-files-in-the-phishu-framework.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -72,6 +77,11 @@
   </url>
   <url>
     <loc>https://phishu.net/blogs/blog-microsoft-entra-oauth-consent-grant-phishu-framework.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://phishu.net/blogs/blog-passkeys-are-not-just-mfa-phishu-framework.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -266,7 +276,27 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://phishu.net/ai-generated-conditional-training.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://phishu.net/ai-phishing-report-generator.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://phishu.net/auto-cert-dkim-dmarc-spf-provisioning.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://phishu.net/create-custom-phishing-campaigns.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://phishu.net/doppelganger-domain-acquisition.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
