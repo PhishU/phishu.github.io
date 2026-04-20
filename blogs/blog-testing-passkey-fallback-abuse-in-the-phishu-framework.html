@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="A research-driven look at passkey fallback abuse in the PhishU Framework, from cloned-page downgrade simulation to live AiTM response rewriting that strips phishing-resistant options." />
         <meta name="author" content="PhishU, LLC" />
-        <title>Passkey Fallback Abuse: Rewriting the Auth Picker in the PhishU Framework | PhishU Blog</title>
+        <title>Sidestepping FIDO2: How Weak Fallbacks Undermine Phishing-Resistant MFA | PhishU Blog</title>
         <meta name="robots" content="noindex,nofollow,noarchive" />
         <link rel="canonical" href="https://phishu.net/blogs/blog-testing-passkey-fallback-abuse-in-the-phishu-framework.html" />
         <link href="../css/styles.css" rel="stylesheet" />
@@ -21,13 +21,13 @@
         </script>
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://phishu.net/blogs/blog-testing-passkey-fallback-abuse-in-the-phishu-framework.html" />
-        <meta property="og:title" content="Passkey Fallback Abuse: Rewriting the Auth Picker in the PhishU Framework" />
+        <meta property="og:title" content="Sidestepping FIDO2: How Weak Fallbacks Undermine Phishing-Resistant MFA" />
         <meta property="og:description" content="How the Framework moved from cloned-page downgrade simulation to live AiTM response rewriting that strips passkeys and steers victims into weaker fallbacks." />
         <meta property="og:site_name" content="PhishU" />
         <meta property="og:image" content="https://phishu.net/images/PasskeyEditor.png" />
         <meta property="og:image:alt" content="PhishU Framework landing page editor showing passkey bypass controls" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Passkey Fallback Abuse: Rewriting the Auth Picker in the PhishU Framework" />
+        <meta name="twitter:title" content="Sidestepping FIDO2: How Weak Fallbacks Undermine Phishing-Resistant MFA" />
         <meta name="twitter:description" content="How the Framework moved from cloned-page downgrade simulation to live AiTM response rewriting that strips passkeys and steers victims into weaker fallbacks." />
         <meta name="twitter:image" content="https://phishu.net/images/PasskeyEditor.png" />
         <meta name="twitter:image:alt" content="PhishU Framework landing page editor showing passkey bypass controls" />
@@ -35,7 +35,7 @@
         {
           "@context": "https://schema.org",
           "@type": "BlogPosting",
-          "headline": "Passkey Fallback Abuse: Rewriting the Auth Picker in the PhishU Framework",
+          "headline": "Sidestepping FIDO2: How Weak Fallbacks Undermine Phishing-Resistant MFA",
           "description": "A research-driven look at passkey fallback abuse in the PhishU Framework, from cloned-page downgrade simulation to live AiTM response rewriting that strips phishing-resistant options.",
           "datePublished": "2026-04-20",
           "dateModified": "2026-04-20",
@@ -166,7 +166,7 @@
                             <div class="container px-5 article-shell">
                                 <img class="article-hero-image" src="../images/PhishUFramework.png" alt="PhishU Framework" />
                                 <div class="article-meta mb-3">April 20, 2026 - PhishU Blog</div>
-                                <h1 class="page-header-ui-title mb-4">Passkey Fallback Abuse: Rewriting the Auth Picker in the PhishU Framework</h1>
+                                <h1 class="page-header-ui-title mb-4">Sidestepping FIDO2: How Weak Fallbacks Undermine Phishing-Resistant MFA</h1>
                                 <p class="page-header-ui-text mb-0">Passkeys are still the right answer. The interesting research question is what happens when an adversary in the middle stops being passive, rewrites the real authentication picker in flight, and turns fallback risk into something actively steerable.</p>
                             </div>
                         </div>
@@ -183,6 +183,8 @@
                                 <p>Passkeys and hardware-backed WebAuthn flows are still a real phishing-resistant improvement. They resist the classic origin-swapped phishing path that still works against passwords, push prompts, SMS codes, and TOTP apps. The interesting question is not whether passkeys work. It is whether a passkey-enabled environment is still operationally vulnerable when weaker fallback and recovery methods remain available beside them.</p>
 
                                 <p>What the Framework ended up making visible is that there are really two different downgrade stories. One is a cloned-page technique that tests whether a user can be nudged away from the phishing-resistant path. The other is a live AiTM technique that rewrites the real authentication-method picker itself. That second path is where the work stopped feeling like a user-experience trick and started feeling like a genuine shift in what an adversary in the middle can do.</p>
+
+                                <p>I already wrote up the first technique in <a href="blog-understanding-what-makes-passkeys-great-and-how-to-bypass-in-the-phishu-framework.html">Understanding What Makes Passkeys Great and How to Bypass in the PhishU Framework</a>. That earlier post focused on the cloned-page downgrade path. This one is about what came after: realizing the AiTM proxy did not just let me relay traffic and capture sessions, but actively rewrite the server's picker before the victim ever saw it.</p>
 
                                 <h2>Cloned Page Types: Simulating the Human Downgrade Path</h2>
                                 <p>On cloned page types, the Passkey Bypass overlay is not pretending to break passkeys cryptographically. It is testing whether a target can be steered away from the phishing-resistant ceremony and into a weaker fallback path that the operator is actually able to phish. The overlay presents the familiar passkey moment, simulates the flow failing, and then falls back into a conventional username-and-password path the target may already expect from older sign-in behavior.</p>
