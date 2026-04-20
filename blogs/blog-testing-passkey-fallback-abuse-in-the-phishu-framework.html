@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="PhishU explains how the Framework tests passkey fallback abuse across cloned landing pages and live AiTM proxy flows, including response-side stripping of phishing-resistant options." />
+        <meta name="author" content="PhishU, LLC" />
+        <title>Testing Passkey Fallback Abuse in the PhishU Framework | PhishU Blog</title>
+        <meta name="robots" content="noindex,nofollow,noarchive" />
+        <link rel="canonical" href="https://phishu.net/blogs/blog-testing-passkey-fallback-abuse-in-the-phishu-framework.html" />
+        <link href="../css/styles.css" rel="stylesheet" />
+        <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" crossorigin="anonymous"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y2W7ZWEC7"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag("js", new Date());
+            gtag("config", "G-0Y2W7ZWEC7");
+        </script>
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://phishu.net/blogs/blog-testing-passkey-fallback-abuse-in-the-phishu-framework.html" />
+        <meta property="og:title" content="Testing Passkey Fallback Abuse in the PhishU Framework" />
+        <meta property="og:description" content="How the Framework tests passkey fallback abuse across cloned landing pages and live AiTM proxy flows without claiming to break passkeys themselves." />
+        <meta property="og:site_name" content="PhishU" />
+        <meta property="og:image" content="https://phishu.net/images/PasskeyEditor.png" />
+        <meta property="og:image:alt" content="PhishU Framework landing page editor showing passkey bypass controls" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Testing Passkey Fallback Abuse in the PhishU Framework" />
+        <meta name="twitter:description" content="How the Framework tests passkey fallback abuse from cloned pages through live AiTM response rewriting." />
+        <meta name="twitter:image" content="https://phishu.net/images/PasskeyEditor.png" />
+        <meta name="twitter:image:alt" content="PhishU Framework landing page editor showing passkey bypass controls" />
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "headline": "Testing Passkey Fallback Abuse in the PhishU Framework",
+          "description": "PhishU explains how the Framework tests passkey fallback abuse across cloned landing pages and live AiTM proxy flows, including response-side stripping of phishing-resistant options.",
+          "datePublished": "2026-04-20",
+          "dateModified": "2026-04-20",
+          "author": {
+            "@type": "Organization",
+            "name": "PhishU"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "PhishU",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://phishu.net/images/logo-transparent-white-grey-small.png"
+            }
+          },
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://phishu.net/blogs/blog-testing-passkey-fallback-abuse-in-the-phishu-framework.html"
+          }
+        }
+        </script>
+        <style>
+            .article-shell {
+                max-width: 860px;
+                margin: 0 auto;
+            }
+            .article-meta {
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                font-size: 0.8rem;
+                color: #6c757d;
+            }
+            .article-shell h2 {
+                margin-top: 2.75rem;
+            }
+            .article-shell p,
+            .article-shell li {
+                font-size: 1.05rem;
+                line-height: 1.8;
+            }
+            .article-image {
+                display: block;
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+                border-radius: 0.75rem;
+                box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.16);
+            }
+            .article-media {
+                display: block;
+                width: 100%;
+                max-width: 680px;
+                height: auto;
+                margin: 0 auto;
+                border-radius: 0.75rem;
+                box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.16);
+                background: #000;
+            }
+            .article-caption {
+                margin-top: 0.75rem;
+                font-size: 0.95rem;
+                color: #6c757d;
+            }
+            .article-hero-image {
+                display: block;
+                width: 100%;
+                max-width: 315px;
+                margin: 0 auto 1rem;
+            }
+            .compare-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                gap: 1.5rem;
+            }
+            .placeholder-box {
+                border: 2px dashed #9fb3c8;
+                border-radius: 0.75rem;
+                background: #f8fafc;
+                padding: 1.25rem;
+                color: #4a5568;
+                min-height: 240px;
+            }
+            .placeholder-box strong {
+                display: block;
+                margin-bottom: 0.5rem;
+            }
+            .svg-border-rounded {
+                display: block;
+                line-height: 0;
+                margin-bottom: -1px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="layoutDefault">
+            <div id="layoutDefault_content">
+                <main>
+                    <nav class="navbar navbar-marketing navbar-expand-lg bg-dark navbar-dark">
+                        <div class="container px-5">
+                            <a class="navbar-brand text-white" href="/">PhishU</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="#navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i data-feather="menu"></i></button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ms-auto me-lg-4">
+                                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../blog.html">Blog</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../contact-us.html">Contact</a></li>
+                                </ul>
+                                <a class="btn fw-500 ms-lg-4 btn-teal" href="../contact-us.html">Contact Us</a>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <header class="page-header-ui page-header-ui-dark bg-gradient-primary-only">
+                        <div class="page-header-ui-content pt-8 pb-5">
+                            <div class="container px-5 article-shell">
+                                <img class="article-hero-image" src="../images/PhishUFramework.png" alt="PhishU Framework" />
+                                <div class="article-meta mb-3">April 20, 2026 - PhishU Blog</div>
+                                <h1 class="page-header-ui-title mb-4">Testing Passkey Fallback Abuse in the PhishU Framework</h1>
+                                <p class="page-header-ui-text mb-0">Passkeys are a real phishing-resistant improvement. That does not mean every passkey-enabled environment is actually phishing-resistant in practice. The risk often survives in the fallback path, and that is what a realistic assessment should test.</p>
+                            </div>
+                        </div>
+                        <div class="svg-border-rounded text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
+                        </div>
+                    </header>
+
+                    <section class="bg-white py-10">
+                        <div class="container px-5">
+                            <article class="article-shell">
+                                <p>There is a bad habit in a lot of security marketing to flatten every improvement into the same story: attackers always find a way, so every defense is just one more speed bump. That is not the right way to talk about passkeys. Passkeys and hardware-backed WebAuthn flows are a real step forward because they resist the classic origin-swapped phishing path that still works against passwords, push prompts, SMS codes, and TOTP apps.</p>
+
+                                <p>But that still leaves an important assessment question. If an environment enables passkeys while continuing to offer weaker recovery or fallback authentication methods, what actually happens when the target never completes the phishing-resistant path? That is where the PhishU Framework can test the reality instead of the policy brochure.</p>
+
+                                <p>The Framework now covers that question from two different angles. One lives on cloned landing page types. The other lives on Transparent Proxy AiTM page types. Together they tell a more honest story about what "phishing-resistant by default" really means in practice.</p>
+
+                                <h2>Cloned Page Types: Simulating the Human Downgrade Path</h2>
+                                <p>On cloned page types, the Passkey Bypass overlay is not pretending to break passkeys cryptographically. It is testing whether a target can be steered away from the phishing-resistant ceremony and into a weaker fallback path that the operator is actually able to phish. The overlay presents the familiar passkey moment, simulates the flow failing, and then falls back into a conventional username-and-password path the target may already expect from older sign-in behavior.</p>
+
+                                <p>That matters because a lot of organizations are mid-transition. Users have heard "use your passkey," but they have also spent years learning that login friction often ends with "try another way." If the assessment can reproduce that decision point realistically, it can measure whether the target treats the weaker route as suspicious or just as another normal sign-in detour.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-media" src="../images/PasskeyRender.webp" alt="Animated passkey bypass render showing a cloned-page fallback login sequence" />
+                                    <figcaption class="article-caption">On cloned page types, the passkey bypass overlay tests whether a target will abandon the phishing-resistant path and continue into a phishable fallback flow.</figcaption>
+                                </figure>
+
+                                <p>That is a useful result whether the phish works or not. If the target refuses the downgrade and the assessment dies there, the organization has evidence that its passkey deployment and user expectations are doing real work. If the target continues into the fallback route, the team gets a concrete training and remediation story: the issue was not the passkey itself, but the surrounding workflow and the fallback logic that stayed available.</p>
+
+                                <h2>AiTM Proxy Page Types: Modifying the Real Picker Before the Victim Sees It</h2>
+                                <p>The second path is more interesting because it moves out of simulation and into response shaping on a live authentication flow. On Transparent Proxy AiTM page types, the Framework can inspect the upstream identity provider response, identify the phishing-resistant options in the authentication-method picker, and strip them before the modified page is forwarded to the victim.</p>
+
+                                <p>That changes the user experience in a very important way. Instead of asking whether the user will give up on passkeys after a cloned-page failure prompt, the test asks what happens when the user never even sees the passkey option in the real picker they were about to interact with. If all that remains are weaker factors like push, TOTP, SMS, or a password-backed fallback, then the operational question becomes which phishable path the victim chooses next.</p>
+
+                                <figure class="my-5">
+                                    <div class="compare-grid">
+                                        <div>
+                                            <div class="placeholder-box">
+                                                <strong>Placeholder Image A</strong>
+                                                Intercepted Google authentication-method picker response as originally rendered, with the passkey or security-key option still visible to the user.
+                                            </div>
+                                            <div class="article-caption">Original picker state before response-side manipulation.</div>
+                                        </div>
+                                        <div>
+                                            <div class="placeholder-box">
+                                                <strong>Placeholder Image B</strong>
+                                                Intercepted Google authentication-method picker response after passkey and security-key options have been stripped, leaving only weaker fallback factors visible.
+                                            </div>
+                                            <div class="article-caption">Modified picker state after phishing-resistant options are removed.</div>
+                                        </div>
+                                    </div>
+                                    <figcaption class="article-caption">These placeholders are for the side-by-side comparison that shows the real difference in operator leverage: not breaking passkeys, but changing which options the victim is allowed to choose from in the live flow.</figcaption>
+                                </figure>
+
+                                <p>That distinction is why the technique is worth understanding. The point is not that FIDO2 is broken. The point is that many organizations are still relying on a menu of authentication options where only some of them are phishing-resistant. If an attacker can influence the menu itself, the weakest surviving factor becomes the real security boundary.</p>
+
+                                <h2>Taking It Further: Let the Framework Choose the Fallback We Want</h2>
+                                <p>The obvious next step is not just stripping phishing-resistant methods. It is steering the victim into the ordered fallback path the operator actually wants to test. In practice, not every phishable method is equally useful. Some operators may prefer push because it preserves the familiar session-hijack story. Others may want TOTP, SMS, or even a password-backed route depending on the target environment and the objective of the engagement.</p>
+
+                                <p>That opens the door to a stronger control model inside the Framework: define the preferred fallback order once for the AiTM page type, then let the proxy shape the picker accordingly. If the operator preference is push first, then TOTP, then SMS, the Framework could strip everything above that priority line and funnel the user toward the first still-available phishable method. If the target tenant does not offer that method, the flow can degrade cleanly to the next preferred option instead of leaving the outcome entirely up to the victim.</p>
+
+                                <p>That is interesting from both the offensive and defensive side. Offensively, it lets the operator test the exact fallback path most relevant to the engagement instead of hoping the victim clicks the right button. Defensively, it makes the lesson much harder to dismiss because the resulting report can show that the problem was not generic "MFA fatigue" or a random victim decision. The problem was that the environment still exposed a phishable recovery hierarchy that could be manipulated toward a specific outcome.</p>
+
+                                <h2>The Honest Limits Still Matter</h2>
+                                <p>This kind of testing is only useful if it stays honest. If the tenant truly enforces phishing-resistant authentication server-side, the downgrade should fail. If a user is genuinely passkey-only with no weaker method registered, the phish should fail. If stronger policy blocks the chosen fallback after the picker is manipulated, that is not a disappointing result. That is evidence that the organization's controls are doing what they were supposed to do.</p>
+
+                                <p>That is why the right message is not "passkeys are useless." The right message is the opposite. Passkeys are one of the best improvements defenders can deploy. What needs scrutiny is the surrounding recovery, compatibility, and transition logic that can quietly reintroduce the older risk path even when passkeys are technically available.</p>
+
+                                <h2>Why This Belongs in the Same Framework</h2>
+                                <p>This is exactly the kind of problem that gets messy when it is split across too many tools. One system hosts the landing pages. Another does the proxying. Another captures the session. Another tracks the training outcome. Another writes the report. The value of the PhishU Framework is that the whole assessment can stay in one place even as the technique shifts from a cloned-page downgrade simulation to a live proxy-based fallback-manipulation workflow.</p>
+
+                                <p>That makes the outcome more useful for red teams, pentest firms, and defenders alike. The result is not just that a target clicked something. The result is a more precise answer to the question organizations actually care about: when passkeys are available but weak fallbacks still exist, which security boundary really matters in practice?</p>
+
+                                <div class="card bg-light border-0 mt-5">
+                                    <div class="card-body p-4 p-lg-5">
+                                        <h2 class="h4">Want to test where passkeys really hold and where fallback abuse still survives?</h2>
+                                        <p class="mb-3">The PhishU Framework can model the downgrade story from both sides: cloned-page passkey bypass overlays for user-decision testing and AiTM proxy shaping for live fallback-path analysis.</p>
+                                        <a class="btn btn-teal fw-500" href="../contact-us.html">Contact Us</a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                </main>
+            </div>
+            <div id="layoutDefault_footer">
+                <footer class="footer pt-5 pb-5 mt-auto bg-dark footer-dark">
+                    <div class="container px-5">
+                        <div class="row gx-5 align-items-center">
+                            <div class="col-md-6 small">Copyright &copy; PhishU 2026</div>
+                            <div class="col-md-6 text-md-end small">
+                                <a href="https://www.linkedin.com/company/phishu">LinkedIn</a>
+                                &middot;
+                                <a href="../contact-us.html">Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="../js/site-config.js"></script>
+        <script src="../js/scripts.js?v=20260413a"></script>
+    </body>
+</html>
