@@ -110,17 +110,13 @@
                 grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
                 gap: 1.5rem;
             }
-            .placeholder-box {
-                border: 2px dashed #9fb3c8;
-                border-radius: 0.75rem;
-                background: #f8fafc;
-                padding: 1.25rem;
-                color: #4a5568;
-                min-height: 240px;
-            }
-            .placeholder-box strong {
+            .compare-image {
                 display: block;
-                margin-bottom: 0.5rem;
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+                border-radius: 0.75rem;
+                box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.16);
             }
             .svg-border-rounded {
                 display: block;
@@ -191,21 +187,15 @@
                                 <figure class="my-5">
                                     <div class="compare-grid">
                                         <div>
-                                            <div class="placeholder-box">
-                                                <strong>Placeholder Image A</strong>
-                                                Intercepted Google authentication-method picker response as originally rendered, with the passkey or security-key option still visible to the user.
-                                            </div>
+                                            <img class="compare-image" src="../images/PasskeyBypassAiTMNormalResponse.png" alt="Google authentication-method picker with passkey and security-key options still visible" />
                                             <div class="article-caption">Original picker state before response-side manipulation.</div>
                                         </div>
                                         <div>
-                                            <div class="placeholder-box">
-                                                <strong>Placeholder Image B</strong>
-                                                Intercepted Google authentication-method picker response after passkey and security-key options have been stripped, leaving only weaker fallback factors visible.
-                                            </div>
+                                            <img class="compare-image" src="../images/PasskeyBypassAiTMStrippedResponse.png" alt="Google authentication-method picker after passkey and security-key options have been stripped" />
                                             <div class="article-caption">Modified picker state after phishing-resistant options are removed.</div>
                                         </div>
                                     </div>
-                                    <figcaption class="article-caption">These placeholders are for the side-by-side comparison that shows the real difference in operator leverage: not breaking passkeys, but changing which options the victim is allowed to choose from in the live flow.</figcaption>
+                                    <figcaption class="article-caption">This side-by-side comparison shows the real difference in operator leverage: not breaking passkeys, but changing which options the victim is allowed to choose from in the live flow.</figcaption>
                                 </figure>
 
                                 <p>That distinction is why the technique is worth understanding. The point is not that FIDO2 is broken. The point is that many organizations are still relying on a menu of authentication options where only some of them are phishing-resistant. If an attacker can influence the menu itself, the weakest surviving factor becomes the real security boundary.</p>
