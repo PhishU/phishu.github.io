@@ -4,9 +4,9 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="PhishU explains how the Framework tests passkey fallback abuse across cloned landing pages and live AiTM proxy flows, including response-side stripping of phishing-resistant options." />
+        <meta name="description" content="A research-driven look at passkey fallback abuse in the PhishU Framework, from cloned-page downgrade simulation to live AiTM response rewriting that strips phishing-resistant options." />
         <meta name="author" content="PhishU, LLC" />
-        <title>Testing Passkey Fallback Abuse in the PhishU Framework | PhishU Blog</title>
+        <title>Passkey Fallback Abuse: Rewriting the Auth Picker in the PhishU Framework | PhishU Blog</title>
         <meta name="robots" content="noindex,nofollow,noarchive" />
         <link rel="canonical" href="https://phishu.net/blogs/blog-testing-passkey-fallback-abuse-in-the-phishu-framework.html" />
         <link href="../css/styles.css" rel="stylesheet" />
@@ -21,22 +21,22 @@
         </script>
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://phishu.net/blogs/blog-testing-passkey-fallback-abuse-in-the-phishu-framework.html" />
-        <meta property="og:title" content="Testing Passkey Fallback Abuse in the PhishU Framework" />
-        <meta property="og:description" content="How the Framework tests passkey fallback abuse across cloned landing pages and live AiTM proxy flows without claiming to break passkeys themselves." />
+        <meta property="og:title" content="Passkey Fallback Abuse: Rewriting the Auth Picker in the PhishU Framework" />
+        <meta property="og:description" content="How the Framework moved from cloned-page downgrade simulation to live AiTM response rewriting that strips passkeys and steers victims into weaker fallbacks." />
         <meta property="og:site_name" content="PhishU" />
         <meta property="og:image" content="https://phishu.net/images/PasskeyEditor.png" />
         <meta property="og:image:alt" content="PhishU Framework landing page editor showing passkey bypass controls" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Testing Passkey Fallback Abuse in the PhishU Framework" />
-        <meta name="twitter:description" content="How the Framework tests passkey fallback abuse from cloned pages through live AiTM response rewriting." />
+        <meta name="twitter:title" content="Passkey Fallback Abuse: Rewriting the Auth Picker in the PhishU Framework" />
+        <meta name="twitter:description" content="How the Framework moved from cloned-page downgrade simulation to live AiTM response rewriting that strips passkeys and steers victims into weaker fallbacks." />
         <meta name="twitter:image" content="https://phishu.net/images/PasskeyEditor.png" />
         <meta name="twitter:image:alt" content="PhishU Framework landing page editor showing passkey bypass controls" />
         <script type="application/ld+json">
         {
           "@context": "https://schema.org",
           "@type": "BlogPosting",
-          "headline": "Testing Passkey Fallback Abuse in the PhishU Framework",
-          "description": "PhishU explains how the Framework tests passkey fallback abuse across cloned landing pages and live AiTM proxy flows, including response-side stripping of phishing-resistant options.",
+          "headline": "Passkey Fallback Abuse: Rewriting the Auth Picker in the PhishU Framework",
+          "description": "A research-driven look at passkey fallback abuse in the PhishU Framework, from cloned-page downgrade simulation to live AiTM response rewriting that strips phishing-resistant options.",
           "datePublished": "2026-04-20",
           "dateModified": "2026-04-20",
           "author": {
@@ -105,9 +105,16 @@
                 max-width: 315px;
                 margin: 0 auto 1rem;
             }
+            .compare-figure {
+                width: min(1280px, calc(100vw - 3rem));
+                margin: 3rem auto;
+                position: relative;
+                left: 50%;
+                transform: translateX(-50%);
+            }
             .compare-grid {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                grid-template-columns: repeat(2, minmax(0, 1fr));
                 gap: 1.5rem;
             }
             .compare-image {
@@ -122,6 +129,16 @@
                 display: block;
                 line-height: 0;
                 margin-bottom: -1px;
+            }
+            @media (max-width: 991.98px) {
+                .compare-figure {
+                    width: 100%;
+                    left: auto;
+                    transform: none;
+                }
+                .compare-grid {
+                    grid-template-columns: 1fr;
+                }
             }
         </style>
     </head>
@@ -149,8 +166,8 @@
                             <div class="container px-5 article-shell">
                                 <img class="article-hero-image" src="../images/PhishUFramework.png" alt="PhishU Framework" />
                                 <div class="article-meta mb-3">April 20, 2026 - PhishU Blog</div>
-                                <h1 class="page-header-ui-title mb-4">Testing Passkey Fallback Abuse in the PhishU Framework</h1>
-                                <p class="page-header-ui-text mb-0">Passkeys are a real phishing-resistant improvement. That does not mean every passkey-enabled environment is actually phishing-resistant in practice. The risk often survives in the fallback path, and that is what a realistic assessment should test.</p>
+                                <h1 class="page-header-ui-title mb-4">Passkey Fallback Abuse: Rewriting the Auth Picker in the PhishU Framework</h1>
+                                <p class="page-header-ui-text mb-0">Passkeys are still the right answer. The interesting research question is what happens when an adversary in the middle stops being passive, rewrites the real authentication picker in flight, and turns fallback risk into something actively steerable.</p>
                             </div>
                         </div>
                         <div class="svg-border-rounded text-white">
@@ -161,11 +178,11 @@
                     <section class="bg-white py-10">
                         <div class="container px-5">
                             <article class="article-shell">
-                                <p>There is a bad habit in a lot of security marketing to flatten every improvement into the same story: attackers always find a way, so every defense is just one more speed bump. That is not the right way to talk about passkeys. Passkeys and hardware-backed WebAuthn flows are a real step forward because they resist the classic origin-swapped phishing path that still works against passwords, push prompts, SMS codes, and TOTP apps.</p>
+                                <p>I have written and talked for years about the idea that authentication is only as strong as its weakest fallback method. That advice is still true. What changed here was realizing how much more aggressive that problem becomes when the attacker is not merely waiting for a user to choose a weak option, but is sitting in the middle of the flow with the ability to edit what the user is allowed to choose from at all.</p>
 
-                                <p>But that still leaves an important assessment question. If an environment enables passkeys while continuing to offer weaker recovery or fallback authentication methods, what actually happens when the target never completes the phishing-resistant path? That is where the PhishU Framework can test the reality instead of the policy brochure.</p>
+                                <p>Passkeys and hardware-backed WebAuthn flows are still a real phishing-resistant improvement. They resist the classic origin-swapped phishing path that still works against passwords, push prompts, SMS codes, and TOTP apps. The interesting question is not whether passkeys work. It is whether a passkey-enabled environment is still operationally vulnerable when weaker fallback and recovery methods remain available beside them.</p>
 
-                                <p>The Framework now covers that question from two different angles. One lives on cloned landing page types. The other lives on Transparent Proxy AiTM page types. Together they tell a more honest story about what "phishing-resistant by default" really means in practice.</p>
+                                <p>What the Framework ended up making visible is that there are really two different downgrade stories. One is a cloned-page technique that tests whether a user can be nudged away from the phishing-resistant path. The other is a live AiTM technique that rewrites the real authentication-method picker itself. That second path is where the work stopped feeling like a user-experience trick and started feeling like a genuine shift in what an adversary in the middle can do.</p>
 
                                 <h2>Cloned Page Types: Simulating the Human Downgrade Path</h2>
                                 <p>On cloned page types, the Passkey Bypass overlay is not pretending to break passkeys cryptographically. It is testing whether a target can be steered away from the phishing-resistant ceremony and into a weaker fallback path that the operator is actually able to phish. The overlay presents the familiar passkey moment, simulates the flow failing, and then falls back into a conventional username-and-password path the target may already expect from older sign-in behavior.</p>
@@ -179,12 +196,12 @@
 
                                 <p>That is a useful result whether the phish works or not. If the target refuses the downgrade and the assessment dies there, the organization has evidence that its passkey deployment and user expectations are doing real work. If the target continues into the fallback route, the team gets a concrete training and remediation story: the issue was not the passkey itself, but the surrounding workflow and the fallback logic that stayed available.</p>
 
-                                <h2>AiTM Proxy Page Types: Modifying the Real Picker Before the Victim Sees It</h2>
+                                <h2>AiTM Proxy Page Types: When the Proxy Stops Being Passive</h2>
                                 <p>The second path is where the research became much more interesting, because it moves out of simulation and into response shaping on a live authentication flow. On Transparent Proxy AiTM page types, the Framework can inspect the upstream identity provider response, identify the phishing-resistant options in the authentication-method picker, and strip them before the modified page is forwarded to the victim.</p>
 
                                 <p>That changes the user experience in a very important way. Instead of asking whether the user will give up on passkeys after a cloned-page failure prompt, the test asks what happens when the user never even sees the passkey option in the real picker they were about to interact with. If all that remains are weaker factors like push, TOTP, SMS, or a password-backed fallback, then the operational question becomes which phishable path the victim chooses next.</p>
 
-                                <figure class="my-5">
+                                <figure class="compare-figure">
                                     <div class="compare-grid">
                                         <div>
                                             <img class="compare-image" src="../images/PasskeyBypassAiTMNormalResponse.png" alt="Google authentication-method picker with passkey and security-key options still visible" />
@@ -200,11 +217,11 @@
 
                                 <p>That distinction is why the technique is worth understanding. The point is not that FIDO2 is broken. The point is that many organizations are still relying on a menu of authentication options where only some of them are phishing-resistant. If an attacker can influence the menu itself, the weakest surviving factor becomes the real security boundary.</p>
 
-                                <p>I have written and talked for years about the idea that authentication is only as strong as its weakest fallback method. This is another take on that same advice, but it is more than just a reminder that fallback risk exists. The real breakthrough here was realizing that an AiTM proxy is not limited to sniffing session cookies and relaying traffic. If you are already in the middle, you can actively modify the server response in flight and change which authentication options the victim is allowed to see.</p>
+                                <p>The breakthrough here was realizing that an AiTM proxy is not limited to sniffing session cookies and relaying traffic. If you are already in the middle, you can actively modify the server response in flight and change which authentication options the victim is allowed to see. That is a much stronger observation than the familiar fallback warning, because it means the attacker is not just exploiting a weak branch in the tree. The attacker is pruning the tree in real time.</p>
 
                                 <p>That was the eureka moment. The Framework did not just have to wait and hope the target clicked a weaker method on their own. It could remove the passkey option entirely from the real picker and later even prefer or pre-select a weaker method on the victim's behalf. That takes the idea from generic "fallbacks matter" guidance into something much more operational, because the attacker is no longer just exploiting the existence of weak methods. The attacker is shaping the victim's path toward a specific one.</p>
 
-                                <h2>Taking It Further: Let the Framework Choose the Fallback We Want</h2>
+                                <h2>From Stripping to Steering</h2>
                                 <p>Once that clicked, the next idea was not just stripping phishing-resistant methods. It was steering the victim into the ordered fallback path the operator actually wants to test. In practice, not every phishable method is equally useful. Some operators may prefer push because it preserves the familiar session-hijack story. Others may want TOTP, SMS, or even a password-backed route depending on the target environment and the objective of the engagement.</p>
 
                                 <p>That opens the door to a stronger control model inside the Framework: define the preferred fallback order once for the AiTM page type, then let the proxy shape the picker accordingly. If the operator preference is push first, then TOTP, then SMS, the Framework could strip everything above that priority line and funnel the user toward the first still-available phishable method. If the target tenant does not offer that method, the flow can degrade cleanly to the next preferred option instead of leaving the outcome entirely up to the victim.</p>
@@ -218,16 +235,15 @@
 
                                 <p>That is why the right message is not "passkeys are useless." The right message is the opposite. Passkeys are one of the best improvements defenders can deploy. What needs scrutiny is the surrounding recovery, compatibility, and transition logic that can quietly reintroduce the older risk path even when passkeys are technically available.</p>
 
-                                <h2>Why This Belongs in the Same Framework</h2>
+                                <h2>Why This Changes the Assessment Conversation</h2>
                                 <p>This is exactly the kind of problem that gets messy when it is split across too many tools. One system hosts the landing pages. Another does the proxying. Another captures the session. Another tracks the training outcome. Another writes the report. The value of the PhishU Framework is that the whole assessment can stay in one place even as the technique shifts from a cloned-page downgrade simulation to a live proxy-based fallback-manipulation workflow.</p>
 
                                 <p>That makes the outcome more useful for red teams, pentest firms, and defenders alike. The result is not just that a target clicked something. The result is a more precise answer to the question organizations actually care about: when passkeys are available but weak fallbacks still exist, which security boundary really matters in practice?</p>
 
                                 <div class="card bg-light border-0 mt-5">
                                     <div class="card-body p-4 p-lg-5">
-                                        <h2 class="h4">Want to test where passkeys really hold and where fallback abuse still survives?</h2>
-                                        <p class="mb-3">The PhishU Framework can model the downgrade story from both sides: cloned-page passkey bypass overlays for user-decision testing and AiTM proxy shaping for live fallback-path analysis.</p>
-                                        <a class="btn btn-teal fw-500" href="../contact-us.html">Contact Us</a>
+                                        <h2 class="h4">The Defensive Takeaway</h2>
+                                        <p class="mb-0">Passkeys are still worth deploying aggressively. The lesson here is not that phishing-resistant MFA failed. The lesson is that fallback design, recovery design, and authentication-method selection logic matter more than many organizations realize, especially once an attacker in the middle can start rewriting the ceremony itself.</p>
                                     </div>
                                 </div>
                             </article>
