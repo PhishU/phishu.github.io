@@ -4,9 +4,9 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="PhishU explains how the Framework detects browser-security extensions, protects phishing domains from client-side reporting, captures analytics, and social-engineers around those controls with Incognito steering when appropriate." />
+        <meta name="description" content="Anti-phishing controls are moving into the browser itself. PhishU explains how the Framework detects browser-security extensions, protects phishing domains from client-side reporting, captures analytics, and social-engineers around those controls with Incognito steering when appropriate." />
         <meta name="author" content="PhishU, LLC" />
-        <title>Social-Engineering Past Browser-Security Extensions in the PhishU Framework | PhishU Blog</title>
+        <title>When Anti-Phishing Moves Into the Browser: Social-Engineering Past Browser-Security Extensions in the PhishU Framework | PhishU Blog</title>
         <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
         <link rel="canonical" href="https://phishu.net/blogs/blog-social-engineering-past-browser-security-extensions-in-the-phishu-framework.html" />
         <link href="../css/styles.css" rel="stylesheet" />
@@ -21,13 +21,13 @@
         </script>
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://phishu.net/blogs/blog-social-engineering-past-browser-security-extensions-in-the-phishu-framework.html" />
-        <meta property="og:title" content="Social-Engineering Past Browser-Security Extensions in the PhishU Framework" />
-        <meta property="og:description" content="How the Framework detects browser-security extensions, protects domains from client-side reporting, captures analytics, and social-engineers around those controls with Incognito steering." />
+        <meta property="og:title" content="When Anti-Phishing Moves Into the Browser: Social-Engineering Past Browser-Security Extensions in the PhishU Framework" />
+        <meta property="og:description" content="Anti-phishing controls are moving into the browser itself. Here is how the Framework detects browser-security extensions, protects domains from client-side reporting, captures analytics, and social-engineers around those controls with Incognito steering." />
         <meta property="og:site_name" content="PhishU" />
         <meta property="og:image" content="https://phishu.net/images/PhishUFramework.png" />
         <meta property="og:image:alt" content="PhishU Framework" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Social-Engineering Past Browser-Security Extensions in the PhishU Framework" />
+        <meta name="twitter:title" content="When Anti-Phishing Moves Into the Browser: Social-Engineering Past Browser-Security Extensions in the PhishU Framework" />
         <meta name="twitter:description" content="How the Framework turns browser-security-extension detection into domain protection, measurable analytics, and Incognito-steered assessment outcomes." />
         <meta name="twitter:image" content="https://phishu.net/images/PhishUFramework.png" />
         <meta name="twitter:image:alt" content="PhishU Framework" />
@@ -35,8 +35,8 @@
         {
           "@context": "https://schema.org",
           "@type": "BlogPosting",
-          "headline": "Social-Engineering Past Browser-Security Extensions in the PhishU Framework",
-          "description": "PhishU explains how the Framework detects browser-security extensions, protects phishing domains from client-side reporting, captures analytics, and social-engineers around those controls with Incognito steering when appropriate for authorized assessments.",
+          "headline": "When Anti-Phishing Moves Into the Browser: Social-Engineering Past Browser-Security Extensions in the PhishU Framework",
+          "description": "Anti-phishing controls are moving into the browser itself. PhishU explains how the Framework detects browser-security extensions, protects phishing domains from client-side reporting, captures analytics, and social-engineers around those controls with Incognito steering when appropriate for authorized assessments.",
           "datePublished": "2026-04-21",
           "dateModified": "2026-04-21",
           "author": {
@@ -126,8 +126,8 @@
                             <div class="container px-5 article-shell">
                                 <img class="article-hero-image" src="../images/PhishUFramework.png" alt="PhishU Framework" />
                                 <div class="article-meta mb-3">April 21, 2026 - PhishU Blog</div>
-                                <h1 class="page-header-ui-title mb-4">Social-Engineering Past Browser-Security Extensions in the PhishU Framework</h1>
-                                <p class="page-header-ui-text mb-0">Browser-side detection products are one of the biggest gaps in phishing simulation. The PhishU Framework now detects them, protects phishing domains from client-side reporting by default, captures the analytics for dashboards and reports, and when appropriate can steer the victim into an Incognito session where most enterprise-deployed extensions are absent by default.</p>
+                                <h1 class="page-header-ui-title mb-4">When Anti-Phishing Moves Into the Browser: Social-Engineering Past Browser-Security Extensions in the PhishU Framework</h1>
+                                <p class="page-header-ui-text mb-0">Anti-phishing controls are moving away from purely network and server-side inspection and into the browser itself, where they can judge what the user is actually seeing. That is effective, hard for attackers to get around, and exactly why the Framework now treats browser-security extensions as a first-class assessment surface.</p>
                             </div>
                         </div>
                         <div class="svg-border-rounded text-white">
@@ -138,13 +138,15 @@
                     <section class="bg-white py-10">
                         <div class="container px-5">
                             <article class="article-shell">
-                                <p>Most phishing simulation platforms still behave as if the browser is just a passive rendering surface. That assumption is getting less true every year. Modern browser-security extensions can detect cloned login pages, inspect suspicious page structure, and stop the simulation before the target ever reaches the form the operator wanted to test.</p>
+                                <p>For years, most anti-phishing controls lived upstream of the user. Mail gateways, DNS filters, proxies, and server-side reputation systems decided whether a link or payload should ever reach the browser. That model still matters, but it is no longer the whole story. More of the real decision-making is moving onto the endpoint, inside the browser itself, where an extension can inspect the page the user is actually viewing and intervene before a credential ever gets typed.</p>
 
-                                <p>That creates a practical problem for defenders and service providers alike. If a customer has invested in browser-side protection, the assessment should not just shrug and say the user never saw the page. It should measure whether the control was present, whether it actually intervened, what happened next, and whether the landing-page domain itself stayed protected from client-side reporting workflows. That is the gap the PhishU Framework now closes.</p>
+                                <p>That is effective defensive design, and it is hard for attackers to get around cleanly. If the browser-side product can see a cloned or proxied IdP experience, capture evidence, classify the page, and alert its operators before the victim interacts with the form, the phishing domain may be burned before the campaign really starts. That means a serious phishing framework cannot treat the browser as a passive window anymore. It has to understand the control that is sitting in front of the user.</p>
 
-                                <p>The Framework runs default-on detection for a curated list of modern browser-security extensions, including Push Security, SquareX, ConcealBrowse, Seraphic, and Microsoft Defender Browser Protection. It turns those detections into first-class campaign outcomes instead of treating them as invisible background noise.</p>
+                                <p>This is exactly where the PhishU Framework gets interesting. The Framework runs default-on detection for a growing set of browser-security products and vendor profiles, including actively validated support for products like Push Security, SquareX, ConcealBrowse, Seraphic, and Microsoft Defender Browser Protection, plus additional product slots the runtime can react to as coverage expands. It protects the phishing domain from client-side reporting by default, turns detections into first-class campaign outcomes, and when the engagement calls for it can push the victim into a different browser context where the extension is usually absent.</p>
 
-                                <h2>Detection Happens Before the Real Page Matters</h2>
+                                <p>That also means the response is not one-size-fits-all. The runtime is built to respond according to what it detects. Different products can map to different vendor-styled safety pages, different analytics labels, and different assessment outcomes. The point is not just that a control was present. The point is that the Framework knows which control it was, records that fact, and can shape the victim-facing response accordingly.</p>
+
+                                <h2>The Fight Moved Into the Browser Before the Real Page Ever Loads</h2>
                                 <p>The key detail is timing. If a cloned or proxied page eagerly renders the branded login experience first and only then discovers a browser-security product is present, the extension may already have enough evidence to classify the page, capture a screenshot, alert its operators, or contribute to a downstream report on the phishing domain. The safer model is to detect the browser-side control first, decide what policy should apply, and only then decide whether the real page content should render at all.</p>
 
                                 <p>In the Framework, that means the landing page runtime probes known browser-extension fingerprints in parallel and records what it finds. The technique uses the web-accessible-resources paths those extensions themselves publish. That makes the detection practical without relying on any special browser exploit or private interface. If the extension is present, the platform knows before it hands over the interesting content.</p>
