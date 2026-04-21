@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="PhishU explains how the Framework detects browser-security extensions, measures their effectiveness, and social-engineers around them with Incognito steering when appropriate for authorized assessments." />
+        <meta name="description" content="PhishU explains how the Framework detects browser-security extensions, protects phishing domains from client-side reporting, captures analytics, and social-engineers around those controls with Incognito steering when appropriate." />
         <meta name="author" content="PhishU, LLC" />
         <title>Social-Engineering Past Browser-Security Extensions in the PhishU Framework | PhishU Blog</title>
         <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
@@ -22,13 +22,13 @@
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://phishu.net/blogs/blog-social-engineering-past-browser-security-extensions-in-the-phishu-framework.html" />
         <meta property="og:title" content="Social-Engineering Past Browser-Security Extensions in the PhishU Framework" />
-        <meta property="og:description" content="How the PhishU Framework detects browser-security extensions, measures their effectiveness, and social-engineers around them with Incognito steering when appropriate." />
+        <meta property="og:description" content="How the Framework detects browser-security extensions, protects domains from client-side reporting, captures analytics, and social-engineers around those controls with Incognito steering." />
         <meta property="og:site_name" content="PhishU" />
         <meta property="og:image" content="https://phishu.net/images/PhishUFramework.png" />
         <meta property="og:image:alt" content="PhishU Framework" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Social-Engineering Past Browser-Security Extensions in the PhishU Framework" />
-        <meta name="twitter:description" content="How the Framework turns browser-security-extension detection into measured assessment outcomes instead of a dead end." />
+        <meta name="twitter:description" content="How the Framework turns browser-security-extension detection into domain protection, measurable analytics, and Incognito-steered assessment outcomes." />
         <meta name="twitter:image" content="https://phishu.net/images/PhishUFramework.png" />
         <meta name="twitter:image:alt" content="PhishU Framework" />
         <script type="application/ld+json">
@@ -36,7 +36,7 @@
           "@context": "https://schema.org",
           "@type": "BlogPosting",
           "headline": "Social-Engineering Past Browser-Security Extensions in the PhishU Framework",
-          "description": "PhishU explains how the Framework detects browser-security extensions, measures their effectiveness, and social-engineers around them with Incognito steering when appropriate for authorized assessments.",
+          "description": "PhishU explains how the Framework detects browser-security extensions, protects phishing domains from client-side reporting, captures analytics, and social-engineers around those controls with Incognito steering when appropriate for authorized assessments.",
           "datePublished": "2026-04-21",
           "dateModified": "2026-04-21",
           "author": {
@@ -76,6 +76,19 @@
                 font-size: 1.05rem;
                 line-height: 1.8;
             }
+            .article-image {
+                display: block;
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+                border-radius: 0.75rem;
+                box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.16);
+            }
+            .article-caption {
+                margin-top: 0.75rem;
+                font-size: 0.95rem;
+                color: #6c757d;
+            }
             .article-hero-image {
                 display: block;
                 width: 100%;
@@ -114,7 +127,7 @@
                                 <img class="article-hero-image" src="../images/PhishUFramework.png" alt="PhishU Framework" />
                                 <div class="article-meta mb-3">April 21, 2026 - PhishU Blog</div>
                                 <h1 class="page-header-ui-title mb-4">Social-Engineering Past Browser-Security Extensions in the PhishU Framework</h1>
-                                <p class="page-header-ui-text mb-0">Browser-side detection products are one of the biggest gaps in phishing simulation. The PhishU Framework now detects them, measures their effectiveness, and when appropriate can steer the victim into an Incognito session where most enterprise-deployed extensions are absent by default.</p>
+                                <p class="page-header-ui-text mb-0">Browser-side detection products are one of the biggest gaps in phishing simulation. The PhishU Framework now detects them, protects phishing domains from client-side reporting by default, captures the analytics for dashboards and reports, and when appropriate can steer the victim into an Incognito session where most enterprise-deployed extensions are absent by default.</p>
                             </div>
                         </div>
                         <div class="svg-border-rounded text-white">
@@ -127,21 +140,35 @@
                             <article class="article-shell">
                                 <p>Most phishing simulation platforms still behave as if the browser is just a passive rendering surface. That assumption is getting less true every year. Modern browser-security extensions can detect cloned login pages, inspect suspicious page structure, and stop the simulation before the target ever reaches the form the operator wanted to test.</p>
 
-                                <p>That creates a practical problem for defenders and service providers alike. If a customer has invested in browser-side protection, the assessment should not just shrug and say the user never saw the page. It should measure whether the control was present, whether it actually intervened, and what happened next. That is the gap the PhishU Framework now closes.</p>
+                                <p>That creates a practical problem for defenders and service providers alike. If a customer has invested in browser-side protection, the assessment should not just shrug and say the user never saw the page. It should measure whether the control was present, whether it actually intervened, what happened next, and whether the landing-page domain itself stayed protected from client-side reporting workflows. That is the gap the PhishU Framework now closes.</p>
 
                                 <p>The Framework runs default-on detection for a curated list of modern browser-security extensions, including Push Security, SquareX, ConcealBrowse, Seraphic, and Microsoft Defender Browser Protection. It turns those detections into first-class campaign outcomes instead of treating them as invisible background noise.</p>
 
                                 <h2>Detection Happens Before the Real Page Matters</h2>
-                                <p>The key detail is timing. If a cloned or proxied page eagerly renders the branded login experience first and only then discovers a browser-security product is present, the extension may already have enough evidence to classify the page. The safer model is to detect the browser-side control first, decide what policy should apply, and only then decide whether the real page content should render at all.</p>
+                                <p>The key detail is timing. If a cloned or proxied page eagerly renders the branded login experience first and only then discovers a browser-security product is present, the extension may already have enough evidence to classify the page, capture a screenshot, alert its operators, or contribute to a downstream report on the phishing domain. The safer model is to detect the browser-side control first, decide what policy should apply, and only then decide whether the real page content should render at all.</p>
 
                                 <p>In the Framework, that means the landing page runtime probes known browser-extension fingerprints in parallel and records what it finds. The technique uses the web-accessible-resources paths those extensions themselves publish. That makes the detection practical without relying on any special browser exploit or private interface. If the extension is present, the platform knows before it hands over the interesting content.</p>
 
-                                <p>That is important for more than just evasive behavior. It also makes reporting much better. Even when the customer chooses not to steer around the detected extension, the Framework still knows the endpoint was protected and can surface that result later in campaign analytics and the final assessment narrative.</p>
+                                <p>That is important for more than just evasive behavior. It gives the block page two separate jobs. First, it protects the domain by never rendering the cloned or AiTM login surface once the browser-side control is detected, which helps avoid the screenshot-and-report path that can end the campaign early. Second, it becomes a social-engineering surface of its own, using the victim's existing trust in the browser-security product to move them into a different browser context.</p>
+
+                                <p>It also makes reporting much better. Whether the victim is blocked, steered, or simply allowed through while the detection is logged, the Framework still knows the endpoint was protected and can surface that result later in dashboards, org aggregates, and the customer's assessment report.</p>
 
                                 <h2>From Detection to Incognito Steering</h2>
                                 <p>When the operator enables the victim-facing block behavior, the landing page does not simply fail closed. Instead, it replaces itself with a branded, vendor-styled safety page that says the destination is safe to view and instructs the victim to right click a real link and open it in Incognito mode. The original attribution information is preserved so the simulation continues cleanly if the victim follows the instruction.</p>
 
-                                <p>The reason this works is structural, not magical. Many enterprise browser-security extensions run with an Incognito model that is off by default, even when the extension is deployed broadly in the managed browser. So the first tab detects the control and shows the decoy. The second tab opens in Incognito, the extension is absent, the gate clears, and the real landing page renders normally.</p>
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/BrowserSecurityExtensionBypass1.png" alt="Browser-security-extension bypass decoy page instructing the target to open the landing page in Incognito" />
+                                    <figcaption class="article-caption">The first page protects the domain and gives the victim a browser-extension-themed instruction set that feels consistent with a legitimate security workflow.</figcaption>
+                                </figure>
+
+                                <p>The social-engineering part matters just as much as the browser behavior. The decoy is effective because it borrows trust from the very product that just intervened. The target already knows the extension exists and should generally trust it. The message asks for a simple action that most users already associate with privacy and extra safety. Right click. Open in Incognito. Nothing about that sounds suspicious to a typical enterprise user. It sounds like a safer version of what they were already trying to do.</p>
+
+                                <p>The reason this works is structural, not magical. Many enterprise browser-security extensions run with an Incognito model that is off by default, even when the extension is deployed broadly in the managed browser. Chrome does not let organizations force this universally with one simple org-wide extension setting. In practice, Incognito extension enablement is typically off by default and must be turned on per user. So the first tab detects the control and shows the decoy. The second tab opens in Incognito, the extension is absent, the gate clears, and the real landing page renders normally.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/BrowserSecurityExtensionBypass2-Incognito.png" alt="Landing page opened in Incognito after the browser-security-extension bypass decoy" />
+                                    <figcaption class="article-caption">Once the target opens the link in Incognito, most enterprise-deployed extensions are absent by default, the gate clears, and the real page can load with attribution intact.</figcaption>
+                                </figure>
 
                                 <p>That is the part competitors generally do not address. Awareness-only products have no real story for browser-side controls beyond "the page was blocked." The PhishU Framework measures the extension and can also social-engineer around it. That makes it the first commercial phishing-simulation capability to explicitly treat browser-security extensions as a class of controls that can be both measured and tested against.</p>
 
@@ -152,10 +179,10 @@
 
                                 <p>That framing matters. The point is not that browser-security extensions are useless. The point is that defenders should know whether their current deployment model actually closes this path. In many cases the answer depends as much on Chrome policy and enterprise browser configuration as it does on the extension itself.</p>
 
-                                <h2>Operators Can Choose Block Mode or Monitor Mode</h2>
-                                <p>Not every engagement wants the same behavior. Some customers want the landing page to stop and steer the target into Incognito so the rest of the simulation can continue. Others want the Framework to detect the extension silently, let the page render normally, and simply include the presence of that control in the results. The Framework supports both.</p>
+                                <h2>Analytics Matter Even When No Steering Happens</h2>
+                                <p>Not every engagement wants the same behavior. Some customers want the landing page to stop and steer the target into Incognito so the rest of the simulation can continue. Others want the Framework to detect the extension silently, let the page render normally, and simply include the presence of that control in the results. The important part is that the analytics still exist either way.</p>
 
-                                <p>On the Landing Page Behaviors tab, operators can toggle <code>Block Browser Extension Products</code> per landing page. Enabled means extension-detected visitors see the Incognito-steering page. Disabled means visitors see the real content and the detection is logged in the background for reporting. Framework and training-slide previews always protect the <code>framework.phishu.net</code> domain regardless of the customer-facing toggle, which helps preserve the product's own brand domain reputation.</p>
+                                <p>On the Landing Page Behaviors tab, operators can toggle <code>Block Browser Extension Products</code> per landing page. When enabled, extension-detected visitors see the Incognito-steering page. When disabled, visitors see the real content and the detection is logged silently for reporting and dashboard metrics. Framework and training-slide previews always protect the <code>framework.phishu.net</code> domain regardless of the customer-facing toggle, which helps preserve the product's own brand domain reputation.</p>
 
                                 <h2>Why This Belongs Beside AiTM, Not Outside It</h2>
                                 <p>Browser-security extensions are not a side issue anymore. They sit directly in front of the same cloned and proxied pages that modern phishing assessments depend on. That makes them part of the core tradecraft story, not an afterthought.</p>
@@ -165,7 +192,7 @@
                                 <h2>What Defenders Should Do Instead of Assuming the Extension Solved It</h2>
                                 <p>The right defensive response is not panic. It is configuration discipline. If a browser-security extension matters to the organization, its Incognito behavior matters too. If the deployment assumes the extension is protecting users in every browsing context but the managed-browser policy leaves Incognito unprotected, that is not a product failure. It is a deployment gap.</p>
 
-                                <p>That is why this blog is really about measurement as much as evasion. A good phishing program should be able to tell a customer whether the extension caught the page, whether the user was successfully steered around it, and whether the enterprise browser settings held up under realistic testing. That is the difference between a control-validation exercise and another generic click-rate dashboard.</p>
+                                <p>That is why this blog is really about measurement as much as evasion. A good phishing program should be able to tell a customer whether the extension caught the page, whether the decoy protected the domain from browser-side reporting, whether the user was successfully steered around the control, and whether the enterprise browser settings held up under realistic testing. That is the difference between a control-validation exercise and another generic click-rate dashboard.</p>
 
                                 <h2>Related Reading</h2>
                                 <p>If you want to see where this fits in the larger post-click story, PhishU also covers <a href="blog-transparent-aitm-proxy-framework.html">Transparent AiTM Proxying in the PhishU Framework</a> and <a href="blog-chaining-phishing-techniques-in-the-phishu-framework.html">Chaining Phishing Techniques in the PhishU Framework</a>. Browser-extension detection and Incognito steering matter because they change whether those later stages can happen at all.</p>
