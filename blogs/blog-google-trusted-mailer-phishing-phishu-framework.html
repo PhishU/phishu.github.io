@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="PhishU explains Google Trusted Mailer, a new PhishU Framework technique that evolves trusted Google Tasks phishing into flexible Google-delivered campaigns for any pretext." />
+        <meta name="author" content="PhishU, LLC" />
+        <title>Taking a Newly Trending Google Tasks Technique and Evolving It in the PhishU Framework | PhishU Blog</title>
+        <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+        <link rel="canonical" href="https://phishu.net/blogs/blog-google-trusted-mailer-phishing-phishu-framework.html" />
+        <link href="../css/styles.css" rel="stylesheet" />
+        <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" crossorigin="anonymous"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y2W7ZWEC7"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag("js", new Date());
+            gtag("config", "G-0Y2W7ZWEC7");
+        </script>
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://phishu.net/blogs/blog-google-trusted-mailer-phishing-phishu-framework.html" />
+        <meta property="og:title" content="Taking a Newly Trending Google Tasks Technique and Evolving It in the PhishU Framework" />
+        <meta property="og:description" content="Google Trusted Mailer bypasses the need for a sender by coming from Google-owned infrastructure, helping campaigns move past sender-focused security tools while remaining fully customizable with dynamic subjects, full HTML, AI assistance, training, and reporting." />
+        <meta property="og:site_name" content="PhishU" />
+        <meta property="og:image" content="https://phishu.net/images/GoogleSendEmailReceipt.png" />
+        <meta property="og:image:alt" content="Received Google Trusted Mailer email from noreply@applicationintegration.google" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Taking a Newly Trending Google Tasks Technique and Evolving It in the PhishU Framework" />
+        <meta name="twitter:description" content="Google Trusted Mailer bypasses the need for a sender by coming from Google-owned infrastructure, while giving operators dynamic subjects, full HTML, AI assistance, training, and reporting." />
+        <meta name="twitter:image" content="https://phishu.net/images/GoogleSendEmailReceipt.png" />
+        <meta name="twitter:image:alt" content="Received Google Trusted Mailer email from noreply@applicationintegration.google" />
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "headline": "Taking a Newly Trending Google Tasks Technique and Evolving It in the PhishU Framework",
+          "description": "PhishU explains Google Trusted Mailer, a new PhishU Framework technique that evolves trusted Google Tasks phishing into flexible Google-delivered campaigns for any pretext.",
+          "datePublished": "2026-04-28",
+          "dateModified": "2026-04-28",
+          "author": {
+            "@type": "Organization",
+            "name": "PhishU"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "PhishU",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://phishu.net/images/logo-transparent-white-grey-small.png"
+            }
+          },
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://phishu.net/blogs/blog-google-trusted-mailer-phishing-phishu-framework.html"
+          }
+        }
+        </script>
+        <style>
+            .article-shell {
+                max-width: 860px;
+                margin: 0 auto;
+            }
+            .article-meta {
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                font-size: 0.8rem;
+                color: #6c757d;
+            }
+            .article-shell h2 {
+                margin-top: 2.75rem;
+            }
+            .article-shell p,
+            .article-shell li {
+                font-size: 1.05rem;
+                line-height: 1.8;
+            }
+            .article-callout {
+                border-left: 4px solid #20c997;
+                background: #f8f9fa;
+                border-radius: 0.5rem;
+                padding: 1.25rem 1.5rem;
+            }
+            .article-image {
+                display: block;
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+                border-radius: 0.75rem;
+                box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.16);
+            }
+            .article-caption {
+                margin-top: 0.75rem;
+                font-size: 0.95rem;
+                color: #6c757d;
+            }
+            .article-hero-image {
+                display: block;
+                width: 100%;
+                max-width: 315px;
+                margin: 0 auto 1rem;
+            }
+            .svg-border-rounded {
+                display: block;
+                line-height: 0;
+                margin-bottom: -1px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="layoutDefault">
+            <div id="layoutDefault_content">
+                <main>
+                    <nav class="navbar navbar-marketing navbar-expand-lg bg-dark navbar-dark">
+                        <div class="container px-5">
+                            <a class="navbar-brand text-white" href="/">PhishU</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="#navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i data-feather="menu"></i></button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ms-auto me-lg-4">
+                                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../blog.html">Blog</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../contact-us.html">Contact</a></li>
+                                </ul>
+                                <a class="btn fw-500 ms-lg-4 btn-teal" href="../contact-us.html">Contact Us</a>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <header class="page-header-ui page-header-ui-dark bg-gradient-primary-only">
+                        <div class="page-header-ui-content pt-8 pb-5">
+                            <div class="container px-5 article-shell">
+                                <img class="article-hero-image" src="../images/PhishUFramework.png" alt="PhishU Framework" />
+                                <div class="article-meta mb-3">April 28, 2026 - PhishU Blog</div>
+                                <h1 class="page-header-ui-title mb-4">Taking a Newly Trending Google Tasks Technique and Evolving It in the PhishU Framework</h1>
+                                <p class="page-header-ui-text mb-0">Google Trusted Mailer bypasses the need for a traditional sender because the message comes from Google-owned infrastructure. That helps campaigns move past sender-focused security tools, while the PhishU Framework makes the technique fully customizable with dynamic subjects, full HTML lures, built-in techniques, AI assistance, training, and reporting.</p>
+                            </div>
+                        </div>
+                        <div class="svg-border-rounded text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
+                        </div>
+                    </header>
+
+                    <section class="bg-white py-10">
+                        <div class="container px-5">
+                            <article class="article-shell">
+                                <p>A couple months ago, Kaspersky published a <a href="https://www.kaspersky.com/blog/google-tasks-phishing/55326/" target="_blank" rel="noopener noreferrer">write-up on phishing through Google Tasks</a>. The victim receives what looks like a legitimate Google task notification. The task creates urgency. The link sends the victim to an employee verification form. The attacker wants credentials.</p>
+
+                                <p>That is the visible story. The deeper story is the delivery path.</p>
+
+                                <p>The message rides Google trust into the inbox. It does not look like a cold sender domain. It does not look like a random mail server trying to impersonate a brand. It looks like mail from Google infrastructure, and that changes how mail defenses and users react.</p>
+
+                                <p>Kaspersky's article called out the same core issue: attackers abuse legitimate services to get phishing links delivered by a trusted middleman. Google Tasks was the first visible example. The PhishU Framework turns that trusted Google Tasks technique into a flexible campaign primitive.</p>
+
+                                <div class="article-callout my-5">
+                                    <p class="mb-0"><strong>The Google Tasks version is the proof point.</strong> The larger technique is trusted Google delivery. If the sender is trusted, authenticated, and familiar, a lot of normal phishing assumptions start to break.</p>
+                                </div>
+
+                                <h2>Google Trusted Mailer in the PhishU Framework</h2>
+                                <p>The PhishU Framework now includes Google Trusted Mailer, a campaign technique that simulates this trusted-Google-delivery pattern for authorized testing.</p>
+
+                                <p>The current implementation routes mail through Google Cloud Application Integration. The message arrives from a Google-owned sender, <code>noreply@applicationintegration.google</code>, with authentication aligned through Google infrastructure.</p>
+
+                                <p>That is the part defenders need to see in a real test. The message is not fighting the gateway as an unknown third-party sender. It is not relying on a freshly registered phishing domain to earn trust in the inbox. It is Google-delivered mail carrying an operator-authored lure.</p>
+
+                                <p>In testing, that means the campaign can land without the normal spam-delivery and third-party sender interruptions that often dominate traditional phishing simulations. This is exactly why the technique matters. It tests a different trust boundary.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/GoogleSendEmailReceipt.png" alt="Received Google Trusted Mailer email from noreply@applicationintegration.google" />
+                                    <figcaption class="article-caption">A received Google Trusted Mailer campaign email. The message arrives from <code>noreply@applicationintegration.google</code> and renders as a Google Tasks-style notification in the inbox.</figcaption>
+                                </figure>
+
+                                <h2>PhishU Takes It Past Google Tasks</h2>
+                                <p>The Kaspersky example used Google Tasks. PhishU treats that as the starting point, not the ceiling.</p>
+
+                                <p>Google Trusted Mailer in the PhishU Framework separates the trusted Google delivery primitive from the content. The delivery path is Google-owned infrastructure. The subject and body are dynamic. The email body supports full HTML. The operator can design the message to match the engagement.</p>
+
+                                <p>That means the lure can look like a Google Tasks item, a policy workflow, an HR request, a finance approval, a document notification, a compliance reminder, an IT security action, or almost any business process the operator needs to test.</p>
+
+                                <p>The sender trust remains the same. The story changes.</p>
+
+                                <h2>Full HTML, Dynamic Subject, and Built-In Techniques</h2>
+                                <p>This is where the Framework takes the public technique further.</p>
+
+                                <p>Operators are not stuck with a fixed Google Tasks clone. They can keep the trusted Tasks-style pretext when it fits, or evolve it into any campaign story. They can write the subject. They can build the body in the Framework's editor. They can use full HTML content. They can pair the message with the right landing page or downstream technique.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/GoogleSendEditor.png" alt="Google Trusted Mailer email template in the PhishU Framework editor" />
+                                    <figcaption class="article-caption">The Framework editor gives operators control over the subject and full HTML body. Google Tasks is one pretext, not a fixed limitation.</figcaption>
+                                </figure>
+
+                                <p>Google Trusted Mailer can feed the same campaign engine that already supports clone pages, credential capture, OAuth Consent Grant, Device Code Phishing, session hijacking, ClickFix, QR codes, calendar lures, Microsoft shared-file delivery, and other real-world techniques.</p>
+
+                                <p>The result is simple: the email can look like almost anything the assessment calls for, while still coming through a Google-owned delivery path that can breeze past controls built around sender-domain distrust.</p>
+
+                                <h2>A Natural Chain: Google Trusted Mailer to Google Device Code</h2>
+                                <p>One of the most useful chains is Google Trusted Mailer into Google Device Code Phishing.</p>
+
+                                <p>The first stage gets the message delivered from Google-owned infrastructure. The target sees a trusted-looking Google sender and a business workflow that makes sense for the pretext. The second stage moves the target into a Google-native device authorization flow where they are shown a code and directed to Google's real device login page.</p>
+
+                                <p>That chain is powerful because both halves reinforce the same trust story. The delivery looks Google. The authentication step looks Google. The operator still gets PhishU tracking, campaign attribution, reporting, and training around the full path.</p>
+
+                                <p>A realistic example would be a Google-delivered task or compliance notification that tells the user to verify access to a shared resource. The landing page presents a Google Device Code flow. The target signs in through Google's real device authorization page, and the Framework records the outcome for the campaign.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/GoogleSendDeviceCodePhishLP.png" alt="Google Device Code Phishing landing page reached from a Google Trusted Mailer campaign" />
+                                    <figcaption class="article-caption">A Google Trusted Mailer campaign can chain into Google Device Code Phishing, keeping the sender and authentication story in a Google-native trust context while PhishU records visits, attribution, and outcomes.</figcaption>
+                                </figure>
+
+                                <h2>AI Makes the Workflow Faster</h2>
+                                <p>The existing AI workflow also applies here.</p>
+
+                                <p>The Framework can help operators move from concept to campaign faster: plan the scenario, draft a subject, shape the HTML lure, align the message to the landing page, and build content around the target organization without starting from a blank page.</p>
+
+                                <p>That matters because the delivery primitive is only half the attack. A trusted sender gets the message seen. A believable workflow gets the user to act. PhishU combines both.</p>
+
+                                <h2>Why This Is Different From Normal Phishing Simulation</h2>
+                                <p>Normal phishing simulation still teaches users to distrust unknown senders, strange domains, and obvious spoofing. That is useful, but it is not enough.</p>
+
+                                <p>Trusted cloud sender abuse changes the user decision. The sender can be legitimate. The authentication can align. The message can avoid the warnings users were trained to expect. The failure mode moves from "did the user spot the fake sender" to "does the user understand which workflows are normal for the company and where credentials belong."</p>
+
+                                <p>That is exactly the defensive advice Kaspersky gave. Employees need to know which tools the company actually uses and where corporate credentials should be entered. Google Trusted Mailer lets an organization test that under realistic delivery conditions.</p>
+
+                                <h2>Training and Reporting Are Not Afterthoughts</h2>
+                                <p>Google Trusted Mailer is wired into the rest of the PhishU Framework.</p>
+
+                                <p>Campaign analytics show who received the message, who clicked, and what happened after the click. Training can explain the exact trusted-sender pattern the user encountered. Reports can call out the important control gap: the message came from Google-owned infrastructure, passed normal authentication expectations, and used a trusted-notification workflow to drive action.</p>
+
+                                <p>That is the difference between a clever send trick and a repeatable assessment technique. The Framework does not just send the email. It turns the technique into a full campaign story: delivery, landing page, action, evidence, training, and executive reporting.</p>
+
+                                <h2>The Takeaway</h2>
+                                <p>Google Tasks phishing showed the market where this is going. The specific sender mechanics may change. The abuse pattern does not.</p>
+
+                                <p>Attackers will keep using trusted cloud services to get in front of users. Defenders need to test that reality, not just run another allow-listed template from a training platform.</p>
+
+                                <p>The PhishU Framework now gives operators a point-and-click way to simulate trusted Google delivery, then take it further with dynamic subjects, full HTML bodies, built-in techniques, AI-assisted content, targeted training, and reporting.</p>
+
+                                <p>Every technique attackers use. One platform. Training built in.</p>
+
+                                <div class="card bg-light border-0 mt-5">
+                                    <div class="card-body p-4 p-lg-5">
+                                        <h2 class="h4">Want to test trusted Google delivery in your environment?</h2>
+                                        <p class="mb-3">The PhishU Framework includes Google Trusted Mailer for authorized phishing assessments, with Google-owned delivery, dynamic HTML content, AI-assisted campaign creation, tracked landing pages, training, and reporting in one workflow.</p>
+                                        <a class="btn btn-teal fw-500" href="../contact-us.html">Contact Us</a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                </main>
+            </div>
+            <div id="layoutDefault_footer">
+                <footer class="footer pt-5 pb-5 mt-auto bg-dark footer-dark">
+                    <div class="container px-5">
+                        <div class="row gx-5 align-items-center">
+                            <div class="col-md-6 small">Copyright &copy; PhishU 2026</div>
+                            <div class="col-md-6 text-md-end small">
+                                <a href="https://www.linkedin.com/company/phishu">LinkedIn</a>
+                                &middot;
+                                <a href="../contact-us.html">Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="../js/site-config.js"></script>
+        <script src="../js/scripts.js?v=20260413a"></script>
+    </body>
+</html>
