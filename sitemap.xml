@@ -21,6 +21,21 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://phishu.net/blogs/blog-conditional-access-policy-testing-phishu-framework.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://phishu.net/conditional-access-policy-testing.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://phishu.net/security-control-validation.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://phishu.net/blogs/blog-google-trusted-mailer-phishing-phishu-framework.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

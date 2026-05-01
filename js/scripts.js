@@ -53,6 +53,8 @@
                                         <a class="dropdown-item ps-4" style="white-space: normal; font-size: 0.88rem; line-height: 1.3; padding-top: 0.42rem; padding-bottom: 0.42rem;" href="${localHref('ai-phishing-report-generator.html')}">AI-Generated Reporting</a>
                                         <a class="dropdown-item ps-4" style="white-space: normal; font-size: 0.88rem; line-height: 1.3; padding-top: 0.42rem; padding-bottom: 0.42rem;" href="${localHref('phishing-awareness-training-that-works.html')}">AI-Generated Conditional Training</a>
                                         <a class="dropdown-item ps-4" style="white-space: normal; font-size: 0.88rem; line-height: 1.3; padding-top: 0.42rem; padding-bottom: 0.42rem;" href="${localHref('phishing-tracking-and-analytics.html')}">Tracking and Analytics</a>
+                                        <a class="dropdown-item ps-4" style="white-space: normal; font-size: 0.88rem; line-height: 1.3; padding-top: 0.42rem; padding-bottom: 0.42rem;" href="${localHref('conditional-access-policy-testing.html')}">Conditional Access Policy Testing</a>
+                                        <a class="dropdown-item ps-4" style="white-space: normal; font-size: 0.88rem; line-height: 1.3; padding-top: 0.42rem; padding-bottom: 0.42rem;" href="${localHref('security-control-validation.html')}">Security Control Validation</a>
                                         <a class="dropdown-item ps-4" style="white-space: normal; font-size: 0.88rem; line-height: 1.3; padding-top: 0.42rem; padding-bottom: 0.42rem;" href="${localHref('cloud-directory-sync-for-phishing-campaigns.html')}">Cloud Directory Sync</a>
                                         <a class="dropdown-item ps-4" style="white-space: normal; font-size: 0.88rem; line-height: 1.3; padding-top: 0.42rem; padding-bottom: 0.42rem;" href="${localHref('real-time-phishing-notifications.html')}">Real-Time Visit and Credential Capture Notifications</a>
                                         <div class="dropdown-divider border-0"></div>
@@ -119,7 +121,7 @@
             });
         }
 
-        if (/(clickfix|aitm|browser-in-browser|qr-phishing|no-allow-listing|passkey-bypass|session-hijacking|oauth-consent-grant|device-code|calendar-event|malicious-attachment)/.test(pagePath)) {
+        if (/(clickfix|aitm|browser-in-browser|qr-phishing|no-allow-listing|passkey-bypass|session-hijacking|oauth-consent-grant|device-code|calendar-event|malicious-attachment|conditional-access|security-control-validation)/.test(pagePath)) {
             trackEvent('view_technique_page', {
                 page_title: pageTitle,
                 page_path: pagePath

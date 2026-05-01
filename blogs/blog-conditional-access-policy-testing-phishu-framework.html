@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="PhishU explains how CISOs can test Microsoft and Google Conditional Access, MFA, device, location, and authentication risk controls with realistic phishing assessments and evidence-backed reporting." />
+        <meta name="author" content="PhishU, LLC" />
+        <title>Testing Conditional Access Policies With Real-World Phishing Scenarios | PhishU Blog</title>
+        <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+        <link rel="canonical" href="https://phishu.net/blogs/blog-conditional-access-policy-testing-phishu-framework.html" />
+        <link href="../css/styles.css" rel="stylesheet" />
+        <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" crossorigin="anonymous"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y2W7ZWEC7"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag("js", new Date());
+            gtag("config", "G-0Y2W7ZWEC7");
+        </script>
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://phishu.net/blogs/blog-conditional-access-policy-testing-phishu-framework.html" />
+        <meta property="og:title" content="Testing Conditional Access Policies With Real-World Phishing Scenarios" />
+        <meta property="og:description" content="Your Conditional Access policies may look right in the portal. PhishU Framework shows what happens when they face a realistic phishing exercise." />
+        <meta property="og:site_name" content="PhishU" />
+        <meta property="og:image" content="https://phishu.net/images/GeoIPSpoofDashboard.png" />
+        <meta property="og:image:alt" content="PhishU Framework Conditional Access dashboard showing Geo-IP Spoofing outcomes" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Testing Conditional Access Policies With Real-World Phishing Scenarios" />
+        <meta name="twitter:description" content="PhishU Framework turns realistic phishing exercises into Conditional Access and authentication-risk reporting for CISOs and Security Directors." />
+        <meta name="twitter:image" content="https://phishu.net/images/GeoIPSpoofDashboard.png" />
+        <meta name="twitter:image:alt" content="PhishU Framework Conditional Access dashboard showing Geo-IP Spoofing outcomes" />
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "headline": "Testing Conditional Access Policies With Real-World Phishing Scenarios",
+          "description": "PhishU explains how CISOs can test Microsoft and Google Conditional Access, MFA, device, location, and authentication risk controls with realistic phishing assessments and evidence-backed reporting.",
+          "datePublished": "2026-05-01",
+          "dateModified": "2026-05-01",
+          "author": { "@type": "Organization", "name": "PhishU" },
+          "publisher": {
+            "@type": "Organization",
+            "name": "PhishU",
+            "logo": { "@type": "ImageObject", "url": "https://phishu.net/images/logo-transparent-white-grey-small.png" }
+          },
+          "mainEntityOfPage": { "@type": "WebPage", "@id": "https://phishu.net/blogs/blog-conditional-access-policy-testing-phishu-framework.html" }
+        }
+        </script>
+        <style>
+            .article-shell { max-width: 860px; margin: 0 auto; }
+            .article-meta { letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.8rem; color: #6c757d; }
+            .article-shell h2 { margin-top: 2.75rem; }
+            .article-shell p, .article-shell li { font-size: 1.05rem; line-height: 1.8; }
+            .article-callout { border-left: 4px solid #20c997; background: #f8f9fa; border-radius: 0.5rem; padding: 1.25rem 1.5rem; }
+            .article-image { display: block; width: 100%; max-width: 100%; height: auto; border-radius: 0.75rem; box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.16); }
+            .article-caption { margin-top: 0.75rem; font-size: 0.95rem; color: #6c757d; }
+            .article-hero-image { display: block; width: 100%; max-width: 315px; margin: 0 auto 1rem; }
+            .svg-border-rounded { display: block; line-height: 0; margin-bottom: -1px; }
+        </style>
+    </head>
+    <body>
+        <div id="layoutDefault">
+            <div id="layoutDefault_content">
+                <main>
+                    <nav class="navbar navbar-marketing navbar-expand-lg bg-dark navbar-dark">
+                        <div class="container px-5">
+                            <a class="navbar-brand text-white" href="/">PhishU</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="#navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i data-feather="menu"></i></button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ms-auto me-lg-4">
+                                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../blog.html">Blog</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../contact-us.html">Contact</a></li>
+                                </ul>
+                                <a class="btn fw-500 ms-lg-4 btn-teal" href="../contact-us.html">Contact Us</a>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <header class="page-header-ui page-header-ui-dark bg-gradient-primary-only">
+                        <div class="page-header-ui-content pt-8 pb-5">
+                            <div class="container px-5 article-shell">
+                                <div class="article-meta mb-3">May 1, 2026 - PhishU Blog</div>
+                                <h1 class="page-header-ui-title mb-4">Testing Conditional Access Policies With Real-World Phishing Scenarios</h1>
+                                <p class="page-header-ui-text mb-0">Most organizations trust Conditional Access, MFA, location rules, device checks, and authentication risk profiles because the policies look right in the portal. The real question is what happens when those controls face a realistic phishing exercise.</p>
+                            </div>
+                        </div>
+                        <div class="svg-border-rounded text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
+                        </div>
+                    </header>
+
+                    <section class="bg-white py-10">
+                        <div class="container px-5">
+                            <article class="article-shell">
+                                <p>Conditional Access policies keep security leadership up at night for a reason. Is MFA actually enforced everywhere it matters? Did a device rule get scoped too narrowly? Are impossible travel, trusted-device assumptions, OAuth consent governance, and Device Code restrictions really enough when a user gets phished?</p>
+
+                                <p>All of those controls matter. They also create a dangerous kind of confidence when they are only reviewed on paper.</p>
+
+                                <p>A policy can exist and still be scoped too narrowly. A risk profile can fire for the wrong traffic and miss the traffic that matters. MFA can protect one path while OAuth Consent Grants or Device Code flows remain exposed. Location rules can catch a datacenter IP while a real attacker comes through a residential connection that looks much closer to the victim.</p>
+
+                                <div class="article-callout my-5">
+                                    <p class="mb-0"><strong>The uncomfortable question is simple:</strong> do your identity controls stop a realistic account compromise path, or do they mostly stop the simulation tools you have been using?</p>
+                                </div>
+
+                                <h2>The Gap Security Leaders Have Been Forced to Accept</h2>
+                                <p>Traditional phishing simulation platforms usually answer one question: did the user click?</p>
+
+                                <p>That is not enough for modern identity programs. Security leaders need to know what happened after the click. Did the sign-in succeed? Did MFA trigger? Did the policy block the user? Was the block universal, or did it only apply to admins and executives? Did a device requirement hold? Did a location or risk rule actually matter? Did Microsoft or Google present a challenge that the user could still complete?</p>
+
+                                <p>For years, there has not been a clean way to test this. Teams configure Conditional Access policies, authentication strengths, device requirements, and risk-based rules, then hope attackers do not find a path around them. Audits can verify that policies exist. Portal reviews can show intended coverage. Neither proves the control holds during a real phishing scenario.</p>
+
+                                <p>That is the gap the PhishU Framework is built to close.</p>
+
+                                <h2>Phishing Simulation That Doubles as a Conditional Access Audit</h2>
+                                <p>The PhishU Framework is not an awareness-only platform. It is a real-world spear-phishing framework built for authorized red teams, pentest firms, MSSPs, and internal security teams. That matters because the product tests the identity path attackers actually care about, not just the employee's first click.</p>
+
+                                <p>During Adversary-in-the-Middle (AiTM) phishing assessments, the Framework observes the Microsoft and Google authentication flow and classifies what happened. It can record whether the attempt succeeded, was blocked, was challenged, failed due to credentials, or produced an unknown outcome. It also tags the cause when observable: Conditional Access policy, risk-based control, MFA requirement, device requirement, or another gate.</p>
+
+                                <p>That turns a phishing campaign into a control-validation exercise. The report is no longer just a list of users who clicked. It becomes evidence of which identity controls fired, which users bypassed them, and where the organization may have policy gaps worth reviewing.</p>
+
+                                <p>A lot of these engagements start the same way. Executive leadership says, "I'm not sure that will work on us, but you can try it." Then the exercise finds a missing control, a policy scoped to the wrong group, or a token-based path nobody had fully locked down.</p>
+
+                                <p>That should not be treated as a gotcha. It is the exact reason to run the test. The value of the report is that it gives the security team a defensible opportunity to close the gap by hardening controls they already own.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/GeoIPSpoofDashboard.png" alt="PhishU Framework Conditional Access dashboard showing Geo-IP Spoofing outcomes" />
+                                    <figcaption class="article-caption">Conditional Access and authentication-risk outcomes are mapped into dashboard reporting so security leaders can see which controls held and which paths need review.</figcaption>
+                                </figure>
+
+                                <h2>What the Framework Helps Identify</h2>
+                                <p>For Microsoft environments, the Framework can map observed Entra authentication outcomes into useful reporting categories. Examples include MFA-required prompts, device-required blocks, Conditional Access blocks, risk-driven challenges, and sign-in outcomes that appear to succeed.</p>
+
+                                <p>For Google environments, the same idea applies through Google sign-in flow signals. The Framework can identify observed patterns such as security-key challenges, TOTP prompts, device prompts, reCAPTCHA or IP-change challenges, Context-Aware Access denials, and other sign-in interruptions.</p>
+
+                                <p>The value for security leadership is not the raw signal. It is the translation into an answer they can use:</p>
+
+                                <ul>
+                                    <li>Which controls protected users during the campaign?</li>
+                                    <li>Which users reached the protected resource anyway?</li>
+                                    <li>Were blocks universal or targeted to a subset of users?</li>
+                                    <li>Did privileged users receive stronger protection than everyone else?</li>
+                                    <li>Did risk-based controls fire because of the test setup, or because the policy was actually effective?</li>
+                                    <li>Are Device Code and OAuth Consent Grant paths properly restricted?</li>
+                                </ul>
+
+                                <h2>Geo-IP Spoofing Changes the Test</h2>
+                                <p>Many Conditional Access strategies depend on geography, ASN class, impossible travel, unfamiliar sign-in properties, anonymous IP detection, or expected login locations. Those are useful signals, but they are not the same as phishing-resistant controls.</p>
+
+                                <p>Real attackers know this. They do not always hit Microsoft or Google from an obvious datacenter IP. They can route traffic through infrastructure that looks residential and geographically consistent with the victim.</p>
+
+                                <p>The PhishU Framework now lets operators test that reality. On an AiTM landing page, Geo-IP Spoofing can be enabled with a simple toggle. When enabled, the authentication traffic can appear from a residential exit aligned to the visitor's geography, rather than from a generic hosting provider or VPN range that would be easy for risk engines to flag.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-image" src="../images/GeoIPSpoofLandingPageEnable.png" alt="PhishU Framework Geo-IP Spoofing toggle on an AiTM landing page" />
+                                    <figcaption class="article-caption">Geo-IP Spoofing is enabled directly on the AiTM landing page, giving operators a simple way to test location and anonymous-IP assumptions during an authorized assessment.</figcaption>
+                                </figure>
+
+                                <p>That is intentionally not a universal bypass. It tests one axis: whether location, travel, and anonymous-IP assumptions are carrying too much of the defensive burden. Device-state controls, phishing-resistant MFA, app-protection requirements, and properly enforced authentication strengths should still matter. If those controls hold, the Framework reports that too.</p>
+
+                                <h2>The Controls That Should Still Hold</h2>
+                                <p>This is where the reporting becomes valuable for CISOs.</p>
+
+                                <p>A good assessment should not only prove what failed. It should also prove what worked. If a compliant-device requirement blocks access, that is a positive finding. If phishing-resistant MFA prevents a session from being usable, that matters. If an admin-only policy protects executives but leaves the broader workforce exposed, that is a scoping decision leadership can review with facts instead of assumptions.</p>
+
+                                <p>The Framework's goal is not to tell every customer that every policy is broken. The goal is to produce evidence. Some controls will fail under realistic conditions. Some controls will hold. Both outcomes belong in the dashboard and the executive report.</p>
+
+                                <h2>Why Device Code and OAuth Consent Belong in the Same Conversation</h2>
+                                <p>Conditional Access testing should not stop at username, password, and MFA.</p>
+
+                                <p>Modern account compromise often moves through token-based paths. Device Code Phishing can trick a target into authenticating an attacker-controlled device code. OAuth Consent Grant attacks can produce persistent delegated access that may survive password changes and normal credential rotation until a tenant admin revokes the grant.</p>
+
+                                <p>Security leaders need to know whether those paths are restricted. They also need reporting that explains the difference between a user who clicked a link, a user who entered credentials, a user who completed a device authorization flow, and a user who granted persistent API access.</p>
+
+                                <p>That is why these techniques belong in the same platform as Conditional Access reporting. The identity-control story is bigger than one login page.</p>
+
+                                <h2>The CISO Takeaway</h2>
+                                <p>If your organization relies on Conditional Access, Context-Aware Access, MFA, device trust, impossible travel, and authentication risk profiles, you should be able to test them under realistic conditions.</p>
+
+                                <p>Not in theory. Not through a policy screenshot. Not through another allow-listed email template that stops at click tracking.</p>
+
+                                <p>You should be able to run an authorized spear-phishing exercise, simulate real red team techniques, observe how Microsoft or Google actually responds, and receive a report that maps the controls that worked and the gaps that did not.</p>
+
+                                <p>That is the difference the PhishU Framework brings to security leaders: realistic phishing scenarios, identity-control validation, dashboards, reporting, and training in one workflow.</p>
+
+                                <p>Security leaders should not have to hope attackers do not get around their policies. They should know which policies hold.</p>
+
+                                <div class="card bg-light border-0 mt-5">
+                                    <div class="card-body p-4 p-lg-5">
+                                        <h2 class="h4">Want to test Conditional Access in a real phishing exercise?</h2>
+                                        <p class="mb-3">The PhishU Framework helps teams test Microsoft and Google identity controls with realistic phishing scenarios, Geo-IP Spoofing on AiTM landing pages, dashboard analytics, and CISO-ready reporting.</p>
+                                        <a class="btn btn-teal fw-500 me-2" href="../conditional-access-policy-testing.html">View Conditional Access Testing</a>
+                                        <a class="btn btn-outline-primary fw-500" href="../contact-us.html">Contact Us</a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                </main>
+            </div>
+            <div id="layoutDefault_footer">
+                <footer class="footer pt-5 pb-5 mt-auto bg-dark footer-dark">
+                    <div class="container px-5">
+                        <div class="row gx-5 align-items-center">
+                            <div class="col-md-6 small">Copyright &copy; PhishU 2026</div>
+                            <div class="col-md-6 text-md-end small"><a href="https://www.linkedin.com/company/phishu">LinkedIn</a> &middot; <a href="../blog.html">Blog</a> &middot; <a href="../contact-us.html">Contact</a></div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="../js/site-config.js"></script>
+        <script src="../js/scripts.js?v=20260501a"></script>
+    </body>
+</html>
