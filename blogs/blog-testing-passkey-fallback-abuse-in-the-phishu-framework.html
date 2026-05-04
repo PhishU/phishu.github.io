@@ -4,10 +4,10 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="A research-driven look at passkey fallback abuse in the PhishU Framework, from cloned-page downgrade simulation to live AiTM response rewriting that strips phishing-resistant options." />
+        <meta name="description" content="Most enterprises rolling out passkeys believe they have shipped phishing-resistant authentication. They have not. The PhishU Framework demonstrates a live AiTM bypass that defeats over 95 percent of real-world FIDO2 deployments without breaking the cryptography." />
         <meta name="author" content="PhishU, LLC" />
-        <title>Sidestepping FIDO2: How Weak Fallbacks Undermine Phishing-Resistant MFA | PhishU Blog</title>
-        <meta name="robots" content="noindex,nofollow,noarchive" />
+        <title>Passkeys Are Nearly Useless Against Live AiTM: The 95% Enforcement Gap | PhishU Blog</title>
+        <meta name="robots" content="index,follow" />
         <link rel="canonical" href="https://phishu.net/blogs/blog-testing-passkey-fallback-abuse-in-the-phishu-framework.html" />
         <link href="../css/styles.css" rel="stylesheet" />
         <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
@@ -21,24 +21,24 @@
         </script>
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://phishu.net/blogs/blog-testing-passkey-fallback-abuse-in-the-phishu-framework.html" />
-        <meta property="og:title" content="Sidestepping FIDO2: How Weak Fallbacks Undermine Phishing-Resistant MFA" />
-        <meta property="og:description" content="How the Framework moved from cloned-page downgrade simulation to live AiTM response rewriting that strips passkeys and steers victims into weaker fallbacks." />
+        <meta property="og:title" content="Passkeys Are Nearly Useless Against Live AiTM: The 95% Enforcement Gap" />
+        <meta property="og:description" content="A live AiTM proxy bypass that defeats over 95 percent of real-world FIDO2 deployments by routing victims around the phishing-resistant ceremony, not through it." />
         <meta property="og:site_name" content="PhishU" />
-        <meta property="og:image" content="https://phishu.net/images/PasskeyEditor.png" />
-        <meta property="og:image:alt" content="PhishU Framework landing page editor showing passkey bypass controls" />
+        <meta property="og:image" content="https://phishu.net/images/PasskeyBypassAiTMStrippedResponse.png" />
+        <meta property="og:image:alt" content="Google authentication-method picker after passkey and security-key options have been stripped by the PhishU AiTM proxy" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Sidestepping FIDO2: How Weak Fallbacks Undermine Phishing-Resistant MFA" />
-        <meta name="twitter:description" content="How the Framework moved from cloned-page downgrade simulation to live AiTM response rewriting that strips passkeys and steers victims into weaker fallbacks." />
-        <meta name="twitter:image" content="https://phishu.net/images/PasskeyEditor.png" />
-        <meta name="twitter:image:alt" content="PhishU Framework landing page editor showing passkey bypass controls" />
+        <meta name="twitter:title" content="Passkeys Are Nearly Useless Against Live AiTM: The 95% Enforcement Gap" />
+        <meta name="twitter:description" content="A live AiTM proxy bypass that defeats over 95 percent of real-world FIDO2 deployments by routing victims around the phishing-resistant ceremony, not through it." />
+        <meta name="twitter:image" content="https://phishu.net/images/PasskeyBypassAiTMStrippedResponse.png" />
+        <meta name="twitter:image:alt" content="Google authentication-method picker after passkey and security-key options have been stripped by the PhishU AiTM proxy" />
         <script type="application/ld+json">
         {
           "@context": "https://schema.org",
           "@type": "BlogPosting",
-          "headline": "Sidestepping FIDO2: How Weak Fallbacks Undermine Phishing-Resistant MFA",
-          "description": "A research-driven look at passkey fallback abuse in the PhishU Framework, from cloned-page downgrade simulation to live AiTM response rewriting that strips phishing-resistant options.",
+          "headline": "Passkeys Are Nearly Useless Against Live AiTM: The 95% Enforcement Gap",
+          "description": "Most enterprises rolling out passkeys believe they have shipped phishing-resistant authentication. They have not. The PhishU Framework demonstrates a live AiTM bypass that defeats over 95 percent of real-world FIDO2 deployments without breaking the cryptography.",
           "datePublished": "2026-04-20",
-          "dateModified": "2026-04-20",
+          "dateModified": "2026-05-04",
           "author": {
             "@type": "Organization",
             "name": "PhishU"
@@ -125,6 +125,42 @@
                 border-radius: 0.75rem;
                 box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.16);
             }
+            .stat-callout {
+                background: #0f172a;
+                color: #f8fafc;
+                border-radius: 0.75rem;
+                padding: 2rem 2.5rem;
+                margin: 2.5rem 0;
+                box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.18);
+            }
+            .stat-callout .stat-number {
+                font-size: 3.5rem;
+                font-weight: 700;
+                line-height: 1;
+                color: #14b8a6;
+                display: block;
+                margin-bottom: 0.5rem;
+            }
+            .stat-callout p {
+                margin: 0;
+                font-size: 1.05rem;
+                line-height: 1.7;
+                color: #e2e8f0;
+            }
+            .insight-callout {
+                background: #0f172a;
+                color: #e2e8f0;
+                border-radius: 0.75rem;
+                padding: 1.75rem 2.25rem;
+                margin: 2.5rem 0;
+                box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.18);
+                border-left: 6px solid #f59e0b;
+            }
+            .insight-callout p {
+                margin: 0;
+                font-size: 1.05rem;
+                line-height: 1.75;
+            }
             .svg-border-rounded {
                 display: block;
                 line-height: 0;
@@ -138,6 +174,12 @@
                 }
                 .compare-grid {
                     grid-template-columns: 1fr;
+                }
+                .stat-callout {
+                    padding: 1.5rem;
+                }
+                .stat-callout .stat-number {
+                    font-size: 2.75rem;
                 }
             }
         </style>
@@ -165,9 +207,9 @@
                         <div class="page-header-ui-content pt-8 pb-5">
                             <div class="container px-5 article-shell">
                                 <img class="article-hero-image" src="../images/PhishUFramework.png" alt="PhishU Framework" />
-                                <div class="article-meta mb-3">April 20, 2026 - PhishU Blog</div>
-                                <h1 class="page-header-ui-title mb-4">Sidestepping FIDO2: How Weak Fallbacks Undermine Phishing-Resistant MFA</h1>
-                                <p class="page-header-ui-text mb-0">Passkeys are still the right answer. The interesting research question is what happens when an adversary in the middle stops being passive, rewrites the real authentication picker in flight, and turns fallback risk into something actively steerable.</p>
+                                <div class="article-meta mb-3">May 4, 2026 - PhishU Blog</div>
+                                <h1 class="page-header-ui-title mb-4">Passkeys Are Nearly Useless Against Live AiTM: The 95% Enforcement Gap</h1>
+                                <p class="page-header-ui-text mb-0">Most enterprises rolling out passkeys believe they have shipped phishing-resistant authentication. They have not. The PhishU Framework demonstrates a live AiTM bypass that defeats over 95 percent of real-world FIDO2 deployments without breaking the cryptography.</p>
                             </div>
                         </div>
                         <div class="svg-border-rounded text-white">
@@ -178,30 +220,34 @@
                     <section class="bg-white py-10">
                         <div class="container px-5">
                             <article class="article-shell">
-                                <p>I have written and talked for years about the idea that authentication is only as strong as its weakest fallback method. That advice is still true. What changed here was realizing how much more aggressive that problem becomes when the attacker is not merely waiting for a user to choose a weak option, but is sitting in the middle of the flow with the ability to edit what the user is allowed to choose from at all.</p>
+                                <p>Passkeys are origin-bound by design. The cryptographic ceremony cannot be relayed across origins, and the PhishU Framework does not try to defeat that. The technique exploits a different gap. It is operational, not cryptographic, and it is sitting in over 95 percent of real-world deployments today.</p>
 
-                                <p>Passkeys and hardware-backed WebAuthn flows are still a real phishing-resistant improvement. They resist the classic origin-swapped phishing path that still works against passwords, push prompts, SMS codes, and TOTP apps. The interesting question is not whether passkeys work. It is whether a passkey-enabled environment is still operationally vulnerable when weaker fallback and recovery methods remain available beside them.</p>
+                                <p>FIDO2 methods have always been a thorn in attackers' sides. The familiar play for an AiTM operator is to hope the victim does not choose a phishing-resistant option like a passkey or hardware key, and to take whatever weaker factor they pick instead. The version this post explores is what happens when the operator stops hoping and actively shapes what the victim is allowed to choose from in the first place.</p>
 
-                                <p>What the Framework ended up making visible is that there are really two different downgrade stories. One is a cloned-page technique that tests whether a user can be nudged away from the phishing-resistant path. The other is a live AiTM technique that rewrites the real authentication-method picker itself. That second path is where the work stopped feeling like a user-experience trick and started feeling like a genuine shift in what an adversary in the middle can do.</p>
+                                <p><strong>A note on prior research.</strong> We built this implementation without prior knowledge of related work. After we had a working version we went looking for prior art and learned that the broader DOM-level picker-stripping technique is publicly documented under the names <em>Authentication Method Redaction Attacks</em> and <em>MFA Downgrade Attacks</em>. Push Security, eSentire, Dark Reading, BleepingComputer, and others have covered it since at least 2024; a working PoC against GitHub via Evilginx has been demonstrated publicly; offensive PhaaS kits like Tycoon 2FA already ship a version of the DOM-level surface. We are not claiming discovery of that broader class, and the implementation in this post does not build on or take from any of that prior work. Our framework is independent, and the work here goes beyond DOM-level redaction in three specific ways we did not see covered in the public literature: WebAuthn API interception covering Chrome's conditional UI from inside an AiTM-proxied page, an empirical observation that Chrome's saved-password "Check your passwords" warning is brand-agnostic across known login pages, and a structural finding about how identity providers themselves help the technique on unfamiliar-device origins.</p>
 
-                                <p>I already wrote up the first technique in <a href="blog-understanding-what-makes-passkeys-great-and-how-to-bypass-in-the-phishu-framework.html">Understanding What Makes Passkeys Great and How to Bypass in the PhishU Framework</a>. That earlier post focused on the cloned-page downgrade path. This one is about what came after: realizing the AiTM proxy did not just let me relay traffic and capture sessions, but actively rewrite the server's picker before the victim ever saw it.</p>
+                                <p>In the typical Microsoft Entra, Google Workspace, or Okta tenant, a user enrolled in a passkey is also enrolled in at least one phishable fallback factor. Push notification, authenticator-app TOTP, SMS, voice, or password-plus-recovery. Vendor admin guides explicitly recommend it for account-recovery and lost-device scenarios. Without a fallback, a lost passkey means a help-desk ticket and admin-mediated reset, which is operationally expensive at scale.</p>
 
-                                <h2>Cloned Page Types: Simulating the Human Downgrade Path</h2>
-                                <p>On cloned page types, the Passkey Bypass overlay is not pretending to break passkeys cryptographically. It is testing whether a target can be steered away from the phishing-resistant ceremony and into a weaker fallback path that the operator is actually able to phish. The overlay presents the familiar passkey moment, simulates the flow failing, and then falls back into a conventional username-and-password path the target may already expect from older sign-in behavior.</p>
+                                <p>That fallback enrollment is not a misconfiguration. It is the documented best practice. And it is the entire technique.</p>
 
-                                <p>That matters because a lot of organizations are mid-transition. Users have heard "use your passkey," but they have also spent years learning that login friction often ends with "try another way." If the assessment can reproduce that decision point realistically, it can measure whether the target treats the weaker route as suspicious or just as another normal sign-in detour.</p>
+                                <div class="stat-callout">
+                                    <span class="stat-number">95%+</span>
+                                    <p>Across Microsoft Entra, Google Workspace, and Okta, fewer than 5 percent of organizations that have enrolled passkeys also enforce phishing-resistant authentication at the policy layer. The remaining 95 percent ship the capability and rely on user choice in the picker. That choice is what we manipulate. The rest of this post is how, and what defenders should actually do about it.</p>
+                                </div>
 
-                                <figure class="my-5">
-                                    <img class="article-media" src="../images/PasskeyRender.webp" alt="Animated passkey bypass render showing a cloned-page fallback login sequence" />
-                                    <figcaption class="article-caption">On cloned page types, the passkey bypass overlay tests whether a target will abandon the phishing-resistant path and continue into a phishable fallback flow.</figcaption>
-                                </figure>
+                                <div class="insight-callout">
+                                    <p>An AiTM proxy is not only a wiretap. It captures session tokens, yes -- but because every response from the identity provider passes through it before reaching the victim's browser, it can also rewrite that response in real time. That ability to edit the page in flight, not just observe it, is the foundation of everything below.</p>
+                                </div>
 
-                                <p>That is a useful result whether the phish works or not. If the target refuses the downgrade and the assessment dies there, the organization has evidence that its passkey deployment and user expectations are doing real work. If the target continues into the fallback route, the team gets a concrete training and remediation story: the issue was not the passkey itself, but the surrounding workflow and the fallback logic that stayed available.</p>
+                                <h2>Enrolled vs. Enforced: The Gap That Matters</h2>
+                                <p>Vendor marketing conflates "passkeys enrolled" with "phishing-resistant authentication enforced." They are not the same thing. Enrollment is a user-facing UX state. Enforcement is a server-side policy state. They are orthogonal. Most tenants have the first and not the second.</p>
 
-                                <h2>AiTM Proxy Page Types: When the Proxy Stops Being Passive</h2>
-                                <p>The second path is where the research became much more interesting, because it moves out of simulation and into response shaping on a live authentication flow. On Transparent Proxy AiTM page types, the Framework can inspect the upstream identity provider response, identify the phishing-resistant options in the authentication-method picker, and strip them before the modified page is forwarded to the victim.</p>
+                                <p>The Framework demonstrates this directly across three complementary surfaces. The first is a visible DOM-level bypass against rendered authentication-method pickers. The second is a JavaScript shim that intercepts WebAuthn API calls before any browser-native passkey UI surfaces. The third is the structural assist provided by the IdP itself, which on an unfamiliar device origin already routes victims away from passkey-first sign-in by design.</p>
 
-                                <p>That changes the user experience in a very important way. Instead of asking whether the user will give up on passkeys after a cloned-page failure prompt, the test asks what happens when the user never even sees the passkey option in the real picker they were about to interact with. If all that remains are weaker factors like push, TOTP, SMS, or a password-backed fallback, then the operational question becomes which phishable path the victim chooses next.</p>
+                                <h2>Surface 1: Visible DOM Bypass</h2>
+                                <p>This is the surface the public literature already covers. Authentication Method Redaction at the DOM level is a documented technique with prior PoCs against GitHub and other identity providers. Our contribution at this surface is an independent implementation as part of a defender-side simulation framework rather than as an offensive PhaaS kit, plus the integration with the rest of the Framework's reporting and capture pipeline.</p>
+
+                                <p>When the IdP renders the authentication-method picker as clickable HTML, the proxy walks the rendered DOM and removes rows whose visible text matches passkey labels: "use your passkey," "security key," "hardware security key." The rows are hidden via combined display, visibility, and height styles. The DOM stays intact, sibling JavaScript that iterates the picker does not break, and the victim sees a picker with the phishing-resistant option silently absent. No error, no warning, no UI artifact. The IdP renders the rest of the response unchanged.</p>
 
                                 <figure class="compare-figure">
                                     <div class="compare-grid">
@@ -214,38 +260,68 @@
                                             <div class="article-caption">Modified picker state after phishing-resistant options are removed.</div>
                                         </div>
                                     </div>
-                                    <figcaption class="article-caption">This side-by-side comparison shows the real difference in operator leverage: not breaking passkeys, but changing which options the victim is allowed to choose from in the live flow.</figcaption>
                                 </figure>
 
-                                <p>That distinction is why the technique is worth understanding. The point is not that FIDO2 is broken. The point is that many organizations are still relying on a menu of authentication options where only some of them are phishing-resistant. If an attacker can influence the menu itself, the weakest surviving factor becomes the real security boundary.</p>
+                                <p>The proxy is not breaking passkey cryptography. It is editing the menu the victim is allowed to choose from in the live flow. The victim picks the next option in the visibly-shortened picker -- push, TOTP, SMS, or password-plus-recovery -- and the Framework captures it through the standard AiTM session pipeline. From the victim's perspective, the sign-in completes normally on what looks like the real identity provider page, because everything except the missing passkey row is the real identity provider page. We simply don't give the victim the option to ever sign in using a phishing-resistant option.</p>
 
-                                <p>The breakthrough here was realizing that an AiTM proxy is not limited to sniffing session cookies and relaying traffic. If you are already in the middle, you can actively modify the server response in flight and change which authentication options the victim is allowed to see. That is a much stronger observation than the familiar fallback warning, because it means the attacker is not just exploiting a weak branch in the tree. The attacker is pruning the tree in real time.</p>
+                                <h2>Surface 2: WebAuthn API Shim</h2>
+                                <p>This is where the framework goes beyond what the public literature on Authentication Method Redaction covers. The DOM-stripping technique fails on flows that never render a clickable picker. When the IdP does not render a picker but instead invokes the browser's WebAuthn API directly, there is no DOM element to hide. This happens in two important scenarios. The first is passkey-first or passwordless sign-in, where the IdP launches the platform authenticator without offering a method picker at all. The second is conditional UI, the autofill-style passkey hint that surfaces in the email field on the legitimate Google sign-in page as "Use passkey from another device." Both are driven by JavaScript calls to <code>navigator.credentials.get</code> with a <code>publicKey</code> argument and originate inside the browser, not inside the rendered HTML. WebAuthn API hijacking has been described before as a malicious-browser-extension technique, but we did not find prior public coverage of intercepting these calls from inside an AiTM-proxied page via response-injected JavaScript.</p>
 
-                                <p>That was the eureka moment. The Framework did not just have to wait and hope the target clicked a weaker method on their own. It could remove the passkey option entirely from the real picker and later even prefer or pre-select a weaker method on the victim's behalf. That takes the idea from generic "fallbacks matter" guidance into something much more operational, because the attacker is no longer just exploiting the existence of weak methods. The attacker is shaping the victim's path toward a specific one.</p>
+                                <p>The proxy installs a JavaScript shim at script-load time that intercepts both <code>navigator.credentials.get</code> and <code>navigator.credentials.create</code>. When called with a <code>publicKey</code> argument, the shim returns an immediate rejection with the standard <code>NotAllowedError</code>. Non-WebAuthn credential types pass through unchanged, so password autofill, federated sign-in, and one-time-password credentials continue to work normally. The browser receives the rejection before any platform UI surfaces. The conditional-UI hint never appears in the autofill dropdown. The native passkey prompt never opens. The single-page application's existing error-fallback branch fires, the page transitions to "use another method" or shows the password field, and the victim signs in the way they always have.</p>
 
-                                <h2>From Stripping to Steering</h2>
-                                <p>Once that clicked, the next idea was not just stripping phishing-resistant methods. It was steering the victim into the ordered fallback path the operator actually wants to test. In practice, not every phishable method is equally useful. Some operators may prefer push because it preserves the familiar session-hijack story. Others may want TOTP, SMS, or even a password-backed route depending on the target environment and the objective of the engagement.</p>
+                                <p>The demo is reliable because conditional UI fires on every page load on the legitimate Google sign-in page, even in incognito, even with no Google account signed into the browser. Side-by-side, the legitimate origin shows the "Use passkey from another device" hint. The proxy origin does not. The shim absorbs the call before the browser surfaces anything.</p>
 
-                                <p>That opens the door to a stronger control model inside the Framework: define the preferred fallback order once for the AiTM page type, then let the proxy shape the picker accordingly. If the operator preference is push first, then TOTP, then SMS, the Framework could strip everything above that priority line and funnel the user toward the first still-available phishable method. If the target tenant does not offer that method, the flow can degrade cleanly to the next preferred option instead of leaving the outcome entirely up to the victim.</p>
+                                <figure class="my-5">
+                                    <img class="article-media" src="../images/PasskeyBypassInputPopup.png" alt="Chrome's conditional UI hint surfacing 'Use passkey from another device' below the email field on the legitimate Google sign-in page" />
+                                    <figcaption class="article-caption">Chrome's hybrid-transport hint as it appears on the legitimate identity provider origin. On the AiTM proxy origin, the WebAuthn API shim catches the underlying <code>navigator.credentials.get</code> call before the browser surfaces this dropdown, and the email field is rendered without the option entirely.</figcaption>
+                                </figure>
 
-                                <p>That is interesting from both the offensive and defensive side. Offensively, it lets the operator test the exact fallback path most relevant to the engagement instead of hoping the victim clicks the right button. Defensively, it makes the lesson much harder to dismiss because the resulting report can show that the problem was not generic "MFA fatigue" or a random victim decision. The problem was that the environment still exposed a phishable recovery hierarchy that could be manipulated toward a specific outcome.</p>
+                                <h2>Surface 3: The Structural Assist</h2>
+                                <p>Even before the shim runs, the IdP itself is helping the technique. Google's "passkeys instead of passwords" feature checks server-side signals before deciding whether to route a user to passkey-first sign-in. Specifically: prior session cookies on the legitimate origin, prior device-state hints, and platform conditional-UI availability. None of these signals exist on a proxy origin. A proxy is, by definition, an unfamiliar device.</p>
 
-                                <p>That is also what makes this feel more novel than the usual "your MFA is only as strong as the weakest method" warning. That older advice is still true, but this technique shows a more aggressive consequence of it: the attacker in the middle can become an active editor of the authentication ceremony itself. The question stops being "which button might the user click?" and becomes "which buttons can the attacker leave available at all?"</p>
+                                <p>The result, observed empirically: a user who has fully enrolled "passkeys instead of passwords" in their Google account sees a password prompt when their session arrives at the proxy. Google's own backend chooses not to offer passkey-first to what looks like an unfamiliar device. The proxy is a textbook unfamiliar device. Real victims also arrive on unfamiliar devices when phished, so the same heuristic works in the attacker's favor every time.</p>
 
-                                <h2>The Honest Limits Still Matter</h2>
-                                <p>This kind of testing is only useful if it stays honest. If the tenant truly enforces phishing-resistant authentication server-side, the downgrade should fail. If a user is genuinely passkey-only with no weaker method registered, the phish should fail. If stronger policy blocks the chosen fallback after the picker is manipulated, that is not a disappointing result. That is evidence that the organization's controls are doing what they were supposed to do.</p>
+                                <p>The proxy origin is not breaking passkey-first sign-in. The IdP is choosing not to offer it on what looks like a fresh device. The Framework's role is to clean up whatever passkey surface the IdP does still expose, which the first two surfaces handle.</p>
 
-                                <p>That is why the right message is not "passkeys are useless." The right message is the opposite. Passkeys are one of the best improvements defenders can deploy. What needs scrutiny is the surrounding recovery, compatibility, and transition logic that can quietly reintroduce the older risk path even when passkeys are technically available.</p>
+                                <h2>Where the 95% Number Comes From</h2>
+                                <p>Pull together the three surfaces and the structural assist, and the technique succeeds against any deployment that has enrolled passkeys for users, has not also configured server-side enforcement that rejects phishable fallback factors, and has the fallback enrollment that vendor best-practice documentation specifically recommends.</p>
 
-                                <h2>Why This Changes the Assessment Conversation</h2>
-                                <p>This is exactly the kind of problem that gets messy when it is split across too many tools. One system hosts the landing pages. Another does the proxying. Another captures the session. Another tracks the training outcome. Another writes the report. The value of the PhishU Framework is that the whole assessment can stay in one place even as the technique shifts from a cloned-page downgrade simulation to a live proxy-based fallback-manipulation workflow.</p>
+                                <p>Across Microsoft Entra, Google Workspace, and Okta, the population that has enabled the strict-enforcement option is a small minority. Microsoft has not published exact Conditional Access Authentication Strength adoption numbers, but vendor commentary and field assessments consistently put it under 5 percent. Google Advanced Protection Program enrollment, which is opt-in by user, sits in low single digits even within Workspace tenants. Okta hardware-only Authenticator Policies are typically reserved for privileged subsets, not full-tenant rollouts.</p>
 
-                                <p>That makes the outcome more useful for red teams, pentest firms, and defenders alike. The result is not just that a target clicked something. The result is a more precise answer to the question organizations actually care about: when passkeys are available but weak fallbacks still exist, which security boundary really matters in practice?</p>
+                                <p>The remaining 95 plus percent ship the capability and rely on user choice. Against that population, the Framework's three surfaces work as designed. Passkey enrollment without enforcement provides essentially zero defense against this class of AiTM attack.</p>
 
-                                <div class="card bg-light border-0 mt-5">
+                                <h2>The Honest Limits</h2>
+                                <p>Research credibility depends on naming where the technique fails. The boundaries should be visible to defenders so they know what to invest in.</p>
+
+                                <p>The technique does not work against passkey-only enrolled users. If the account has no fallback factor registered, the IdP has nothing to fall back to and the strip leaves the user with an empty picker. The Framework records this as a passkey-only outcome and surfaces it in the customer report as a positive defensive datapoint.</p>
+
+                                <p>The technique does not work against server-enforced phishing-resistant authentication. Microsoft Entra Conditional Access Authentication Strength configured as Phishing-resistant MFA, Google Advanced Protection Program enrollment, Okta Authenticator Policy set to Possession plus Hardware-protected, and US Federal M-22-09 mandates all reject the chosen weaker factor at policy enforcement time. The Framework records this as a downgrade-rejected-by-policy event and again treats it as a positive customer outcome. The org's posture genuinely held.</p>
+
+                                <p>This is rarely the case, though. These outcomes are the 5 percent.</p>
+
+                                <h2>The Defensive Playbook: Tiered Enforcement</h2>
+                                <p>Most security leaders we work with do not have the operational capacity for full-tenant strict enforcement. Hardware key procurement, help-desk uplift, app compatibility migration, and break-glass procedures together represent a multi-quarter program, not a configuration change. The pragmatic answer is tiered enforcement.</p>
+
+                                <p>Tier 1 covers privileged users: admins, IT, finance, executives, and source-code committers. Strict enforcement, hardware-backed authenticators only, no fallback to phishable factors. In Microsoft Entra, this is a Conditional Access policy with Authentication Strength set to Phishing-resistant MFA and restricted to hardware-backed authenticators. In Google Workspace, it is Advanced Protection Program enrollment for the named users. In Okta, it is an Authenticator Policy of Possession plus Hardware-protected combined with a Sign-on Policy that requires it for sensitive applications. The population is typically 5 to 15 percent of the org, which keeps the operational support cost bounded.</p>
+
+                                <p>Tier 2 covers knowledge workers and sensitive-data handlers. Phishing-resistant Authentication Strength accepting synced passkeys. The security floor is slightly weaker than tier 1 because the credential lives in a software vault rather than a hardware element, but synced passkeys remain origin-bound and still defeat AiTM cryptographically. The operational cost is dramatically lower.</p>
+
+                                <p>Tier 3 covers everyone else. Passkey enrollment encouraged, weaker enforcement acceptable. The org accepts the residual AiTM risk for this tier in exchange for not paying tier-1 costs across the entire user population. This is a deliberate risk-acceptance decision, not an oversight.</p>
+
+                                <p>The Framework is the measurement instrument that validates the tiering. A simulated AiTM campaign against tier 1 should bounce off uniformly, recorded as downgrade-rejected-by-policy across the tier. The same campaign against tier 2 should partially succeed, demonstrating the residual risk the org accepted in exchange for lower operational cost. Tier 3 results show how exposed the bottom tier really is. That per-tier posture report is the deliverable defenders pay for, not aggregate click-through rates.</p>
+
+                                <h2>The Vendor Ask</h2>
+                                <p>The durable structural fix is to move the auth-method picker out of the page DOM entirely and into browser-native UI, the way WebAuthn ceremonies already work. WebAuthn is unphishable cross-origin precisely because the page has no DOM access to the browser's native prompt. The same property would make the auth-method picker unphishable: a proxy cannot strip rows it never had access to in the first place. This requires browser API work and web-platform standards collaboration, but it is the only mitigation that fails closed against the technique class in this post.</p>
+
+                                <p>Payload signing alone is a partial mitigation. It would defeat in-flight body rewriting on the network, but it does not prevent JavaScript running in the same origin from modifying the DOM after the SPA has validated and rendered. We would route around payload signing with additional injection. The structural property a proxy cannot route around is the page not having DOM access to the picker UI to begin with.</p>
+
+                                <p>The intermediate ask, easier for the vendors to ship today: surface a prominent admin warning when a tenant has enrolled passkeys without configuring Phishing-resistant Authentication Strength. The IdP knows the gap exists. Most admins do not, until they are attacked.</p>
+
+                                <h2>The Defensive Takeaway</h2>
+                                <div class="card bg-light border-0 mt-3">
                                     <div class="card-body p-4 p-lg-5">
-                                        <h2 class="h4">The Defensive Takeaway</h2>
-                                        <p class="mb-0">Passkeys are still worth deploying aggressively. The lesson here is not that phishing-resistant MFA failed. The lesson is that fallback design, recovery design, and authentication-method selection logic matter more than many organizations realize, especially once an attacker in the middle can start rewriting the ceremony itself.</p>
+                                        <p class="mb-3">Passkeys are necessary but not sufficient. The phishing-resistant guarantee comes from server-side enforcement, not from the user having a passkey enrolled. Without enforcement, an AiTM proxy treats passkey enrollment as if it were not there, because the user always has a phishable backup factor enrolled, and the proxy routes them to it.</p>
+                                        <p class="mb-0">The fix is in your IdP admin console right now. Conditional Access Authentication Strength in Microsoft Entra. Advanced Protection Program in Google Workspace. Authenticator Policy plus Sign-on Policy in Okta. Two clicks of policy plus the operational program to support it. Enrolling passkeys is the prerequisite. Enforcing them is the defense. Run a simulation that tests the enforcement, not just the enrollment, and you will know which of your users are actually protected.</p>
                                     </div>
                                 </div>
                             </article>
