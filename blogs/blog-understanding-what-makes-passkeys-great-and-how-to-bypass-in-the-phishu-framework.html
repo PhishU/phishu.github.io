@@ -38,7 +38,7 @@
           "headline": "Understanding What Makes Passkeys Great and How to Bypass in the PhishU Framework",
           "description": "PhishU explains why passkeys are phishing-resistant by design, where fallback flows still create risk, and how the PhishU Framework simulates passkey bypass scenarios with a point-and-click overlay.",
           "datePublished": "2026-04-01",
-          "dateModified": "2026-04-01",
+          "dateModified": "2026-05-04",
           "author": {
             "@type": "Organization",
             "name": "PhishU"
@@ -175,6 +175,8 @@
 
                                 <p>That is also where the educational opportunity gets much better. A phishing program should not accidentally teach people that passkeys are "just another MFA prompt." It should teach the opposite: passkeys are worth adopting precisely because they stop whole classes of phishing that older MFA methods still lose to.</p>
 
+                                <p><strong>Editor's note (May 2026):</strong> The Framework now ships a second, complementary path for testing passkey environments. The Clone-LP overlay this post focuses on simulates the human downgrade decision on a static cloned page. The AiTM-proxy-side strip and WebAuthn API shim, covered in our follow-up post <a href="blog-testing-passkey-fallback-abuse-in-the-phishu-framework.html">Passkeys Are Nearly Useless Against Live AiTM: The 95% Enforcement Gap</a>, edits the real identity provider's authentication-method picker in flight and intercepts conditional-UI WebAuthn calls before any browser prompt surfaces. Different surface, same defensive testing question. Most readers benefit from understanding both.</p>
+
                                 <h2>What the Passkey Bypass Overlay Is Actually Testing</h2>
                                 <p>Inside the Framework, the Passkey Bypass overlay is not claiming to defeat passkeys cryptographically. The point is to simulate the human and workflow conditions that lead a target away from the stronger path and into a weaker one. In other words, the test is not "can we break passkeys?" The test is "can we socially engineer the user into abandoning the phishing-resistant path?" Pre-populating the target's identifier in the rendered fallback form is part of that realism. It mirrors what users are accustomed to seeing in legitimate sign-in flows and helps measure whether familiarity lowers skepticism in the moment.</p>
 
@@ -196,6 +198,8 @@
                                 <p>This is one of the clearest examples of why modern phishing assessment cannot be reduced to a single technique. Transparent AiTM with session hijacking still matters enormously in password-and-MFA environments. <a href="blog-transparent-aitm-proxy-framework.html">AiTM proxying in the PhishU Framework</a> shows exactly how dangerous session theft remains when the authentication flow can be relayed successfully.</p>
 
                                 <p>Passkeys are different. If the environment is truly passkey-first with no practical downgrade path, that classic session-hijacking story gets much weaker or disappears entirely. That is not a limitation of the Framework. It is evidence that the defense is working. The Framework's job then becomes showing whether the deployment is actually that strong, or whether the user can still be pushed sideways into a weaker route.</p>
+
+                                <p>The mixed-enrollment case, where users have a passkey alongside push, SMS, TOTP, or password fallbacks, is where AiTM gets sharper. Our follow-up post <a href="blog-testing-passkey-fallback-abuse-in-the-phishu-framework.html">Passkeys Are Nearly Useless Against Live AiTM: The 95% Enforcement Gap</a> walks through the proxy-side technique we ship for that case: editing the real identity provider's authentication-method picker in flight, intercepting Chrome's conditional-UI WebAuthn calls before any browser prompt surfaces, and the structural assist provided by the IdPs themselves on unfamiliar-device origins. Different surface than the Clone-LP overlay covered here, same defensive testing question.</p>
 
                                 <p>That is also why this capability belongs in the same product as landing pages, proxying, token-abuse workflows, campaign delivery, reporting, and training. Different organizations are at different stages of the authentication transition. Some need AiTM testing today. Some need OAuth and device code abuse testing. Some need passkey downgrade testing. Many need all three.</p>
 
