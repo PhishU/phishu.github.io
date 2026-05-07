@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="When Microsoft Conditional Access blocks a phished sign-in for a device-state policy, the PhishU Framework registers a phantom device, acquires a Primary Refresh Token, and lands a working access token in the Token Explorer. The victim sees a seamless redirect, not a CA error. The chained technique was disclosed this week by Clint Josy at Cyderes; PhishU now ships it for authorized red-team engagements by default." />
+        <meta name="author" content="PhishU, LLC" />
+        <title>Bypassing Conditional Access with Phantom Devices: How PhishU Turns a CA Block Into a Token Explorer Grant | PhishU Blog</title>
+        <meta name="robots" content="index,follow" />
+        <link rel="canonical" href="https://phishu.net/blogs/blog-bypassing-conditional-access-with-phantom-devices-in-the-phishu-framework.html" />
+        <link href="../css/styles.css" rel="stylesheet" />
+        <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" crossorigin="anonymous"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y2W7ZWEC7"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag("js", new Date());
+            gtag("config", "G-0Y2W7ZWEC7");
+        </script>
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://phishu.net/blogs/blog-bypassing-conditional-access-with-phantom-devices-in-the-phishu-framework.html" />
+        <meta property="og:title" content="Bypassing Conditional Access with Phantom Devices: How PhishU Turns a CA Block Into a Token Explorer Grant" />
+        <meta property="og:description" content="When Microsoft Conditional Access blocks a phished sign-in for a device-state policy, the PhishU Framework registers a phantom device in the background and lands a working Graph access token in the operator's Token Explorer. Default-on, no operator configuration." />
+        <meta property="og:site_name" content="PhishU" />
+        <meta property="og:image" content="https://phishu.net/images/PhantomTokenExplorer.png" />
+        <meta property="og:image:alt" content="Captured Credentials view in the PhishU Framework showing a Phantom Device-badged Microsoft Entra grant ready for Token Explorer post-exploitation" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Bypassing Conditional Access with Phantom Devices: How PhishU Turns a CA Block Into a Token Explorer Grant" />
+        <meta name="twitter:description" content="When Microsoft Conditional Access blocks a phished sign-in for a device-state policy, the PhishU Framework registers a phantom device in the background and lands a working Graph access token in the operator's Token Explorer. Default-on, no operator configuration." />
+        <meta name="twitter:image" content="https://phishu.net/images/PhantomTokenExplorer.png" />
+        <meta name="twitter:image:alt" content="Captured Credentials view in the PhishU Framework showing a Phantom Device-badged Microsoft Entra grant ready for Token Explorer post-exploitation" />
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "headline": "Bypassing Conditional Access with Phantom Devices: How PhishU Turns a CA Block Into a Token Explorer Grant",
+          "description": "When Microsoft Conditional Access blocks a phished sign-in for a device-state policy, the PhishU Framework registers a phantom device, acquires a Primary Refresh Token, and lands a working access token in the Token Explorer. The victim sees a seamless redirect, not a CA error.",
+          "datePublished": "2026-05-07",
+          "dateModified": "2026-05-07",
+          "author": {
+            "@type": "Organization",
+            "name": "PhishU"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "PhishU",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://phishu.net/images/logo-transparent-white-grey-small.png"
+            }
+          },
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://phishu.net/blogs/blog-bypassing-conditional-access-with-phantom-devices-in-the-phishu-framework.html"
+          }
+        }
+        </script>
+        <style>
+            .article-shell {
+                max-width: 860px;
+                margin: 0 auto;
+            }
+            .article-meta {
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                font-size: 0.8rem;
+                color: #6c757d;
+            }
+            .article-shell h2 {
+                margin-top: 2.75rem;
+            }
+            .article-shell p,
+            .article-shell li {
+                font-size: 1.05rem;
+                line-height: 1.8;
+            }
+            .article-image {
+                display: block;
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+                border-radius: 0.75rem;
+                box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.16);
+            }
+            .article-media {
+                display: block;
+                width: 100%;
+                max-width: 680px;
+                height: auto;
+                margin: 0 auto;
+                border-radius: 0.75rem;
+                box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.16);
+                background: #000;
+            }
+            .article-media-wide {
+                display: block;
+                width: min(1280px, calc(100vw - 3rem));
+                max-width: none;
+                height: auto;
+                margin: 0 auto;
+                position: relative;
+                left: 50%;
+                transform: translateX(-50%);
+                border-radius: 0.75rem;
+                box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.16);
+                background: #000;
+            }
+            @media (max-width: 991.98px) {
+                .article-media-wide {
+                    width: 100%;
+                    left: auto;
+                    transform: none;
+                }
+            }
+            .article-caption {
+                margin-top: 0.75rem;
+                font-size: 0.95rem;
+                color: #6c757d;
+            }
+            .article-hero-image {
+                display: block;
+                width: 100%;
+                max-width: 315px;
+                margin: 0 auto 1rem;
+            }
+            .image-placeholder {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                width: 100%;
+                max-width: 680px;
+                margin: 0 auto;
+                aspect-ratio: 16 / 9;
+                border: 2px dashed #94a3b8;
+                border-radius: 0.75rem;
+                background: #f1f5f9;
+                color: #475569;
+                padding: 2rem;
+            }
+            .image-placeholder .ph-label {
+                font-size: 0.75rem;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                font-weight: 700;
+                color: #64748b;
+                margin-bottom: 0.5rem;
+            }
+            .image-placeholder .ph-text {
+                font-size: 1rem;
+                line-height: 1.5;
+                color: #334155;
+            }
+            .insight-callout {
+                background: #0f172a;
+                color: #e2e8f0;
+                border-radius: 0.75rem;
+                padding: 1.75rem 2.25rem;
+                margin: 2.5rem 0;
+                box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.18);
+                border-left: 6px solid #14b8a6;
+            }
+            .insight-callout p {
+                margin: 0;
+                font-size: 1.05rem;
+                line-height: 1.75;
+            }
+            .svg-border-rounded {
+                display: block;
+                line-height: 0;
+                margin-bottom: -1px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="layoutDefault">
+            <div id="layoutDefault_content">
+                <main>
+                    <nav class="navbar navbar-marketing navbar-expand-lg bg-dark navbar-dark">
+                        <div class="container px-5">
+                            <a class="navbar-brand text-white" href="/">PhishU</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="#navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i data-feather="menu"></i></button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ms-auto me-lg-4">
+                                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../blog.html">Blog</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../contact-us.html">Contact</a></li>
+                                </ul>
+                                <a class="btn fw-500 ms-lg-4 btn-teal" href="../contact-us.html">Contact Us</a>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <header class="page-header-ui page-header-ui-dark bg-gradient-primary-only">
+                        <div class="page-header-ui-content pt-8 pb-5">
+                            <div class="container px-5 article-shell">
+                                <img class="article-hero-image" src="../images/PhishUFramework.png" alt="PhishU Framework" />
+                                <div class="article-meta mb-3">May 7, 2026 - PhishU Blog</div>
+                                <h1 class="page-header-ui-title mb-4">Bypassing Conditional Access with Phantom Devices: How PhishU Turns a CA Block Into a Token Explorer Grant</h1>
+                                <p class="page-header-ui-text mb-0">Microsoft Conditional Access policies that require a compliant or domain-joined device are most organizations' primary defense against Adversary-in-the-Middle (AiTM) attacks. New research from Cyderes published this week shows the chain that walks past them. The PhishU Framework now ships the same technique for authorized red-team engagements by default.</p>
+                            </div>
+                        </div>
+                        <div class="svg-border-rounded text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
+                        </div>
+                    </header>
+
+                    <section class="bg-white py-10">
+                        <div class="container px-5">
+                            <article class="article-shell">
+                                <p>The premise of Conditional Access is straightforward. A user can have the right password, the right MFA, and the right tenant assignment, and still be denied access if their device is not compliant or not joined to the directory. This is the layer most organizations lean on as their primary defense against AiTM, because session cookies stolen by an attacker proxy are not coming from a compliant device, and Microsoft is supposed to notice.</p>
+
+                                <p>On May 5, 2026, Clint Josy at Cyderes' <a href="https://www.cyderes.com/howler-cell">Howler Cell research team</a> published <em><a href="https://www.cyderes.com/howler-cell/azure-ad-conditional-access-device-identity-abuse">One Password, No Device, Full Tenant: Dismantling Azure AD Conditional Access Through Device Identity Abuse</a></em>, a writeup of an authorized red-team engagement that chained phantom device registration with Primary Refresh Token manipulation to walk past exactly that defense. The technique is not new in its parts. The foundational primitives have been public for years through Nestori Syynimaa's <a href="https://github.com/Gerenios/AADInternals">AADInternals</a> project and Dirk-Jan Mollema's <a href="https://github.com/dirkjanm/ROADtools">roadtools</a>, and the Cyderes engagement used <code>roadtx</code> from roadtools directly for the device-registration step. What the Cyderes writeup did was frame the chained workflow against a real customer's Conditional Access stack, a production tenant with roughly 16,000 users, 82,000 devices, and 78 Conditional Access policies, and show that the controls most defenders rely on as their AiTM mitigation can be walked through end-to-end by an attacker who already has the password, ultimately reaching Global Administrator.</p>
+
+                                <p>As of today, the PhishU Framework ships that chain by default for authorized red-team engagements. Every TransparentProxy Landing Page targeting Microsoft has it enabled with no operator configuration, no per-Landing-Page toggle, and no extra step in the campaign workflow. When Conditional Access fires the block, the Framework handles the rest in the background and the captured tokens land in the same Token Explorer the operator already uses for OAuth Consent Grant and Device Code captures.</p>
+
+                                <h2>The Three Conditional Access Policies This Bypasses</h2>
+                                <p>The chain targets the three Conditional Access controls organizations most commonly deploy against AiTM:</p>
+
+                                <ul>
+                                    <li><strong>Require Compliant Device.</strong> The Microsoft Entra control that requires the signing-in device to be Intune-managed and reported as compliant. Most large enterprise tenants enforce this on at least their privileged users. Returns AADSTS 53000 (<code>managed_device_required</code>) when it blocks.</li>
+                                    <li><strong>Require Hybrid Azure AD-joined Device.</strong> Requires the device to be domain-joined to on-prem Active Directory and synced to Entra ID via Azure AD Connect. Returns AADSTS 53001 (<code>hybrid_join_required</code>).</li>
+                                    <li><strong>Require Azure AD-joined Device.</strong> The weakest of the three. Just requires the device to be joined to the tenant's directory. Common as a baseline control on tenants that do not run on-prem AD or Intune.</li>
+                                </ul>
+
+                                <p>Each of these returns a distinct error class from Microsoft's authorization endpoint. The PhishU AiTM proxy parses upstream responses, classifies the verdict and the specific policy that fired, and persists it directly onto the captured-credential row. That classification is what triggers the rest of the chain.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-media" src="../images/PhantomEntraCAPolicies.png" alt="Microsoft Entra Conditional Access policy list showing device-state policies the chain bypasses" />
+                                    <figcaption class="article-caption">The Microsoft Entra Conditional Access policy list showing the device-state controls the chain walks past. Each policy returns a distinct AADSTS code that the PhishU AiTM proxy classifies and records on the captured-credential row.</figcaption>
+                                </figure>
+
+                                <h2>What the Victim Sees</h2>
+                                <p>Without the pivot, a victim who hits a CA-enforced tenant through an AiTM proxy gets one of Microsoft's "You can't get there from here" error pages. That is a noisy outcome. The victim notices, may report it to IT, and the engagement window narrows.</p>
+
+                                <p>With the pivot, the proxy detects the CA verdict, persists it for reporting, and replaces Microsoft's error response body with a meta-refresh and JavaScript redirect to <code>login.microsoftonline.com</code>. The victim sees a routine handoff to the real Microsoft sign-in page, exactly the way a normal sign-in flow concludes. No error. No "you can't get there from here." No reason to file a ticket.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-media" src="../images/PhantomCABlock.png" alt="Microsoft's 'You can't get there from here' Conditional Access error page on login.microsoftonline.com" />
+                                    <figcaption class="article-caption">The Conditional Access error message a victim would see without the redirect, as rendered by Microsoft on the legitimate sign-in page. The PhishU AiTM proxy intercepts this response body and replaces it with a meta-refresh and JavaScript redirect to <code>login.microsoftonline.com</code> so the victim never sees it.</figcaption>
+                                </figure>
+
+                                <h2>What Happens in the Background</h2>
+                                <p>While the victim is being seamlessly redirected, an asynchronous backend worker takes over.</p>
+
+                                <p>It uses the captured password to acquire an access token scoped to the Device Registration Service. DRS is a system resource that is not subject to standard Conditional Access policies, which is what makes the rest of the chain possible. With that token, it generates a fresh RSA-2048 keypair, then registers a phantom device against the victim's tenant via the DRS enrollment endpoint, claiming Hybrid Azure AD-join via the <code>SyncJoined</code> registration type and the victim's UPN domain. If the tenant has Intune licensing, the worker then enrolls the phantom device for MDM and self-reports a compliant state. If the tenant does not have Intune, that step no-ops gracefully and the device remains domain-joined.</p>
+
+                                <p>With the phantom device registered, the worker requests a Primary Refresh Token using a JWT-bearer grant signed by the phantom device's private key, with the device certificate embedded in the JWT header. Microsoft validates the certificate against the device it just registered, accepts the cert as authoritative, and returns the PRT plus an encrypted session key. The worker unwraps the session key with the phantom device's private key, then exchanges the PRT for a Microsoft Graph access token by sending an <code>x-ms-RefreshTokenCredential</code> cookie to <code>login.microsoftonline.com/common/oauth2/authorize</code>. Microsoft's authorization endpoint evaluates Conditional Access against the phantom device's claim and accepts it.</p>
+
+                                <p>The chain finishes by exchanging the resulting authorization code for tokens and verifying with a Graph <code>/me</code> call that the access token actually works.</p>
+
+                                <h2>How It Surfaces in Token Explorer</h2>
+                                <p>This is the integration the operator cares about. The captured grant lands in the Framework's existing <strong>Captured Credentials</strong> tab as a new row with a "Phantom Device" badge and the same post-exploitation surface every other Microsoft Graph grant has. Read the inbox. Browse OneDrive and SharePoint files. Send mail as the user. Refresh the access token. Revoke the grant cleanly when the engagement ends.</p>
+
+                                <p>There is no separate workflow for phantom-device captures. No new tab to learn. No different scope model. The same Token Explorer that operators already use for OAuth Consent Grant and Device Code captures works against this grant the moment it appears.</p>
+
+                                <figure class="my-5">
+                                    <img class="article-media-wide" src="../images/PhantomTokenExplorer.png" alt="Captured Credentials view in the PhishU Framework showing a Phantom Device-badged Microsoft Entra grant ready for Token Explorer post-exploitation" />
+                                    <figcaption class="article-caption">A captured phantom-device grant in the operator's Captured Credentials view. The Phantom Device badge is the only visible difference from any other Microsoft Graph grant, and the Token Explorer actions (read inbox, browse files, send mail, refresh, revoke) work identically.</figcaption>
+                                </figure>
+
+                                <p>If a previous phantom-device grant for the same victim was captured and later revoked by the tenant admin, the Framework refreshes that row in place rather than duplicating. The revoked badge clears, the new tokens are written to the existing record, and the operator does not need to track which row is current. One user, one grant, always reflecting the latest working tokens.</p>
+
+                                <h2>The Conditional Access Posture Deliverable</h2>
+                                <p>Every Conditional Access policy that fired during the engagement is recorded on the captured-credential row. AADSTS 53000 is annotated as <code>managed_device_required</code>. AADSTS 53001 is annotated as <code>hybrid_join_required</code>. AADSTS 530021 is annotated as <code>app_protection_policy_required</code>. The annotation is exact, not paraphrased.</p>
+
+                                <p>That data flows live into the Campaign Run dashboard widget, the Org Analytics posture rollup, and the AI-generated PDF report at the end of the engagement. The customer's CISO sees not just whether their users got phished, but specifically which Conditional Access policies fired against the attempt and which were bypassed end-to-end. That is a posture deliverable, not a click-through rate. It is the kind of finding security leaders can take to a steering committee and use to drive specific policy changes, rather than another generic "users keep clicking" report.</p>
+
+                                <div class="insight-callout">
+                                    <p>Conditional Access posture is captured whether the bypass succeeds or not. A policy that genuinely held against the technique is recorded as a <code>downgrade-rejected-by-policy</code> outcome and surfaces in the report as a positive defensive datapoint. The customer learns which of their controls actually work under fire.</p>
+                                </div>
+
+                                <h2>The Honest Limits</h2>
+                                <p>Research credibility depends on naming where the technique fails. The boundaries are visible to defenders so they know what to invest in.</p>
+
+                                <p>The technique requires the victim to enter their password. The PRT acquisition step uses a Resource Owner Password Credentials grant, so a victim who would otherwise authenticate with a passkey would normally fall outside this chain. The PhishU Framework already addresses that case with another technique baked in by default: the AiTM proxy strips phishing-resistant authentication options out of the identity provider's auth-method picker before the victim sees them, plus a WebAuthn API shim that intercepts <code>navigator.credentials.get</code> / <code>.create</code> to catch passkey-first and conditional-UI flows. The picker the victim is shown contains only password and phishable-fallback factors, the victim signs in with their password, and the phantom-device chain in this post then captures normally. Full writeup of the response-side passkey bypass is in <a href="blog-testing-passkey-fallback-abuse-in-the-phishu-framework.html">our prior post on the 95 percent enforcement gap</a>. The remaining hard limit is users who are passkey-only enrolled with no password fallback configured at all in the tenant: with no fallback factor, the IdP has nothing to fall back to, and the Framework records the outcome as a passkey-only positive defensive datapoint.</p>
+
+                                <p>Server-side phishing-resistant authentication enforcement still rejects the chosen factor at policy time. Microsoft Entra Conditional Access Authentication Strength configured as <em>Phishing-resistant MFA</em>, Google Advanced Protection Program enrollment, Okta Authenticator Policy set to Possession plus Hardware-protected, and the US Federal M-22-09 mandate all defeat this chain at the policy layer. The Framework records these as positive defensive datapoints. The org's posture genuinely held.</p>
+
+                                <p>The bypass against <code>Require Compliant Device</code> requires the victim tenant to have Intune licensing for the phantom-device enrollment and compliance self-report path to land. The bypass against <code>Require Hybrid Azure AD-joined Device</code> requires the victim tenant to have Azure AD Connect Sync configured, because Microsoft will reject a SyncJoined claim against a tenant with no on-prem AD sync. Most enterprise tenants have one or the other; lab tenants typically have neither. Pivot success in any specific engagement depends on victim-tenant posture, and the Framework reports honestly per engagement.</p>
+
+                                <p>Finally, risk-based step-up at the PRT-cookie exchange step can still trigger additional verification we cannot intercept. This is rare in practice but worth naming.</p>
+
+                                <h2>The Defensive Playbook</h2>
+                                <p>The durable defenses against this technique class are not about adding more Conditional Access policies. They are about closing the specific gaps the chain exploits.</p>
+
+                                <p>The first and most important defense is to enforce phishing-resistant authentication at the policy layer for the populations that matter most. Conditional Access Authentication Strength configured as Phishing-resistant MFA, scoped to admins, finance, IT, executives, and source-code committers, defeats this chain at the policy time-of-evaluation regardless of what the phantom device claims. The chain still runs. The tokens are still issued. The customer's policy still rejects them at the resource step. Pair this with hardware-backed authenticator enrollment for the same tier, and the residual risk for that population approaches zero.</p>
+
+                                <p>The second is to monitor the audit log for unexpected device registrations. Every phantom device the chain registers shows up in the Entra audit log as an <code>Add device</code> event under the victim's identity. Most organizations do not alert on this. They should. A new device registration that the user did not initiate is a high-confidence signal of either the technique in this post or a similar abuse pattern.</p>
+
+                                <p>The third is to require TPM-attested device certificates at registration time, via an Intune device-compliance policy that requires TPM 2.0 attestation as a prerequisite. The Framework's phantom device generates a software RSA keypair, not a TPM-attested key. A tenant policy that rejects non-TPM-attested registrations will reject the phantom device at the DRS step before the rest of the chain can run. This is a Microsoft-side configuration, not a vendor-side one, and it is widely under-deployed.</p>
+
+                                <p>The fourth is the Health Attestation Service, which validates device claims against external attestation rather than self-reported compliance. Tenants that route compliance evaluation through HAS reject the self-reported compliance signal the chain produces.</p>
+
+                                <h2>The Defensive Takeaway</h2>
+                                <div class="card bg-light border-0 mt-3">
+                                    <div class="card-body p-4 p-lg-5">
+                                        <p class="mb-3">Conditional Access policies that require a compliant or joined device are necessary, but not sufficient against a determined adversary who has the password. The chain that walks past them has been documented in the public PoC literature for years; this week's Cyderes writeup framed it as a real red-team workflow against a real customer. Defenders need to be tested against it.</p>
+                                        <p class="mb-0">The PhishU Framework runs the same technique by default for authorized red-team engagements. When a Conditional Access policy fires, the Framework records exactly which policy was evaluated, walks the chain, and lands the working access token in the operator's Token Explorer. The customer's report shows which controls held and which did not, against their tenant, in their environment, with their users. Run the engagement, look at which policies actually defeated the technique, and you will know what to invest in next.</p>
+                                    </div>
+                                </div>
+
+                                <h2>Credits and Prior Art</h2>
+                                <p>The chained workflow described in this post was published on May 5, 2026 by <strong>Clint Josy</strong> at Cyderes' <strong><a href="https://www.cyderes.com/howler-cell">Howler Cell research team</a></strong> as <em><a href="https://www.cyderes.com/howler-cell/azure-ad-conditional-access-device-identity-abuse">One Password, No Device, Full Tenant: Dismantling Azure AD Conditional Access Through Device Identity Abuse</a></em>. The foundational primitives (phantom device registration via DRS spoofing, PRT manipulation, session-key derivation) have been in the public proof-of-concept literature for years through <strong>Nestori Syynimaa's <a href="https://github.com/Gerenios/AADInternals">AADInternals</a></strong> project (the canonical PowerShell toolkit, with functions including <code>Join-AADIntDeviceToAzureAD</code>, <code>Set-AADIntDeviceCompliant</code>, and <code>Get-AADIntUserPRTToken</code>) and <strong>Dirk-Jan Mollema's <a href="https://github.com/dirkjanm/ROADtools">roadtools</a></strong> project (the Cyderes engagement used <code>roadtx</code> from roadtools for the device-registration step). Microsoft Threat Intelligence has tracked state-aligned threat actors using this primitive class against real organizations. PhishU's contribution is a productized integration of the same technique into authorized red-team engagement workflows, with results landing in the Framework's existing Token Explorer, captured-credential reporting, and Conditional Access posture deliverable, so customers can measure their own posture against the technique without standing up red-team tooling separately.</p>
+                            </article>
+                        </div>
+                    </section>
+                </main>
+            </div>
+            <div id="layoutDefault_footer">
+                <footer class="footer pt-5 pb-5 mt-auto bg-dark footer-dark">
+                    <div class="container px-5">
+                        <div class="row gx-5 align-items-center">
+                            <div class="col-md-6 small">Copyright &copy; PhishU 2026</div>
+                            <div class="col-md-6 text-md-end small">
+                                <a href="https://www.linkedin.com/company/phishu">LinkedIn</a>
+                                &middot;
+                                <a href="../contact-us.html">Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="../js/site-config.js"></script>
+        <script src="../js/scripts.js?v=20260413a"></script>
+    </body>
+</html>
