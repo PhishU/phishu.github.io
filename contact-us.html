@@ -398,6 +398,11 @@
     ></textarea>
   </div>
 
+  <div aria-hidden="true" style="position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;">
+    <label for="inputCompanyWebsite">Company Website</label>
+    <input id="inputCompanyWebsite" name="company_website" type="text" tabindex="-1" autocomplete="off" />
+  </div>
+
   <div class="col-12 text-center mt-4">
   <div
   class="g-recaptcha"
@@ -408,6 +413,9 @@
 <button class="btn btn-primary" type="submit">Submit Request</button>
     <!-- status message -->
     <p id="form-status" style="display:none; margin-top:1rem;"></p>
+    <p class="text-muted small" style="margin-top:0.75rem;">
+      Prefer email? Write to <a href="mailto:curtis@phishu.net">curtis@phishu.net</a>.
+    </p>
   </div>
 </form>
 
@@ -515,37 +523,51 @@
         </script>
  <!-- Bootstrap bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- EmailJS browser SDK -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // initialize EmailJS
-    emailjs.init('JDdMkRZP6gEcdCI0H');
-
-    // intercept the form submit → trigger reCAPTCHA
     const form = document.getElementById('contact-form');
     form.addEventListener('submit', function(e) {
       e.preventDefault();
-      // this kicks off the invisible widget, which will invoke onSubmitRecaptcha(token)
       grecaptcha.execute();
     });
   });
 
-  // this is called **after** reCAPTCHA passes and injects g-recaptcha-response
+  // Invoked by the invisible reCAPTCHA after a successful challenge.
   function onSubmitRecaptcha(token) {
     const form = document.getElementById('contact-form');
-    const interest = document.getElementById('inputInterest');
-    const message = document.getElementById('inputMessage');
-    const originalMessage = message.value;
-    const selectedInterest = interest && interest.value ? interest.value : 'Not specified';
-    message.value = `Interested in: ${selectedInterest}\nOrganization: ${document.getElementById('inputOrg').value}\n\n${originalMessage}`;
-    emailjs
-      .sendForm('service_6wh1qm3', 'template_jt9di8q', form)
-      .then(() => {
+    const status = document.getElementById('form-status');
+    status.style.display = 'none';
+
+    const payload = {
+      name: document.getElementById('inputName').value,
+      email: document.getElementById('inputEmail').value,
+      org: document.getElementById('inputOrg').value,
+      service_interest: document.getElementById('inputInterest').value,
+      message: document.getElementById('inputMessage').value,
+      company_website: document.getElementById('inputCompanyWebsite').value,
+      captcha_token: token,
+    };
+
+    fetch('https://framework.phishu.net/contact_submit.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    })
+      .then(r => r.json().then(data => ({ ok: r.ok, data })))
+      .then(({ ok, data }) => {
+        if (!ok || !data || !data.success) {
+          const msg = (data && data.message)
+            ? data.message
+            : 'Could not send. Please try again or email curtis@phishu.net directly.';
+          status.style.display = 'block';
+          status.style.color = 'red';
+          status.textContent = msg;
+          if (window.grecaptcha) grecaptcha.reset();
+          return;
+        }
         document.dispatchEvent(new CustomEvent('phishu:lead_generated'));
         form.reset();
-        // show your modal…
         const modal = new bootstrap.Modal(document.getElementById('thankYouModal'));
         modal.show();
         modal._element.addEventListener('hidden.bs.modal', () => {
@@ -553,12 +575,11 @@
         }, { once: true });
       })
       .catch(err => {
-        message.value = originalMessage;
-        console.error('EmailJS error:', err);
-        const s = document.getElementById('form-status');
-        s.style.display = 'block';
-        s.style.color = 'red';
-        s.textContent = '❌ Couldn’t send—please try again;';
+        console.error('contact submit error:', err);
+        status.style.display = 'block';
+        status.style.color = 'red';
+        status.textContent = 'Could not send. Please try again or email curtis@phishu.net directly.';
+        if (window.grecaptcha) grecaptcha.reset();
       });
   }
 </script>
