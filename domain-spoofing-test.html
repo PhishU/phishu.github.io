@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="Test whether your customer's domains can be spoofed by a real attacker. The PhishU Framework auto-scores every target domain for SPF, DMARC, DKIM, and the receiver-side mail gateway, then offers spoofable domains directly in the campaign sender dropdown. No SMTP config, no DNS work." />
+        <meta name="author" content="PhishU, LLC" />
+        <title>Domain Spoofing Test Platform | PhishU Framework</title>
+        <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+        <link rel="canonical" href="https://phishu.net/domain-spoofing-test.html" />
+        <link href="css/styles.css" rel="stylesheet" />
+        <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" crossorigin="anonymous"></script>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y2W7ZWEC7"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag("js", new Date());
+            gtag("config", "G-0Y2W7ZWEC7");
+        </script>
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://phishu.net/domain-spoofing-test.html" />
+        <meta property="og:title" content="Domain Spoofing Test Platform | PhishU Framework" />
+        <meta property="og:description" content="Auto-score every target domain for spoofability and run a realistic spoof from a clean relay, with the customer's DNS remediation in every report." />
+        <meta property="og:site_name" content="PhishU" />
+        <meta property="og:image" content="https://phishu.net/images/DomainSpoofingCompanyProfile.png" />
+        <meta property="og:image:alt" content="Company Profiling page in the PhishU Framework showing automatic email-authentication scoring for a target domain" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Domain Spoofing Test Platform | PhishU Framework" />
+        <meta name="twitter:description" content="Auto-score target domains for spoofability and run a realistic spoof from a clean relay, with the customer's DNS remediation in every report." />
+        <meta name="twitter:image" content="https://phishu.net/images/DomainSpoofingCompanyProfile.png" />
+        <meta name="twitter:image:alt" content="Company Profiling page in the PhishU Framework showing automatic email-authentication scoring for a target domain" />
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": "PhishU Framework Domain Spoofing Test",
+          "applicationCategory": "SecurityApplication",
+          "operatingSystem": "Web",
+          "url": "https://phishu.net/domain-spoofing-test.html",
+          "description": "Auto-score every target domain for SPF, DMARC, DKIM, and receiver-side gateway posture, then run an authorized domain-spoofing phishing test from a dedicated outbound relay.",
+          "image": "https://phishu.net/images/DomainSpoofingCompanyProfile.png"
+        }
+        </script>
+        <style>
+            .hero-shell, .page-shell { max-width: 1200px; margin: 0 auto; }
+            .eyebrow { letter-spacing: .08em; text-transform: uppercase; font-size: .8rem; color: rgba(255,255,255,.75); }
+            .page-image { display: block; width: 100%; max-width: 100%; height: auto; border-radius: 1rem; box-shadow: 0 1rem 3rem rgba(15,23,42,.14); }
+            .section-lead { font-size: 1.1rem; line-height: 1.8; color: #5b6472; }
+            .proof-card, .feature-card, .cta-card { border: 0; border-radius: 1rem; box-shadow: 0 1rem 3rem rgba(15,23,42,.08); }
+            .feature-card { height: 100%; }
+        </style>
+    </head>
+    <body>
+        <div id="layoutDefault">
+            <div id="layoutDefault_content">
+                <main>
+                    <nav class="navbar navbar-marketing navbar-expand-lg bg-dark navbar-dark">
+                        <div class="container px-5">
+                            <a class="navbar-brand text-white" href="/">PhishU</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i data-feather="menu"></i></button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ms-auto me-lg-4">
+                                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="phishu-framework-pricing.html">Pricing</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact</a></li>
+                                </ul>
+                                <a class="btn fw-500 ms-lg-4 btn-teal" href="contact-us.html">Contact Us</a>
+                            </div>
+                        </div>
+                    </nav>
+                    <header class="page-header-ui page-header-ui-dark bg-gradient-primary-only">
+                        <div class="page-header-ui-content pt-10 pb-5">
+                            <div class="container px-5 hero-shell">
+                                <div class="row gx-5 align-items-center">
+                                    <div class="col-lg-6">
+                                        <div class="eyebrow mb-3">PhishU Framework</div>
+                                        <h1 class="page-header-ui-title mb-4">Test Whether Your Customer's Domains Can Actually Be Spoofed</h1>
+                                        <p class="page-header-ui-text mb-4">Most phishing tools refuse to model the attack that drives the most damaging social-engineering incidents: spoofing the customer's own domain. The PhishU Framework auto-scores every target domain for SPF, DMARC, DKIM, and the receiver-side mail gateway, then offers viable targets directly in the sender dropdown with no SMTP, DNS, or relay configuration on the operator's side.</p>
+                                        <a class="btn btn-teal fw-500 me-3" href="contact-us.html">Contact Us</a>
+                                        <a class="btn btn-outline-light fw-500" href="blogs/blog-spoof-discovered-sender-in-the-phishu-framework.html">Read the deep-dive</a>
+                                    </div>
+                                    <div class="col-lg-6 mt-5 mt-lg-0"><img class="page-image" src="images/DomainSpoofingCompanyProfile.png" alt="Company Profiling page in the PhishU Framework showing a target domain with its email-authentication grade, SPF, DMARC, DKIM, last-check timestamp, and detected inbound filtering" /></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="svg-border-rounded text-white"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg></div>
+                    </header>
+                    <section class="bg-white py-10">
+                        <div class="container px-5 page-shell">
+                            <div class="row gx-5 gy-4 mb-5">
+                                <div class="col-lg-4"><div class="card feature-card"><div class="card-body p-4"><h3 class="h5">Automatic posture scoring</h3><p class="mb-0">Recon grades every target domain for SPF, DMARC (policy plus pct), DKIM presence and key size, and the receiver-side mail gateway (Proofpoint, Mimecast, Barracuda, Cisco, Trend Micro, Sophos). Refreshed on every recon pass with no operator action.</p></div></div></div>
+                                <div class="col-lg-4"><div class="card feature-card"><div class="card-body p-4"><h3 class="h5">Spoofable targets surface in the dropdown</h3><p class="mb-0">When a domain's published authentication is weak enough that a realistic attacker would land mail, the domain appears as a sender option in the existing Email Settings dropdown. Pick it from a menu. The Framework auto-routes that campaign through a dedicated outbound relay.</p></div></div></div>
+                                <div class="col-lg-4"><div class="card feature-card"><div class="card-body p-4"><h3 class="h5">Customer remediation in every report</h3><p class="mb-0">Every customer report includes a graphical Email Security Posture Report Card grading each target domain with the exact DNS records to publish, ready to paste into a zone file. The lowest-graded domain is called out as the priority remediation target.</p></div></div></div>
+                            </div>
+                            <div class="row gx-5 gy-4 mb-5">
+                                <div class="col-lg-3"><div class="card feature-card"><div class="card-body p-4"><h3 class="h5">No SMTP config</h3><p class="mb-0">No relay provisioning, no DKIM key generation, no relayhost setup. The dedicated outbound infrastructure is maintained centrally.</p></div></div></div>
+                                <div class="col-lg-3"><div class="card feature-card"><div class="card-body p-4"><h3 class="h5">No DNS work</h3><p class="mb-0">Operators do not own the spoofed domain. There is nothing to publish on the operator side. Authorization rides on the existing Campaign Targets domain-validation flow.</p></div></div></div>
+                                <div class="col-lg-3"><div class="card feature-card"><div class="card-body p-4"><h3 class="h5">Header-inspection training</h3><p class="mb-0">When the technique is used in a campaign, the recipient training automatically includes a slide on inbound header inspection: reading Authentication-Results, finding the real sending IP, and what DNS the org should publish.</p></div></div></div>
+                                <div class="col-lg-3"><div class="card feature-card"><div class="card-body p-4"><h3 class="h5">Public pricing</h3><p class="mb-0">$12,000 per year for the first org, then $1,000 per additional org. Training is included. No per-seat training fees and no hidden feature tiers.</p></div></div></div>
+                            </div>
+                            <div class="row gx-5 align-items-center mb-5">
+                                <div class="col-lg-6">
+                                    <h2>The realism gap every other platform leaves open</h2>
+                                    <p class="section-lead">Every commercial phishing simulation tool restricts senders to a verified pool. Operator-owned via a DNS challenge, or platform-owned via an in-house domain inventory. Either way, the platform itself attests to the sender domain. That structural anti-abuse property keeps the platform safe to operate against any target. It also keeps it blind to supplier-impersonation, the single most common social-engineering pattern of the last decade.</p>
+                                    <p class="section-lead">The PhishU Framework now closes that gap inside the same product used for landing pages, AiTM, reporting, and training. One platform, one report, one training story.</p>
+                                </div>
+                                <div class="col-lg-6 mt-4 mt-lg-0"><img class="page-image" src="images/DomainSpoofingReportCard.png" alt="Email Security Posture Report Card section from a PhishU Framework report showing a colored grade badge, spoofability pill, SPF / DMARC / DKIM pills, gaps, and verbatim DNS-record remediation" /></div>
+                            </div>
+                            <div class="card proof-card bg-light mb-5">
+                                <div class="card-body p-4 p-lg-5">
+                                    <h2 class="h4">What makes this different</h2>
+                                    <p class="mb-3">Operators do not stitch together a sender domain, an outbound relay, a DNS posture audit, a remediation checklist, and a header-inspection training slide as separate pieces of work. PhishU produces all of it from one campaign run.</p>
+                                    <ul class="mb-0">
+                                        <li>Recon posture scoring is automatic and refreshed by the platform</li>
+                                        <li>The sender dropdown is the only operator UI; eligible domains appear there</li>
+                                        <li>The outbound relay infrastructure and IP reputation are managed centrally</li>
+                                        <li>The customer report contains exact DNS records to publish, not generic advice</li>
+                                        <li>Training is included and conditionally generated when the technique was used</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card proof-card bg-light mb-5">
+                                <div class="card-body p-4 p-lg-5">
+                                    <h2 class="h4">Honest about where it works</h2>
+                                    <p class="mb-3">A domain only qualifies as spoofable when the published authentication is actually weak. Domains with SPF -all, DMARC p=reject, and an enforcing receiver-side gateway are correctly scored low and never appear as a target. This is the design: PhishU tests domains that an attacker could already spoof today, and the same scoring engine produces the customer's posture report so they know which of their domains an attacker could not.</p>
+                                    <p class="mb-0">Customers find out which of their domains are protected and which are not, both with the same engagement.</p>
+                                </div>
+                            </div>
+                            <div class="card cta-card bg-light">
+                                <div class="card-body p-4 p-lg-5 d-lg-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h2 class="h3">Run a realistic domain-spoofing test against authorized scope</h2>
+                                        <p class="mb-0">PhishU Framework pricing is public: $12,000/year for the first org, then $1,000 per additional org, with training included.</p>
+                                    </div>
+                                    <div class="mt-4 mt-lg-0"><a class="btn btn-teal fw-500" href="contact-us.html">Talk to PhishU</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+            </div>
+            <div id="layoutDefault_footer"><footer class="footer pt-5 pb-5 mt-auto bg-dark footer-dark"><div class="container px-5"><div class="row gx-5 align-items-center"><div class="col-md-6 small">Copyright &copy; PhishU 2026</div><div class="col-md-6 text-md-end small"><a href="https://framework.phishu.net">Framework</a> &middot; <a href="blog.html">Blog</a> &middot; <a href="phishu-framework-pricing.html">Pricing</a> &middot; <a href="contact-us.html">Contact</a></div></div></div></footer></div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/site-config.js"></script>
+        <script src="js/scripts.js?v=20260413a"></script>
+    </body>
+</html>

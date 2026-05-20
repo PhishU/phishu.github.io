@@ -21,6 +21,11 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://phishu.net/domain-spoofing-test.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://phishu.net/blogs/blog-spoof-discovered-sender-in-the-phishu-framework.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
