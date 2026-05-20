@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="Every commercial phishing platform requires the operator to send from a domain they own. Real attackers don't always do this. The PhishU Framework now scores every target domain for spoofability and offers viable ones as a sender option directly in Email Settings, with no operator SMTP or DNS work required." />
+        <meta name="author" content="PhishU, LLC" />
+        <title>The Phishing Test That Awareness Platforms Don't Run: Domain Spoofability in the PhishU Framework | PhishU Blog</title>
+        <meta name="robots" content="index,follow" />
+        <link rel="canonical" href="https://phishu.net/blogs/blog-spoof-discovered-sender-in-the-phishu-framework.html" />
+        <link href="../css/styles.css" rel="stylesheet" />
+        <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" crossorigin="anonymous"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y2W7ZWEC7"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag("js", new Date());
+            gtag("config", "G-0Y2W7ZWEC7");
+        </script>
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://phishu.net/blogs/blog-spoof-discovered-sender-in-the-phishu-framework.html" />
+        <meta property="og:title" content="The Phishing Test That Awareness Platforms Don't Run: Domain Spoofability in the PhishU Framework" />
+        <meta property="og:description" content="Every commercial phishing tool makes operators send from a domain they own. The PhishU Framework scores every target domain for spoofability and offers viable ones as a sender option in Email Settings, with no operator SMTP or DNS work." />
+        <meta property="og:site_name" content="PhishU" />
+        <meta property="og:image" content="https://phishu.net/images/DomainSpoofingReportCard.png" />
+        <meta property="og:image:alt" content="Email Security Posture Report Card section produced by the PhishU Framework" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="The Phishing Test That Awareness Platforms Don't Run: Domain Spoofability in the PhishU Framework" />
+        <meta name="twitter:description" content="Every commercial phishing tool makes operators send from a domain they own. The PhishU Framework scores every target domain for spoofability and offers viable ones as a sender option in Email Settings, with no operator SMTP or DNS work." />
+        <meta name="twitter:image" content="https://phishu.net/images/DomainSpoofingReportCard.png" />
+        <meta name="twitter:image:alt" content="Email Security Posture Report Card section produced by the PhishU Framework" />
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "headline": "The Phishing Test That Awareness Platforms Don't Run: Domain Spoofability in the PhishU Framework",
+          "description": "Every commercial phishing platform requires the operator to send from a domain they own. Real attackers don't always do this. The PhishU Framework now scores every target domain for spoofability and offers viable ones as a sender option directly in Email Settings, with no operator SMTP or DNS work required.",
+          "datePublished": "2026-05-20",
+          "dateModified": "2026-05-20",
+          "author": {
+            "@type": "Organization",
+            "name": "PhishU"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "PhishU",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://phishu.net/images/logo-transparent-white-grey-small.png"
+            }
+          },
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://phishu.net/blogs/blog-spoof-discovered-sender-in-the-phishu-framework.html"
+          }
+        }
+        </script>
+        <style>
+            .article-shell {
+                max-width: 860px;
+                margin: 0 auto;
+            }
+            .article-meta {
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                font-size: 0.8rem;
+                color: #6c757d;
+            }
+            .article-shell h2 {
+                margin-top: 2.75rem;
+            }
+            .article-shell p,
+            .article-shell li {
+                font-size: 1.05rem;
+                line-height: 1.8;
+            }
+            .article-hero-image {
+                display: block;
+                width: 100%;
+                max-width: 315px;
+                margin: 0 auto 1rem;
+            }
+            .stat-callout {
+                background: #0f172a;
+                color: #f8fafc;
+                border-radius: 0.75rem;
+                padding: 2rem 2.5rem;
+                margin: 2.5rem 0;
+                box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.18);
+            }
+            .stat-callout .stat-number {
+                font-size: 3.5rem;
+                font-weight: 700;
+                line-height: 1;
+                color: #14b8a6;
+                display: block;
+                margin-bottom: 0.5rem;
+            }
+            .stat-callout p {
+                margin: 0;
+                font-size: 1.05rem;
+                line-height: 1.7;
+                color: #e2e8f0;
+            }
+            .insight-callout {
+                background: #0f172a;
+                color: #e2e8f0;
+                border-radius: 0.75rem;
+                padding: 1.75rem 2.25rem;
+                margin: 2.5rem 0;
+                box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.18);
+                border-left: 6px solid #f59e0b;
+            }
+            .insight-callout p {
+                margin: 0;
+                font-size: 1.05rem;
+                line-height: 1.75;
+            }
+            .verdict-block {
+                background: #0f172a;
+                color: #e2e8f0;
+                border-radius: 0.75rem;
+                padding: 1.5rem 1.75rem;
+                margin: 1.5rem 0;
+                font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+                font-size: 0.95rem;
+                line-height: 1.65;
+                white-space: pre-wrap;
+                overflow-x: auto;
+            }
+            .article-image {
+                display: block;
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+                border-radius: 0.75rem;
+                box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.16);
+            }
+            .article-caption {
+                margin-top: 0.75rem;
+                font-size: 0.95rem;
+                color: #6c757d;
+                text-align: center;
+            }
+            .article-shell figure {
+                margin: 2rem 0;
+            }
+            .svg-border-rounded {
+                display: block;
+                line-height: 0;
+                margin-bottom: -1px;
+            }
+            @media (max-width: 991.98px) {
+                .stat-callout {
+                    padding: 1.5rem;
+                }
+                .stat-callout .stat-number {
+                    font-size: 2.75rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="layoutDefault">
+            <div id="layoutDefault_content">
+                <main>
+                    <nav class="navbar navbar-marketing navbar-expand-lg bg-dark navbar-dark">
+                        <div class="container px-5">
+                            <a class="navbar-brand text-white" href="/">PhishU</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="#navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i data-feather="menu"></i></button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ms-auto me-lg-4">
+                                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../blog.html">Blog</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../contact-us.html">Contact</a></li>
+                                </ul>
+                                <a class="btn fw-500 ms-lg-4 btn-teal" href="../contact-us.html">Contact Us</a>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <header class="page-header-ui page-header-ui-dark bg-gradient-primary-only">
+                        <div class="page-header-ui-content pt-8 pb-5">
+                            <div class="container px-5 article-shell">
+                                <img class="article-hero-image" src="../images/PhishUFramework.png" alt="PhishU Framework" />
+                                <div class="article-meta mb-3">May 20, 2026 - PhishU Blog</div>
+                                <h1 class="page-header-ui-title mb-4">The Phishing Test That Awareness Platforms Don't Run: Domain Spoofability in the PhishU Framework</h1>
+                                <p class="page-header-ui-text mb-0">Every commercial phishing platform requires the operator to send from a domain they own. Real attackers don't always do this. The PhishU Framework now scores every target domain for spoofability and offers viable ones as a sender option directly in Email Settings, with no operator SMTP or DNS work required.</p>
+                            </div>
+                        </div>
+                        <div class="svg-border-rounded text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
+                        </div>
+                    </header>
+
+                    <section class="bg-white py-10">
+                        <div class="container px-5">
+                            <article class="article-shell">
+                                <p>A phishing test that only sends from authorized sender domains is a phishing test that ignores the most common real attacker move. Attackers often do not buy the sender's domain. They send from infrastructure they control, with whatever <code>From:</code> header gets past the target's published email-authentication policy. The single most common social-engineering pattern of the last decade, supplier impersonation, runs on this gap.</p>
+
+                                <p>Every commercial phishing simulation platform refuses to replicate it. Awareness platforms restrict senders to a verified domain pool, either domains the operator has proven they own, or domains the platform itself maintains and pre-clears for everyone. Self-hosted phishing tools sit on the operator's own infrastructure but still expect a domain the operator controls. None of those models can put a forged <code>From:</code> on a domain that neither the platform nor the operator owns. The reason is sensible. Without that restriction the egress would be open spam infrastructure. The cost is realism. The customer's actual exposure to supplier-impersonation and self-domain spoofing cannot be measured by a tool that refuses to model the attacker.</p>
+
+                                <p>The PhishU Framework now closes that gap. As of May 20, 2026, every target domain a customer's recon discovers is automatically scored for spoofability. When a domain has published its email-authentication settings weak enough that an attacker could realistically spoof it today, the domain appears as a sender option in the existing Email Settings dropdown. Operators pick it the same way they pick any other sender. The Framework handles relay selection, egress routing, capture, reporting, and per-recipient training in the background.</p>
+
+                                <div class="insight-callout">
+                                    <p>Spoofability is not a measurement of how secure the sender's mail platform is. It is a measurement of what the domain owner has told the world's mail receivers to do when an unauthenticated message arrives. A Fortune 500 can run a hardened Microsoft 365 tenant and still publish DMARC <code>p=none</code>, in which case Gmail and every other compliant receiver delivers spoofed mail anyway. The DNS-published policy is the entire defense surface, and most domains publish weak.</p>
+                                </div>
+
+                                <h2>Why the Realism Gap Exists</h2>
+                                <p>Awareness platforms ship sender restrictions as a hard requirement because their egress would otherwise be open spam infrastructure for anyone with a credit card. The restriction takes two forms. Some platforms pre-acquire and maintain a pool of phishing-test domains in-house, and customers pick a sender from that pool. Others require the operator to prove ownership of a domain through a DNS challenge before that domain can be used as a sender. Either way, the platform itself attests that the sender domain is authorized, and the egress will only relay mail with <code>From:</code> headers on attested domains. This makes the platform safe to use against any target. It also makes it incapable of testing the single attacker move that drives the most damaging social-engineering incidents.</p>
+
+                                <p>Real attackers operate from their own infrastructure and forge whatever sender passes their target's published policy. They do not verify. They look for DMARC reports going unread, SPF records published with <code>~all</code> instead of <code>-all</code>, and DKIM keys that never got rotated, and they send from those gaps. The customer's actual exposure is the gap, not the strength of the customer's outbound mail platform.</p>
+
+                                <p>A phishing test that ignores that gap is testing an attacker who does not exist.</p>
+
+                                <h2>Score Every Domain, Automatically</h2>
+                                <p>When recon runs against an organization in the PhishU Framework, every target domain receives a full email-authentication audit. The scoring engine inspects three DNS records and the receiver-side mail stack:</p>
+
+                                <p><strong>SPF (Sender Policy Framework).</strong> The score factors in whether a record exists, whether the trailing policy is hard-fail (<code>-all</code>), soft-fail (<code>~all</code>), neutral (<code>?all</code>), or open (<code>+all</code>), and whether the record exceeds the ten-lookup limit that causes most receivers to treat it as a permanent error.</p>
+
+                                <p><strong>DMARC (Domain-based Message Authentication, Reporting, and Conformance).</strong> The engine reads the published policy (<code>p=reject</code>, <code>p=quarantine</code>, or <code>p=none</code>) and the <code>pct</code> percentage the policy applies to. A reject policy is real enforcement. Quarantine sends spoofed mail to a spam folder, where many users still read it. None means receivers have no instruction at all.</p>
+
+                                <p><strong>DKIM (DomainKeys Identified Mail).</strong> The engine probes common selectors and grades whether outbound mail is cryptographically signed, and whether the signing key meets a 1024-bit floor.</p>
+
+                                <p><strong>Receiver-side secure email gateway.</strong> Recon already detects gateways like Proofpoint, Mimecast, Barracuda Email Protection, Cisco Secure Email, Trend Micro Email Security, and Sophos Email from the target's MX and SPF records. When one is present, it raises the bar significantly. Most enforce DMARC even when the sender's published policy does not, and they add anti-impersonation heuristics on top. The scoring engine downgrades any domain with a detected enforcing gateway by one spoofability tier on top of whatever the published policy implies.</p>
+
+                                <p>The composite signal is rendered as a letter grade (A+ through F) plus an explicit spoofability rating: high, medium, or low. The rating is what determines whether the domain becomes available in the Email Settings sender dropdown.</p>
+
+                                <figure>
+                                    <img class="article-image" src="../images/DomainSpoofingCompanyProfile.png" alt="Company Profiling page in the PhishU Framework showing a target domain with its email-authentication grade, SPF, DMARC, DKIM, last-check timestamp, and detected inbound filtering" />
+                                    <figcaption class="article-caption">Per-domain scoring on the Company Profiling page. Recon refreshes the grade automatically; operators do not run anything manually.</figcaption>
+                                </figure>
+
+                                <h2>When the Domain Is Spoofable, the Dropdown Offers It</h2>
+                                <p>A target domain only surfaces as a sender option when two things are true. First, recon scored it <em>high</em> for spoofability. The published authentication is weak enough that a realistic attacker would land mail. Second, the operator has completed the existing Campaign Targets domain-validation flow for that domain. The validation flow is the same one operators already use to confirm a recipient is in scope: someone at the recipient domain clicks a confirmation link. That confirmation is the authorization basis. No new authorization model, no separate attestation surface.</p>
+
+                                <p>When both gates pass, the domain shows up in the existing Domain dropdown on the campaign's Email Settings page, inside a new optgroup labeled <em>Spoofable Targets (DMARC gap)</em>. Each option is prefixed with <code>(SPOOFED)</code> so the operator sees exactly what they are choosing. Picking one auto-routes that sender through the spoof relay. Operators do not configure SMTP, do not provision an outbound relay, do not touch DNS, and do not see a separate UI flow. They pick a domain from a dropdown.</p>
+
+                                <p>The role gate is enforced again on save. Only Admin and Super Admin roles can save a spoof sender, and the same scoring and validation checks run a second time in the server-side handler to prevent any bypass via crafted form submission.</p>
+
+                                <h2>How the Framework Routes the Send</h2>
+                                <p>When the campaign runs, the send pipeline detects that the default sender is in spoof mode and routes that campaign through a separate worker. The normal Microsoft 365 Graph send path is bypassed entirely. There is no tenant mailbox, no <code>/users/{sender}/sendMail</code> call, no Graph token. The mail is submitted over SMTP AUTH with STARTTLS to a dedicated outbound relay running on its own infrastructure, with its own clean public IP, isolated from the rest of the platform.</p>
+
+                                <p>The relay accepts submission on the standard submission port, authenticates the Framework against a per-installation credential, and performs direct-to-MX delivery from its own egress IP. The PhishU NAS and tenant infrastructure are never exposed in the message headers. The receiving mail server sees only the relay's IP.</p>
+
+                                <p>Operators do not interact with any of this. They picked a domain from a dropdown. The routing is a property of the domain class.</p>
+
+                                <h2>The Posture Report Card and the Training Slide</h2>
+                                <p>Every campaign report now includes an Email Security Posture Report Card. Not just campaigns that used the spoof technique. Every campaign, every report.</p>
+
+                                <p>For each target domain in the customer's recon, the report card shows the letter grade and numeric score, the SPF, DMARC, and DKIM status in plain English, the detected gaps named specifically (<em>SPF policy is ~all soft-fail</em>, <em>DMARC p=quarantine - mail filtered to spam but not rejected</em>, <em>DKIM record not found on common selectors</em>), and concrete DNS records the customer should publish, rendered verbatim from the scoring engine and ready to paste into a zone file. The lowest-graded domain is called out as the priority remediation target.</p>
+
+                                <figure>
+                                    <img class="article-image" src="../images/DomainSpoofingReportCard.png" alt="Email Security Posture Report Card section from a PhishU Framework report - shows a colored grade badge, spoofability pill, SPF / DMARC / DKIM pills, gaps, and a verbatim DNS-record code block the customer can paste into their zone file" />
+                                    <figcaption class="article-caption">Email Security Posture Report Card section as it appears in the customer's PDF report. Every campaign ships one, even when the spoof technique was not used.</figcaption>
+                                </figure>
+
+                                <p>When a campaign actually used the spoof technique, the report also carries evidence of which domain was spoofed and the exact authentication gap that made it land. The recipient training that follows the campaign automatically includes a slide on inbound header inspection: how to read the <code>Authentication-Results</code> header to identify a DMARC fail, how to read the <code>Received</code> chain to find the real sending IP, and what the customer's IT team should publish in DNS to close the gap.</p>
+
+                                <p>One campaign produces three customer-facing outputs at once: engagement results, posture review with verbatim remediation, and per-recipient training. This is the same architectural pattern as every other technique in the Framework. Training and reporting ship with the technique, not as follow-up work.</p>
+
+                                <h2>Where the Technique Does Not Work</h2>
+                                <p>Research credibility depends on naming where the technique fails. The boundaries should be visible to defenders so they know what to invest in.</p>
+
+                                <p>The technique does not work against domains that publish <code>SPF -all</code>. Compliant receivers, including Gmail and Microsoft 365, reject mail from non-listed sending IPs on the hard-fail policy before they even evaluate DMARC. The Framework's scoring identifies these domains as <em>low</em> spoofability and they do not appear in the sender dropdown. A test send through the relay against a domain with <code>SPF -all</code> and <code>DMARC p=quarantine</code> was returned by Gmail with this exact response:</p>
+
+                                <div class="verdict-block">550-5.7.26 The MAIL FROM domain [example.com] has an SPF record with a hard fail
+550-5.7.26 policy (-all) but it fails to pass SPF checks with the ip:
+550-5.7.26 [relay-ip]. To best protect our users from spam and phishing,
+550-5.7.26 the message has been blocked.</div>
+
+                                <p>The DMARC policy never came up in the receiver's decision. SPF alone was sufficient to reject. This is the result a customer with strict SPF should get every time.</p>
+
+                                <p>The technique also does not work against receiver-side gateways like Proofpoint when they pre-emptively block on IP reputation. Many enterprise mail gateways treat entire cloud-provider ranges as low-reputation sources and refuse the SMTP connection at the banner, before any authentication check runs. The scoring engine accounts for this by downgrading any domain with a detected enforcing gateway by one spoofability tier. In a real test against a mailbox protected by Proofpoint, the connection was refused with this response:</p>
+
+                                <div class="verdict-block">554 Blocked - see https://ipcheck.proofpoint.com/?ip=...</div>
+
+                                <p>The mail never reached the recipient's mailbox. It was never quarantined. It was never seen. This is the result the customer's defense should produce, and the Framework predicts it ahead of time by surfacing the domain as <em>low</em> spoofability instead of offering it in the sender dropdown.</p>
+
+                                <p>The technique exposes domains the customer has not protected. Domains the customer has protected, through strict SPF, enforced DMARC, or a properly configured inbound gateway, defeat the technique cleanly. The Framework tells the customer which domains are in which category. That is the deliverable.</p>
+
+                                <h2>The Defensive Takeaway</h2>
+                                <div class="card bg-light border-0 mt-3">
+                                    <div class="card-body p-4 p-lg-5">
+                                        <p class="mb-3">Real attackers send spoofed mail from infrastructure they control to targets whose published DMARC tells receivers it is fine to deliver unauthenticated mail. The PhishU Framework now tests for this directly, automatically, and with no operator setup beyond the existing Campaign Targets workflow. The output is twofold: a phishing test that closes the supplier-impersonation realism gap that every other commercial platform leaves open, and a per-domain posture review with the exact DNS records the customer should publish to close the gap on their side.</p>
+                                        <p class="mb-0">The fix lives in DNS. Publish SPF with <code>-all</code>. Enable DKIM signing and rotate keys on schedule. Publish DMARC at <code>p=reject</code> with <code>pct=100</code>. Pair that with an inbound gateway configured to honor DMARC results. The Framework's posture report tells you whether you have done it, per domain, with the records ready to paste. Run the test, read the report card, publish the records, run the test again. That is the loop.</p>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                </main>
+            </div>
+            <div id="layoutDefault_footer">
+                <footer class="footer pt-5 pb-5 mt-auto bg-dark footer-dark">
+                    <div class="container px-5">
+                        <div class="row gx-5 align-items-center">
+                            <div class="col-md-6 small">Copyright &copy; PhishU 2026</div>
+                            <div class="col-md-6 text-md-end small">
+                                <a href="https://www.linkedin.com/company/phishu">LinkedIn</a>
+                                &middot;
+                                <a href="../contact-us.html">Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="../js/site-config.js"></script>
+        <script src="../js/scripts.js?v=20260413a"></script>
+    </body>
+</html>
