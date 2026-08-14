@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="Attackers are building QR codes out of markup instead of images so email filters have no picture to scan. Here is how the text-rendered quishing technique works, how the PhishU Framework reproduces it, and the three email-rendering bugs it took to ship reliably." />
+        <meta name="author" content="PhishU, LLC" />
+        <title>Quishing With No Image: Text-Rendered QR Codes in the PhishU Framework | PhishU Blog</title>
+        <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+        <link rel="canonical" href="https://phishu.net/blogs/blog-text-rendered-qr-quishing-in-the-phishu-framework.html" />
+        <link href="../css/styles.css" rel="stylesheet" />
+        <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" crossorigin="anonymous"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y2W7ZWEC7"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag("js", new Date());
+            gtag("config", "G-0Y2W7ZWEC7");
+        </script>
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://phishu.net/blogs/blog-text-rendered-qr-quishing-in-the-phishu-framework.html" />
+        <meta property="og:title" content="Quishing With No Image: Text-Rendered QR Codes in the PhishU Framework" />
+        <meta property="og:description" content="A QR code built from markup instead of an image gives email filters nothing to scan. Here is how the technique works and what it took to ship it reliably." />
+        <meta property="og:site_name" content="PhishU" />
+        <meta property="og:image" content="https://phishu.net/images/TextQRCamera.jpg" />
+        <meta property="og:image:alt" content="PhishU blog article about text-rendered QR code phishing and email filter evasion" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Quishing With No Image: Text-Rendered QR Codes in the PhishU Framework" />
+        <meta name="twitter:description" content="A QR code built from markup instead of an image gives email filters nothing to scan. Here is how the technique works and what it took to ship it reliably." />
+        <meta name="twitter:image" content="https://phishu.net/images/TextQRCamera.jpg" />
+        <meta name="twitter:image:alt" content="PhishU blog article about text-rendered QR code phishing and email filter evasion" />
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "headline": "Quishing With No Image: Text-Rendered QR Codes in the PhishU Framework",
+          "description": "Attackers are building QR codes out of markup instead of images so email filters have no picture to scan. Here is how the text-rendered quishing technique works, how the PhishU Framework reproduces it, and the three email-rendering bugs it took to ship reliably.",
+          "datePublished": "2026-08-14",
+          "dateModified": "2026-08-14",
+          "author": {
+            "@type": "Organization",
+            "name": "PhishU"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "PhishU",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://phishu.net/images/logo-transparent-white-grey-small.png"
+            }
+          },
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://phishu.net/blogs/blog-text-rendered-qr-quishing-in-the-phishu-framework.html"
+          }
+        }
+        </script>
+        <style>
+            .article-shell { max-width: 860px; margin: 0 auto; }
+            .article-meta { letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.8rem; color: #6c757d; }
+            .article-shell h2 { margin-top: 2.75rem; }
+            .article-shell p, .article-shell li { font-size: 1.05rem; line-height: 1.8; }
+            .article-hero-image { display: block; width: 100%; max-width: 315px; margin: 0 auto 1rem; }
+            .truth-table { border-radius: 0.75rem; overflow: hidden; box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.08); }
+            .truth-table th { background: #0f172a; color: #f8fafc; border: 0; }
+            .truth-table td { vertical-align: top; }
+            .callout-dark { background: #0f172a; color: #e2e8f0; border-radius: 0.75rem; padding: 1.75rem 2.25rem; margin: 2.5rem 0; box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.18); border-left: 6px solid #14b8a6; }
+            .callout-dark p { margin: 0; color: #e2e8f0; }
+            .callout-light { background: #f8fafc; border-radius: 0.75rem; padding: 1.75rem 2.25rem; margin: 2.5rem 0; border-left: 6px solid #f59e0b; }
+            .figure-placeholder { border: 2px dashed #94a3b8; border-radius: 0.75rem; background: #f8fafc; color: #64748b; text-align: center; padding: 3rem 1.5rem; margin: 2.5rem 0; font-size: 0.95rem; }
+            .article-figure { margin: 2.5rem 0; }
+            .article-figure img { display: block; width: 100%; border-radius: 0.75rem; box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.12); }
+            .article-figure figcaption { font-size: 0.9rem; color: #64748b; text-align: center; margin-top: 0.75rem; line-height: 1.5; }
+            .source-list a { word-break: break-word; }
+        </style>
+    </head>
+    <body>
+        <div id="layoutDefault">
+            <div id="layoutDefault_content">
+                <main>
+                    <nav class="navbar navbar-marketing navbar-expand-lg bg-dark navbar-dark">
+                        <div class="container px-5">
+                            <a class="navbar-brand text-white" href="/">PhishU</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i data-feather="menu"></i></button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ms-auto me-lg-4">
+                                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../blog.html">Blog</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../contact-us.html">Contact</a></li>
+                                </ul>
+                                <a class="btn fw-500 ms-lg-4 btn-teal" href="../contact-us.html">Contact Us</a>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <header class="page-header-ui page-header-ui-dark bg-gradient-primary-only">
+                        <div class="page-header-ui-content pt-8 pb-5">
+                            <div class="container px-5 article-shell">
+                                <img class="article-hero-image" src="../images/PhishUFramework.png" alt="PhishU Framework" />
+                                <div class="article-meta mb-3">August 14, 2026 - PhishU Blog</div>
+                                <h1 class="page-header-ui-title mb-4">Quishing With No Image: Text-Rendered QR Codes in the PhishU Framework</h1>
+                                <p class="page-header-ui-text mb-0">Attackers found a way to put a QR code in an email with no picture in it. The code is built from markup, so image scanners have nothing to look at. The PhishU Framework now reproduces the technique, and getting it to render reliably was harder than the evasion itself.</p>
+                            </div>
+                        </div>
+                        <div class="svg-border-rounded text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
+                        </div>
+                    </header>
+
+                    <section class="bg-white py-10">
+                        <div class="container px-5">
+                            <article class="article-shell">
+                                <p>QR code phishing, or "quishing," has been climbing for a while. The pitch is simple for an attacker: put a QR code in front of a target on a desktop, and they tend to scan it with a phone. The link opens on a device that is often less monitored, outside the corporate browser, and away from endpoint controls. The QR itself also hides the destination until the moment of scan.</p>
+
+                                <p>Defenses adapted on two fronts. Secure Email Gateways (SEGs) started scanning image attachments and embedded images, decoding any QR they found, and following the link to judge it. Email clients hardened too: most now block remote images by default and wait for the user to click "show images." That combination closed a lot of the easy quishing. A code the gateway can decode gets caught, and a code that arrives as a blocked remote image may never even display for the target to scan. So attackers changed the shape of the code.</p>
+
+                                <p>In research reported in mid-2026, Kaspersky described a variant that is getting real traction: build the QR code out of text characters and markup directly in the email body, with no image object at all. There is no attachment to open, no embedded picture to decode, and nothing for an image-based or optical-character-recognition (OCR) scanner to key off. Because it is markup and not a remote image, an inbox with images turned off still paints it. The message shows a perfectly scannable QR to the human reading it, image-blocking and all.</p>
+
+                                <div class="callout-dark">
+                                    <p><strong>The short version:</strong> An image-based QR gives a filter something to decode and can be suppressed by an inbox that blocks remote images. A QR assembled from markup does neither. It renders as a normal grid even with images disabled, and there is no image object anywhere in the message for image or OCR scanning to catch. The PhishU Framework now ships this as a second QR mode, so authorized assessments can test whether it lands.</p>
+                                </div>
+
+                                <h2>Why an Image-Based QR Is Catchable</h2>
+                                <p>When a QR arrives as an attachment or an embedded image, a modern SEG has a clear job. It extracts the image, runs QR decoding, pulls out the URL, and evaluates it against reputation, redirect chains, and known-bad lists. It can also OCR the picture to spot brand logos or login-form language rendered as an image. None of this is exotic anymore. It is table stakes for a good email filter, and it is the reason plain image quishing does not perform like it used to.</p>
+
+                                <p>The weak point is the assumption underneath it. That whole pipeline starts by finding an image. If there is no image, the pipeline never runs.</p>
+
+                                <p>There is a second, more familiar control that leans on the same assumption. Most email clients block remote images by default and only load them when the user clicks "show images." Security teams often treat that setting as a partial answer to quishing, on the theory that a QR delivered as a remote image simply will not display. Against an image-based QR, that mostly holds. Against a QR drawn from markup, it does nothing, because there is no remote image to block. The grid is part of the message layout and paints immediately.</p>
+
+                                <h2>What a Text-Rendered QR Actually Is</h2>
+                                <p>A QR code is just a grid of black and white squares. Nothing says those squares have to come from a bitmap. You can draw the same grid with block characters in a monospace font, or with a table where every cell is colored black or white. The email client paints the grid from the markup. The recipient's phone camera sees a valid QR and scans it normally.</p>
+
+                                <p>To the mail filter, the message is text and layout instructions. There is no picture to extract, so the decode-and-evaluate pipeline has nothing to work on. That is the entire trick. It is not clever cryptography. It is a category error in how a lot of email scanning is built.</p>
+
+                                <figure class="article-figure">
+                                    <img src="../images/TextQRCamera.jpg" alt="Phone camera scanning a text-rendered QR code displayed in a laptop email inbox" />
+                                    <figcaption>A text-rendered QR shown in a laptop inbox and scanned from a phone. There is no image object anywhere in the message, but the code reads normally.</figcaption>
+                                </figure>
+
+                                <h2>Reproducing It in the PhishU Framework</h2>
+                                <p>The PhishU Framework already had image-based quishing: a toolbar button in the email template editor drops a QR placeholder, and at send time the platform swaps it for a live QR pointing at the recipient's own tracking link. That is the standard, proven path, and it stays.</p>
+
+                                <p>The new work adds a second button next to it, "Insert QR (Text)." Pick it, and at send time the Framework builds the QR as an HTML table of individually colored cells instead of an image. No <code>&lt;img&gt;</code> tag. No attachment. No embedded bitmap anywhere in the message. Each recipient still gets a unique tracked destination, so click-through, engagement, and reporting all work exactly like every other technique in the platform. The operator picks a mode from a dropdown. The plumbing is handled.</p>
+
+                                <figure class="article-figure">
+                                    <img src="../images/TextQRFrameworkToolbar.png" alt="PhishU Framework email template editor toolbar showing the new Insert QR (Text) option" />
+                                    <figcaption>The email template editor's QR toolbar dropdown. The new "Insert QR (Text)" option sits next to the existing image-based QR, so the operator picks a render mode and the Framework handles the rest at send time.</figcaption>
+                                </figure>
+
+                                <p>Being precise about the implementation matters here, because it is a point of technical honesty. PhishU's version does not draw the code from Unicode block glyphs, which is the most literal reading of the in-the-wild technique. It uses a table of colored cells. Both approaches share the property that matters: no image object exists in the message for a scanner to find. The reason for the choice is reliability, and that is its own story.</p>
+
+                                <h2>Email Rendering Was the Harder Adversary</h2>
+                                <p>The evasion idea is easy to describe. Making it render as a clean, scannable square in real inboxes was the actual engineering problem. Three separate rendering bugs turned up along the way, each found by sending to real Gmail and Outlook accounts and looking at what arrived.</p>
+
+                                <h2>Bug one: font-drawn glyphs stretch on mobile</h2>
+                                <p>The first attempt was the faithful reproduction: draw the QR from half-block characters in a monospace font, inside a preformatted text block. It scanned cleanly from Outlook desktop and Gmail on the web. It failed in the Gmail mobile app, where the code rendered visibly non-square, stretched sideways so the module grid no longer read as a QR.</p>
+
+                                <p>The cause is font handling. A glyph-drawn QR depends on the mail client preserving font family, line height, and letter spacing exactly. Gmail's mobile app applies its own font boosting and auto-scaling, and it does not keep those properties in lockstep. The square grid the half-block trick relies on falls apart. This is the core reason font-glyph QR art is fragile as a production technique even though it is a faithful copy of the attacker method. It inherits every mail client's font-rendering quirks.</p>
+
+                                <h2>Bug two: Gmail silently clips the message at ~102KB</h2>
+                                <p>The fix for the font problem was to drop fonts entirely and use an HTML table where every module is a cell with an explicit pixel width and height. Table cell dimensions are the single most consistently honored layout primitive across mail engines, which is exactly why HTML email developers have nested tables for decades to survive Outlook's Word-based renderer.</p>
+
+                                <p>The naive version repeated a full inline style block on every cell. For a typical short-link QR that is well over a thousand cells, which produced roughly 230KB of HTML. Gmail silently truncates messages over about 102KB and shows a "[Message clipped]" banner. The cut landed mid-table, the browser tried to repair the broken markup, and the result was a garbled, half-collapsed grid. It looked like a CSS bug. It was not. Dumping the raw QR matrix on its own showed clean finder patterns in all three corners. The grid was structurally perfect. The only problem was payload size.</p>
+
+                                <h2>Bug three: Outlook repaints white cells grey in dark mode</h2>
+                                <p>The size fix was run-length compression. A QR has long runs of same-colored modules in its quiet-zone border and finder patterns. Merging consecutive same-color cells in a row with <code>colspan</code>, instead of emitting one cell per module, cut the markup from roughly 230KB down to about 50 to 65KB. That is comfortably under Gmail's clip threshold, and it uses nothing but legacy HTML width, height, and bgcolor attributes, with no dependency on a CSS class or a <code>&lt;style&gt;</code> block in the document head. That last part is deliberate, because the snippet gets spliced into an arbitrary spot inside an operator's already-composed email. There is no document head to control at that point.</p>
+
+                                <p>One more issue surfaced. Even with the white color set two different ways on every white cell, Outlook's automatic dark-mode recoloring overrode it and showed grey. Outlook applies that transform at render time. The source markup does not control it directly. The fix was a small override targeting the attributes Outlook stamps on the page when dark mode is active, forcing the explicit colors back. Confirmed working on Outlook desktop.</p>
+
+                                <table class="table truth-table my-5">
+                                    <thead>
+                                        <tr>
+                                            <th>Approach</th>
+                                            <th>What broke</th>
+                                            <th>Outcome</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Unicode block glyphs in a monospace font</td>
+                                            <td>Gmail mobile font boosting stretched the grid non-square</td>
+                                            <td>Rejected as fragile across clients</td>
+                                        </tr>
+                                        <tr>
+                                            <td>HTML table, one styled cell per module</td>
+                                            <td>~230KB payload tripped Gmail's ~102KB clip and garbled the render</td>
+                                            <td>Rejected on size</td>
+                                        </tr>
+                                        <tr>
+                                            <td>HTML table with colspan run-length compression</td>
+                                            <td>Outlook dark mode repainted white cells grey (fixed with an override)</td>
+                                            <td>Shipped</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <div class="callout-light">
+                                    <p><strong>Known residual, left in on purpose:</strong> Gmail's mobile app runs its own dark-mode recoloring that the Outlook-specific fix does not reach, so white cells can show as light grey there. It is cosmetic. The code still scans correctly with the tint, and the realistic quishing threat model is a code displayed on a desktop and scanned with a second device, not a code scanned off the same phone showing its own mail app. It was deprioritized rather than chased further.</p>
+                                </div>
+
+                                <h2>Why a Table of Cells and Not Unicode Art</h2>
+                                <p>It is worth stating plainly. PhishU's implementation is not a literal copy of "a QR built from Unicode characters." It reaches the same no-image-object property through a more reliable primitive. That distinction is a strength to be upfront about, not something to hide.</p>
+
+                                <p>A SEG that renders the full message to a headless browser and screenshots it before scanning would catch either approach equally, because both draw a visible QR. A SEG that looks specifically for image attachments and embedded image objects is defeated by both, because neither contains one. The delta between the two approaches is not evasion strength. It is delivery reliability across real mail clients. That is the finding worth publishing, because a lot of attacker-technique writeups never test whether the thing actually lands in an inbox, and this one turned up three reproducible client-rendering bugs on the way to something that does.</p>
+
+                                <h2>What Defenders Should Take Away</h2>
+                                <p>The lesson is not "text QR is unstoppable." It is that image-only scanning, and image-blocking, are the wrong places to draw the line.</p>
+
+                                <ul>
+                                    <li><strong>Do not treat "no image" as "no QR."</strong> Detection that renders the full message and scans the visual output catches a code no matter how it was drawn. Detection that only extracts and decodes image objects does not.</li>
+                                    <li><strong>Blocking remote images by default is not a quishing fix.</strong> It suppresses image-based codes, which is worth having, but a markup-drawn QR renders with images off. Admins should know the gap exists so it does not get quietly filed under "handled."</li>
+                                    <li><strong>Watch for QR-shaped structure in markup.</strong> A dense grid of tiny alternating black and white table cells, or a block of half-block glyphs in a monospace run, is a strong signal on its own.</li>
+                                    <li><strong>Train for the behavior, not the format.</strong> The human defense against quishing is the same regardless of how the code was built: be suspicious of a QR that wants you to authenticate, and check where it actually goes before entering anything.</li>
+                                    <li><strong>Test it against your own filters.</strong> The only way to know whether your gateway catches a markup-drawn QR is to send one through an authorized assessment and watch what happens.</li>
+                                </ul>
+
+                                <p>Like every technique in the PhishU Framework, text-rendered quishing feeds targeted training and branded reporting tied to the outcome. When a campaign uses it, recipients get a training slide that shows them this exact variant, so they learn that a QR can arrive with images disabled and still be a trap, not just the image-based codes they may have been warned about before. If a target scans and clicks, that shows up in the campaign metrics, in the report, and in the training that explains the message they received.</p>
+
+                                <h2>PhishU's View</h2>
+                                <p>Attackers do not stand still, and the interesting ones move to whatever the current defenses were not built to see. Image scanning was a good answer to image quishing, so the technique stopped using images. That is a normal cycle. The job of a realistic phishing assessment is to test the current shape of the attack, not the shape from two years ago.</p>
+
+                                <p>PhishU builds these techniques because seeing one land against your own people and your own filters is worth far more than a slide claiming you are covered. Text-rendered quishing is in the platform now, alongside the image-based version, so authorized engagements can measure exactly which one your controls stop and which one they miss.</p>
+
+                                <h2>Sources and Further Reading</h2>
+                                <ul class="source-list">
+                                    <li><a href="https://www.bizcommunity.com/article/hackers-using-text-based-qr-codes-to-bypass-email-security-tools-845233a" target="_blank" rel="noopener noreferrer">Bizcommunity: Hackers using text-based QR codes to bypass email security tools (Kaspersky research, 2026)</a></li>
+                                    <li><a href="https://www.kaspersky.com/blog/" target="_blank" rel="noopener noreferrer">Kaspersky Daily: quishing and email-security research</a></li>
+                                </ul>
+
+                                <div class="card bg-light border-0 mt-5">
+                                    <div class="card-body p-4 p-lg-5">
+                                        <h2 class="h4">Want to see which QR your filters actually catch?</h2>
+                                        <p class="mb-3">PhishU helps security teams, red teams, pentest firms, and MSSPs run realistic authorized phishing assessments, with evidence, training, and reporting tied to the outcome. Test image-based and text-rendered quishing against your real controls.</p>
+                                        <a class="btn btn-teal fw-500" href="../contact-us.html">Contact Us</a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                </main>
+            </div>
+            <div id="layoutDefault_footer">
+                <footer class="footer pt-5 pb-5 mt-auto bg-dark footer-dark">
+                    <div class="container px-5">
+                        <div class="row gx-5 align-items-center">
+                            <div class="col-md-6 small">Copyright &copy; PhishU 2026</div>
+                            <div class="col-md-6 text-md-end small">
+                                <a href="https://www.linkedin.com/company/phishu">LinkedIn</a>
+                                &middot;
+                                <a href="../contact-us.html">Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="../js/site-config.js"></script>
+        <script src="../js/scripts.js?v=20260413a"></script>
+    </body>
+</html>
