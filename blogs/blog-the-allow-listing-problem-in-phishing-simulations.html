@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="Most phishing simulations require you to allow-list the vendor first, which switches off the controls the test claims to measure. Here is what allow-listing removes from your results, why the industry does it anyway, and how to tell what your own program is actually measuring." />
+        <meta name="author" content="PhishU, LLC" />
+        <title>The Allow-Listing Problem: Why Your Phishing Simulation Results Are Not What You Think | PhishU Blog</title>
+        <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+        <link rel="canonical" href="https://phishu.net/blogs/blog-the-allow-listing-problem-in-phishing-simulations.html" />
+        <link href="../css/styles.css" rel="stylesheet" />
+        <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" crossorigin="anonymous"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y2W7ZWEC7"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag("js", new Date());
+            gtag("config", "G-0Y2W7ZWEC7");
+        </script>
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://phishu.net/blogs/blog-the-allow-listing-problem-in-phishing-simulations.html" />
+        <meta property="og:title" content="The Allow-Listing Problem: Why Your Phishing Simulation Results Are Not What You Think" />
+        <meta property="og:description" content="Allow-listing switches off the controls your phishing test claims to measure. Here is what it removes from your results, and how to tell what your program is actually testing." />
+        <meta property="og:site_name" content="PhishU" />
+        <meta property="og:image" content="https://phishu.net/images/PhishUFramework.png" />
+        <meta property="og:image:alt" content="PhishU blog article about allow-listing in phishing simulations and what it removes from your results" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="The Allow-Listing Problem: Why Your Phishing Simulation Results Are Not What You Think" />
+        <meta name="twitter:description" content="Allow-listing switches off the controls your phishing test claims to measure. Here is what it removes from your results, and how to tell what your program is actually testing." />
+        <meta name="twitter:image" content="https://phishu.net/images/PhishUFramework.png" />
+        <meta name="twitter:image:alt" content="PhishU blog article about allow-listing in phishing simulations and what it removes from your results" />
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "headline": "The Allow-Listing Problem: Why Your Phishing Simulation Results Are Not What You Think",
+          "description": "Most phishing simulations require you to allow-list the vendor first, which switches off the controls the test claims to measure. Here is what allow-listing removes from your results, why the industry does it anyway, and how to tell what your own program is actually measuring.",
+          "datePublished": "2026-08-26",
+          "dateModified": "2026-08-26",
+          "author": {
+            "@type": "Organization",
+            "name": "PhishU"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "PhishU",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://phishu.net/images/logo-transparent-white-grey-small.png"
+            }
+          },
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://phishu.net/blogs/blog-the-allow-listing-problem-in-phishing-simulations.html"
+          }
+        }
+        </script>
+    </head>
+    <body>
+        <div id="layoutDefault">
+            <div id="layoutDefault_content">
+                <main>
+                    <nav class="navbar navbar-marketing navbar-expand-lg bg-dark navbar-dark">
+                        <div class="container px-5">
+                            <a class="navbar-brand text-white" href="/">PhishU</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i data-feather="menu"></i></button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ms-auto me-lg-4">
+                                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../blog.html">Blog</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../contact-us.html">Contact</a></li>
+                                </ul>
+                                <a class="btn fw-500 ms-lg-4 btn-teal" href="../contact-us.html">Contact Us</a>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <header class="page-header-ui page-header-ui-dark bg-gradient-primary-only">
+                        <div class="page-header-ui-content pt-8 pb-5">
+                            <div class="container px-5 article-shell">
+                                <img class="article-hero-image" src="../images/PhishUFramework.png" alt="PhishU Framework" />
+                                <div class="article-meta mb-3">August 26, 2026 - PhishU Blog</div>
+                                <h1 class="page-header-ui-title mb-4">The Allow-Listing Problem: Why Your Phishing Simulation Results Are Not What You Think</h1>
+                                <p class="page-header-ui-text mb-0">Before your last phishing simulation went out, somebody added the vendor's sending addresses to an allow-list. Every control you bought to stop phishing was told to stand down for that message. The click rate you reported afterward measured something narrower than you think.</p>
+                            </div>
+                        </div>
+                    </header>
+
+                    <section class="bg-white py-8">
+                        <div class="container px-5">
+                            <article class="article-shell article-body">
+
+                                <p>Nearly every commercial phishing simulation platform asks you to do the same thing during onboarding. Add our sending IP addresses to your gateway's allow-list. Create a transport rule that skips filtering for these senders. Exempt these domains from URL rewriting. The vendors publish detailed guides for this, covering every major email security product, because without those steps their simulated phishing emails do not reliably land in the inbox.</p>
+
+                                <p>That request is reasonable from the vendor's point of view, and we will get to why. But it has a consequence that rarely makes it into the quarterly report: the test no longer measures whether a phishing email can reach your employees. It only measures what happens once it already has.</p>
+
+                                <h2 class="h3 mt-5 mb-3">What allow-listing actually switches off</h2>
+
+                                <p>An organization's defense against phishing is not one control. It is a chain, and most of the chain sits in front of the human being. A realistic phishing attempt has to survive all of it before anybody gets the chance to click.</p>
+
+                                <p>Allow-listing removes most of that chain from the test:</p>
+
+                                <ul>
+                                    <li><strong>The Secure Email Gateway (SEG).</strong> Content analysis, attachment detonation, and sender reputation scoring are skipped for allow-listed senders. That is the entire point of the exemption.</li>
+                                    <li><strong>Sender authentication checks.</strong> SPF, DKIM, and DMARC evaluation stop being a factor when the message is exempted upstream. A real attacker has to solve sender alignment. An allow-listed simulation does not.</li>
+                                    <li><strong>URL rewriting and time-of-click protection.</strong> Many exemption guides specifically instruct you to bypass link rewriting so tracking stays intact. That removes the control most likely to catch a malicious destination at the moment it matters.</li>
+                                    <li><strong>Domain and infrastructure reputation.</strong> A newly registered lookalike domain with no sending history is one of the strongest signals defenders have. Allow-listing makes that signal irrelevant, because the platform sends from established, well-reputationed infrastructure.</li>
+                                    <li><strong>Quarantine and user-reporting workflows.</strong> If the message never lands in quarantine, you never learn whether it would have.</li>
+                                </ul>
+
+                                <p>What survives is the last link in the chain: the person. That is worth measuring. It is not the same as measuring your organization's resilience to phishing, and the difference is not academic.</p>
+
+                                <h2 class="h3 mt-5 mb-3">The assumption underneath the number</h2>
+
+                                <p>Suppose an allow-listed simulation comes back with a twelve percent click rate. What can you honestly conclude?</p>
+
+                                <p>You can conclude that when a phishing email is placed directly into an employee's inbox, with no filtering, no rewriting, and no reputation penalty, about twelve percent of employees interact with it. That is a real finding about human susceptibility, and it is useful for targeting training.</p>
+
+                                <p>What you cannot conclude is that twelve percent of your workforce would fall for a real attack, because you never established that a real attack would arrive. Perhaps your gateway would have caught ninety percent of those messages, and the real exposure is much smaller. Perhaps your gateway would have caught none of them, and your exposure is exactly as measured. The test was designed in a way that cannot distinguish between those two very different organizations.</p>
+
+                                <p>That ambiguity travels. It gets averaged into a trend line, put on a slide, and shown to a board that hears "twelve percent of our people would fall for a phishing attack." Nobody in the room is lying. The number simply does not support the sentence.</p>
+
+                                <p>The same ambiguity undermines improvement claims. When a click rate drops from eighteen percent to eleven over four quarters, the natural reading is that the program worked. It might have. It might also reflect employees becoming familiar with the cadence, the templates, or the sending pattern of a specific vendor whose messages are guaranteed to arrive. An allow-listed program cannot separate those explanations, because the delivery conditions were held artificially constant the entire time.</p>
+
+                                <h2 class="h3 mt-5 mb-3">Why the industry does this anyway</h2>
+
+                                <p>It is worth being fair here, because allow-listing is not a scam and the vendors requiring it are not acting in bad faith. There are real operational reasons for it.</p>
+
+                                <p>Guaranteed delivery makes results clean. If a platform sends ten thousand simulated emails and an unpredictable share get filtered, the denominator becomes unstable and quarter-over-quarter comparisons get noisy. Allow-listing produces consistent, explainable numbers.</p>
+
+                                <p>It also protects the vendor's infrastructure. A platform sending phishing-shaped mail on behalf of thousands of customers would see its sending reputation degrade quickly if that mail were treated like real phishing. Allow-listing sidesteps the problem entirely.</p>
+
+                                <p>And it reduces friction. Filtered simulations generate help desk tickets, confused IT teams, and awkward conversations about why the security vendor's mail is in quarantine. Allow-listing makes onboarding smooth.</p>
+
+                                <p>These are legitimate engineering and commercial motivations. The problem is not that allow-listing exists. The problem is that the resulting number gets reported as though it measured the whole chain, when the test was constructed to exclude most of it.</p>
+
+                                <h2 class="h3 mt-5 mb-3">When allow-listing is the right choice</h2>
+
+                                <p>There is a version of this where allow-listing is correct, and any honest treatment has to say so.</p>
+
+                                <p>If the goal is a continuous training program, allow-listing is defensible and often preferable. You want every employee to receive the exercise, you want consistent volume, and you are measuring learning rather than infrastructure. Filtered delivery would only introduce noise into an outcome you are not trying to measure. Run it allow-listed and interpret the results as what they are: a measure of human recognition under ideal delivery conditions.</p>
+
+                                <p>The failure is not choosing allow-listing. The failure is choosing it and then reporting the result as organizational resilience.</p>
+
+                                <p>Most security programs need both measurements, and they answer different questions. How well do our people recognize a phishing attempt when they see one? And would a real attempt reach them in the first place? A program that only ever runs the first test has a blind spot precisely where the expensive controls live.</p>
+
+                                <h2 class="h3 mt-5 mb-3">How to find out what your program actually measures</h2>
+
+                                <p>Four questions will tell you where you stand. None of them require a new tool to answer.</p>
+
+                                <ol>
+                                    <li><strong>Does the platform require allow-listing to function?</strong> Ask directly, and ask what happens to delivery rates without it. If the honest answer is that campaigns become unreliable, the platform is built around guaranteed delivery.</li>
+                                    <li><strong>What exemptions are currently live in your gateway?</strong> Go look. Transport rules and connection filter entries added during onboarding tend to outlive the person who added them, and they frequently exempt more than intended.</li>
+                                    <li><strong>Is URL rewriting bypassed for simulated messages?</strong> If time-of-click protection is skipped, your most effective link-level control was never exercised.</li>
+                                    <li><strong>Where do the emails originate?</strong> Shared vendor infrastructure with mature sending reputation behaves nothing like a domain registered three days ago. The second is what an attacker uses.</li>
+                                </ol>
+
+                                <p>If the answers show a fully exempted path, that is not a crisis. It means your click rate is a human recognition metric, and you should describe it that way in reporting, rather than as a measure of whether phishing gets through.</p>
+
+                                <h2 class="h3 mt-5 mb-3">The other way to run it</h2>
+
+                                <p>The PhishU Framework defaults to no allow-listing. Campaigns send from domains acquired for the engagement, with authentication provisioned for them, through the same path a real attacker would use, and they arrive at your employees only if they survive your controls first.</p>
+
+                                <p>That design decision has a cost, and it is the reason the industry standardized the other way. Deliverability becomes an engineering problem rather than a configuration step. Domains have to be acquired and warmed. Authentication has to be correct. Landing pages have to survive automated scanning and reputation services long enough for real targets to reach them. The platform does that work, because the alternative is asking the customer to disable the controls the assessment is supposed to evaluate.</p>
+
+                                <p>The payoff is that the resulting number means something specific. When a campaign reaches an inbox, that is evidence a real one would too. When it gets filtered, that is a finding, and a good one, because it tells you a control did its job against a genuine attempt rather than against a message it was instructed to ignore.</p>
+
+                                <p>Both modes are supported. Teams running ongoing internal awareness programs can allow-list deliberately when consistent delivery is the goal. The difference is that it is a choice made for a reason, rather than a prerequisite for the product to work at all.</p>
+
+                                <h2 class="h3 mt-5 mb-3">The question worth asking</h2>
+
+                                <p>Phishing simulation is one of the few security controls that gets to grade its own homework. The organization chooses the difficulty, chooses the delivery conditions, and then reports the score.</p>
+
+                                <p>That makes one question worth putting to any program, including your current one. If a real attacker sent this exact message tomorrow, from a domain they registered last week, with no exemption anywhere in your stack, would it land in the same inboxes?</p>
+
+                                <p>If you cannot answer with evidence, the number in your last report is not measuring what its label says.</p>
+
+                                <div class="card bg-light border-0 mt-5">
+                                    <div class="card-body p-4 p-lg-5">
+                                        <h2 class="h4">Find out what actually reaches your inboxes</h2>
+                                        <p class="mb-3">PhishU helps security teams, red teams, pentest firms, and MSSPs run authorized phishing assessments through real defenses, with no allow-listing required, and with evidence, training, and reporting tied to the outcome.</p>
+                                        <a class="btn btn-teal fw-500" href="../contact-us.html">Contact Us</a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                </main>
+            </div>
+            <div id="layoutDefault_footer">
+                <footer class="footer pt-5 pb-5 mt-auto bg-dark footer-dark">
+                    <div class="container px-5">
+                        <div class="row gx-5 align-items-center">
+                            <div class="col-md-6 small">Copyright &copy; PhishU 2026</div>
+                            <div class="col-md-6 text-md-end small">
+                                <a href="https://www.linkedin.com/company/phishu">LinkedIn</a>
+                                &middot;
+                                <a href="../contact-us.html">Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="../js/site-config.js"></script>
+        <script src="../js/scripts.js?v=20260413a"></script>
+    </body>
+</html>

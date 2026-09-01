@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="Fake software update prompts work because keeping software updated is good advice. The PhishU Framework now detects which extensions a visitor actually has installed and shows an update prompt branded for one of them, using the same probe originally built to detect browser security tools." />
+        <meta name="author" content="PhishU, LLC" />
+        <title>One Probe, Two Attacks: Fake Software Update Prompts in the PhishU Framework | PhishU Blog</title>
+        <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+        <link rel="canonical" href="https://phishu.net/blogs/blog-fake-software-update-prompts-in-the-phishu-framework.html" />
+        <link href="../css/styles.css" rel="stylesheet" />
+        <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" crossorigin="anonymous"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y2W7ZWEC7"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag("js", new Date());
+            gtag("config", "G-0Y2W7ZWEC7");
+        </script>
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://phishu.net/blogs/blog-fake-software-update-prompts-in-the-phishu-framework.html" />
+        <meta property="og:title" content="One Probe, Two Attacks: Fake Software Update Prompts in the PhishU Framework" />
+        <meta property="og:description" content="A detection built to evade browser security tools turns out to answer a second question: which software does this visitor actually run? That makes a fake update prompt believable." />
+        <meta property="og:site_name" content="PhishU" />
+        <meta property="og:image" content="https://phishu.net/images/BrowserExtensionsBehaviorEnabled.png" />
+        <meta property="og:image:alt" content="The Prompt for Extension Updates toggle on the PhishU Framework Landing Page Behaviors tab" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="One Probe, Two Attacks: Fake Software Update Prompts in the PhishU Framework" />
+        <meta name="twitter:description" content="A detection built to evade browser security tools turns out to answer a second question: which software does this visitor actually run? That makes a fake update prompt believable." />
+        <meta name="twitter:image" content="https://phishu.net/images/BrowserExtensionsBehaviorEnabled.png" />
+        <meta name="twitter:image:alt" content="The Prompt for Extension Updates toggle on the PhishU Framework Landing Page Behaviors tab" />
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "headline": "One Probe, Two Attacks: Fake Software Update Prompts in the PhishU Framework",
+          "description": "Fake software update prompts work because keeping software updated is good advice. The PhishU Framework now detects which extensions a visitor actually has installed and shows an update prompt branded for one of them, using the same probe originally built to detect browser security tools.",
+          "datePublished": "2026-09-01",
+          "dateModified": "2026-09-01",
+          "author": {
+            "@type": "Organization",
+            "name": "PhishU"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "PhishU",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://phishu.net/images/logo-transparent-white-grey-small.png"
+            }
+          },
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://phishu.net/blogs/blog-fake-software-update-prompts-in-the-phishu-framework.html"
+          }
+        }
+        </script>
+    </head>
+    <body>
+        <div id="layoutDefault">
+            <div id="layoutDefault_content">
+                <main>
+                    <nav class="navbar navbar-marketing navbar-expand-lg bg-dark navbar-dark">
+                        <div class="container px-5">
+                            <a class="navbar-brand text-white" href="/">PhishU</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i data-feather="menu"></i></button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ms-auto me-lg-4">
+                                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../blog.html">Blog</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../contact-us.html">Contact</a></li>
+                                </ul>
+                                <a class="btn fw-500 ms-lg-4 btn-teal" href="../contact-us.html">Contact Us</a>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <header class="page-header-ui page-header-ui-dark bg-gradient-primary-only">
+                        <div class="page-header-ui-content pt-8 pb-5">
+                            <div class="container px-5 article-shell">
+                                <img class="article-hero-image" src="../images/PhishUFramework.png" alt="PhishU Framework" />
+                                <div class="article-meta mb-3">September 1, 2026 - PhishU Blog</div>
+                                <h1 class="page-header-ui-title mb-4">One Probe, Two Attacks: Fake Software Update Prompts in the PhishU Framework</h1>
+                                <p class="page-header-ui-text mb-0">A detection built to spot browser security tools turned out to answer a second question just as well: which software does this visitor actually run? That answer is what makes a fake update prompt believable, and it is now a landing page behavior you can switch on.</p>
+                            </div>
+                        </div>
+                    </header>
+
+                    <section class="bg-white py-8">
+                        <div class="container px-5">
+                            <article class="article-shell article-body">
+
+                                <p>Fake software update prompts have been a staple of malware delivery for years. The pattern is tracked publicly under names like SocGholish, also called FakeUpdates, along with related campaign families such as ClearFake. A visitor lands on a compromised or attacker-controlled page, a full-screen overlay tells them their browser or a familiar application is out of date, and the "Update Now" button hands them a payload instead of an update.</p>
+
+                                <p>It keeps working for a reason that has nothing to do with technical sophistication. Keeping software updated is genuinely good security advice. Users have been told for two decades to install updates promptly. The prompt asks them to do the thing they have been trained to do, and almost nobody has an independent way to check whether a given piece of software actually needs updating right now.</p>
+
+                                <h2 class="h3 mt-5 mb-3">Why the generic version stopped landing</h2>
+
+                                <p>The weakness in the classic version is that it guesses. A page that tells every visitor their Flash Player is out of date is going to be wrong for nearly all of them, and in 2026 a large share of people will recognize that particular pretext on sight. The prompt has to be plausible for the specific person looking at it, and a generic prompt cannot be.</p>
+
+                                <p>Which raises the question that makes this technique work properly: what software does this visitor actually have?</p>
+
+                                <h2 class="h3 mt-5 mb-3">A detection built for something else entirely</h2>
+
+                                <p>The PhishU Framework already had a way to answer that, built for an unrelated reason.</p>
+
+                                <p>We previously shipped browser-security-extension detection, covered in <a href="blog-when-anti-phishing-moves-into-the-browser-social-engineering-past-browser-security-extensions-in-the-phishu-framework.html">an earlier post on social engineering past browser security extensions</a>. That feature probes for a known extension by requesting a file the extension publishes at a <code>chrome-extension://</code> address. If the request succeeds, the extension is installed. If it fails, it is not. The purpose there was defensive measurement and evasion: find out whether a security tool is watching, and report on how well it performed.</p>
+
+                                <p>The probe itself is indifferent to what kind of extension it is looking for. It works exactly the same way for a password manager, a meeting tool, or an ad blocker as it does for a security product. Once you accept that, the same primitive answers a completely different question, and that question is the one the fake update pretext needs. If a visitor has a specific extension installed, a prompt branded for that specific product is dramatically more credible than a generic one, because it names something they recognize and actually use.</p>
+
+                                <p>So this ships as a second, independent capability rather than a setting on the first one. They are separate toggles on the Landing Page Behaviors tab, they can be enabled independently, and they measure different things. They just happen to share plumbing underneath.</p>
+
+                                <figure class="article-figure">
+                                    <img src="../images/BrowserExtensionsBehaviorEnabled.png" alt="PhishU Framework Landing Page Behaviors tab showing the Prompt for Extension Updates toggle enabled under Visitor Behaviors" />
+                                    <figcaption>The Behaviors tab for a landing page. "Prompt for Extension Updates (Malware Simulation)" sits under Visitor Behaviors, while "Block Browser Extension Products" sits under Block Behaviors. Both are on here, which is allowed but not required. They share the same underlying probe and are otherwise unrelated.</figcaption>
+                                </figure>
+
+                                <h2 class="h3 mt-5 mb-3">Allow-list probing, because enumeration is not allowed</h2>
+
+                                <p>There is a hard constraint worth explaining, because it shaped the design.</p>
+
+                                <p>Browsers deliberately do not let a web page enumerate installed extensions. There is no API that returns a list. That boundary exists for good privacy reasons, and it is exactly why detection has to work the way it does: you can only check for extensions you already decided to check for, one identifier at a time.</p>
+
+                                <p>That constraint produced the most interesting design decision in the build. The instinct, when no specific extension is identified, is to fall back on something like "we know they have <em>some</em> extension, so show a generic prompt." That turns out to be impossible rather than merely difficult, because there is no way to learn that an unlisted extension exists at all. So instead of faking a workaround, a visit where nothing on the list is present is recorded as its own explicit outcome. Every visit with the feature enabled resolves to one of three states: nothing recognized, prompt shown, or prompt clicked.</p>
+
+                                <p>Three outcomes is a better susceptibility signal than a binary one anyway. "We checked and found nothing to impersonate" is a genuinely different result from "we showed them a convincing prompt and they ignored it," and collapsing those two into a single number would hide the distinction.</p>
+
+                                <h2 class="h3 mt-5 mb-3">The catalog, and an honest word about what it does</h2>
+
+                                <p>The catalog behind the feature holds 604 researched, categorized extensions spanning crypto wallets, developer tools, meeting apps, password managers, accessibility tools, CRM and sales tooling, VPNs, PDF utilities, and more. Of those, 455 carry a confirmed Chrome Web Store identifier. The remainder are name-only reference entries, either because the product has no browser extension at all or because the research pass could not confirm a current identifier and correctly declined to invent one.</p>
+
+                                <p>Here is the part that matters, and it is worth being direct about it rather than quoting the big number and moving on.</p>
+
+                                <p>Confirming that an extension is installed requires knowing a real file path it publishes, and that has to be verified per extension. Two entries have that today: Bitwarden and uBlock Origin, both open source, so their manifests could be checked against public source rather than guessed. Everything else with an identifier falls into a best-effort tier that tries a small set of likely paths, including the contract Chrome documents for its own favicon interface plus a handful of common icon conventions. Those guesses will resolve correctly for some real installations and miss for others, and that hit rate has not been measured at scale. A wrong guess simply reads as "not installed," which is the same thing an absent extension looks like, so there is no accuracy penalty for trying broadly.</p>
+
+                                <p>So the accurate description is a large, researched framework with confirmed detection on two specific extensions today and a real chance, not a guarantee, of recognizing many more. It is not a tool that detects 604 browser extensions, and we are not going to describe it that way.</p>
+
+                                <figure class="article-figure">
+                                    <img src="../images/BrowserExtensionsExecuted.png" alt="A fake update prompt branded for the Claude browser extension, shown over a Microsoft 365 sign-in page during an authorized simulation" />
+                                    <figcaption>What the visitor sees. The prompt names a specific extension because the probe confirmed that extension was actually installed on this endpoint, and it renders anchored near the toolbar where a real extension notice would appear. A visitor without that extension never sees this prompt.</figcaption>
+                                </figure>
+
+                                <h2 class="h3 mt-5 mb-3">It only fires for real visitors</h2>
+
+                                <p>The overlay renders only after the genuine landing page content has mounted for a visitor who was not diverted to a block page. Anyone caught by the blocklist, an identifier mismatch, or the human check sees the usual block content and never reaches the code path that draws the prompt. That is structural rather than a separate check somebody has to remember to add, which is the difference between a rule and a guarantee.</p>
+
+                                <h2 class="h3 mt-5 mb-3">The training slide is about you specifically</h2>
+
+                                <p>Most conditional training in the platform keys off a campaign-level flag: did this campaign use a QR code, a Browser-in-Browser overlay, an attachment. Useful, but coarse.</p>
+
+                                <p>This one reads the actual event data for the individual recipient. The slide appears only for someone who was personally shown the prompt, and the content names the real extension that was impersonated for them and states whether they clicked it. Not "here is a slide about fake update scams," but "here is the Bitwarden update prompt you saw on Tuesday, and here is what you did next."</p>
+
+                                <p>That specificity is the entire premise of PhishU's approach to training. The moment of recognition, the "I fell for <em>that</em>," is what changes behavior later. A generic module about update scams does not produce it.</p>
+
+                                <h2 class="h3 mt-5 mb-3">Where the number lands in reporting, and why that took a correction</h2>
+
+                                <p>The first implementation filed shown and clicked counts under credential statistics, next to captured sessions and MFA tokens, on the reasoning that it lives in a capture table like credentials do.</p>
+
+                                <p>That was wrong, and fixing it is worth describing because the category of a metric determines how a reader treats it. Clicking a fake update prompt is a susceptibility signal. It measures whether someone would engage with an urgent-update pretext for software they recognize. It is not evidence that anything was compromised, because in this phase nothing is downloaded and nothing executes. The prompt is shown, the click is recorded, and that is the extent of it.</p>
+
+                                <p>Filing that alongside captured credentials would tell a CISO reading the report that thirty people were compromised, when what actually happened is that thirty people demonstrated they would probably click a real one. Those call for different responses. The metric now sits with attachments opened and QR codes scanned, where it belongs, as a dashboard tile and a funnel step that appear only when the behavior produced data.</p>
+
+                                <p>One related detail: the toggle state is captured per send rather than read live at report time. Flipping the setting on a landing page months later does not retroactively change what a past campaign's report and training say happened. Point-in-time correctness is easy to overlook and hard to fix after the fact.</p>
+
+                                <h2 class="h3 mt-5 mb-3">What this does not do yet</h2>
+
+                                <p>Three honest limits.</p>
+
+                                <p>There is no payload. This phase measures whether a target would click an update pretext for software they actually run. Nothing is downloaded and nothing is executed.</p>
+
+                                <p>The metric appears on the Org Analytics dashboard and in per-campaign data, but does not yet have its own section in the generated PDF report.</p>
+
+                                <p>And the best-effort detection tier is exactly that. Its real-world hit rate against genuinely installed extensions has not been measured, and the specific limits chosen are engineering judgment rather than tuned numbers.</p>
+
+                                <p>None of that is a reason to wait on shipping it. It is a reason to describe it accurately.</p>
+
+                                <h2 class="h3 mt-5 mb-3">The part worth taking away</h2>
+
+                                <p>We did not invent the fake update prompt. It is a long-documented, widely-tracked malware delivery pattern, and defenders have been writing about it for years.</p>
+
+                                <p>What is new here is the targeting. A detection surface built to find defensive tooling turns out to describe the visitor's software just as well, and that turns a pretext everyone has learned to ignore into one branded for something they personally use and trust. Same probe, two entirely different simulations, both measured and both wired into training.</p>
+
+                                <div class="card bg-light border-0 mt-5">
+                                    <div class="card-body p-4 p-lg-5">
+                                        <h2 class="h4">See whether your users would click an update prompt for software they trust</h2>
+                                        <p class="mb-3">PhishU helps security teams, red teams, pentest firms, and MSSPs run authorized phishing assessments through real defenses, with personalized training and reporting tied to what each person actually experienced.</p>
+                                        <a class="btn btn-teal fw-500" href="../contact-us.html">Contact Us</a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                </main>
+            </div>
+            <div id="layoutDefault_footer">
+                <footer class="footer pt-5 pb-5 mt-auto bg-dark footer-dark">
+                    <div class="container px-5">
+                        <div class="row gx-5 align-items-center">
+                            <div class="col-md-6 small">Copyright &copy; PhishU 2026</div>
+                            <div class="col-md-6 text-md-end small">
+                                <a href="https://www.linkedin.com/company/phishu">LinkedIn</a>
+                                &middot;
+                                <a href="../contact-us.html">Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="../js/site-config.js"></script>
+        <script src="../js/scripts.js?v=20260413a"></script>
+    </body>
+</html>
