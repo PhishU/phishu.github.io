@@ -104,17 +104,20 @@
                                 <p class="page-header-ui-text mb-0">Before your last phishing simulation went out, somebody added the vendor's sending addresses to an allow-list. Every control you bought to stop phishing was told to stand down for that message. The click rate you reported afterward measured something narrower than you think.</p>
                             </div>
                         </div>
+                        <div class="svg-border-rounded text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
+                        </div>
                     </header>
 
-                    <section class="bg-white py-8">
+                    <section class="bg-white py-10">
                         <div class="container px-5">
-                            <article class="article-shell article-body">
+                            <article class="article-shell">
 
                                 <p>Nearly every commercial phishing simulation platform asks you to do the same thing during onboarding. Add our sending IP addresses to your gateway's allow-list. Create a transport rule that skips filtering for these senders. Exempt these domains from URL rewriting. The vendors publish detailed guides for this, covering every major email security product, because without those steps their simulated phishing emails do not reliably land in the inbox.</p>
 
                                 <p>That request is reasonable from the vendor's point of view, and we will get to why. But it has a consequence that rarely makes it into the quarterly report: the test no longer measures whether a phishing email can reach your employees. It only measures what happens once it already has.</p>
 
-                                <h2 class="h3 mt-5 mb-3">What allow-listing actually switches off</h2>
+                                <h2>What allow-listing actually switches off</h2>
 
                                 <p>An organization's defense against phishing is not one control. It is a chain, and most of the chain sits in front of the human being. A realistic phishing attempt has to survive all of it before anybody gets the chance to click.</p>
 
@@ -130,7 +133,7 @@
 
                                 <p>What survives is the last link in the chain: the person. That is worth measuring. It is not the same as measuring your organization's resilience to phishing, and the difference is not academic.</p>
 
-                                <h2 class="h3 mt-5 mb-3">The assumption underneath the number</h2>
+                                <h2>The assumption underneath the number</h2>
 
                                 <p>Suppose an allow-listed simulation comes back with a twelve percent click rate. What can you honestly conclude?</p>
 
@@ -142,7 +145,7 @@
 
                                 <p>The same ambiguity undermines improvement claims. When a click rate drops from eighteen percent to eleven over four quarters, the natural reading is that the program worked. It might have. It might also reflect employees becoming familiar with the cadence, the templates, or the sending pattern of a specific vendor whose messages are guaranteed to arrive. An allow-listed program cannot separate those explanations, because the delivery conditions were held artificially constant the entire time.</p>
 
-                                <h2 class="h3 mt-5 mb-3">Why the industry does this anyway</h2>
+                                <h2>Why the industry does this anyway</h2>
 
                                 <p>It is worth being fair here, because allow-listing is not a scam and the vendors requiring it are not acting in bad faith. There are real operational reasons for it.</p>
 
@@ -154,7 +157,7 @@
 
                                 <p>These are legitimate engineering and commercial motivations. The problem is not that allow-listing exists. The problem is that the resulting number gets reported as though it measured the whole chain, when the test was constructed to exclude most of it.</p>
 
-                                <h2 class="h3 mt-5 mb-3">When allow-listing is the right choice</h2>
+                                <h2>When allow-listing is the right choice</h2>
 
                                 <p>There is a version of this where allow-listing is correct, and any honest treatment has to say so.</p>
 
@@ -164,7 +167,7 @@
 
                                 <p>Most security programs need both measurements, and they answer different questions. How well do our people recognize a phishing attempt when they see one? And would a real attempt reach them in the first place? A program that only ever runs the first test has a blind spot precisely where the expensive controls live.</p>
 
-                                <h2 class="h3 mt-5 mb-3">How to find out what your program actually measures</h2>
+                                <h2>How to find out what your program actually measures</h2>
 
                                 <p>Four questions will tell you where you stand. None of them require a new tool to answer.</p>
 
@@ -177,7 +180,7 @@
 
                                 <p>If the answers show a fully exempted path, that is not a crisis. It means your click rate is a human recognition metric, and you should describe it that way in reporting, rather than as a measure of whether phishing gets through.</p>
 
-                                <h2 class="h3 mt-5 mb-3">The other way to run it</h2>
+                                <h2>The other way to run it</h2>
 
                                 <p>The PhishU Framework defaults to no allow-listing. Campaigns send from domains acquired for the engagement, with authentication provisioned for them, through the same path a real attacker would use, and they arrive at your employees only if they survive your controls first.</p>
 
@@ -187,7 +190,7 @@
 
                                 <p>Both modes are supported. Teams running ongoing internal awareness programs can allow-list deliberately when consistent delivery is the goal. The difference is that it is a choice made for a reason, rather than a prerequisite for the product to work at all.</p>
 
-                                <h2 class="h3 mt-5 mb-3">The question worth asking</h2>
+                                <h2>The question worth asking</h2>
 
                                 <p>Phishing simulation is one of the few security controls that gets to grade its own homework. The organization chooses the difficulty, chooses the delivery conditions, and then reports the score.</p>
 

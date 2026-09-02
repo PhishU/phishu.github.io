@@ -104,23 +104,26 @@
                                 <p class="page-header-ui-text mb-0">A detection built to spot browser security tools turned out to answer a second question just as well: which software does this visitor actually run? That answer is what makes a fake update prompt believable, and it is now a landing page behavior you can switch on.</p>
                             </div>
                         </div>
+                        <div class="svg-border-rounded text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
+                        </div>
                     </header>
 
-                    <section class="bg-white py-8">
+                    <section class="bg-white py-10">
                         <div class="container px-5">
-                            <article class="article-shell article-body">
+                            <article class="article-shell">
 
                                 <p>Fake software update prompts have been a staple of malware delivery for years. The pattern is tracked publicly under names like SocGholish, also called FakeUpdates, along with related campaign families such as ClearFake. A visitor lands on a compromised or attacker-controlled page, a full-screen overlay tells them their browser or a familiar application is out of date, and the "Update Now" button hands them a payload instead of an update.</p>
 
                                 <p>It keeps working for a reason that has nothing to do with technical sophistication. Keeping software updated is genuinely good security advice. Users have been told for two decades to install updates promptly. The prompt asks them to do the thing they have been trained to do, and almost nobody has an independent way to check whether a given piece of software actually needs updating right now.</p>
 
-                                <h2 class="h3 mt-5 mb-3">Why the generic version stopped landing</h2>
+                                <h2>Why the generic version stopped landing</h2>
 
                                 <p>The weakness in the classic version is that it guesses. A page that tells every visitor their Flash Player is out of date is going to be wrong for nearly all of them, and in 2026 a large share of people will recognize that particular pretext on sight. The prompt has to be plausible for the specific person looking at it, and a generic prompt cannot be.</p>
 
                                 <p>Which raises the question that makes this technique work properly: what software does this visitor actually have?</p>
 
-                                <h2 class="h3 mt-5 mb-3">A detection built for something else entirely</h2>
+                                <h2>A detection built for something else entirely</h2>
 
                                 <p>The PhishU Framework already had a way to answer that, built for an unrelated reason.</p>
 
@@ -135,7 +138,7 @@
                                     <figcaption>The Behaviors tab for a landing page. "Prompt for Extension Updates (Malware Simulation)" sits under Visitor Behaviors, while "Block Browser Extension Products" sits under Block Behaviors. Both are on here, which is allowed but not required. They share the same underlying probe and are otherwise unrelated.</figcaption>
                                 </figure>
 
-                                <h2 class="h3 mt-5 mb-3">Allow-list probing, because enumeration is not allowed</h2>
+                                <h2>Allow-list probing, because enumeration is not allowed</h2>
 
                                 <p>There is a hard constraint worth explaining, because it shaped the design.</p>
 
@@ -145,7 +148,7 @@
 
                                 <p>Three outcomes is a better susceptibility signal than a binary one anyway. "We checked and found nothing to impersonate" is a genuinely different result from "we showed them a convincing prompt and they ignored it," and collapsing those two into a single number would hide the distinction.</p>
 
-                                <h2 class="h3 mt-5 mb-3">The catalog, and an honest word about what it does</h2>
+                                <h2>The catalog, and an honest word about what it does</h2>
 
                                 <p>The catalog behind the feature holds 604 researched, categorized extensions spanning crypto wallets, developer tools, meeting apps, password managers, accessibility tools, CRM and sales tooling, VPNs, PDF utilities, and more. Of those, 455 carry a confirmed Chrome Web Store identifier. The remainder are name-only reference entries, either because the product has no browser extension at all or because the research pass could not confirm a current identifier and correctly declined to invent one.</p>
 
@@ -160,11 +163,11 @@
                                     <figcaption>What the visitor sees. The prompt names a specific extension because the probe confirmed that extension was actually installed on this endpoint, and it renders anchored near the toolbar where a real extension notice would appear. A visitor without that extension never sees this prompt.</figcaption>
                                 </figure>
 
-                                <h2 class="h3 mt-5 mb-3">It only fires for real visitors</h2>
+                                <h2>It only fires for real visitors</h2>
 
                                 <p>The overlay renders only after the genuine landing page content has mounted for a visitor who was not diverted to a block page. Anyone caught by the blocklist, an identifier mismatch, or the human check sees the usual block content and never reaches the code path that draws the prompt. That is structural rather than a separate check somebody has to remember to add, which is the difference between a rule and a guarantee.</p>
 
-                                <h2 class="h3 mt-5 mb-3">The training slide is about you specifically</h2>
+                                <h2>The training slide is about you specifically</h2>
 
                                 <p>Most conditional training in the platform keys off a campaign-level flag: did this campaign use a QR code, a Browser-in-Browser overlay, an attachment. Useful, but coarse.</p>
 
@@ -172,7 +175,7 @@
 
                                 <p>That specificity is the entire premise of PhishU's approach to training. The moment of recognition, the "I fell for <em>that</em>," is what changes behavior later. A generic module about update scams does not produce it.</p>
 
-                                <h2 class="h3 mt-5 mb-3">Where the number lands in reporting, and why that took a correction</h2>
+                                <h2>Where the number lands in reporting, and why that took a correction</h2>
 
                                 <p>The first implementation filed shown and clicked counts under credential statistics, next to captured sessions and MFA tokens, on the reasoning that it lives in a capture table like credentials do.</p>
 
@@ -182,7 +185,7 @@
 
                                 <p>One related detail: the toggle state is captured per send rather than read live at report time. Flipping the setting on a landing page months later does not retroactively change what a past campaign's report and training say happened. Point-in-time correctness is easy to overlook and hard to fix after the fact.</p>
 
-                                <h2 class="h3 mt-5 mb-3">What this does not do yet</h2>
+                                <h2>What this does not do yet</h2>
 
                                 <p>Three honest limits.</p>
 
@@ -194,7 +197,7 @@
 
                                 <p>None of that is a reason to wait on shipping it. It is a reason to describe it accurately.</p>
 
-                                <h2 class="h3 mt-5 mb-3">The part worth taking away</h2>
+                                <h2>The part worth taking away</h2>
 
                                 <p>We did not invent the fake update prompt. It is a long-documented, widely-tracked malware delivery pattern, and defenders have been writing about it for years.</p>
 
