@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="A 2026 phishing campaign sending millions of messages a day split spam-trigger words with invisible Unicode Tags block characters to slip past Secure Email Gateway keyword rules. The PhishU Framework now applies the same technique at send time against a categorized trigger-word database, so you can test whether your own filters actually catch it." />
+        <meta name="author" content="PhishU, LLC" />
+        <title>Invisible Characters, Broken Filter Rules: Unicode Tags Obfuscation in the PhishU Framework | PhishU Blog</title>
+        <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+        <link rel="canonical" href="https://phishu.net/blogs/blog-invisible-unicode-character-spam-filter-evasion-in-the-phishu-framework.html" />
+        <link href="../css/styles.css" rel="stylesheet" />
+        <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" crossorigin="anonymous"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y2W7ZWEC7"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag("js", new Date());
+            gtag("config", "G-0Y2W7ZWEC7");
+        </script>
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://phishu.net/blogs/blog-invisible-unicode-character-spam-filter-evasion-in-the-phishu-framework.html" />
+        <meta property="og:title" content="Invisible Characters, Broken Filter Rules: Unicode Tags Obfuscation in the PhishU Framework" />
+        <meta property="og:description" content="Attackers sent millions of messages a day with invisible characters splitting the words filters scan for. The Framework now does the same thing at send time, against a categorized trigger-word database." />
+        <meta property="og:site_name" content="PhishU" />
+        <meta property="og:image" content="https://phishu.net/images/EmailUnicodeObjuscationSetting.png" />
+        <meta property="og:image:alt" content="The Obfuscation toggle active in the PhishU Framework email template editor toolbar" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Invisible Characters, Broken Filter Rules: Unicode Tags Obfuscation in the PhishU Framework" />
+        <meta name="twitter:description" content="Attackers sent millions of messages a day with invisible characters splitting the words filters scan for. The Framework now does the same thing at send time, against a categorized trigger-word database." />
+        <meta name="twitter:image" content="https://phishu.net/images/EmailUnicodeObjuscationSetting.png" />
+        <meta name="twitter:image:alt" content="The Obfuscation toggle active in the PhishU Framework email template editor toolbar" />
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "headline": "Invisible Characters, Broken Filter Rules: Unicode Tags Obfuscation in the PhishU Framework",
+          "description": "A 2026 phishing campaign sending millions of messages a day split spam-trigger words with invisible Unicode Tags block characters to slip past Secure Email Gateway keyword rules. The PhishU Framework now applies the same technique at send time against a categorized trigger-word database.",
+          "datePublished": "2026-09-04",
+          "dateModified": "2026-09-04",
+          "author": {
+            "@type": "Organization",
+            "name": "PhishU"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "PhishU",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://phishu.net/images/logo-transparent-white-grey-small.png"
+            }
+          },
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://phishu.net/blogs/blog-invisible-unicode-character-spam-filter-evasion-in-the-phishu-framework.html"
+          }
+        }
+        </script>
+        <style>
+            .article-shell { max-width: 860px; margin: 0 auto; }
+            .article-meta { letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.8rem; color: #6c757d; }
+            .article-shell h2 { margin-top: 2.75rem; }
+            .article-shell p, .article-shell li { font-size: 1.05rem; line-height: 1.8; }
+            .article-hero-image { display: block; width: 100%; max-width: 315px; margin: 0 auto 1rem; }
+            .truth-table { border-radius: 0.75rem; overflow: hidden; box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.08); }
+            .truth-table th { background: #0f172a; color: #f8fafc; border: 0; }
+            .truth-table td { vertical-align: top; }
+            .callout-dark { background: #0f172a; color: #e2e8f0; border-radius: 0.75rem; padding: 1.75rem 2.25rem; margin: 2.5rem 0; box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.18); border-left: 6px solid #14b8a6; }
+            .callout-dark p { margin: 0; color: #e2e8f0; }
+            .callout-light { background: #f8fafc; border-radius: 0.75rem; padding: 1.75rem 2.25rem; margin: 2.5rem 0; border-left: 6px solid #f59e0b; }
+            .figure-placeholder { border: 2px dashed #94a3b8; border-radius: 0.75rem; background: #f8fafc; color: #64748b; text-align: center; padding: 3rem 1.5rem; margin: 2.5rem 0; font-size: 0.95rem; }
+            .article-figure { margin: 2.5rem 0; }
+            .article-figure img { display: block; width: 100%; border-radius: 0.75rem; box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.12); }
+            .article-figure figcaption { font-size: 0.9rem; color: #64748b; text-align: center; margin-top: 0.75rem; line-height: 1.5; }
+            .source-list a { word-break: break-word; }
+        </style>
+    </head>
+    <body>
+        <div id="layoutDefault">
+            <div id="layoutDefault_content">
+                <main>
+                    <nav class="navbar navbar-marketing navbar-expand-lg bg-dark navbar-dark">
+                        <div class="container px-5">
+                            <a class="navbar-brand text-white" href="/">PhishU</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i data-feather="menu"></i></button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ms-auto me-lg-4">
+                                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../blog.html">Blog</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../contact-us.html">Contact</a></li>
+                                </ul>
+                                <a class="btn fw-500 ms-lg-4 btn-teal" href="../contact-us.html">Contact Us</a>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <header class="page-header-ui page-header-ui-dark bg-gradient-primary-only">
+                        <div class="page-header-ui-content pt-8 pb-5">
+                            <div class="container px-5 article-shell">
+                                <img class="article-hero-image" src="../images/PhishUFramework.png" alt="PhishU Framework" />
+                                <div class="article-meta mb-3">September 4, 2026 - PhishU Blog</div>
+                                <h1 class="page-header-ui-title mb-4">Invisible Characters, Broken Filter Rules: Unicode Tags Obfuscation in the PhishU Framework</h1>
+                                <p class="page-header-ui-text mb-0">A campaign that peaked at 2.37 million messages a day hid nothing at all. It just put a character you cannot see in the middle of the words your email gateway scans for. The Framework now does the same thing at send time, against a categorized database of the words filters actually watch.</p>
+                            </div>
+                        </div>
+                        <div class="svg-border-rounded text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
+                        </div>
+                    </header>
+
+                    <section class="bg-white py-10">
+                        <div class="container px-5">
+                            <article class="article-shell">
+
+                                <p>In September 2026, Microsoft Security Research and Fortra's FIRE team disclosed a phishing campaign that had been running quietly since late 2025. At its peak on February 26, 2026, it pushed 2.37 million messages in a single day. The targets were Small Business Administration loan applicants, and the mail went out through ActiveCampaign, a legitimate marketing automation platform.</p>
+
+                                <p>The interesting part is not the volume. It is that the operators were not hiding their content behind image attachments, link shorteners, or any of the usual obfuscation. They were sending readable text with readable words in it. They had simply broken those words in a place no human eye can see.</p>
+
+                                <p>The campaign also ran like a business rather than a smash and grab. The high-volume phase lasted roughly three months before dropping off sharply in mid-May, and the sending pattern followed a weekly cadence with very little weekend activity. Someone was working office hours.</p>
+
+                                <h2>The trick is a character that renders as nothing</h2>
+
+                                <p>Unicode has a block called Tags, spanning U+E0000 to U+E007F. It was added for language tagging, a purpose that was deprecated years ago, and almost nothing uses it today. The characters in it have no visual representation. A conforming renderer draws nothing at all.</p>
+
+                                <p>Insert one into the middle of a word and you get a string that reads exactly the same to a person and is a completely different sequence of bytes to a machine. "Funding" becomes "fun" plus an invisible character plus "ding". On screen it is still the word funding. To a rule looking for the literal string, it is not.</p>
+
+                                <p>Secure Email Gateways lean heavily on keyword and regular expression matching against message content. Finance and urgency vocabulary is exactly what those rules are tuned for, which is why the campaign targeted those words specifically. Some researchers file this under the broader label "ASCII Smuggling," meaning the use of non-rendering characters to carry or conceal content past a parser. For the rest of this post we will call it what it is, invisible character obfuscation.</p>
+
+                                <p>What makes the Tags block a good choice for an attacker is how thoroughly it has been forgotten. It was added to handle language tagging, that use was deprecated years ago, and essentially nothing in modern text relies on it. A rule engine author writing a keyword filter has no particular reason to think about a block of characters that nothing legitimate produces and nothing visible renders. The characters sit in a blind spot created by disuse rather than by any clever cryptography.</p>
+
+                                <p>That is also why it survives a copy and paste. The invisible character travels with the text into a ticket, a forwarded message, or a paste into a search box, which is worth knowing if you ever go looking for one of these messages after the fact.</p>
+
+                                <figure class="article-figure">
+                                    <img src="../images/UnicodeTagsObfuscation.png" alt="Diagram comparing what a recipient sees, the word urgent, against what a filter parses, urg plus an invisible U+E0020 character plus ent, with a keyword rule returning no match" />
+                                    <figcaption>The word is unchanged for the reader. The literal string the rule was written against no longer exists in the message.</figcaption>
+                                </figure>
+
+                                <h2>One toggle, applied at send time</h2>
+
+                                <p>The PhishU Framework now ships this as a switch in the email template editor. It is on by default for new templates, it sits alongside the QR and tracking pixel controls, and there is nothing to configure.</p>
+
+                                <figure class="article-figure">
+                                    <img src="../images/EmailUnicodeObjuscationSetting.png" alt="The Obfuscation button highlighted in the PhishU Framework email template editor toolbar, with a tooltip explaining that it inserts invisible Unicode characters inside spam-filter trigger words in both subject and body at send time" />
+                                    <figcaption>Highlighted means active. Your saved template stays clean; the transformation happens on the way out the door.</figcaption>
+                                </figure>
+
+                                <p>With it on, every campaign you send has its trigger words split before delivery, in both the subject line and the body. You write the email normally. Your recipients read it normally. What changes is the string your gateway's content rules are handed.</p>
+
+                                <h2>The words it targets, and why those</h2>
+
+                                <p>Matching runs against a categorized database rather than a fixed list baked into the code. There are 151 trigger words at launch across ten categories: urgency, auth, account, finance, calls to action, spam, legal, document, HR, and IT.</p>
+
+                                <p>Those categories are not arbitrary. They are the vocabulary of credential phishing, which is exactly why they are the vocabulary of gateway rules. Password. Verify. Urgent. Invoice. Overdue. Confirm. A filter has to watch those words because attackers cannot write a convincing credential lure without them, and the 2026 campaign went after finance and urgency terms for precisely that reason.</p>
+
+                                <p>Keeping the list in a database rather than in code means it grows with the threat rather than with the release cycle.</p>
+
+                                <h2>This measures a control, not a person</h2>
+
+                                <p>Most of what the Framework does is measure people. Who clicked, who entered credentials, who reported it. This is different, and it is worth being clear about why it earns a place in an assessment.</p>
+
+                                <p>Your gateway's keyword rules are an assumption until something tests them. Nobody buys a Secure Email Gateway and then verifies that its content matching survives contact with a technique attackers were using at two million messages a day. There is no dashboard for that.</p>
+
+                                <p>Running a campaign with obfuscation on gives you the answer either way. If those messages reach more inboxes than the same campaign without it, you have found a specific, fixable gap in your content filtering, and you found it from a message you authorized rather than from an incident report. If delivery is identical, your gateway is normalizing Unicode before it matches, which is the correct behavior and something most security teams currently have no way to confirm.</p>
+
+                                <p>Both outcomes are worth having. Only one of them is available without testing for it.</p>
+
+                                <p>We did not discover this technique. Microsoft and Fortra documented it in the wild, at scale, against real targets, and published the details. What the Framework adds is the ability to point it at your own organization under a signed engagement, with the results tied to the same reporting and training as every other technique it runs.</p>
+
+                                <h2>Sources</h2>
+
+                                <ul class="source-list">
+                                    <li>The Hacker News, September 2026: <a href="https://thehackernews.com/2026/09/phishing-campaign-sends-millions-of.html">Phishing Campaign Sends Millions of Emails Using Invisible Unicode Characters</a></li>
+                                    <li>Microsoft Security Research and Fortra FIRE, September 2026, on the ActiveCampaign-delivered campaign targeting SBA loan applicants.</li>
+                                </ul>
+
+                                <div class="card bg-light border-0 mt-5">
+                                    <div class="card-body p-4 p-lg-5">
+                                        <h2 class="h4">Find out whether your gateway's keyword rules survive this</h2>
+                                        <p class="mb-3">PhishU helps security teams, red teams, pentest firms, and MSSPs run authorized phishing assessments through real defenses, with personalized training and reporting tied to what each person actually experienced.</p>
+                                        <a class="btn btn-teal fw-500" href="../contact-us.html">Contact Us</a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                </main>
+            </div>
+            <div id="layoutDefault_footer">
+                <footer class="footer pt-5 pb-5 mt-auto bg-dark footer-dark">
+                    <div class="container px-5">
+                        <div class="row gx-5 align-items-center">
+                            <div class="col-md-6 small">Copyright &copy; PhishU 2026</div>
+                            <div class="col-md-6 text-md-end small">
+                                <a href="https://www.linkedin.com/company/phishu">LinkedIn</a>
+                                &middot;
+                                <a href="../contact-us.html">Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="../js/site-config.js"></script>
+        <script src="../js/scripts.js?v=20260413a"></script>
+    </body>
+</html>
