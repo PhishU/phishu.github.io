@@ -106,27 +106,21 @@
             var st = document.createElement('style');
             st.id = 'nl-inline-styles';
             st.textContent =
-                '.nl-inline{max-width:860px;margin:0 auto 2rem;background:linear-gradient(135deg,#001235,#00351f);border:1px solid rgba(32,201,151,.35);border-radius:14px;padding:1.4rem 1.5rem;box-shadow:0 6px 24px rgba(0,0,0,.12);}' +
-                '.nl-inline h3{color:#fff;font-size:1.15rem;font-weight:800;margin:0 0 .25rem;}' +
-                '.nl-inline p.nl-sub{color:rgba(255,255,255,.82);font-size:.9rem;margin:0 0 .9rem;}' +
+                '.nl-inline{max-width:860px;margin:0 auto 2rem;background:#ffffff;border:1px solid #e3e6ec;border-radius:12px;padding:1.25rem 1.4rem;}' +
+                '.nl-inline .nl-copy{color:#2b3648;font-size:1rem;font-weight:600;line-height:1.5;margin:0 0 .9rem;}' +
                 '.nl-inline form{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;position:relative;}' +
-                '.nl-inline input[type=email]{flex:1 1 240px;min-width:0;padding:.7rem .9rem;border-radius:10px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.96);font-size:.95rem;}' +
-                '.nl-inline button{flex:0 0 auto;padding:.7rem 1.3rem;border-radius:10px;border:none;background:#20c997;color:#00251a;font-weight:800;font-size:.95rem;cursor:pointer;}' +
-                '.nl-inline button:hover{background:#00E1A7;}' +
-                '.nl-inline .nl-note{color:rgba(255,255,255,.62);font-size:.75rem;margin:.6rem 0 0;width:100%;}' +
+                '.nl-inline input[type=email]{flex:1 1 240px;min-width:0;padding:.65rem .85rem;border-radius:8px;border:1px solid #ccd2dc;background:#fff;font-size:.95rem;color:#1e2a3a;}' +
+                '.nl-inline button{flex:0 0 auto;padding:.65rem 1.2rem;border-radius:8px;border:none;background:#20c997;color:#fff;font-weight:700;font-size:.95rem;cursor:pointer;}' +
+                '.nl-inline button:hover{background:#1bb587;}' +
+                '.nl-inline .nl-note{color:#8a94a3;font-size:.75rem;margin:.55rem 0 0;width:100%;}' +
                 '.nl-inline .nl-note a{color:#20c997;}' +
-                '.nl-inline .nl-inline-status{width:100%;margin:.5rem 0 0;font-size:.85rem;font-weight:700;display:none;}';
+                '.nl-inline .nl-inline-status{width:100%;margin:.5rem 0 0;font-size:.85rem;font-weight:600;display:none;}';
             document.head.appendChild(st);
         }
-        var heading = isBlogArticle ? 'Get new posts by email' : 'The week in phishing, every Monday';
-        var sub = isBlogArticle
-            ? 'Join The PhishU Weekly for new blog posts, trending phishing news, and industry metrics. One short email, unsubscribe any time.'
-            : 'One short email each Monday: trending phishing campaigns and techniques, new posts, and metrics worth knowing.';
         var wrap = document.createElement('div');
         wrap.className = 'nl-inline';
         wrap.innerHTML =
-            '<h3>' + heading + '</h3>' +
-            '<p class="nl-sub">' + sub + '</p>' +
+            '<p class="nl-copy">Keep informed with new blog posts and phishing news with our newsletter.</p>' +
             '<form class="nl-inline-form" novalidate>' +
             '<input type="email" placeholder="you@company.com" aria-label="Email address" required>' +
             '<button type="submit">Subscribe</button>' +
@@ -156,7 +150,7 @@
         var widgetId = null;
         function setStatus(msg, isErr) {
             statusEl.style.display = 'block';
-            statusEl.style.color = isErr ? '#ffd0d0' : '#bff7e5';
+            statusEl.style.color = isErr ? '#dc3545' : '#0f9d69';
             statusEl.textContent = msg;
         }
         function doSubmit(token) {
