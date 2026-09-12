@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="Subscribe to The PhishU Weekly: a short Monday email with trending phishing campaigns and techniques, new PhishU blog posts, and industry metrics. Pick your topics." />
+        <meta name="author" content="PhishU, LLC" />
+        <title>The PhishU Weekly Newsletter | PhishU</title>
+        <link rel="canonical" href="https://phishu.net/newsletter.html" />
+        <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+        <link href="css/styles.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+		<link rel="manifest" href="site.webmanifest">
+		<link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
+		<meta name="msapplication-TileColor" content="#da532c">
+		<meta name="theme-color" content="#ffffff">
+        <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" crossorigin="anonymous"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y2W7ZWEC7"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag("js", new Date());
+            gtag("config", "G-0Y2W7ZWEC7");
+        </script>
+		<meta property="og:type" content="website"/>
+		<meta property="og:url" content="https://phishu.net/newsletter.html"/>
+		<meta property="og:title" content="The PhishU Weekly Newsletter"/>
+		<meta property="og:description" content="Your Monday rundown of the week in phishing. Pick your topics."/>
+		<meta property="og:site_name" content="PhishU"/>
+		<meta property="og:image" content="https://phishu.net/images/unfurl2.png"/>
+		<meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:domain" content="phishu.net" />
+		<meta name="twitter:title" content="The PhishU Weekly Newsletter" />
+		<meta name="twitter:description" content="Trending phishing news, new blog posts, and metrics. One short email each Monday." />
+		<meta name="twitter:image" content="https://phishu.net/images/unfurl2.png" />
+        <style>
+            .nl-card { max-width: 640px; margin: 0 auto; }
+            .nl-topic { display: flex; align-items: flex-start; gap: 0.85rem; padding: 1rem 1.15rem; border: 1px solid #e3e6ec; border-radius: 0.75rem; margin-bottom: 0.85rem; background: #fff; transition: border-color .15s, box-shadow .15s; }
+            .nl-topic:hover { border-color: #20c997; box-shadow: 0 2px 12px rgba(32,201,151,0.12); }
+            .nl-topic input { margin-top: 0.2rem; width: 1.15rem; height: 1.15rem; accent-color: #20c997; flex: 0 0 auto; }
+            .nl-topic .nl-t-title { font-weight: 700; color: #1e2a3a; }
+            .nl-topic .nl-t-desc { font-size: 0.88rem; color: #6c757d; margin-top: 0.15rem; }
+            #nl-status { display:none; margin-top: 1rem; font-weight: 600; }
+        </style>
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    </head>
+    <body>
+        <div id="layoutDefault">
+            <div id="layoutDefault_content">
+                <main>
+                    <nav class="navbar navbar-marketing navbar-expand-lg bg-transparent navbar-dark fixed-top"></nav>
+                    <header class="page-header-ui page-header-ui-dark bg-gradient-primary-only">
+                        <div class="page-header-ui-content pt-10">
+                            <div class="container px-5 text-center">
+                                <div class="row gx-5 justify-content-center">
+                                    <div class="col-lg-8">
+                                        <h1 class="page-header-ui-title mb-3">The PhishU Weekly</h1>
+                                        <p class="page-header-ui-text mb-0">One short email every Monday: trending phishing campaigns and techniques, our newest blog posts, and metrics from the week in the industry. You pick the topics, and quiet weeks stay short.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="svg-border-rounded text-light">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
+                        </div>
+                    </header>
+                    <section class="bg-light py-10">
+                        <div class="container px-5">
+                            <div class="nl-card">
+                                <form id="nl-form" novalidate>
+                                    <label class="text-dark fw-bold mb-2" for="nl-email">Email address</label>
+                                    <input class="form-control form-control-solid py-4 mb-4" id="nl-email" name="email" type="email" placeholder="you@company.com" required />
+
+                                    <div class="text-dark fw-bold mb-2">What do you want to hear about?</div>
+                                    <div class="text-muted small mb-3">All on by default. Uncheck anything you would rather skip.</div>
+
+                                    <div class="nl-topic">
+                                        <input type="checkbox" id="nl-trends" name="trends" checked />
+                                        <label for="nl-trends" class="mb-0">
+                                            <div class="nl-t-title">Trending phishing campaigns, actors &amp; techniques</div>
+                                            <div class="nl-t-desc">The phishing and social-engineering stories that mattered this week.</div>
+                                        </label>
+                                    </div>
+                                    <div class="nl-topic">
+                                        <input type="checkbox" id="nl-blogs" name="blogs" checked />
+                                        <label for="nl-blogs" class="mb-0">
+                                            <div class="nl-t-title">New blog posts</div>
+                                            <div class="nl-t-desc">Every new PhishU write-up the week it lands.</div>
+                                        </label>
+                                    </div>
+                                    <div class="nl-topic">
+                                        <input type="checkbox" id="nl-metrics" name="metrics" checked />
+                                        <label for="nl-metrics" class="mb-0">
+                                            <div class="nl-t-title">Phishing metrics &amp; industry stats</div>
+                                            <div class="nl-t-desc">A few numbers worth knowing from the week in phishing.</div>
+                                        </label>
+                                    </div>
+
+                                    <div aria-hidden="true" style="position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;">
+                                        <label for="nl-company-website">Company Website</label>
+                                        <input id="nl-company-website" name="company_website" type="text" tabindex="-1" autocomplete="off" />
+                                    </div>
+
+                                    <div class="g-recaptcha" data-sitekey="6Lfj-34rAAAAALGqhJvIGximbY2N8Uayzvq1PPNR" data-callback="onSubmitNewsletter" data-size="invisible"></div>
+
+                                    <button class="btn btn-teal btn-lg w-100 mt-2" type="submit">Subscribe to The PhishU Weekly</button>
+                                    <p id="nl-status"></p>
+                                    <p class="text-muted small mt-3 mb-0">Double opt-in: we send a confirmation link first. No spam, unsubscribe any time. See our <a href="https://framework.phishu.net/privacypolicy/">Privacy Policy</a>.</p>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+            </div>
+            <div id="layoutDefault_footer">
+                <footer class="footer pt-10 pb-5 mt-auto bg-dark footer-dark">
+                    <div class="container px-5">
+                        <div class="row gx-5">
+                            <div class="col-lg-3">
+                                <div class="footer-brand">PhishU</div>
+                                <div class="mb-3">Get Caught Then Join the School</div>
+                                <div class="icon-list-social mb-5">
+                                    <a class="icon-list-social-link" href="https://www.linkedin.com/company/phishu"><i class="fab fa-linkedin"></i></a>
+                                    <a class="icon-list-social-link" href="https://x.com/curtbraz"><i class="fab fa-twitter"></i></a>
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="row gx-5">
+                                    <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+                                        <div class="text-uppercase-expanded text-xs mb-4">Services</div>
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="mb-2"><a href="phishu-framework-pricing.html">PhishU Framework SaaS</a></li>
+                                            <li class="mb-2"><a href="phishing-assessment-consulting.html">Social Engineering Consulting</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
+                                        <div class="text-uppercase-expanded text-xs mb-4">More</div>
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="mb-2"><a href="blog.html">Blog</a></li>
+                                            <li class="mb-2"><a href="newsletter.html">Newsletter</a></li>
+                                            <li class="mb-2"><a href="about-us.html">About Us</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="text-uppercase-expanded text-xs mb-4">Contact</div>
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="mb-2"><a href="mailto:curtis@phishu.net">Email</a></li>
+                                            <li class="mb-2"><a href="contact-us.html">Get Started</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-5" />
+                        <div class="row gx-5 align-items-center">
+                            <div class="col-md-6 small">Copyright &copy; PhishU 2026</div>
+                            <div class="col-md-6 text-md-end small">
+                                <a href="https://framework.phishu.net/privacypolicy/">Privacy Policy</a>
+                                &middot;
+                                <a href="https://framework.phishu.net/privacypolicy/">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/site-config.js"></script>
+        <script src="js/scripts.js?v=20260413a"></script>
+        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+        <script>
+            AOS.init({ disable: 'mobile', duration: 600, once: true });
+
+            document.addEventListener('DOMContentLoaded', function () {
+                var form = document.getElementById('nl-form');
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    var email = document.getElementById('nl-email').value.trim();
+                    if (!email) { return; }
+                    if (!(document.getElementById('nl-trends').checked ||
+                          document.getElementById('nl-blogs').checked ||
+                          document.getElementById('nl-metrics').checked)) {
+                        showStatus('Pick at least one topic to subscribe.', true);
+                        return;
+                    }
+                    grecaptcha.execute();
+                });
+            });
+
+            function showStatus(msg, isError) {
+                var s = document.getElementById('nl-status');
+                s.style.display = 'block';
+                s.style.color = isError ? '#dc3545' : '#0f9d69';
+                s.textContent = msg;
+            }
+
+            function onSubmitNewsletter(token) {
+                var payload = {
+                    email: document.getElementById('nl-email').value.trim(),
+                    topics: {
+                        trends: document.getElementById('nl-trends').checked,
+                        blogs: document.getElementById('nl-blogs').checked,
+                        metrics: document.getElementById('nl-metrics').checked
+                    },
+                    company_website: document.getElementById('nl-company-website').value,
+                    captcha_token: token
+                };
+                fetch('/newsletter/subscribe.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                })
+                .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+                .then(function (res) {
+                    if (window.grecaptcha) { grecaptcha.reset(); }
+                    if (res.ok && res.d && res.d.success) {
+                        document.getElementById('nl-form').reset();
+                        showStatus(res.d.message || 'Almost done. Check your email to confirm.', false);
+                    } else {
+                        showStatus((res.d && res.d.message) ? res.d.message : 'Something went wrong. Please try again.', true);
+                    }
+                })
+                .catch(function () {
+                    if (window.grecaptcha) { grecaptcha.reset(); }
+                    showStatus('Network error. Please try again.', true);
+                });
+            }
+        </script>
+    </body>
+</html>

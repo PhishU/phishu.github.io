@@ -23,6 +23,7 @@
         const homeClass = isCurrentPage('index.html') ? ' active' : '';
         const blogClass = isCurrentPage('blog.html') ? ' active' : '';
         const pricingClass = isCurrentPage('phishu-framework-pricing.html') ? ' active' : '';
+        const newsletterClass = isCurrentPage('newsletter.html') ? ' active' : '';
 
         marketingNav.innerHTML = `
             <div class="container px-5">
@@ -85,6 +86,7 @@
                         </li>
                         <li class="nav-item"><a class="nav-link" href="https://framework.phishu.net">PhishU Framework</a></li>
                         <li class="nav-item"><a class="nav-link${blogClass}" href="${localHref('blog.html')}">Blog</a></li>
+                        <li class="nav-item"><a class="nav-link${newsletterClass}" href="${localHref('newsletter.html')}">Newsletter</a></li>
                         <li class="nav-item"><a class="nav-link${pricingClass}" href="${localHref('phishu-framework-pricing.html')}">Transparent Pricing</a></li>
                     </ul>
                     <a class="btn fw-500 ms-lg-4 btn-teal" href="${localHref('contact-us.html')}">Contact Us<i class="ms-2" data-feather="arrow-right"></i></a>
@@ -94,6 +96,117 @@
 
     // Activate feather
     feather.replace();
+
+    injectNewsletterPrompts();
+
+    function injectNewsletterPrompts() {
+        var onHub = isCurrentPage('blog.html');
+        if (!onHub && !isBlogArticle) { return; }
+        if (!document.getElementById('nl-inline-styles')) {
+            var st = document.createElement('style');
+            st.id = 'nl-inline-styles';
+            st.textContent =
+                '.nl-inline{max-width:860px;margin:0 auto 2rem;background:linear-gradient(135deg,#001235,#00351f);border:1px solid rgba(32,201,151,.35);border-radius:14px;padding:1.4rem 1.5rem;box-shadow:0 6px 24px rgba(0,0,0,.12);}' +
+                '.nl-inline h3{color:#fff;font-size:1.15rem;font-weight:800;margin:0 0 .25rem;}' +
+                '.nl-inline p.nl-sub{color:rgba(255,255,255,.82);font-size:.9rem;margin:0 0 .9rem;}' +
+                '.nl-inline form{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;position:relative;}' +
+                '.nl-inline input[type=email]{flex:1 1 240px;min-width:0;padding:.7rem .9rem;border-radius:10px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.96);font-size:.95rem;}' +
+                '.nl-inline button{flex:0 0 auto;padding:.7rem 1.3rem;border-radius:10px;border:none;background:#20c997;color:#00251a;font-weight:800;font-size:.95rem;cursor:pointer;}' +
+                '.nl-inline button:hover{background:#00E1A7;}' +
+                '.nl-inline .nl-note{color:rgba(255,255,255,.62);font-size:.75rem;margin:.6rem 0 0;width:100%;}' +
+                '.nl-inline .nl-note a{color:#20c997;}' +
+                '.nl-inline .nl-inline-status{width:100%;margin:.5rem 0 0;font-size:.85rem;font-weight:700;display:none;}';
+            document.head.appendChild(st);
+        }
+        var heading = isBlogArticle ? 'Get new posts by email' : 'The week in phishing, every Monday';
+        var sub = isBlogArticle
+            ? 'Join The PhishU Weekly for new blog posts, trending phishing news, and industry metrics. One short email, unsubscribe any time.'
+            : 'One short email each Monday: trending phishing campaigns and techniques, new posts, and metrics worth knowing.';
+        var wrap = document.createElement('div');
+        wrap.className = 'nl-inline';
+        wrap.innerHTML =
+            '<h3>' + heading + '</h3>' +
+            '<p class="nl-sub">' + sub + '</p>' +
+            '<form class="nl-inline-form" novalidate>' +
+            '<input type="email" placeholder="you@company.com" aria-label="Email address" required>' +
+            '<button type="submit">Subscribe</button>' +
+            '<div style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;"><input type="text" tabindex="-1" autocomplete="off" class="nl-hp"></div>' +
+            '<div class="nl-inline-recaptcha"></div>' +
+            '<p class="nl-inline-status"></p>' +
+            '<p class="nl-note">Prefer to choose topics? <a href="' + localHref('newsletter.html') + '">Full signup page</a>.</p>' +
+            '</form>';
+        var placed = false;
+        if (onHub) {
+            var sec = document.querySelector('section.bg-light .container.px-5');
+            if (sec) { sec.insertBefore(wrap, sec.firstChild); placed = true; }
+        } else {
+            var art = document.querySelector('article.article-shell');
+            if (art && art.parentNode) { art.parentNode.insertBefore(wrap, art); placed = true; }
+        }
+        if (!placed) {
+            var hdr = document.querySelector('header.page-header-ui');
+            if (hdr && hdr.parentNode) { hdr.parentNode.insertBefore(wrap, hdr.nextSibling); placed = true; }
+        }
+        if (placed) { wireNewsletterInline(wrap); }
+    }
+
+    function wireNewsletterInline(wrap) {
+        var form = wrap.querySelector('form');
+        var statusEl = wrap.querySelector('.nl-inline-status');
+        var widgetId = null;
+        function setStatus(msg, isErr) {
+            statusEl.style.display = 'block';
+            statusEl.style.color = isErr ? '#ffd0d0' : '#bff7e5';
+            statusEl.textContent = msg;
+        }
+        function doSubmit(token) {
+            var email = form.querySelector('input[type=email]').value.trim();
+            var hp = form.querySelector('.nl-hp').value;
+            fetch('/newsletter/subscribe.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email, company_website: hp, captcha_token: token })
+            })
+            .then(function(r){ return r.json().then(function(d){ return { ok: r.ok, d: d }; }); })
+            .then(function(res){
+                if (window.grecaptcha && widgetId !== null) { grecaptcha.reset(widgetId); }
+                if (res.ok && res.d && res.d.success) { form.reset(); setStatus(res.d.message || 'Check your email to confirm.', false); }
+                else { setStatus((res.d && res.d.message) ? res.d.message : 'Something went wrong. Please try again.', true); }
+            })
+            .catch(function(){ if (window.grecaptcha && widgetId !== null) { grecaptcha.reset(widgetId); } setStatus('Network error. Please try again.', true); });
+        }
+        function renderWidget() {
+            widgetId = grecaptcha.render(wrap.querySelector('.nl-inline-recaptcha'), {
+                sitekey: '6Lfj-34rAAAAALGqhJvIGximbY2N8Uayzvq1PPNR',
+                size: 'invisible',
+                callback: doSubmit
+            });
+        }
+        form.addEventListener('submit', function(e){
+            e.preventDefault();
+            var email = form.querySelector('input[type=email]').value.trim();
+            if (!email) { return; }
+            if (widgetId === null) {
+                setStatus('One moment...', false);
+                loadRecaptcha(function(){ renderWidget(); grecaptcha.execute(widgetId); });
+            } else {
+                grecaptcha.execute(widgetId);
+            }
+        });
+    }
+
+    var __nlRcLoading = false, __nlRcCbs = [];
+    function loadRecaptcha(cb) {
+        if (window.grecaptcha && window.grecaptcha.render) { cb(); return; }
+        __nlRcCbs.push(cb);
+        if (__nlRcLoading) { return; }
+        __nlRcLoading = true;
+        window.__nlRcReady = function(){ __nlRcCbs.forEach(function(f){ f(); }); __nlRcCbs = []; };
+        var sc = document.createElement('script');
+        sc.src = 'https://www.google.com/recaptcha/api.js?render=explicit&onload=__nlRcReady';
+        sc.async = true; sc.defer = true;
+        document.head.appendChild(sc);
+    }
 
     const hasGtag = typeof window.gtag === 'function';
     const trackEvent = function(name, params) {
