@@ -124,8 +124,8 @@
                                 <p>None of it was proofread. "Theses messages will be deleted" and "placed on hold untill action is taken" both shipped exactly as written. Outlook had already flagged the sender enough to block embedded content by default, showing a "sender isn't in your Safe senders list" banner above the message. It still reached the inbox.</p>
 
                                 <figure class="article-figure">
-                                    <img src="../images/M365QuarantineEmailTemplate.png" alt="The recreated fake Microsoft mail-quarantine phishing email rebuilt as a selectable email template inside the PhishU Framework email editor" />
-                                    <figcaption>The recreated lure, rebuilt as a selectable email template inside the PhishU Framework. Same subject line, same body, same wording as the original, typos included.</figcaption>
+                                    <img src="../images/M365QuarantinePhishingEmailReceived.png" alt="The actual phishing email as received in Outlook, showing the fake Microsoft mail-quarantine notice, the DeliveryPortal sender, and the Safe senders blocked-content banner" />
+                                    <figcaption>The actual email as it arrived, unedited. Outlook already distrusted the sender enough to block embedded content by default, and it still reached the inbox.</figcaption>
                                 </figure>
 
                                 <h2>The Infrastructure Behind It</h2>
@@ -147,6 +147,11 @@
 
                                 <h2>Same Day, Same Framework</h2>
                                 <p>PhishU exists to turn real attacker behavior into training your own people actually see. The same day this landed, we rebuilt it as an email template inside the Framework: same subject, same body, same typos, same button. Nothing sanitized, because sanitizing it would defeat the point.</p>
+
+                                <figure class="article-figure">
+                                    <img src="../images/M365QuarantineEmailTemplate.png" alt="The recreated fake Microsoft mail-quarantine phishing email rebuilt as a selectable email template inside the PhishU Framework email editor" />
+                                    <figcaption>The same lure, rebuilt as a selectable email template inside the PhishU Framework. Same subject line, same body, same wording, typos included.</figcaption>
+                                </figure>
 
                                 <p>The template is a normal Email-type entry in the catalog now. Select it for a campaign the way you would select any other template, and it slots into the Framework's existing send path with no special setup. The training tie-in is not something bolted on for this one template: whatever email a recipient actually received during a campaign is automatically reconstructed for them in their post-campaign training, so the review shows the exact message they were sent rather than a generic description of "a phishing email." Pick the template, run the campaign, and the training side takes care of itself.</p>
 
