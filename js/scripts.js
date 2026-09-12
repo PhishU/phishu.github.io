@@ -132,7 +132,12 @@
         var placed = false;
         if (onHub) {
             var sec = document.querySelector('section.bg-light .container.px-5');
-            if (sec) { sec.insertBefore(wrap, sec.firstChild); placed = true; }
+            if (sec) {
+                sec.insertBefore(wrap, sec.firstChild);
+                var hubSection = sec.closest('section');
+                if (hubSection) { hubSection.style.setProperty('padding-top', '1.5rem', 'important'); }
+                placed = true;
+            }
         } else {
             var art = document.querySelector('article.article-shell');
             if (art && art.parentNode) { art.parentNode.insertBefore(wrap, art); placed = true; }
