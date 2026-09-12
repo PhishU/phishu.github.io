@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="A fake Microsoft mail-quarantine notice landed in our own inbox this week from a throwaway domain riding SendGrid, passing SPF, DKIM, and DMARC clean. Here is the forensic breakdown and the email template we built from it the same day." />
+        <meta name="author" content="PhishU, LLC" />
+        <title>Campaign Watch: A Fake Microsoft Mail-Quarantine Notice Hitting Inboxes This Week | PhishU Blog</title>
+        <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+        <link rel="canonical" href="https://phishu.net/blogs/blog-campaign-watch-fake-microsoft-mail-quarantine-notice.html" />
+        <link href="../css/styles.css" rel="stylesheet" />
+        <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" crossorigin="anonymous"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y2W7ZWEC7"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag("js", new Date());
+            gtag("config", "G-0Y2W7ZWEC7");
+        </script>
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://phishu.net/blogs/blog-campaign-watch-fake-microsoft-mail-quarantine-notice.html" />
+        <meta property="og:title" content="Campaign Watch: A Fake Microsoft Mail-Quarantine Notice Hitting Inboxes This Week" />
+        <meta property="og:description" content="A throwaway domain riding SendGrid passed SPF, DKIM, and DMARC clean, then pushed a fake Microsoft mail-quarantine notice. Here is the breakdown, and the email template we built from it the same day." />
+        <meta property="og:site_name" content="PhishU" />
+        <meta property="og:image" content="https://phishu.net/images/M365QuarantineEmailTemplate.png" />
+        <meta property="og:image:alt" content="The recreated fake Microsoft mail-quarantine phishing email rebuilt as a selectable template inside the PhishU Framework" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Campaign Watch: A Fake Microsoft Mail-Quarantine Notice Hitting Inboxes This Week" />
+        <meta name="twitter:description" content="A throwaway domain riding SendGrid passed SPF, DKIM, and DMARC clean, then pushed a fake Microsoft mail-quarantine notice. Here is the breakdown, and the email template we built from it the same day." />
+        <meta name="twitter:image" content="https://phishu.net/images/M365QuarantineEmailTemplate.png" />
+        <meta name="twitter:image:alt" content="The recreated fake Microsoft mail-quarantine phishing email rebuilt as a selectable template inside the PhishU Framework" />
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "headline": "Campaign Watch: A Fake Microsoft Mail-Quarantine Notice Hitting Inboxes This Week",
+          "description": "A fake Microsoft mail-quarantine notice landed in our own inbox this week from a throwaway domain riding SendGrid, passing SPF, DKIM, and DMARC clean. Here is the forensic breakdown and the email template we built from it the same day.",
+          "datePublished": "2026-09-12",
+          "dateModified": "2026-09-12",
+          "author": {
+            "@type": "Organization",
+            "name": "PhishU"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "PhishU",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://phishu.net/images/logo-transparent-white-grey-small.png"
+            }
+          },
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://phishu.net/blogs/blog-campaign-watch-fake-microsoft-mail-quarantine-notice.html"
+          }
+        }
+        </script>
+        <style>
+            .article-shell { max-width: 860px; margin: 0 auto; }
+            .article-meta { letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.8rem; color: #6c757d; }
+            .article-shell h2 { margin-top: 2.75rem; }
+            .article-shell p, .article-shell li { font-size: 1.05rem; line-height: 1.8; }
+            .article-hero-image { display: block; width: 100%; max-width: 315px; margin: 0 auto 1rem; }
+            .truth-table { border-radius: 0.75rem; overflow: hidden; box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.08); }
+            .truth-table th { background: #0f172a; color: #f8fafc; border: 0; }
+            .truth-table td { vertical-align: top; }
+            .callout-dark { background: #0f172a; color: #e2e8f0; border-radius: 0.75rem; padding: 1.75rem 2.25rem; margin: 2.5rem 0; box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.18); border-left: 6px solid #14b8a6; }
+            .callout-dark p { margin: 0; color: #e2e8f0; }
+            .callout-light { background: #f8fafc; border-radius: 0.75rem; padding: 1.75rem 2.25rem; margin: 2.5rem 0; border-left: 6px solid #f59e0b; }
+            .figure-placeholder { border: 2px dashed #94a3b8; border-radius: 0.75rem; background: #f8fafc; color: #64748b; text-align: center; padding: 3rem 1.5rem; margin: 2.5rem 0; font-size: 0.95rem; }
+            .article-figure { margin: 2.5rem 0; }
+            .article-figure img { display: block; width: 100%; border-radius: 0.75rem; box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.12); }
+            .article-figure figcaption { font-size: 0.9rem; color: #64748b; text-align: center; margin-top: 0.75rem; line-height: 1.5; }
+            .source-list a { word-break: break-word; }
+        </style>
+    </head>
+    <body>
+        <div id="layoutDefault">
+            <div id="layoutDefault_content">
+                <main>
+                    <nav class="navbar navbar-marketing navbar-expand-lg bg-dark navbar-dark">
+                        <div class="container px-5">
+                            <a class="navbar-brand text-white" href="/">PhishU</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i data-feather="menu"></i></button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ms-auto me-lg-4">
+                                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../blog.html">Blog</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../contact-us.html">Contact</a></li>
+                                </ul>
+                                <a class="btn fw-500 ms-lg-4 btn-teal" href="../contact-us.html">Contact Us</a>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <header class="page-header-ui page-header-ui-dark bg-gradient-primary-only">
+                        <div class="page-header-ui-content pt-8 pb-5">
+                            <div class="container px-5 article-shell">
+                                <img class="article-hero-image" src="../images/PhishUFramework.png" alt="PhishU Framework" />
+                                <div class="article-meta mb-3">September 12, 2026 - PhishU Blog</div>
+                                <h1 class="page-header-ui-title mb-4">Campaign Watch: A Fake Microsoft Mail-Quarantine Notice Hitting Inboxes This Week</h1>
+                                <p class="page-header-ui-text mb-0">Two phishing emails from the same campaign landed in our own inbox this week. Both cleared filtering. Here is what was actually behind them, and the email template we built from it the same day.</p>
+                            </div>
+                        </div>
+                        <div class="svg-border-rounded text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
+                        </div>
+                    </header>
+
+                    <section class="bg-white py-10">
+                        <div class="container px-5">
+                            <article class="article-shell">
+                                <p>Two phishing emails from the same campaign landed in our own inbox this week. Both made it past filtering. Neither one was clever, and that is the more useful story. Most of what actually reaches a real inbox is not clever. It rides infrastructure that already has a reputation to spend.</p>
+
+                                <div class="callout-dark">
+                                    <p><strong>The short version:</strong> A throwaway domain sent through a legitimate bulk email service passes SPF, DKIM, and DMARC cleanly, because that authentication checks the domain's own configuration, not whether the domain has any business being in your inbox. The lure was a fake Microsoft mail-quarantine notice. We turned it into a selectable email template inside the PhishU Framework the same day.</p>
+                                </div>
+
+                                <h2>What Landed</h2>
+                                <p>The message was styled as a Microsoft mail-delivery report: a small four-color Office-style logo, a headline reading "Mail Delivery Report," and a body claiming four messages had failed to deliver and would be deleted in 24 hours unless the recipient clicked "Restore Messages." Red urgency text repeated the deadline. A confidentiality footer rounded out the message, copied from somewhere else and never edited for the medium. It still refers to the email as "this fax."</p>
+
+                                <p>None of it was proofread. "Theses messages will be deleted" and "placed on hold untill action is taken" both shipped exactly as written. Outlook had already flagged the sender enough to block embedded content by default, showing a "sender isn't in your Safe senders list" banner above the message. It still reached the inbox.</p>
+
+                                <figure class="article-figure">
+                                    <img src="../images/M365QuarantineEmailTemplate.png" alt="The recreated fake Microsoft mail-quarantine phishing email rebuilt as a selectable email template inside the PhishU Framework email editor" />
+                                    <figcaption>The recreated lure, rebuilt as a selectable email template inside the PhishU Framework. Same subject line, same body, same wording as the original, typos included.</figcaption>
+                                </figure>
+
+                                <h2>The Infrastructure Behind It</h2>
+                                <p>The lure copy is not the interesting part. What got it delivered is.</p>
+
+                                <p>The message authenticated against a domain almost nobody would recognize: kasrelsalam[.]co. SPF, DKIM, and DMARC all passed. That is worth pausing on, because "authentication passed" is exactly the signal a lot of security awareness training tells people to trust. Authentication only confirms a domain is configured correctly for its own mail. It says nothing about whether that domain has any legitimate reason to be sending to you. kasrelsalam[.]co configured its records perfectly and still exists only to spam.</p>
+
+                                <p>The mail itself rode through SendGrid, a mainstream bulk email platform used by a large share of legitimate companies. That is also why the pattern is durable: SendGrid's own sending reputation is generally solid, an account is easy to open, and a spam or phishing domain sent through it inherits some of that trust by association. The flaw is not specific to SendGrid: it is the standing cost of any large, accessible email platform, and every major provider deals with some version of it.</p>
+
+                                <p>One more detail gave the operation away completely. The message's "From" field, instead of a normal display name and address, contained a long block of encoded text. Decoded, it turned out to be internal bulk-mail tracking data: a campaign date code, an audience-segment label, a subscriber ID, a couple of tracking hashes, and an A/B creative-variant tag. That data belongs inside a tracked link, not in a sender's address. A mail-merge template broke somewhere in the sending pipeline and dumped its own personalization payload into the wrong field. It is a small thing, and it is exactly the kind of detail that separates a hand-built targeted lure from a rented mail-merge blast running against a purchased list.</p>
+
+                                <h2>What This Means for Your Inbox</h2>
+                                <ul>
+                                    <li><strong>Authentication passing is not a trust signal on its own.</strong> SPF, DKIM, and DMARC only prove a sender configured its own domain correctly, not that the domain has any right to be emailing you.</li>
+                                    <li><strong>A bulk-mail platform's reputation is not the sender's reputation.</strong> Anyone can open an account with a legitimate email service, and the messages inherit the platform's deliverability along with it.</li>
+                                    <li><strong>Broken personalization is a real, checkable tell.</strong> A garbled sender name or tracking junk where an address should be usually means the message came off an automated blast, not a targeted attacker who checked their work.</li>
+                                    <li><strong>Low-effort campaigns have not gone away.</strong> Grammar mistakes and mismatched boilerplate, like referring to an email as a fax, are still some of the most reliable signals, even with sharper attacks getting most of the attention.</li>
+                                </ul>
+
+                                <h2>Same Day, Same Framework</h2>
+                                <p>PhishU exists to turn real attacker behavior into training your own people actually see. The same day this landed, we rebuilt it as an email template inside the Framework: same subject, same body, same typos, same button. Nothing sanitized, because sanitizing it would defeat the point.</p>
+
+                                <p>The template is a normal Email-type entry in the catalog now. Select it for a campaign the way you would select any other template, and it slots into the Framework's existing send path with no special setup. The training tie-in is not something bolted on for this one template: whatever email a recipient actually received during a campaign is automatically reconstructed for them in their post-campaign training, so the review shows the exact message they were sent rather than a generic description of "a phishing email." Pick the template, run the campaign, and the training side takes care of itself.</p>
+
+                                <p>Phishing operators do not wait for a quarterly update to change their pretext. Staying current on what is actually landing in real inboxes, then getting it in front of your own users before the next wave does, is the whole model.</p>
+
+                                <div class="card bg-light border-0 mt-5">
+                                    <div class="card-body p-4 p-lg-5">
+                                        <h2 class="h4">Want training built on what is actually hitting inboxes?</h2>
+                                        <p class="mb-3">PhishU runs authorized phishing assessments for security teams, red teams, pentest firms, and MSSPs, with real campaign lures, reporting, and training tied to the outcome.</p>
+                                        <a class="btn btn-teal fw-500" href="../contact-us.html">Contact Us</a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                </main>
+            </div>
+            <div id="layoutDefault_footer">
+                <footer class="footer pt-5 pb-5 mt-auto bg-dark footer-dark">
+                    <div class="container px-5">
+                        <div class="row gx-5 align-items-center">
+                            <div class="col-md-6 small">Copyright &copy; PhishU 2026</div>
+                            <div class="col-md-6 text-md-end small">
+                                <a href="https://www.linkedin.com/company/phishu">LinkedIn</a>
+                                &middot;
+                                <a href="../contact-us.html">Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="../js/site-config.js"></script>
+        <script src="../js/scripts.js?v=20260413a"></script>
+    </body>
+</html>
