@@ -91,21 +91,41 @@
                 line-height: 1.2; border-bottom: 3px solid #00061c; white-space: nowrap;
             }
             .nl-issue .nl-i-mid { padding: 0 0.4rem; }
-            /* The burst. Eleven spikes rather than sixteen, with shallow notches so
-               it reads as a splat instead of a saw blade, and deliberately uneven
-               spike lengths so no two sides match. White fill, so it sits on the navy
-               the way a cover flash does. drop-shadow rather than box-shadow because
-               the shadow has to follow the clipped spikes; the fill is opaque, so it
-               traces the shape and not the type inside it. Padding is lopsided:
-               the text sits left of centre and the extra left inset keeps it clear
-               of the spikes on that side. */
+            /* Action lines. A conic gradient of thin spokes radiating from the centre,
+               masked to a ring that starts outside the flash, so they read as streaks
+               thrown off the impact rather than a sunburst behind it. Sits under the
+               flash, which is why the flash gets its own stacking position. */
+            .nl-issue .nl-i-flash { position: relative; display: block; }
+            .nl-issue .nl-i-flash::before {
+                content: ''; position: absolute; inset: -16%; z-index: 0; pointer-events: none;
+                background: repeating-conic-gradient(from 4deg, #00061c 0deg 1deg, transparent 1deg 13deg);
+                -webkit-mask-image: radial-gradient(ellipse closest-side, transparent 0 44%, #000 53%, #000 72%, transparent 88%);
+                mask-image: radial-gradient(ellipse closest-side, transparent 0 44%, #000 53%, #000 72%, transparent 88%);
+                opacity: 0.5;
+            }
+            .nl-issue .nl-i-burst { position: relative; z-index: 1; }
+            /* The flash. Ten long uneven points with deep notches between them, on
+               jittered angles so no two sides repeat. The halftone runs across it on
+               the same 8px rhythm as the card, so the dot screen reads as one field
+               passing behind the shape rather than stopping at its edge.
+               clip-path cannot be stroked, so the dark rim is four chained
+               drop-shadows, one per direction, with the offset shadow last so it
+               follows the outlined shape rather than the bare fill. */
             .nl-issue .nl-i-burst {
-                background: #ffffff; clip-path: polygon(50.0% 0.0%, 60.7% 13.5%, 73.0% 14.2%, 77.6% 26.1%, 93.7% 30.1%, 88.6% 44.4%, 90.6% 55.8%, 83.7% 65.4%, 87.4% 82.4%, 70.8% 82.4%, 62.3% 91.7%, 50.0% 86.0%, 36.8% 95.1%, 28.9% 82.8%, 19.4% 76.5%, 15.9% 65.6%, 0.5% 57.1%, 12.4% 44.6%, 9.5% 31.5%, 22.4% 26.1%, 25.1% 11.3%, 39.0% 12.6%);
-                padding: 19% 12% 19% 20%; text-align: left;
-                filter: drop-shadow(3px 3px 0 rgba(0,0,0,0.45));
+                clip-path: polygon(50.0% 0.0%, 57.5% 21.0%, 71.6% 11.1%, 71.6% 33.8%, 97.7% 39.0%, 82.5% 50.3%, 90.3% 60.0%, 70.9% 66.3%, 73.5% 94.1%, 59.1% 79.6%, 54.8% 95.3%, 42.0% 76.8%, 19.8% 87.3%, 24.4% 70.8%, 12.1% 69.3%, 24.0% 50.7%, 4.8% 29.9%, 25.8% 31.4%, 21.1% 14.3%, 40.3% 22.7%);
+                background-color: #ffffff;
+                background-image: radial-gradient(rgba(0,12,56,0.16) 1.1px, transparent 1.4px);
+                background-size: 8px 8px;
+                padding: 21% 13% 21% 19%; text-align: left;
+                filter:
+                    drop-shadow(2px 0 0 #00061c) drop-shadow(-2px 0 0 #00061c)
+                    drop-shadow(0 2px 0 #00061c) drop-shadow(0 -2px 0 #00061c)
+                    drop-shadow(4px 4px 0 rgba(0,0,0,0.45));
             }
             .nl-issue .nl-i-foot { padding: 0 0.7rem 0.8rem; }
-            .nl-issue .nl-i-label { font-size: 1.26rem; font-weight: 900; letter-spacing: 0.14em; text-transform: uppercase; color: #000C38; line-height: 1.05; }
+            /* Green on the white flash, with the same hard dark offset the number
+               carries, which also keeps it legible where the halftone sits under it. */
+            .nl-issue .nl-i-label { font-size: 1.26rem; font-weight: 900; letter-spacing: 0.14em; text-transform: uppercase; color: #00E1A7; line-height: 1.05; text-shadow: 1.5px 1.5px 0 #00061c; }
             /* The number is the cover: container units so it fills the card at whatever
                width the grid gives it, with a rem fallback where cqw is unsupported.
                The hard offset shadow and dark outline are the comic title treatment;
@@ -403,9 +423,9 @@
                             // The cover carried the number twice, in a corner box and in the
                             // headline. With the headline this large the box is just clutter.
                             b.innerHTML = '<span class="nl-i-masthead">The PhishU Weekly</span>'
-                                        + '<span class="nl-i-mid"><span class="nl-i-burst">'
+                                        + '<span class="nl-i-mid"><span class="nl-i-flash"><span class="nl-i-burst">'
                                         + '<span class="nl-i-label">Issue</span>'
-                                        + '<span class="nl-i-num' + (no.length > 2 ? ' is-wide' : '') + '">#' + esc(no) + '</span></span></span>'
+                                        + '<span class="nl-i-num' + (no.length > 2 ? ' is-wide' : '') + '">#' + esc(no) + '</span></span></span></span>'
                                         + '<span class="nl-i-foot"><span class="nl-i-period">' + esc(it.period) + '</span>'
                                         + '<span class="nl-i-open">Read</span></span>';
                             b.setAttribute('aria-label', 'Read issue ' + it.issue + ', ' + (it.period || ''));
