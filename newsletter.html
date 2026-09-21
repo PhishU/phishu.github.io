@@ -167,7 +167,7 @@
                 font-size: 2.6rem; font-weight: 900; line-height: 0.9; letter-spacing: -0.045em;
                 color: #000C38; margin: 0;
                 /* Counter-rotated against the label, so the two lines lean apart. */
-                transform: rotate(2.5deg); transform-origin: left top;
+                transform: rotate(4deg); transform-origin: left top;
                 -webkit-text-stroke: 2px #00061c; paint-order: stroke fill;
                 text-shadow: 3px 3px 0 #00E1A7, 5px 5px 0 rgba(0,0,0,0.6);
             }
@@ -180,10 +180,13 @@
             .nl-issue .nl-i-period { font-size: 0.72rem; font-weight: 600; color: #cfd6df; }
             /* Stuck on at an angle, like a cover sticker. */
             .nl-issue .nl-i-open {
-                display: inline-block; margin-top: 0.55rem; font-size: 0.64rem; font-weight: 900;
+                /* width:fit-content plus an auto left margin parks it on the right
+                   without dragging the date along, which text-align would. */
+                display: block; width: fit-content; margin: 0.55rem 0 0 auto;
+                font-size: 0.64rem; font-weight: 900;
                 letter-spacing: 0.12em; text-transform: uppercase; color: #000C38; background: #00E1A7;
                 padding: 0.28rem 0.6rem; border: 2px solid #00061c; border-radius: 0.2rem;
-                transform: rotate(-3deg); box-shadow: 2px 2px 0 rgba(0,0,0,0.6);
+                transform: rotate(-1.5deg); box-shadow: 2px 2px 0 rgba(0,0,0,0.6);
             }
             @media (prefers-reduced-motion: reduce) { .nl-issue { transition: none; } .nl-issue:hover, .nl-issue:focus-visible { transform: none; } }
             /* Reading pane. The issue is a fixed 640px email table, so it is rendered
