@@ -253,16 +253,33 @@
                             list.appendChild(b);
                         });
                         section.hidden = false;
+                        // Deep link: /newsletter.html#issue-2 opens that issue, so a
+                        // social reply or a blog can cite one issue rather than the page.
+                        var want = (location.hash.match(/^#issue-(\d+)$/) || [])[1];
+                        if (want && issues.some(function (i) { return String(i.issue) === want; })) {
+                            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            openIssue(want);
+                        }
                     })
                     .catch(function () { /* the archive is additive; never break signup over it */ });
 
-                list.addEventListener('click', function (e) {
-                    var btn = e.target.closest('.nl-issue');
-                    if (!btn) return;
-                    var n = btn.getAttribute('data-issue');
+                function openIssue(n) {
                     document.getElementById('nl-issue-modal-title').textContent = 'The PhishU Weekly - Issue #' + n;
                     document.getElementById('nl-issue-frame').src = '/newsletter/archive.php?issue=' + encodeURIComponent(n);
                     new bootstrap.Modal(document.getElementById('nl-issue-modal')).show();
+                    // Keep the address bar on the open issue so the link can be copied,
+                    // without pushing history entries as someone browses the rack.
+                    if (history.replaceState) history.replaceState(null, '', '#issue-' + n);
+                }
+
+                list.addEventListener('click', function (e) {
+                    var btn = e.target.closest('.nl-issue');
+                    if (btn) openIssue(btn.getAttribute('data-issue'));
+                });
+
+                window.addEventListener('hashchange', function () {
+                    var n = (location.hash.match(/^#issue-(\d+)$/) || [])[1];
+                    if (n) openIssue(n);
                 });
             })();
 
