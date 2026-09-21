@@ -264,9 +264,21 @@
 
                 function esc(v) { var d = document.createElement('div'); d.textContent = v == null ? '' : v; return d.innerHTML; }
 
-                // The issue is a fixed 640px email table. Scale it to whatever width the
-                // stage has rather than letting it overflow, and never scale above 1:1,
-                // because enlarging a 640px email past its design width just looks wrong.
+                // The issue is a 640px email card, but its outer table adds 12px of side
+                // padding, so the document needs 664px before its own vertical scrollbar
+                // is even accounted for. Laying the frame out at 640 is what put a
+                // horizontal scrollbar inside a pane that had room to spare.
+                var EMAIL_W = 640, EMAIL_PAD = 24;
+
+                function scrollbarWidth() {
+                    var d = document.createElement('div');
+                    d.style.cssText = 'position:absolute;top:-9999px;width:100px;height:100px;overflow:scroll';
+                    document.body.appendChild(d);
+                    var w = d.offsetWidth - d.clientWidth;   // 0 on overlay-scrollbar platforms
+                    document.body.removeChild(d);
+                    return w;
+                }
+
                 function fitFrame() {
                     var stage = document.getElementById('nl-issue-stage');
                     var holder = document.getElementById('nl-issue-holder');
@@ -274,13 +286,26 @@
                     if (!stage || !holder || !frame) return;
                     var w = stage.clientWidth, h = stage.clientHeight;
                     if (!w || !h) return;
-                    var scale = Math.min(1, w / 640);
-                    // The frame is laid out tall enough that, once scaled, it exactly
-                    // fills the stage; its own scrollbar then moves through the issue.
+
+                    var minW = EMAIL_W + EMAIL_PAD + scrollbarWidth();
+                    holder.style.width = w + 'px';
+                    holder.style.height = h + 'px';
+
+                    if (w >= minW) {
+                        // Room to spare: let the frame fill the pane so its scrollbar sits
+                        // at the right edge of the dialog, and let the email's own outer
+                        // table centre the card, which is how a mail client reads.
+                        frame.style.width = w + 'px';
+                        frame.style.height = h + 'px';
+                        frame.style.transform = 'none';
+                        return;
+                    }
+                    // Too narrow to show it at size: lay it out at the width it needs and
+                    // scale the whole thing down, so nothing is ever clipped.
+                    var scale = w / minW;
+                    frame.style.width = minW + 'px';
                     frame.style.height = Math.round(h / scale) + 'px';
                     frame.style.transform = 'scale(' + scale + ')';
-                    holder.style.width = Math.round(640 * scale) + 'px';
-                    holder.style.height = h + 'px';
                 }
 
                 fetch('/newsletter/archive.php', { headers: { Accept: 'application/json' } })
