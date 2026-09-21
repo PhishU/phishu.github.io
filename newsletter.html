@@ -66,13 +66,15 @@
             .nl-issue {
                 container-type: inline-size; position: relative; display: flex; flex-direction: column;
                 justify-content: space-between; aspect-ratio: 3 / 4; width: 100%; text-align: left;
-                padding: 0; overflow: hidden; color: #fff; background-color: #16181C;
-                /* A glow behind the number, then the dot screen over it. */
+                padding: 0; overflow: hidden; color: #fff; background-color: #000C38;
+                /* The page's navy carries the cover; a glow behind the number, then the
+                   dot screen over it. Green is left to the band, the label and the
+                   sticker so it reads as an accent rather than the whole cover. */
                 background-image:
-                    radial-gradient(circle at 22% 58%, rgba(0,225,167,0.26) 0 34%, transparent 64%),
-                    radial-gradient(rgba(255,255,255,0.12) 1.1px, transparent 1.4px);
+                    radial-gradient(circle at 22% 58%, rgba(0,97,242,0.38) 0 34%, transparent 64%),
+                    radial-gradient(rgba(255,255,255,0.13) 1.1px, transparent 1.4px);
                 background-size: 100% 100%, 8px 8px;
-                border: 4px solid #0e1013; border-radius: 0.3rem;
+                border: 4px solid #00061c; border-radius: 0.3rem;
                 box-shadow: inset 0 0 0 2px rgba(255,255,255,0.07), 0 6px 18px rgba(30,42,58,0.22);
                 transition: transform .18s ease, box-shadow .18s ease;
             }
@@ -84,9 +86,9 @@
             .nl-issue span { display: block; }
             /* Masthead band, bleeding to the panel edge the way a logo strip does. */
             .nl-issue .nl-i-masthead {
-                background: #00E1A7; color: #0e1013; padding: 0.42rem 0.7rem;
+                background: #00E1A7; color: #000C38; padding: 0.42rem 0.7rem;
                 font-size: 0.6rem; font-weight: 900; letter-spacing: 0.13em; text-transform: uppercase;
-                line-height: 1.2; border-bottom: 3px solid #0e1013; white-space: nowrap;
+                line-height: 1.2; border-bottom: 3px solid #00061c; white-space: nowrap;
             }
             .nl-issue .nl-i-mid { padding: 0 0.7rem; }
             .nl-issue .nl-i-foot { padding: 0 0.7rem 0.8rem; }
@@ -98,8 +100,8 @@
             .nl-issue .nl-i-num {
                 font-size: 3.4rem; font-weight: 900; line-height: 0.86; letter-spacing: -0.045em;
                 color: #fff; transform: rotate(-2deg); transform-origin: left center; margin: 0.1rem 0 0.15rem;
-                -webkit-text-stroke: 2px #0e1013; paint-order: stroke fill;
-                text-shadow: 3px 3px 0 #00E1A7, 5px 5px 0 rgba(0,0,0,0.55);
+                -webkit-text-stroke: 2px #00061c; paint-order: stroke fill;
+                text-shadow: 3px 3px 0 #0061f2, 5px 5px 0 rgba(0,0,0,0.6);
             }
             @supports (font-size: 1cqw) {
                 .nl-issue .nl-i-num { font-size: 40cqw; }
@@ -111,9 +113,9 @@
             /* Stuck on at an angle, like a cover sticker. */
             .nl-issue .nl-i-open {
                 display: inline-block; margin-top: 0.55rem; font-size: 0.64rem; font-weight: 900;
-                letter-spacing: 0.12em; text-transform: uppercase; color: #0e1013; background: #00E1A7;
-                padding: 0.28rem 0.6rem; border: 2px solid #0e1013; border-radius: 0.2rem;
-                transform: rotate(-3deg); box-shadow: 2px 2px 0 rgba(0,0,0,0.55);
+                letter-spacing: 0.12em; text-transform: uppercase; color: #000C38; background: #00E1A7;
+                padding: 0.28rem 0.6rem; border: 2px solid #00061c; border-radius: 0.2rem;
+                transform: rotate(-3deg); box-shadow: 2px 2px 0 rgba(0,0,0,0.6);
             }
             @media (prefers-reduced-motion: reduce) { .nl-issue { transition: none; } .nl-issue:hover, .nl-issue:focus-visible { transform: none; } }
             /* Reading pane. The issue is a fixed 640px email table, so it is rendered
