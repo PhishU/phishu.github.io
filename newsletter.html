@@ -126,7 +126,12 @@
             #nl-issue-holder { overflow: hidden; flex: 0 0 auto; }
             #nl-issue-frame { width: 640px; border: 0; display: block; background: #16181C; transform-origin: top left; }
             /* Envelope header, so it reads as a message rather than a web page. */
-            .nl-env { padding: 0.7rem 1rem; border-bottom: 1px solid #e3e6ec; background: #fff; }
+            .nl-env { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; padding: 0.7rem 1rem; border-bottom: 1px solid #e3e6ec; background: #fff; }
+            .nl-env-text { min-width: 0; }
+            .nl-env .btn-close { flex: 0 0 auto; margin-top: 0.1rem; }
+            /* No modal-header any more, so the envelope is the top edge and has to
+               respect the dialog's corner radius itself. */
+            #nl-issue-modal .modal-content { overflow: hidden; }
             .nl-env-subj { font-weight: 700; color: #1e2a3a; font-size: 0.95rem; line-height: 1.3; }
             .nl-env-meta { font-size: 0.8rem; color: #6c757d; margin-top: 0.15rem; }
             .nl-env-meta .nl-env-from { color: #1e2a3a; font-weight: 600; }
@@ -273,20 +278,19 @@
                 </footer>
             </div>
         </div>
-        <div class="modal fade" id="nl-issue-modal" tabindex="-1" aria-labelledby="nl-issue-modal-title" aria-hidden="true">
+        <div class="modal fade" id="nl-issue-modal" tabindex="-1" aria-labelledby="nl-env-subject" aria-hidden="true">
             <div class="modal-dialog modal-xl modal-fullscreen-sm-down modal-dialog-centered">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="nl-issue-modal-title">Issue</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
                     <div class="modal-body p-0">
                         <div class="nl-env">
-                            <div class="nl-env-subj" id="nl-env-subject">The PhishU Weekly</div>
-                            <div class="nl-env-meta">
-                                <span class="nl-env-from">The PhishU Weekly</span>
-                                &lt;newsletter@phishu.net&gt; <span id="nl-env-date"></span>
+                            <div class="nl-env-text">
+                                <div class="nl-env-subj" id="nl-env-subject">The PhishU Weekly</div>
+                                <div class="nl-env-meta">
+                                    <span class="nl-env-from">The PhishU Weekly</span>
+                                    &lt;newsletter@phishu.net&gt; <span id="nl-env-date"></span>
+                                </div>
                             </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div id="nl-issue-stage">
                             <div id="nl-issue-holder">
@@ -400,7 +404,6 @@
 
                 function openIssue(n) {
                     var meta = byIssue[String(n)] || {};
-                    document.getElementById('nl-issue-modal-title').textContent = 'Issue #' + n;
                     document.getElementById('nl-env-subject').textContent = meta.subject || ('The PhishU Weekly - Issue #' + n);
                     document.getElementById('nl-env-date').textContent = meta.period ? '\u00b7 ' + meta.period : '';
                     document.getElementById('nl-issue-frame').src = '/newsletter/archive.php?issue=' + encodeURIComponent(n);
