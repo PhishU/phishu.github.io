@@ -46,10 +46,13 @@
             .nl-topic .nl-t-title { font-weight: 700; color: #1e2a3a; }
             .nl-topic .nl-t-desc { font-size: 0.88rem; color: #6c757d; margin-top: 0.15rem; }
             #nl-status { display:none; margin-top: 1rem; font-weight: 600; }
-            /* py-10 is 6rem top and bottom; the curved divider above already carries
-               some of that, so the form sat lower than it needed to. Bottom is left
-               alone so the archive below keeps its breathing room. */
-            #nl-signup-section { padding-top: 3.5rem !important; }
+            /* py-10 is 6rem top and bottom. The curved divider above already carries
+               some of the top gap, so the form sat lower than it needed to. At the
+               seam below, the signup's 6rem bottom met the archive's 6rem top and
+               stacked into 12rem of dead space; each side now contributes half of a
+               single normal gap instead of a full one. */
+            #nl-signup-section { padding-top: 3.5rem !important; padding-bottom: 2.5rem !important; }
+            #nl-archive-section { padding-top: 2.5rem !important; }
             /* Same focus treatment as the inline signup on the blog pages
                (.nl-inline input[type=email]:focus in js/scripts.js), so the two
                signup forms do not disagree: green, not Bootstrap's blue. */
