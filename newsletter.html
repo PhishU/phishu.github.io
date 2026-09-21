@@ -57,27 +57,64 @@
                (.nl-inline input[type=email]:focus in js/scripts.js), so the two
                signup forms do not disagree: green, not Bootstrap's blue. */
             #nl-email:focus { outline: none; border-color: #20c997; box-shadow: 0 0 0 3px rgba(32,201,151,0.18); }
-            /* Issue covers: a rack of back numbers. The dark ground and green are the
-               email's own palette, so the cover previews what opens inside it. */
+            /* Issue covers: a rack of back numbers, drawn like one. The comic cues are
+               the cheap ones that survive being small: a masthead banner, a heavy
+               panel border, ben-day dots, and a title with a hard offset shadow
+               instead of a soft one. Palette stays the email's own, so it still
+               previews what opens inside. */
             #nl-archive-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(178px, 1fr)); gap: 1.35rem; }
-            .nl-issue { container-type: inline-size; position: relative; display: flex; flex-direction: column; justify-content: space-between; aspect-ratio: 3 / 4; width: 100%; text-align: left; padding: 0.95rem 0.95rem 0.85rem; border: 3px solid #1e2a3a; border-radius: 0.45rem; color: #fff; overflow: hidden; background-color: #16181C; background-image: radial-gradient(rgba(0,225,167,0.15) 1px, transparent 1.3px); background-size: 7px 7px; box-shadow: 0 6px 18px rgba(30,42,58,0.18); transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
-            .nl-issue:hover, .nl-issue:focus-visible { transform: translateY(-6px) rotate(-1.1deg); box-shadow: 0 14px 30px rgba(30,42,58,0.34); border-color: #20c997; outline: none; }
+            .nl-issue {
+                container-type: inline-size; position: relative; display: flex; flex-direction: column;
+                justify-content: space-between; aspect-ratio: 3 / 4; width: 100%; text-align: left;
+                padding: 0; overflow: hidden; color: #fff; background-color: #16181C;
+                /* A glow behind the number, then the dot screen over it. */
+                background-image:
+                    radial-gradient(circle at 22% 58%, rgba(0,225,167,0.26) 0 34%, transparent 64%),
+                    radial-gradient(rgba(255,255,255,0.12) 1.1px, transparent 1.4px);
+                background-size: 100% 100%, 8px 8px;
+                border: 4px solid #0e1013; border-radius: 0.3rem;
+                box-shadow: inset 0 0 0 2px rgba(255,255,255,0.07), 0 6px 18px rgba(30,42,58,0.22);
+                transition: transform .18s ease, box-shadow .18s ease;
+            }
+            .nl-issue:hover, .nl-issue:focus-visible {
+                transform: translateY(-6px) rotate(-1.1deg);
+                box-shadow: inset 0 0 0 2px rgba(255,255,255,0.10), 0 14px 30px rgba(30,42,58,0.36);
+                outline: none;
+            }
             .nl-issue span { display: block; }
-            .nl-issue .nl-i-masthead { font-size: 0.63rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: #00E1A7; line-height: 1.3; }
-            .nl-issue .nl-i-rule { height: 2px; background: #00E1A7; opacity: 0.5; margin-top: 0.5rem; }
-            .nl-issue .nl-i-label { font-size: 0.58rem; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; color: #9aa4b2; }
-            /* The number is the cover. Sized in container units so it fills the card
-               at whatever width the grid hands it, with a rem fallback for browsers
-               without container queries. */
-            .nl-issue .nl-i-num { font-size: 3.4rem; font-weight: 900; line-height: 0.88; letter-spacing: -0.045em; }
+            /* Masthead band, bleeding to the panel edge the way a logo strip does. */
+            .nl-issue .nl-i-masthead {
+                background: #00E1A7; color: #0e1013; padding: 0.42rem 0.7rem;
+                font-size: 0.6rem; font-weight: 900; letter-spacing: 0.13em; text-transform: uppercase;
+                line-height: 1.2; border-bottom: 3px solid #0e1013; white-space: nowrap;
+            }
+            .nl-issue .nl-i-mid { padding: 0 0.7rem; }
+            .nl-issue .nl-i-foot { padding: 0 0.7rem 0.8rem; }
+            .nl-issue .nl-i-label { font-size: 0.56rem; font-weight: 900; letter-spacing: 0.24em; text-transform: uppercase; color: #00E1A7; }
+            /* The number is the cover: container units so it fills the card at whatever
+               width the grid gives it, with a rem fallback where cqw is unsupported.
+               The hard offset shadow and dark outline are the comic title treatment;
+               paint-order keeps the stroke behind the fill so the glyph stays crisp. */
+            .nl-issue .nl-i-num {
+                font-size: 3.4rem; font-weight: 900; line-height: 0.86; letter-spacing: -0.045em;
+                color: #fff; transform: rotate(-2deg); transform-origin: left center; margin: 0.1rem 0 0.15rem;
+                -webkit-text-stroke: 2px #0e1013; paint-order: stroke fill;
+                text-shadow: 3px 3px 0 #00E1A7, 5px 5px 0 rgba(0,0,0,0.55);
+            }
             @supports (font-size: 1cqw) {
                 .nl-issue .nl-i-num { font-size: 40cqw; }
                 /* Issue 100 arrives in 2028 and a fourth glyph would run off the
                    card at the two-digit size. */
                 .nl-issue .nl-i-num.is-wide { font-size: 29cqw; }
             }
-            .nl-issue .nl-i-period { font-size: 0.76rem; color: #cfd6df; margin-top: 0.3rem; }
-            .nl-issue .nl-i-open { display: inline-block; margin-top: 0.6rem; font-size: 0.64rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #16181C; background: #00E1A7; padding: 0.3rem 0.55rem; border-radius: 0.25rem; }
+            .nl-issue .nl-i-period { font-size: 0.72rem; font-weight: 600; color: #cfd6df; }
+            /* Stuck on at an angle, like a cover sticker. */
+            .nl-issue .nl-i-open {
+                display: inline-block; margin-top: 0.55rem; font-size: 0.64rem; font-weight: 900;
+                letter-spacing: 0.12em; text-transform: uppercase; color: #0e1013; background: #00E1A7;
+                padding: 0.28rem 0.6rem; border: 2px solid #0e1013; border-radius: 0.2rem;
+                transform: rotate(-3deg); box-shadow: 2px 2px 0 rgba(0,0,0,0.55);
+            }
             @media (prefers-reduced-motion: reduce) { .nl-issue { transition: none; } .nl-issue:hover, .nl-issue:focus-visible { transform: none; } }
             /* Reading pane. The issue is a fixed 640px email table, so it is rendered
                at that width and scaled down to whatever the stage can give it, the
@@ -340,10 +377,10 @@
                             var no = String(it.issue).length < 2 ? '0' + it.issue : String(it.issue);
                             // The cover carried the number twice, in a corner box and in the
                             // headline. With the headline this large the box is just clutter.
-                            b.innerHTML = '<span><span class="nl-i-masthead">The PhishU<br>Weekly</span><span class="nl-i-rule"></span></span>'
-                                        + '<span><span class="nl-i-label">Issue</span>'
-                                        + '<span class="nl-i-num' + (no.length > 2 ? ' is-wide' : '') + '">#' + esc(no) + '</span>'
-                                        + '<span class="nl-i-period">' + esc(it.period) + '</span>'
+                            b.innerHTML = '<span class="nl-i-masthead">The PhishU Weekly</span>'
+                                        + '<span class="nl-i-mid"><span class="nl-i-label">Issue</span>'
+                                        + '<span class="nl-i-num' + (no.length > 2 ? ' is-wide' : '') + '">#' + esc(no) + '</span></span>'
+                                        + '<span class="nl-i-foot"><span class="nl-i-period">' + esc(it.period) + '</span>'
                                         + '<span class="nl-i-open">Read</span></span>';
                             b.setAttribute('aria-label', 'Read issue ' + it.issue + ', ' + (it.period || ''));
                             list.appendChild(b);
