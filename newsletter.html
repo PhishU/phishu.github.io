@@ -90,24 +90,35 @@
                 font-size: 0.6rem; font-weight: 900; letter-spacing: 0.13em; text-transform: uppercase;
                 line-height: 1.2; border-bottom: 3px solid #00061c; white-space: nowrap;
             }
-            .nl-issue .nl-i-mid { padding: 0 0.7rem; }
+            .nl-issue .nl-i-mid { padding: 0 0.4rem; }
+            /* The burst. A 16-spike starburst via clip-path, slightly irregular so it
+               reads hand-drawn rather than like a gear. drop-shadow rather than
+               box-shadow because the shadow has to follow the clipped spikes. */
+            .nl-issue .nl-i-burst {
+                background: #00E1A7; clip-path: polygon(50.0% 0.0%, 56.8% 15.7%, 68.6% 5.2%, 68.6% 22.1%, 85.4% 14.6%, 79.9% 30.0%, 93.9% 31.8%, 83.3% 43.4%, 99.5% 50.0%, 84.8% 56.9%, 96.2% 69.1%, 77.4% 68.3%, 83.9% 83.9%, 69.4% 79.1%, 68.8% 95.3%, 56.7% 83.8%, 50.0% 100.0%, 43.0% 85.3%, 31.8% 93.9%, 31.4% 77.9%, 15.0% 85.0%, 20.9% 69.4%, 5.2% 68.6%, 16.7% 56.6%, 0.0% 50.0%, 15.2% 43.1%, 5.7% 31.6%, 22.1% 31.4%, 15.0% 15.0%, 30.6% 20.9%, 30.9% 3.8%, 43.3% 16.2%);
+                padding: 20% 15%; text-align: center;
+                filter: drop-shadow(3px 3px 0 rgba(0,0,0,0.45));
+            }
             .nl-issue .nl-i-foot { padding: 0 0.7rem 0.8rem; }
-            .nl-issue .nl-i-label { font-size: 1.68rem; font-weight: 900; letter-spacing: 0.24em; text-transform: uppercase; color: #00E1A7; line-height: 1.05; }
+            .nl-issue .nl-i-label { font-size: 1.26rem; font-weight: 900; letter-spacing: 0.14em; text-transform: uppercase; color: #000C38; line-height: 1.05; }
             /* The number is the cover: container units so it fills the card at whatever
                width the grid gives it, with a rem fallback where cqw is unsupported.
                The hard offset shadow and dark outline are the comic title treatment;
                paint-order keeps the stroke behind the fill so the glyph stays crisp. */
+            /* Navy on the green burst, so the number reads as printed onto the shape
+               rather than floating over it. No stroke or offset shadow here: the
+               burst already carries the depth, and a second shadow inside it muddies
+               the spikes. Sized smaller than the bare-card version because it now
+               has to clear the burst's inner radius, not just the card edge. */
             .nl-issue .nl-i-num {
-                font-size: 3.4rem; font-weight: 900; line-height: 0.86; letter-spacing: -0.045em;
-                color: #fff; transform: rotate(-2deg); transform-origin: left center; margin: 0.1rem 0 0.15rem;
-                -webkit-text-stroke: 2px #00061c; paint-order: stroke fill;
-                text-shadow: 3px 3px 0 #00E1A7, 5px 5px 0 rgba(0,0,0,0.6);
+                font-size: 2.6rem; font-weight: 900; line-height: 0.9; letter-spacing: -0.045em;
+                color: #000C38; margin: 0;
             }
             @supports (font-size: 1cqw) {
-                .nl-issue .nl-i-num { font-size: 40cqw; }
+                .nl-issue .nl-i-num { font-size: 30cqw; }
                 /* Issue 100 arrives in 2028 and a fourth glyph would run off the
                    card at the two-digit size. */
-                .nl-issue .nl-i-num.is-wide { font-size: 29cqw; }
+                .nl-issue .nl-i-num.is-wide { font-size: 22cqw; }
             }
             .nl-issue .nl-i-period { font-size: 0.72rem; font-weight: 600; color: #cfd6df; }
             /* Stuck on at an angle, like a cover sticker. */
@@ -384,8 +395,9 @@
                             // The cover carried the number twice, in a corner box and in the
                             // headline. With the headline this large the box is just clutter.
                             b.innerHTML = '<span class="nl-i-masthead">The PhishU Weekly</span>'
-                                        + '<span class="nl-i-mid"><span class="nl-i-label">Issue</span>'
-                                        + '<span class="nl-i-num' + (no.length > 2 ? ' is-wide' : '') + '">#' + esc(no) + '</span></span>'
+                                        + '<span class="nl-i-mid"><span class="nl-i-burst">'
+                                        + '<span class="nl-i-label">Issue</span>'
+                                        + '<span class="nl-i-num' + (no.length > 2 ? ' is-wide' : '') + '">#' + esc(no) + '</span></span></span>'
                                         + '<span class="nl-i-foot"><span class="nl-i-period">' + esc(it.period) + '</span>'
                                         + '<span class="nl-i-open">Read</span></span>';
                             b.setAttribute('aria-label', 'Read issue ' + it.issue + ', ' + (it.period || ''));
