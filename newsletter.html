@@ -46,6 +46,14 @@
             .nl-topic .nl-t-title { font-weight: 700; color: #1e2a3a; }
             .nl-topic .nl-t-desc { font-size: 0.88rem; color: #6c757d; margin-top: 0.15rem; }
             #nl-status { display:none; margin-top: 1rem; font-weight: 600; }
+            /* py-10 is 6rem top and bottom; the curved divider above already carries
+               some of that, so the form sat lower than it needed to. Bottom is left
+               alone so the archive below keeps its breathing room. */
+            #nl-signup-section { padding-top: 3.5rem !important; }
+            /* Same focus treatment as the inline signup on the blog pages
+               (.nl-inline input[type=email]:focus in js/scripts.js), so the two
+               signup forms do not disagree: green, not Bootstrap's blue. */
+            #nl-email:focus { outline: none; border-color: #20c997; box-shadow: 0 0 0 3px rgba(32,201,151,0.18); }
             /* Issue covers: a rack of back numbers. The dark ground and green are the
                email's own palette, so the cover previews what opens inside it. */
             #nl-archive-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(178px, 1fr)); gap: 1.35rem; }
@@ -104,7 +112,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
                         </div>
                     </header>
-                    <section class="bg-light py-10">
+                    <section class="bg-light py-10" id="nl-signup-section">
                         <div class="container px-5">
                             <div class="nl-card">
                                 <form id="nl-form" novalidate>
@@ -369,6 +377,18 @@
             })();
 
             document.addEventListener('DOMContentLoaded', function () {
+                // Put the cursor in the email field on arrival. preventScroll matches
+                // what the inline blog signup does: without it the browser scrolls the
+                // field into view and the visitor never sees the hero explaining what
+                // they are subscribing to. Skipped when the URL names an issue, since
+                // that visitor came to read one, not to sign up.
+                if (!/^#issue-\d+$/.test(location.hash)) {
+                    var emailEl = document.getElementById('nl-email');
+                    if (emailEl) {
+                        try { emailEl.focus({ preventScroll: true }); } catch (e) { emailEl.focus(); }
+                    }
+                }
+
                 var form = document.getElementById('nl-form');
                 form.addEventListener('submit', function (e) {
                     e.preventDefault();
