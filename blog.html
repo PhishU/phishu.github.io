@@ -54,6 +54,17 @@
        "url" : "https://phishu.net/blog.html"
     }
     </script>
+    <style>
+        .blog-search { max-width: 520px; margin: 0 auto 1.25rem; position: relative; }
+        .blog-search input { width: 100%; padding: 0.7rem 2.4rem 0.7rem 2.5rem; border-radius: 8px; border: 1px solid #ccd2dc; background: #fff; font-size: 0.95rem; color: #1e2a3a; transition: border-color .15s, box-shadow .15s; }
+        /* Same green focus the newsletter signup and the inline blog signup use. */
+        .blog-search input:focus { outline: none; border-color: #20c997; box-shadow: 0 0 0 3px rgba(32,201,151,0.18); }
+        .blog-search .bs-icon { position: absolute; left: 0.85rem; top: 50%; transform: translateY(-50%); color: #8a94a3; pointer-events: none; font-size: 0.9rem; }
+        .blog-search .bs-clear { position: absolute; right: 0.5rem; top: 50%; transform: translateY(-50%); border: 0; background: transparent; color: #8a94a3; font-size: 1.1rem; line-height: 1; padding: 0.25rem 0.45rem; cursor: pointer; border-radius: 6px; }
+        .blog-search .bs-clear:hover { color: #1e2a3a; background: #eef1f6; }
+        #blogNoResults { display: none; }
+        #blogNoResults .btn { margin-top: 0.75rem; }
+    </style>
     </head>
     <body>
         <div id="layoutDefault">
@@ -244,9 +255,99 @@
                     </header>
                     <section class="bg-light py-10">
                         <div class="container px-5">
+                            <div class="row gx-5 justify-content-center">
+                                <div class="col-lg-10 col-xl-9 mb-4">
+                                    <div class="blog-search">
+                                        <i class="fas fa-search bs-icon" aria-hidden="true"></i>
+                                        <label class="visually-hidden" for="blogSearch">Search articles</label>
+                                        <input type="search" id="blogSearch" placeholder="Search articles, techniques, actors..." autocomplete="off" spellcheck="false">
+                                        <button type="button" class="bs-clear" id="blogSearchClear" aria-label="Clear search" hidden>&times;</button>
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-2 justify-content-center" id="blogFilters">
+                                        <button type="button" class="btn btn-sm btn-primary fw-500 blog-filter active" data-filter="all">All</button>
+                                        <button type="button" class="btn btn-sm btn-outline-primary fw-500 blog-filter" data-filter="technique" title="How a specific phishing or social-engineering technique works, and how the Framework runs it.">Attack Technique</button>
+                                        <button type="button" class="btn btn-sm btn-outline-primary fw-500 blog-filter" data-filter="threat-actor" title="Live campaigns, phishing kits, and actor tradecraft we are seeing in the wild right now.">Threat Actor</button>
+                                        <button type="button" class="btn btn-sm btn-outline-primary fw-500 blog-filter" data-filter="defense" title="Conditional Access, identity policy, and what actually holds up when tested.">Defense & Policy</button>
+                                        <button type="button" class="btn btn-sm btn-outline-primary fw-500 blog-filter" data-filter="platform" title="Framework capabilities: AI assistance, recon, reporting, and training.">Platform</button>
+                                        <button type="button" class="btn btn-sm btn-outline-primary fw-500 blog-filter" data-filter="research" title="Original analysis and measurement, including where widely-trusted controls fall short.">Research</button>
+                                    </div>
+                                    <div class="text-center text-muted small mt-3" id="blogFilterCount"></div>
+                                    <div class="text-center mt-4" id="blogNoResults">
+                                        <div class="fw-bold text-dark mb-1">Nothing matched that.</div>
+                                        <div class="text-muted small">Try a shorter phrase, or clear the category filter.</div>
+                                        <button type="button" class="btn btn-sm btn-outline-primary" id="blogResetAll">Show all articles</button>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row gx-5 justify-content-center mb-5">
                                 <div class="col-lg-10 col-xl-9 mb-4">
-                                    <a class="card card-link lift border-0 shadow-sm" href="blogs/blog-blob-url-phishing-in-the-phishu-framework.html">
+                                    <a data-category="threat-actor" class="card card-link lift border-0 shadow-sm" href="blogs/blog-voidproxy-the-adversary-in-the-middle-kit-okta-uncovered-and-the-control-that-actually-sto.html">
+                                        <div class="card-body p-5">
+                                            <div class="text-uppercase-expanded text-xs mb-2">September 21, 2026</div>
+                                            <h2 class="h3 mb-3">VoidProxy: the adversary-in-the-middle kit Okta uncovered, and the control that actually stopped it</h2>
+                                            <p class="mb-3">A newly named phishing-as-a-service platform that captures the session cookie after MFA. What is genuinely new about it, what is routine for the category, and what your identity stack needs to survive it.</p>
+                                            <div class="text-primary fw-bold d-inline-flex align-items-center">
+                                                Read the article
+                                                <i class="fas fa-arrow-right text-xs ms-1"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-lg-10 col-xl-9 mb-4">
+                                    <a data-category="research" class="card card-link lift border-0 shadow-sm" href="blogs/blog-n0va-phishkit-device-code-token-theft-phishu-framework.html">
+                                        <div class="card-body p-5">
+                                            <div class="text-uppercase-expanded text-xs mb-2">September 20, 2026</div>
+                                            <h2 class="h3 mb-3">MFA Worked. The Session Was Handed Over Anyway: Reading the N0va Phishkit in the PhishU Framework</h2>
+                                            <p class="mb-3">ANY.RUN disclosed N0va in September 2026 and most of the coverage led with "tokens even after MFA", which reads as an MFA bypass and is not one. MFA ran, the sign-in was genuine, and the victim authorized the attacker's session while completing it. That distinction decides the fix: enforcing MFA does nothing, a password reset does nothing, and the refresh token plus the registered device both survive. Here is the chain link by link, what actually stops it, and where it sits against the device code and phantom device work we shipped in the spring.</p>
+                                            <div class="text-primary fw-bold d-inline-flex align-items-center">
+                                                Read the article
+
+                                                <i class="fas fa-arrow-right text-xs ms-1"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-lg-10 col-xl-9 mb-4">
+                                    <a data-category="technique" class="card card-link lift border-0 shadow-sm" href="blogs/blog-authcodefix-oauth-authorization-code-phishing-phishu-framework.html">
+                                        <div class="card-body p-5">
+                                            <div class="text-uppercase-expanded text-xs mb-2">September 19, 2026</div>
+                                            <h2 class="h3 mb-3">Real Passkey, Real MFA, Someone Else Walks Away With The Session: AuthCodeFix in the PhishU Framework</h2>
+                                            <p class="mb-3">The victim completes a real, fully MFA'd sign-in on the actual Microsoft login page, then pastes the address-bar error URL into a page that says it needs one more verification step. Passkey participated. Consent restriction never fired, because no consent screen was ever shown. Device code block never fired, because this is a different flow. The Framework now ships AuthCodeFix as a Landing Page template alongside a matching Conditional Access audit check for the control that actually stops it.</p>
+                                            <div class="text-primary fw-bold d-inline-flex align-items-center">
+                                                Read the article
+                                                <i class="fas fa-arrow-right text-xs ms-1"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-lg-10 col-xl-9 mb-4">
+                                    <a data-category="technique" class="card card-link lift border-0 shadow-sm" href="blogs/blog-rogue-external-mfa-provider-eam-detection-phishu-framework.html">
+                                        <div class="card-body p-5">
+                                            <div class="text-uppercase-expanded text-xs mb-2">September 18, 2026</div>
+                                            <h2 class="h3 mb-3">When the MFA Prompt Belongs to the Attacker: Rogue External Authentication Methods</h2>
+                                            <p class="mb-3">Varonis Threat Labs documented a provider registered in Entra that shows a fake password prompt and then signs a token saying MFA passed. Entra checks the signature, not the honesty. The password reset does not fix it. The Framework now checks every mapped tenant for this and reports it alongside the rest of the identity policy findings.</p>
+                                            <div class="text-primary fw-bold d-inline-flex align-items-center">
+                                                Read the article
+                                                <i class="fas fa-arrow-right text-xs ms-1"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-lg-10 col-xl-9 mb-4">
+                                    <a data-category="defense" class="card card-link lift border-0 shadow-sm" href="blogs/blog-conditional-access-location-blind-spot-phishu-framework.html">
+                                        <div class="card-body p-5">
+                                            <div class="text-uppercase-expanded text-xs mb-2">September 18, 2026</div>
+                                            <h2 class="h3 mb-3">When the Sign-In Comes From Your Zip Code: The Location Assumption in Conditional Access</h2>
+                                            <p class="mb-3">Anonymous IP detection, atypical travel, and country-scoped named locations all assume hostile traffic will look foreign. The Framework runs authorized engagements from geographically consistent residential egress, then maps the outcome back to named Conditional Access checks so administrators get findings they can act on.</p>
+                                            <div class="text-primary fw-bold d-inline-flex align-items-center">
+                                                Read the article
+                                                <i class="fas fa-arrow-right text-xs ms-1"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-lg-10 col-xl-9 mb-4">
+                                    <a data-category="technique" class="card card-link lift border-0 shadow-sm" href="blogs/blog-blob-url-phishing-in-the-phishu-framework.html">
                                         <div class="card-body p-5">
                                             <div class="text-uppercase-expanded text-xs mb-2">September 15, 2026</div>
                                             <h2 class="h3 mb-3">The Sign-In Page That Was Never on a Server: Blob URL Phishing in the PhishU Framework</h2>
@@ -259,7 +360,7 @@
                                     </a>
                                 </div>
                                 <div class="col-lg-10 col-xl-9 mb-4">
-                                    <a class="card card-link lift border-0 shadow-sm" href="blogs/blog-apple-mobileconfig-phishing-in-the-phishu-framework.html">
+                                    <a data-category="technique" class="card card-link lift border-0 shadow-sm" href="blogs/blog-apple-mobileconfig-phishing-in-the-phishu-framework.html">
                                         <div class="card-body p-5">
                                             <div class="text-uppercase-expanded text-xs mb-2">September 14, 2026</div>
                                             <h2 class="h3 mb-3">Two Taps, No Browser: Apple Configuration Profile Phishing in the PhishU Framework</h2>
@@ -272,7 +373,7 @@
                                     </a>
                                 </div>
                                 <div class="col-lg-10 col-xl-9 mb-4">
-                                    <a class="card card-link lift border-0 shadow-sm" href="blogs/blog-campaign-watch-fake-microsoft-mail-quarantine-notice.html">
+                                    <a data-category="threat-actor" class="card card-link lift border-0 shadow-sm" href="blogs/blog-campaign-watch-fake-microsoft-mail-quarantine-notice.html">
                                         <div class="card-body p-5">
                                             <div class="text-uppercase-expanded text-xs mb-2">September 12, 2026</div>
                                             <h2 class="h3 mb-3">Campaign Watch: A Fake Microsoft Mail-Quarantine Notice Hitting Inboxes This Week</h2>
@@ -285,7 +386,7 @@
                                     </a>
                                 </div>
                                 <div class="col-lg-10 col-xl-9 mb-4">
-                                    <a class="card card-link lift border-0 shadow-sm" href="blogs/blog-invisible-unicode-character-spam-filter-evasion-in-the-phishu-framework.html">
+                                    <a data-category="technique" class="card card-link lift border-0 shadow-sm" href="blogs/blog-invisible-unicode-character-spam-filter-evasion-in-the-phishu-framework.html">
                                         <div class="card-body p-5">
                                             <div class="text-uppercase-expanded text-xs mb-2">September 4, 2026</div>
                                             <h2 class="h3 mb-3">Invisible Characters, Broken Filter Rules: Unicode Tags Obfuscation in the PhishU Framework</h2>
@@ -298,7 +399,7 @@
                                     </a>
                                 </div>
                                 <div class="col-lg-10 col-xl-9 mb-4">
-                                    <a class="card card-link lift border-0 shadow-sm" href="blogs/blog-fake-software-update-prompts-in-the-phishu-framework.html">
+                                    <a data-category="technique" class="card card-link lift border-0 shadow-sm" href="blogs/blog-fake-software-update-prompts-in-the-phishu-framework.html">
                                         <div class="card-body p-5">
                                             <div class="text-uppercase-expanded text-xs mb-2">September 1, 2026</div>
                                             <h2 class="h3 mb-3">One Probe, Two Attacks: Fake Software Update Prompts in the PhishU Framework</h2>
@@ -311,7 +412,7 @@
                                     </a>
                                 </div>
                                 <div class="col-lg-10 col-xl-9 mb-4">
-                                    <a class="card card-link lift border-0 shadow-sm" href="blogs/blog-the-allow-listing-problem-in-phishing-simulations.html">
+                                    <a data-category="defense" class="card card-link lift border-0 shadow-sm" href="blogs/blog-the-allow-listing-problem-in-phishing-simulations.html">
                                         <div class="card-body p-5">
                                             <div class="text-uppercase-expanded text-xs mb-2">August 26, 2026</div>
                                             <h2 class="h3 mb-3">The Allow-Listing Problem: Why Your Phishing Simulation Results Are Not What You Think</h2>
@@ -324,7 +425,7 @@
                                     </a>
                                 </div>
                                 <div class="col-lg-10 col-xl-9 mb-4">
-                                    <a class="card card-link lift border-0 shadow-sm" href="blogs/blog-text-rendered-qr-phishing-in-the-phishu-framework.html">
+                                    <a data-category="technique" class="card card-link lift border-0 shadow-sm" href="blogs/blog-text-rendered-qr-phishing-in-the-phishu-framework.html">
                                         <div class="card-body p-5">
                                             <div class="text-uppercase-expanded text-xs mb-2">August 14, 2026</div>
                                             <h2 class="h3 mb-3">QR Phishing With No Image: Text-Rendered QR Codes in the PhishU Framework</h2>
@@ -337,7 +438,7 @@
                                     </a>
                                 </div>
                                 <div class="col-lg-10 col-xl-9 mb-4">
-                                    <a class="card card-link lift border-0 shadow-sm" href="blogs/blog-device-bound-session-credentials-dbsc-and-aitm-phishing.html">
+                                    <a data-category="research" class="card card-link lift border-0 shadow-sm" href="blogs/blog-device-bound-session-credentials-dbsc-and-aitm-phishing.html">
                                         <div class="card-body p-5">
                                             <div class="text-uppercase-expanded text-xs mb-2">May 29, 2026</div>
                                             <h2 class="h3 mb-3">DBSC Is Great for Cookie Theft. AiTM Phishing Is a Different Problem.</h2>
@@ -350,9 +451,9 @@
                                     </a>
                                 </div>
                                 <div class="col-lg-10 col-xl-9 mb-4">
-                                    <a class="card card-link lift border-0 shadow-sm" href="blogs/blog-vaultjacking-phishing-the-google-password-manager-vault-in-the-phishu-framework.html">
+                                    <a data-category="research" class="card card-link lift border-0 shadow-sm" href="blogs/blog-vaultjacking-phishing-the-google-password-manager-vault-in-the-phishu-framework.html">
                                         <div class="card-body p-5">
-                                            <div class="text-uppercase-expanded text-xs mb-2">May 27, 2026</div>
+                                            <div class="text-uppercase-expanded text-xs mb-2">May 20, 2026</div>
                                             <h2 class="h3 mb-3">Vaultjacking: One Captured PIN, the Entire Google Password Manager Vault</h2>
                                             <p class="mb-3">A captured Google Password Manager PIN is enough to decrypt every synced password and passkey the victim owns. The PhishU Framework implements the full chain: AiTM capture of the PIN at sign-in, an operator-owned passkey for long-term persistence, and a background worker that joins Google's security domain from operator infrastructure to unlock the vault. Tested end-to-end against real accounts.</p>
                                             <div class="text-primary fw-bold d-inline-flex align-items-center">
@@ -363,7 +464,7 @@
                                     </a>
                                 </div>
                                 <div class="col-lg-10 col-xl-9 mb-4">
-                                    <a class="card card-link lift border-0 shadow-sm" href="blogs/blog-spoof-discovered-sender-in-the-phishu-framework.html">
+                                    <a data-category="technique" class="card card-link lift border-0 shadow-sm" href="blogs/blog-spoof-discovered-sender-in-the-phishu-framework.html">
                                         <div class="card-body p-5">
                                             <div class="text-uppercase-expanded text-xs mb-2">May 20, 2026</div>
                                             <h2 class="h3 mb-3">The Phishing Test That Awareness Platforms Don't Run: Domain Spoofability in the PhishU Framework</h2>
@@ -376,7 +477,7 @@
                                     </a>
                                 </div>
                                 <div class="col-lg-10 col-xl-9 mb-4">
-                                    <a class="card card-link lift border-0 shadow-sm" href="blogs/blog-bypassing-conditional-access-with-phantom-devices-in-the-phishu-framework.html">
+                                    <a data-category="technique" class="card card-link lift border-0 shadow-sm" href="blogs/blog-bypassing-conditional-access-with-phantom-devices-in-the-phishu-framework.html">
                                         <div class="card-body p-5">
                                             <div class="text-uppercase-expanded text-xs mb-2">May 7, 2026</div>
                                             <h2 class="h3 mb-3">Bypassing Conditional Access with Phantom Devices: How PhishU Turns a CA Block Into a Token Explorer Grant</h2>
@@ -389,9 +490,9 @@
                                     </a>
                                 </div>
                                 <div class="col-lg-10 col-xl-9 mb-4">
-                                    <a class="card card-link lift border-0 shadow-sm" href="blogs/blog-testing-passkey-fallback-abuse-in-the-phishu-framework.html">
+                                    <a data-category="research" class="card card-link lift border-0 shadow-sm" href="blogs/blog-testing-passkey-fallback-abuse-in-the-phishu-framework.html">
                                         <div class="card-body p-5">
-                                            <div class="text-uppercase-expanded text-xs mb-2">May 4, 2026</div>
+                                            <div class="text-uppercase-expanded text-xs mb-2">April 20, 2026</div>
                                             <h2 class="h3 mb-3">Passkeys Are Nearly Useless Against Live AiTM: The 95% Enforcement Gap</h2>
                                             <p class="mb-3">Most enterprises rolling out passkeys believe they have shipped phishing-resistant authentication. They have not. The PhishU Framework demonstrates a working AiTM bypass that defeats over 95 percent of real-world FIDO2 deployments without breaking the cryptography, plus the tiered-enforcement defensive playbook that actually closes the gap.</p>
                                             <div class="text-primary fw-bold d-inline-flex align-items-center">
@@ -402,7 +503,7 @@
                                     </a>
                                 </div>
                                 <div class="col-lg-10 col-xl-9 mb-4">
-                                    <a class="card card-link lift border-0 shadow-sm" href="blogs/blog-conditional-access-policy-testing-phishu-framework.html">
+                                    <a data-category="defense" class="card card-link lift border-0 shadow-sm" href="blogs/blog-conditional-access-policy-testing-phishu-framework.html">
                                         <div class="card-body p-5">
                                             <div class="text-uppercase-expanded text-xs mb-2">May 1, 2026</div>
                                             <h2 class="h3 mb-3">Testing Conditional Access Policies With Real-World Phishing Scenarios</h2>
@@ -415,7 +516,7 @@
                                     </a>
                                 </div>
                                 <div class="col-lg-10 col-xl-9 mb-4">
-                                    <a class="card card-link lift border-0 shadow-sm" href="blogs/blog-google-trusted-mailer-phishing-phishu-framework.html">
+                                    <a data-category="technique" class="card card-link lift border-0 shadow-sm" href="blogs/blog-google-trusted-mailer-phishing-phishu-framework.html">
                                         <div class="card-body p-5">
                                             <div class="text-uppercase-expanded text-xs mb-2">April 28, 2026</div>
                                             <h2 class="h3 mb-3">Taking a Newly Trending Google Tasks Technique and Evolving It in the PhishU Framework</h2>
@@ -428,7 +529,7 @@
                                     </a>
                                 </div>
                                 <div class="col-lg-10 col-xl-9 mb-4">
-                                    <a class="card card-link lift border-0 shadow-sm" href="blogs/blog-when-anti-phishing-moves-into-the-browser-social-engineering-past-browser-security-extensions-in-the-phishu-framework.html">
+                                    <a data-category="technique" class="card card-link lift border-0 shadow-sm" href="blogs/blog-when-anti-phishing-moves-into-the-browser-social-engineering-past-browser-security-extensions-in-the-phishu-framework.html">
                                         <div class="card-body p-5">
                                             <div class="text-uppercase-expanded text-xs mb-2">April 21, 2026</div>
                                             <h2 class="h3 mb-3">When Anti-Phishing Moves Into the Browser: Social-Engineering Past Browser-Security Extensions in the PhishU Framework</h2>
@@ -441,7 +542,7 @@
                                     </a>
                                 </div>
                                 <div class="col-lg-10 col-xl-9 mb-4">
-                                    <a class="card card-link lift border-0 shadow-sm" href="blogs/blog-osint-email-recon-for-phishing-campaigns-in-the-phishu-framework.html">
+                                    <a data-category="platform" class="card card-link lift border-0 shadow-sm" href="blogs/blog-osint-email-recon-for-phishing-campaigns-in-the-phishu-framework.html">
                                         <div class="card-body p-5">
                                             <div class="text-uppercase-expanded text-xs mb-2">April 19, 2026</div>
                                             <h2 class="h3 mb-3">OSINT Email Recon for Phishing Campaigns in the PhishU Framework</h2>
@@ -454,7 +555,7 @@
                                     </a>
                                 </div>
                                 <div class="col-lg-10 col-xl-9 mb-4">
-                                    <a class="card card-link lift border-0 shadow-sm" href="blogs/blog-chaining-phishing-techniques-in-the-phishu-framework.html">
+                                    <a data-category="technique" class="card card-link lift border-0 shadow-sm" href="blogs/blog-chaining-phishing-techniques-in-the-phishu-framework.html">
                                         <div class="card-body p-5">
                                             <div class="text-uppercase-expanded text-xs mb-2">April 13, 2026</div>
                                             <h2 class="h3 mb-3">Chaining Phishing Techniques in the PhishU Framework</h2>
@@ -467,7 +568,7 @@
                                     </a>
                                 </div>
                                 <div class="col-lg-10 col-xl-9 mb-4">
-                                    <a class="card card-link lift border-0 shadow-sm" href="blogs/blog-malicious-shared-files-in-the-phishu-framework.html">
+                                    <a data-category="technique" class="card card-link lift border-0 shadow-sm" href="blogs/blog-malicious-shared-files-in-the-phishu-framework.html">
                                         <div class="card-body p-5">
                                             <div class="text-uppercase-expanded text-xs mb-2">April 13, 2026</div>
                                             <h2 class="h3 mb-3">The Microsoft Collaboration Lure: Malicious Shared Files in the PhishU Framework</h2>
@@ -480,7 +581,7 @@
                                     </a>
                                 </div>
                                 <div class="col-lg-10 col-xl-9 mb-4">
-                                    <a class="card card-link lift border-0 shadow-sm" href="blogs/blog-how-ai-suggests-phishing-campaigns-based-on-target-infrastructure-in-the-phishu-framework.html">
+                                    <a data-category="platform" class="card card-link lift border-0 shadow-sm" href="blogs/blog-how-ai-suggests-phishing-campaigns-based-on-target-infrastructure-in-the-phishu-framework.html">
                                         <div class="card-body p-5">
                                             <div class="text-uppercase-expanded text-xs mb-2">April 5, 2026</div>
                                             <h2 class="h3 mb-3">How the PhishU Framework Uses AI and Target Infrastructure to Suggest Better Campaigns</h2>
@@ -493,7 +594,7 @@
                                     </a>
                                 </div>
                                 <div class="col-lg-10 col-xl-9 mb-4">
-                                    <a class="card card-link lift border-0 shadow-sm" href="blogs/blog-microsoft-entra-b2b-guest-invitation-phishing-phishu-framework.html">
+                                    <a data-category="technique" class="card card-link lift border-0 shadow-sm" href="blogs/blog-microsoft-entra-b2b-guest-invitation-phishing-phishu-framework.html">
                                         <div class="card-body p-5">
                                             <div class="text-uppercase-expanded text-xs mb-2">April 5, 2026</div>
                                             <h2 class="h3 mb-3">The Attack With No Attacker Domain: Microsoft Entra B2B Guest Invitation Phishing in the PhishU Framework</h2>
@@ -506,7 +607,7 @@
                                     </a>
                                 </div>
                                 <div class="col-lg-10 col-xl-9 mb-4">
-                                    <a class="card card-link lift border-0 shadow-sm" href="blogs/blog-how-ai-speeds-up-phishing-campaigns-in-the-phishu-framework.html">
+                                    <a data-category="platform" class="card card-link lift border-0 shadow-sm" href="blogs/blog-how-ai-speeds-up-phishing-campaigns-in-the-phishu-framework.html">
                                         <div class="card-body p-5">
                                             <div class="text-uppercase-expanded text-xs mb-2">April 2, 2026</div>
                                             <h2 class="h3 mb-3">How AI Speeds Up Phishing Campaigns in the PhishU Framework</h2>
@@ -519,7 +620,7 @@
                                     </a>
                                 </div>
                                 <div class="col-lg-10 col-xl-9 mb-4">
-                                    <a class="card card-link lift border-0 shadow-sm" href="blogs/blog-calendar-event-phishing-in-the-phishu-framework.html">
+                                    <a data-category="technique" class="card card-link lift border-0 shadow-sm" href="blogs/blog-calendar-event-phishing-in-the-phishu-framework.html">
                                         <div class="card-body p-5">
                                             <div class="text-uppercase-expanded text-xs mb-2">April 1, 2026</div>
                                             <h2 class="h3 mb-3">Calendar Event Phishing in the PhishU Framework</h2>
@@ -532,7 +633,7 @@
                                     </a>
                                 </div>
                                 <div class="col-lg-10 col-xl-9 mb-4">
-                                    <a class="card card-link lift border-0 shadow-sm" href="blogs/blog-understanding-what-makes-passkeys-great-and-how-to-bypass-in-the-phishu-framework.html">
+                                    <a data-category="research" class="card card-link lift border-0 shadow-sm" href="blogs/blog-understanding-what-makes-passkeys-great-and-how-to-bypass-in-the-phishu-framework.html">
                                         <div class="card-body p-5">
                                             <div class="text-uppercase-expanded text-xs mb-2">April 1, 2026</div>
                                             <h2 class="h3 mb-3">Understanding What Makes Passkeys Great and How to Bypass in the PhishU Framework</h2>
@@ -545,7 +646,7 @@
                                     </a>
                                 </div>
                                 <div class="col-lg-10 col-xl-9 mb-4">
-                                    <a class="card card-link lift border-0 shadow-sm" href="blogs/blog-microsoft-entra-device-code-phishing-phishu-framework.html">
+                                    <a data-category="technique" class="card card-link lift border-0 shadow-sm" href="blogs/blog-microsoft-entra-device-code-phishing-phishu-framework.html">
                                         <div class="card-body p-5">
                                             <div class="text-uppercase-expanded text-xs mb-2">March 30, 2026</div>
                                             <h2 class="h3 mb-3">Microsoft Entra Device Code Phishing Simulation in the PhishU Framework</h2>
@@ -558,7 +659,7 @@
                                     </a>
                                 </div>
                                 <div class="col-lg-10 col-xl-9 mb-4">
-                                    <a class="card card-link lift border-0 shadow-sm" href="blogs/blog-microsoft-entra-oauth-consent-grant-phishu-framework.html">
+                                    <a data-category="technique" class="card card-link lift border-0 shadow-sm" href="blogs/blog-microsoft-entra-oauth-consent-grant-phishu-framework.html">
                                         <div class="card-body p-5">
                                             <div class="text-uppercase-expanded text-xs mb-2">March 27, 2026</div>
                                             <h2 class="h3 mb-3">Microsoft Entra OAuth Consent Grant Attack Simulation in the PhishU Framework</h2>
@@ -571,7 +672,7 @@
                                     </a>
                                 </div>
                                 <div class="col-lg-10 col-xl-9 mb-4">
-                                    <a class="card card-link lift border-0 shadow-sm" href="blogs/blog-clickfix-in-the-phishu-framework.html">
+                                    <a data-category="technique" class="card card-link lift border-0 shadow-sm" href="blogs/blog-clickfix-in-the-phishu-framework.html">
                                         <div class="card-body p-5">
                                             <div class="text-uppercase-expanded text-xs mb-2">March 23, 2026</div>
                                             <h2 class="h3 mb-3">ClickFix in the PhishU Framework</h2>
@@ -584,7 +685,7 @@
                                     </a>
                                 </div>
                                 <div class="col-lg-10 col-xl-9">
-                                    <a class="card card-link lift border-0 shadow-sm" href="blogs/blog-transparent-aitm-proxy-framework.html">
+                                    <a data-category="technique" class="card card-link lift border-0 shadow-sm" href="blogs/blog-transparent-aitm-proxy-framework.html">
                                         <div class="card-body p-5">
                                             <div class="text-uppercase-expanded text-xs mb-2">March 16, 2026</div>
                                             <h2 class="h3 mb-3">Transparent AiTM Proxying in the PhishU Framework</h2>
@@ -693,6 +794,7 @@
                                     <!--<a class="icon-list-social-link" href="#!"><i class="fab fa-instagram"></i></a>-->
                                     <a class="icon-list-social-link" href="https://www.linkedin.com/company/phishu"><i class="fab fa-linkedin"></i></a>
                                     <a class="icon-list-social-link" href="https://x.com/curtbraz"><i class="fab fa-twitter"></i></a>
+                                    <a class="icon-list-social-link" href="https://infosec.exchange/@phishu" rel="me"><i class="fab fa-mastodon"></i></a>
                                 </div>
                             </div>
                             <div class="col-lg-9">
@@ -753,7 +855,7 @@
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="js/site-config.js"></script>
-    <script src="js/scripts.js?v=20260912a"></script>
+    <script src="js/scripts.js?v=20260920c"></script>
         <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
         <script>
             AOS.init({
@@ -762,5 +864,100 @@
                 once: true,
             });
         </script>
-    </body>
+            <script>
+            (function () {
+                var bar = document.getElementById("blogFilters");
+                if (!bar) { return; }
+                var cards = Array.prototype.slice.call(
+                    document.querySelectorAll("a.card.card-link[data-category]"));
+                var count = document.getElementById("blogFilterCount");
+                var box = document.getElementById("blogSearch");
+                var clearBtn = document.getElementById("blogSearchClear");
+                var empty = document.getElementById("blogNoResults");
+                var resetBtn = document.getElementById("blogResetAll");
+
+                // Category and query are ANDed, not either/or: picking a category and
+                // then typing should narrow within it rather than silently widening
+                // back out to every article.
+                var category = "all";
+                var query = "";
+
+                // Indexed once. Every card's title, standfirst and date, lowercased,
+                // so keystrokes do not walk the DOM. Date is in there deliberately:
+                // "september 2026" is a search people actually run on an archive.
+                var index = cards.map(function (card) {
+                    var title = card.querySelector("h2");
+                    var blurb = card.querySelector("p");
+                    var date = card.querySelector(".text-uppercase-expanded");
+                    return {
+                        card: card,
+                        wrap: card.closest(".col-lg-10") || card.parentNode,
+                        cat: card.getAttribute("data-category") || "",
+                        text: [
+                            title ? title.textContent : "",
+                            blurb ? blurb.textContent : "",
+                            date ? date.textContent : ""
+                        ].join(" ").toLowerCase()
+                    };
+                });
+
+                function apply() {
+                    // Every whitespace-separated term must appear somewhere, so extra
+                    // words narrow the result instead of matching more loosely.
+                    var terms = query.split(/\s+/).filter(Boolean);
+                    var shown = 0;
+                    index.forEach(function (it) {
+                        var hit = (category === "all" || it.cat === category)
+                            && terms.every(function (t) { return it.text.indexOf(t) !== -1; });
+                        it.wrap.hidden = !hit;
+                        if (hit) { shown += 1; }
+                    });
+                    if (count) {
+                        count.textContent = shown + (shown === 1 ? " article" : " articles")
+                            + (query ? ' matching "' + box.value.trim() + '"' : "");
+                    }
+                    if (empty) { empty.style.display = shown === 0 ? "block" : "none"; }
+                    if (clearBtn) { clearBtn.hidden = query === ""; }
+                }
+
+                bar.addEventListener("click", function (e) {
+                    var btn = e.target.closest(".blog-filter");
+                    if (!btn) { return; }
+                    Array.prototype.forEach.call(bar.querySelectorAll(".blog-filter"), function (b) {
+                        b.classList.toggle("btn-primary", b === btn);
+                        b.classList.toggle("btn-outline-primary", b !== btn);
+                        b.classList.toggle("active", b === btn);
+                    });
+                    category = btn.getAttribute("data-filter");
+                    apply();
+                });
+
+                function setQuery(v) {
+                    query = v.trim().toLowerCase();
+                    apply();
+                }
+
+                if (box) {
+                    box.addEventListener("input", function () { setQuery(box.value); });
+                    box.addEventListener("keydown", function (e) {
+                        if (e.key === "Escape" && box.value) { box.value = ""; setQuery(""); }
+                    });
+                }
+                if (clearBtn) {
+                    clearBtn.addEventListener("click", function () {
+                        box.value = ""; setQuery(""); box.focus();
+                    });
+                }
+                if (resetBtn) {
+                    resetBtn.addEventListener("click", function () {
+                        if (box) { box.value = ""; }
+                        query = "";
+                        var all = bar.querySelector('[data-filter="all"]');
+                        if (all) { all.click(); } else { category = "all"; apply(); }
+                    });
+                }
+                apply();
+            })();
+        </script>
+</body>
 </html>
